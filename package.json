@@ -1,0 +1,94 @@
+{
+  "name": "router-segments",
+  "version": "0.0.0",
+  "description": "Router with segments",
+  "keywords": [
+    "router",
+    "segments"
+  ],
+  "author": "Christophe Hurpeau <christophe@hurpeau.com> (http://christophe.hurpeau.com/)",
+  "license": "MIT",
+  "repository": "git@github.com:christophehurpeau/router-segments.git",
+  "homepage": "https://github.com/christophehurpeau/router-segments",
+  "bugs": {
+    "url": "https://github.com/christophehurpeau/router-segments/issues"
+  },
+  "engines": {
+    "node": ">=6.5.0"
+  },
+  "main": "lib/index.js",
+  "module:node": "./lib-module-node8/index.js",
+  "module:node-dev": "./lib-module-node8-dev/index.js",
+  "scripts": {
+    "build": "pob-build",
+    "clean": "rm -Rf docs dist test/node6 coverage",
+    "generate:api": "rm -Rf docs/ ; mkdir docs/ ; pob-build doc ; jsdoc README.md lib-doc --recurse --destination docs/ --configure jsdoc.conf.json ; rm -Rf lib-doc",
+    "generate:docs": "yarn run generate:api && yarn run generate:test-coverage",
+    "generate:test-coverage": "NODE_ENV=production rm -Rf coverage/ ; jest --coverage --coverageReporters=lcov --coverageDirectory=coverage/",
+    "lint": "eslint --ext .js,.jsx src/",
+    "postcheckout": "./.git-hooks/post-checkout",
+    "postmerge": "./.git-hooks/post-merge",
+    "precommit": "./.git-hooks/pre-commit",
+    "preparecommitmsg": "./.git-hooks/prepare-commit-msg ${GIT_PARAMS}",
+    "preversion": "yarn run lint && yarn run build && pob-repository-check-clean",
+    "release": "pob-repository-check-clean && pob-release",
+    "test": "jest",
+    "version": "pob-version",
+    "watch": "pob-watch"
+  },
+  "lint-staged": {
+    "package.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "eslint --fix --quiet",
+      "git add"
+    ]
+  },
+  "jest": {
+    "cacheDirectory": "./node_modules/.cache/jest",
+    "testMatch": [
+      "**/src/**/?(*.)test.js",
+      "**/__tests__/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
+  "dependencies": {
+    "flow-runtime": "^0.10.0",
+    "nightingale-logger": "^3.4.0",
+    "path-to-regexp": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-add-jsdoc-annotations": "^5.1.0",
+    "babel-preset-jsdoc": "^0.4.0",
+    "babel-preset-latest-node": "^0.3.1",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-config-pob": "^14.1.2",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "jest-junit-reporter": "^1.1.0",
+    "jsdoc": "^3.4.1",
+    "komet": "^0.1.4",
+    "komet-karma": "^0.2.5",
+    "lint-staged": "^4.0.2",
+    "minami": "^1.1.1",
+    "pob-babel": "^17.6.0",
+    "pob-release": "^3.1.0",
+    "prettier": "^1.5.3"
+  }
+}

@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/builder/createSegmentRouterBuilderCreator.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/builder</a> createSegmentRouterBuilderCreator.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>55/55</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>18/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>52/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { SegmentRouteType } from '../routes/index';
+import type { RouteType, PathDictionaryType, SegmentCallbackType, RouteRefType } from '../types';
+import {
+  createRoute,
+  createLocalizedRoute,
+  createSegmentRoute,
+  createLocalizedSegmentRoute,
+} from '../routes/create';
+&nbsp;
+type AddToRouteMapType = (key: string, route: RouteType) =&gt; void;
+export default (defaultLocale: ?string, addToRouteMap: AddToRouteMapType) =&gt; {
+  const createSegmentRouterBuilder = (segmentRoute: SegmentRouteType) =&gt; {
+    const getCompletePath = path =&gt; segmentRoute.path.completePath + path;
+    const getCompleteLocalizedPaths = (localizedPaths: PathDictionaryType): PathDictionaryType =&gt; {
+      const completeLocalizedPaths = {};
+&nbsp;
+      const getCompletePathForLocale = !segmentRoute.localizedPaths
+        ? (path, locale) =&gt; `${segmentRoute.path.completePath}${path}`
+        : (path, locale) =&gt; `${segmentRoute.localizedPaths.get(locale).completePath}${path}`;
+&nbsp;
+      Object.keys(localizedPaths).forEach((locale: string) =&gt; {
+        completeLocalizedPaths[locale] = getCompletePathForLocale(localizedPaths[locale], locale);
+      });
+&nbsp;
+      return completeLocalizedPaths;
+    };
+&nbsp;
+    const createLocalizedPathFromSegment = (path: string) =&gt; {
+      const localizedPaths = {};
+      Array.from(segmentRoute.localizedPaths.keys()).forEach(
+        locale =&gt; (localizedPaths[locale] = path),
+      );
+      return localizedPaths;
+    };
+&nbsp;
+    const _createLocalizedEndRoute = (
+      localizedPaths: PathDictionaryType,
+      ref: RouteRefType,
+      key: ?string,
+    ) =&gt; {
+      const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
+      const finalKey: string = key || completeLocalizedPaths[defaultLocale];
+      const route = createLocalizedRoute(localizedPaths, completeLocalizedPaths, ref);
+      addToRouteMap(finalKey, route);
+      return route;
+    };
+&nbsp;
+    const _createEndRoute = (path: string, ref: RouteRefType, key: ?string) =&gt; {
+      if (segmentRoute.localizedPaths) {
+        return _createLocalizedEndRoute(createLocalizedPathFromSegment(path), ref, key);
+      }
+&nbsp;
+      const completePath = getCompletePath(path);
+      const route = createRoute(path, completePath, ref);
+      const finalKey: string = key || completePath;
+      addToRouteMap(finalKey, route);
+      return route;
+    };
+&nbsp;
+    const _createLocalizedSegmentRoute = (
+      localizedPaths: PathDictionaryType,
+      buildSegment: SegmentCallbackType,
+    ) =&gt; {
+      const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
+      const route = createLocalizedSegmentRoute(localizedPaths, completeLocalizedPaths);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      return route;
+    };
+&nbsp;
+    const _createSegmentRoute = (path: string, buildSegment: SegmentCallbackType) =&gt; {
+      if (segmentRoute.localizedPaths) {
+        return _createLocalizedSegmentRoute(createLocalizedPathFromSegment(path), buildSegment);
+      }
+&nbsp;
+      const completePath = getCompletePath(path);
+      const route = createSegmentRoute(path, completePath);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      return route;
+    };
+&nbsp;
+    return {
+      defaultRoute: (ref: RouteRefType, key: ?string) =&gt; {
+        segmentRoute.defaultRoute = _createEndRoute('', ref, key);
+      },
+&nbsp;
+      add: (path: string, ref: RouteRefType, key: ?string): void =&gt; {
+        segmentRoute.nestedRoutes.push(_createEndRoute(path, ref, key));
+      },
+&nbsp;
+      addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string): void =&gt; {
+        if (!defaultLocale) throw new Error('Invalid locales');
+        segmentRoute.nestedRoutes.push(_createLocalizedEndRoute(localizedPaths, ref, key));
+      },
+&nbsp;
+      addSegment: (path: string, buildSegment: SegmentCallbackType): void =&gt; {
+        segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
+      },
+&nbsp;
+      addLocalizedSegment: (
+        localizedPaths: PathDictionaryType,
+        buildSegment: SegmentCallbackType,
+      ): void =&gt; {
+        if (!defaultLocale) throw new Error('Invalid locales');
+        segmentRoute.nestedRoutes.push(_createLocalizedSegmentRoute(localizedPaths, buildSegment));
+      },
+    };
+  };
+  return createSegmentRouterBuilder;
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jul 26 2017 13:20:10 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

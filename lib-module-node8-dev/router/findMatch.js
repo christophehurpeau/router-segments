@@ -9,14 +9,14 @@ const LocaleType = t.tdz(() => _LocaleType);
 const RouteMatchType = t.tdz(() => _RouteMatchType);
 const logger = new Logger('router-segments:findMatch');
 
-const parseOtherParams = wildcard => {
+const parseOtherParams = t.annotate(function parseOtherParams(wildcard) {
   let _wildcardType = t.string();
 
   t.param('wildcard', _wildcardType).assert(wildcard);
   return wildcard ? wildcard.split('/') : [];
-};
+}, t.function(t.param('wildcard', t.string())));
 
-const findMatch = (path, completePath, routes, locale, namedParams) => {
+const findMatch = t.annotate(function findMatch(path, completePath, routes, locale, namedParams) {
   let _pathType = t.string();
 
   let _completePathType = t.string();
@@ -37,7 +37,7 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
 
   let result = null;
 
-  routes.some(route => {
+  routes.some(t.annotate(route => {
     let _routeType = t.ref(RouteType);
 
     t.param('route', _routeType).assert(route);
@@ -63,13 +63,13 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
       // set params
       if (!namedParams) namedParams = _namedParamsType.assert(new Map());
 
-      routePath.namedParams.forEach(paramName => {
+      routePath.namedParams.forEach(t.annotate(paramName => {
         let _paramNameType = t.string();
 
         t.param('paramName', _paramNameType).assert(paramName);
 
         namedParams.set(paramName, match[group++]);
-      });
+      }, t.function(t.param('paramName', t.string()))));
     }
 
     if (route.isSegment()) {
@@ -100,12 +100,12 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
     });
 
     return true;
-  });
+  }, t.function(t.param('route', t.ref(RouteType)))));
 
   return _returnType.assert(result);
-};
+}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.param('routes', t.ref(RoutesType)), t.param('locale', t.ref(LocaleType)), t.param('namedParams', t.nullable(t.ref('Map', t.string(), t.string()))), t.return(t.nullable(t.ref(RouteMatchType)))));
 
-export default (function findMatch0(path, routes, locale = 'en') {
+export default t.annotate((path, routes, locale = 'en') => {
   let _pathType2 = t.string();
 
   let _routesType2 = t.ref(RoutesType);
@@ -118,5 +118,5 @@ export default (function findMatch0(path, routes, locale = 'en') {
   t.param('routes', _routesType2).assert(routes);
   t.param('locale', _localeType2).assert(locale);
   return _returnType2.assert(findMatch(path, path, routes, locale));
-});
+}, t.function(t.param('path', t.string()), t.param('routes', t.ref(RoutesType)), t.param('locale', t.ref(LocaleType)), t.return(t.nullable(t.ref(RouteMatchType)))));
 //# sourceMappingURL=findMatch.js.map

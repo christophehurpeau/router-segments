@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _desc, _value, _class, _descriptor, _descriptor2, _descriptor3;
+var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -49,9 +49,11 @@ import _Route from './EndRoute';
 import t from 'flow-runtime';
 const Route = t.tdz(() => _Route);
 const RoutePathType = t.tdz(() => _RoutePathType);
-let SegmentRoute = (_dec = t.decorate(t.ref(RoutePathType)), _dec2 = t.decorate(function () {
+let SegmentRoute = (_dec = t.annotate(t.class('SegmentRoute', SegmentRoute => {
+  return [t.property('path', t.ref(RoutePathType)), t.property('nestedRoutes', t.array(t.union(t.ref(Route), t.ref(SegmentRoute)))), t.property('defaultRoute', t.nullable(t.ref(Route))), t.method('constructor', t.param('path', t.ref(RoutePathType))), t.method('freeze'), t.method('getPath', t.return(t.ref(RoutePathType))), t.method('isSegment', t.return(t.boolean())), t.method('toJSON'), t.method('toString')];
+})), _dec2 = t.decorate(t.ref(RoutePathType)), _dec3 = t.decorate(function () {
   return t.array(t.union(t.ref(Route), t.ref(SegmentRoute)));
-}), _dec3 = t.decorate(t.nullable(t.ref(Route))), (_class = class {
+}), _dec4 = t.decorate(t.nullable(t.ref(Route))), _dec(_class = (_class2 = class {
 
   constructor(path) {
     _initDefineProp(this, 'path', _descriptor, this);
@@ -91,17 +93,17 @@ let SegmentRoute = (_dec = t.decorate(t.ref(RoutePathType)), _dec2 = t.decorate(
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'path', [_dec], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'path', [_dec2], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'nestedRoutes', [_dec2], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'nestedRoutes', [_dec3], {
   enumerable: true,
   initializer: function () {
     return [];
   }
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'defaultRoute', [_dec3], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'defaultRoute', [_dec4], {
   enumerable: true,
   initializer: null
-})), _class));
+})), _class2)) || _class);
 export { SegmentRoute as default };
 //# sourceMappingURL=SegmentRoute.js.map

@@ -28,20 +28,20 @@ const SegmentRouteType = _flowRuntime2.default.tdz(() => _index.SegmentRouteType
 
 const AddToRouteMapType = _flowRuntime2.default.type('AddToRouteMapType', _flowRuntime2.default.function(_flowRuntime2.default.param('key', _flowRuntime2.default.string()), _flowRuntime2.default.param('route', _flowRuntime2.default.ref(RouteType)), _flowRuntime2.default.return(_flowRuntime2.default.void())));
 
-exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
+exports.default = _flowRuntime2.default.annotate((defaultLocale, addToRouteMap) => {
   let _defaultLocaleType = _flowRuntime2.default.nullable(_flowRuntime2.default.string());
 
   _flowRuntime2.default.param('defaultLocale', _defaultLocaleType).assert(defaultLocale);
 
   _flowRuntime2.default.param('addToRouteMap', AddToRouteMapType).assert(addToRouteMap);
 
-  const createSegmentRouterBuilder = segmentRoute => {
+  const createSegmentRouterBuilder = _flowRuntime2.default.annotate(function createSegmentRouterBuilder(segmentRoute) {
     let _segmentRouteType = _flowRuntime2.default.ref(SegmentRouteType);
 
     _flowRuntime2.default.param('segmentRoute', _segmentRouteType).assert(segmentRoute);
 
     const getCompletePath = path => segmentRoute.path.completePath + path;
-    const getCompleteLocalizedPaths = localizedPaths => {
+    const getCompleteLocalizedPaths = _flowRuntime2.default.annotate(function getCompleteLocalizedPaths(localizedPaths) {
       let _localizedPathsType = _flowRuntime2.default.ref(PathDictionaryType);
 
       const _returnType = _flowRuntime2.default.return(_flowRuntime2.default.ref(PathDictionaryType));
@@ -52,18 +52,18 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
 
       const getCompletePathForLocale = !segmentRoute.localizedPaths ? path => `${segmentRoute.path.completePath}${path}` : (path, locale) => `${segmentRoute.localizedPaths.get(locale).completePath}${path}`;
 
-      Object.keys(localizedPaths).forEach(locale => {
+      Object.keys(localizedPaths).forEach(_flowRuntime2.default.annotate(locale => {
         let _localeType = _flowRuntime2.default.string();
 
         _flowRuntime2.default.param('locale', _localeType).assert(locale);
 
         completeLocalizedPaths[locale] = getCompletePathForLocale(localizedPaths[locale], locale);
-      });
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('locale', _flowRuntime2.default.string()))));
 
       return _returnType.assert(completeLocalizedPaths);
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.return(_flowRuntime2.default.ref(PathDictionaryType))));
 
-    const createLocalizedPathFromSegment = path => {
+    const createLocalizedPathFromSegment = _flowRuntime2.default.annotate(function createLocalizedPathFromSegment(path) {
       let _pathType = _flowRuntime2.default.string();
 
       _flowRuntime2.default.param('path', _pathType).assert(path);
@@ -71,9 +71,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
       const localizedPaths = {};
       Array.from(segmentRoute.localizedPaths.keys()).forEach(locale => localizedPaths[locale] = path);
       return localizedPaths;
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string())));
 
-    const _createLocalizedEndRoute = (localizedPaths, ref, key) => {
+    const _createLocalizedEndRoute = _flowRuntime2.default.annotate(function _createLocalizedEndRoute(localizedPaths, ref, key) {
       let _localizedPathsType2 = _flowRuntime2.default.ref(PathDictionaryType);
 
       let _refType = _flowRuntime2.default.ref(RouteRefType);
@@ -91,9 +91,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
       const route = (0, _create.createLocalizedRoute)(localizedPaths, completeLocalizedPaths, ref);
       addToRouteMap(finalKey, route);
       return route;
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string()))));
 
-    const _createEndRoute = (path, ref, key) => {
+    const _createEndRoute = _flowRuntime2.default.annotate(function _createEndRoute(path, ref, key) {
       let _pathType2 = _flowRuntime2.default.string();
 
       let _refType2 = _flowRuntime2.default.ref(RouteRefType);
@@ -115,9 +115,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
       const finalKey = _flowRuntime2.default.string().assert(key || completePath);
       addToRouteMap(finalKey, route);
       return route;
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string()))));
 
-    const _createLocalizedSegmentRoute = (localizedPaths, buildSegment) => {
+    const _createLocalizedSegmentRoute = _flowRuntime2.default.annotate(function _createLocalizedSegmentRoute(localizedPaths, buildSegment) {
       let _localizedPathsType3 = _flowRuntime2.default.ref(PathDictionaryType);
 
       let _buildSegmentType = _flowRuntime2.default.ref(SegmentCallbackType);
@@ -131,9 +131,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       return route;
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentCallbackType))));
 
-    const _createSegmentRoute = (path, buildSegment) => {
+    const _createSegmentRoute = _flowRuntime2.default.annotate(function _createSegmentRoute(path, buildSegment) {
       let _pathType3 = _flowRuntime2.default.string();
 
       let _buildSegmentType2 = _flowRuntime2.default.ref(SegmentCallbackType);
@@ -151,10 +151,10 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       return route;
-    };
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentCallbackType))));
 
     return {
-      defaultRoute: (ref, key) => {
+      defaultRoute: _flowRuntime2.default.annotate((ref, key) => {
         let _refType3 = _flowRuntime2.default.ref(RouteRefType);
 
         let _keyType3 = _flowRuntime2.default.nullable(_flowRuntime2.default.string());
@@ -164,9 +164,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
         _flowRuntime2.default.param('key', _keyType3).assert(key);
 
         segmentRoute.defaultRoute = _createEndRoute('', ref, key);
-      },
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string())))),
 
-      add: (path, ref, key) => {
+      add: _flowRuntime2.default.annotate((path, ref, key) => {
         let _pathType4 = _flowRuntime2.default.string();
 
         let _refType4 = _flowRuntime2.default.ref(RouteRefType);
@@ -182,9 +182,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
         _flowRuntime2.default.param('key', _keyType4).assert(key);
 
         segmentRoute.nestedRoutes.push(_createEndRoute(path, ref, key));
-      },
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string())), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-      addLocalized: (localizedPaths, ref, key) => {
+      addLocalized: _flowRuntime2.default.annotate((localizedPaths, ref, key) => {
         let _localizedPathsType4 = _flowRuntime2.default.ref(PathDictionaryType);
 
         let _refType5 = _flowRuntime2.default.ref(RouteRefType);
@@ -201,9 +201,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
 
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(_createLocalizedEndRoute(localizedPaths, ref, key));
-      },
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string())), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-      addSegment: (path, buildSegment) => {
+      addSegment: _flowRuntime2.default.annotate((path, buildSegment) => {
         let _pathType5 = _flowRuntime2.default.string();
 
         let _buildSegmentType3 = _flowRuntime2.default.ref(SegmentCallbackType);
@@ -215,9 +215,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
         _flowRuntime2.default.param('buildSegment', _buildSegmentType3).assert(buildSegment);
 
         segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
-      },
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentCallbackType)), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-      addLocalizedSegment: (localizedPaths, buildSegment) => {
+      addLocalizedSegment: _flowRuntime2.default.annotate((localizedPaths, buildSegment) => {
         let _localizedPathsType5 = _flowRuntime2.default.ref(PathDictionaryType);
 
         let _buildSegmentType4 = _flowRuntime2.default.ref(SegmentCallbackType);
@@ -230,9 +230,9 @@ exports.default = function createSegmentRouterBuilderCreator(defaultLocale, addT
 
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(_createLocalizedSegmentRoute(localizedPaths, buildSegment));
-      }
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentCallbackType)), _flowRuntime2.default.return(_flowRuntime2.default.void())))
     };
-  };
+  }, _flowRuntime2.default.function(_flowRuntime2.default.param('segmentRoute', _flowRuntime2.default.ref(SegmentRouteType))));
   return createSegmentRouterBuilder;
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('defaultLocale', _flowRuntime2.default.nullable(_flowRuntime2.default.string())), _flowRuntime2.default.param('addToRouteMap', AddToRouteMapType)));
 //# sourceMappingURL=createSegmentRouterBuilderCreator.js.map

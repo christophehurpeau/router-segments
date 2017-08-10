@@ -5,7 +5,7 @@ import type {
   RoutesType,
   RouteMapType,
   RouteType,
-  SegmentCallbackType,
+  SegmentRouterBuilderType,
   RouteRefType,
 } from '../types';
 import {
@@ -40,7 +40,7 @@ export default (locales: ?LocalesType): RouterBuilderType => {
       addToRouteMap(key, route);
     },
 
-    addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string): void => {
+    addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string): void => {
       if (!defaultLocale) throw new Error('Invalid locales');
       const route = createLocalizedRoute(localizedPath, localizedPath, ref);
       routes.push(route);
@@ -48,7 +48,7 @@ export default (locales: ?LocalesType): RouterBuilderType => {
       addToRouteMap(finalKey, route);
     },
 
-    addSegment: (path: string, buildSegment: SegmentCallbackType): void => {
+    addSegment: (path: string, buildSegment: SegmentRouterBuilderType): void => {
       const route = createSegmentRoute(path, path);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
@@ -57,7 +57,7 @@ export default (locales: ?LocalesType): RouterBuilderType => {
 
     addLocalizedSegment: (
       localizedPaths: PathDictionaryType,
-      buildSegment: SegmentCallbackType,
+      buildSegment: SegmentRouterBuilderType,
     ): void => {
       if (!defaultLocale) throw new Error('Invalid locales');
       const route = createLocalizedSegmentRoute(localizedPaths, localizedPaths);

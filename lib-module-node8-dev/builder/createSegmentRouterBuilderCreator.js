@@ -10,19 +10,19 @@ const RouteRefType = t.tdz(() => _RouteRefType);
 const SegmentRouteType = t.tdz(() => _SegmentRouteType);
 const AddToRouteMapType = t.type('AddToRouteMapType', t.function(t.param('key', t.string()), t.param('route', t.ref(RouteType)), t.return(t.void())));
 
-export default (function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
+export default t.annotate((defaultLocale, addToRouteMap) => {
   let _defaultLocaleType = t.nullable(t.string());
 
   t.param('defaultLocale', _defaultLocaleType).assert(defaultLocale);
   t.param('addToRouteMap', AddToRouteMapType).assert(addToRouteMap);
 
-  const createSegmentRouterBuilder = segmentRoute => {
+  const createSegmentRouterBuilder = t.annotate(function createSegmentRouterBuilder(segmentRoute) {
     let _segmentRouteType = t.ref(SegmentRouteType);
 
     t.param('segmentRoute', _segmentRouteType).assert(segmentRoute);
 
     const getCompletePath = path => segmentRoute.path.completePath + path;
-    const getCompleteLocalizedPaths = localizedPaths => {
+    const getCompleteLocalizedPaths = t.annotate(function getCompleteLocalizedPaths(localizedPaths) {
       let _localizedPathsType = t.ref(PathDictionaryType);
 
       const _returnType = t.return(t.ref(PathDictionaryType));
@@ -33,18 +33,18 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
 
       const getCompletePathForLocale = !segmentRoute.localizedPaths ? path => `${segmentRoute.path.completePath}${path}` : (path, locale) => `${segmentRoute.localizedPaths.get(locale).completePath}${path}`;
 
-      Object.keys(localizedPaths).forEach(locale => {
+      Object.keys(localizedPaths).forEach(t.annotate(locale => {
         let _localeType = t.string();
 
         t.param('locale', _localeType).assert(locale);
 
         completeLocalizedPaths[locale] = getCompletePathForLocale(localizedPaths[locale], locale);
-      });
+      }, t.function(t.param('locale', t.string()))));
 
       return _returnType.assert(completeLocalizedPaths);
-    };
+    }, t.function(t.param('localizedPaths', t.ref(PathDictionaryType)), t.return(t.ref(PathDictionaryType))));
 
-    const createLocalizedPathFromSegment = path => {
+    const createLocalizedPathFromSegment = t.annotate(function createLocalizedPathFromSegment(path) {
       let _pathType = t.string();
 
       t.param('path', _pathType).assert(path);
@@ -52,9 +52,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
       const localizedPaths = {};
       Array.from(segmentRoute.localizedPaths.keys()).forEach(locale => localizedPaths[locale] = path);
       return localizedPaths;
-    };
+    }, t.function(t.param('path', t.string())));
 
-    const _createLocalizedEndRoute = (localizedPaths, ref, key) => {
+    const _createLocalizedEndRoute = t.annotate(function _createLocalizedEndRoute(localizedPaths, ref, key) {
       let _localizedPathsType2 = t.ref(PathDictionaryType);
 
       let _refType = t.ref(RouteRefType);
@@ -70,9 +70,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
       const route = createLocalizedRoute(localizedPaths, completeLocalizedPaths, ref);
       addToRouteMap(finalKey, route);
       return route;
-    };
+    }, t.function(t.param('localizedPaths', t.ref(PathDictionaryType)), t.param('ref', t.ref(RouteRefType)), t.param('key', t.nullable(t.string()))));
 
-    const _createEndRoute = (path, ref, key) => {
+    const _createEndRoute = t.annotate(function _createEndRoute(path, ref, key) {
       let _pathType2 = t.string();
 
       let _refType2 = t.ref(RouteRefType);
@@ -92,9 +92,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
       const finalKey = t.string().assert(key || completePath);
       addToRouteMap(finalKey, route);
       return route;
-    };
+    }, t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType)), t.param('key', t.nullable(t.string()))));
 
-    const _createLocalizedSegmentRoute = (localizedPaths, buildSegment) => {
+    const _createLocalizedSegmentRoute = t.annotate(function _createLocalizedSegmentRoute(localizedPaths, buildSegment) {
       let _localizedPathsType3 = t.ref(PathDictionaryType);
 
       let _buildSegmentType = t.ref(SegmentCallbackType);
@@ -107,9 +107,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       return route;
-    };
+    }, t.function(t.param('localizedPaths', t.ref(PathDictionaryType)), t.param('buildSegment', t.ref(SegmentCallbackType))));
 
-    const _createSegmentRoute = (path, buildSegment) => {
+    const _createSegmentRoute = t.annotate(function _createSegmentRoute(path, buildSegment) {
       let _pathType3 = t.string();
 
       let _buildSegmentType2 = t.ref(SegmentCallbackType);
@@ -126,10 +126,10 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       return route;
-    };
+    }, t.function(t.param('path', t.string()), t.param('buildSegment', t.ref(SegmentCallbackType))));
 
     return {
-      defaultRoute: (ref, key) => {
+      defaultRoute: t.annotate((ref, key) => {
         let _refType3 = t.ref(RouteRefType);
 
         let _keyType3 = t.nullable(t.string());
@@ -138,9 +138,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
         t.param('key', _keyType3).assert(key);
 
         segmentRoute.defaultRoute = _createEndRoute('', ref, key);
-      },
+      }, t.function(t.param('ref', t.ref(RouteRefType)), t.param('key', t.nullable(t.string())))),
 
-      add: (path, ref, key) => {
+      add: t.annotate((path, ref, key) => {
         let _pathType4 = t.string();
 
         let _refType4 = t.ref(RouteRefType);
@@ -153,9 +153,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
         t.param('key', _keyType4).assert(key);
 
         segmentRoute.nestedRoutes.push(_createEndRoute(path, ref, key));
-      },
+      }, t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType)), t.param('key', t.nullable(t.string())), t.return(t.void()))),
 
-      addLocalized: (localizedPaths, ref, key) => {
+      addLocalized: t.annotate((localizedPaths, ref, key) => {
         let _localizedPathsType4 = t.ref(PathDictionaryType);
 
         let _refType5 = t.ref(RouteRefType);
@@ -169,9 +169,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
 
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(_createLocalizedEndRoute(localizedPaths, ref, key));
-      },
+      }, t.function(t.param('localizedPaths', t.ref(PathDictionaryType)), t.param('ref', t.ref(RouteRefType)), t.param('key', t.nullable(t.string())), t.return(t.void()))),
 
-      addSegment: (path, buildSegment) => {
+      addSegment: t.annotate((path, buildSegment) => {
         let _pathType5 = t.string();
 
         let _buildSegmentType3 = t.ref(SegmentCallbackType);
@@ -181,9 +181,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
         t.param('buildSegment', _buildSegmentType3).assert(buildSegment);
 
         segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
-      },
+      }, t.function(t.param('path', t.string()), t.param('buildSegment', t.ref(SegmentCallbackType)), t.return(t.void()))),
 
-      addLocalizedSegment: (localizedPaths, buildSegment) => {
+      addLocalizedSegment: t.annotate((localizedPaths, buildSegment) => {
         let _localizedPathsType5 = t.ref(PathDictionaryType);
 
         let _buildSegmentType4 = t.ref(SegmentCallbackType);
@@ -194,9 +194,9 @@ export default (function createSegmentRouterBuilderCreator(defaultLocale, addToR
 
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(_createLocalizedSegmentRoute(localizedPaths, buildSegment));
-      }
+      }, t.function(t.param('localizedPaths', t.ref(PathDictionaryType)), t.param('buildSegment', t.ref(SegmentCallbackType)), t.return(t.void())))
     };
-  };
+  }, t.function(t.param('segmentRoute', t.ref(SegmentRouteType))));
   return createSegmentRouterBuilder;
-});
+}, t.function(t.param('defaultLocale', t.nullable(t.string())), t.param('addToRouteMap', AddToRouteMapType)));
 //# sourceMappingURL=createSegmentRouterBuilderCreator.js.map

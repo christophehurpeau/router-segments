@@ -28,15 +28,15 @@ const RouteMatchType = _flowRuntime2.default.tdz(() => _types.RouteMatchType);
 
 const logger = new _nightingaleLogger2.default('router-segments:findMatch');
 
-const parseOtherParams = wildcard => {
+const parseOtherParams = _flowRuntime2.default.annotate(function parseOtherParams(wildcard) {
   let _wildcardType = _flowRuntime2.default.string();
 
   _flowRuntime2.default.param('wildcard', _wildcardType).assert(wildcard);
 
   return wildcard ? wildcard.split('/') : [];
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('wildcard', _flowRuntime2.default.string())));
 
-const findMatch = (path, completePath, routes, locale, namedParams) => {
+const findMatch = _flowRuntime2.default.annotate(function findMatch(path, completePath, routes, locale, namedParams) {
   let _pathType = _flowRuntime2.default.string();
 
   let _completePathType = _flowRuntime2.default.string();
@@ -61,7 +61,7 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
 
   let result = null;
 
-  routes.some(route => {
+  routes.some(_flowRuntime2.default.annotate(route => {
     let _routeType = _flowRuntime2.default.ref(RouteType);
 
     _flowRuntime2.default.param('route', _routeType).assert(route);
@@ -87,13 +87,13 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
       // set params
       if (!namedParams) namedParams = _namedParamsType.assert(new Map());
 
-      routePath.namedParams.forEach(paramName => {
+      routePath.namedParams.forEach(_flowRuntime2.default.annotate(paramName => {
         let _paramNameType = _flowRuntime2.default.string();
 
         _flowRuntime2.default.param('paramName', _paramNameType).assert(paramName);
 
         namedParams.set(paramName, match[group++]);
-      });
+      }, _flowRuntime2.default.function(_flowRuntime2.default.param('paramName', _flowRuntime2.default.string()))));
     }
 
     if (route.isSegment()) {
@@ -124,12 +124,12 @@ const findMatch = (path, completePath, routes, locale, namedParams) => {
     });
 
     return true;
-  });
+  }, _flowRuntime2.default.function(_flowRuntime2.default.param('route', _flowRuntime2.default.ref(RouteType)))));
 
   return _returnType.assert(result);
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.param('routes', _flowRuntime2.default.ref(RoutesType)), _flowRuntime2.default.param('locale', _flowRuntime2.default.ref(LocaleType)), _flowRuntime2.default.param('namedParams', _flowRuntime2.default.nullable(_flowRuntime2.default.ref('Map', _flowRuntime2.default.string(), _flowRuntime2.default.string()))), _flowRuntime2.default.return(_flowRuntime2.default.nullable(_flowRuntime2.default.ref(RouteMatchType)))));
 
-exports.default = function findMatch0(path, routes, locale = 'en') {
+exports.default = _flowRuntime2.default.annotate((path, routes, locale = 'en') => {
   let _pathType2 = _flowRuntime2.default.string();
 
   let _routesType2 = _flowRuntime2.default.ref(RoutesType);
@@ -145,5 +145,5 @@ exports.default = function findMatch0(path, routes, locale = 'en') {
   _flowRuntime2.default.param('locale', _localeType2).assert(locale);
 
   return _returnType2.assert(findMatch(path, path, routes, locale));
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('routes', _flowRuntime2.default.ref(RoutesType)), _flowRuntime2.default.param('locale', _flowRuntime2.default.ref(LocaleType)), _flowRuntime2.default.return(_flowRuntime2.default.nullable(_flowRuntime2.default.ref(RouteMatchType)))));
 //# sourceMappingURL=findMatch.js.map

@@ -85,7 +85,7 @@ type RouterBuilderType = {|
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
   addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
   getRoutes: () => RoutesType,
   createRouter: () => RouterType,
 |};
@@ -95,7 +95,7 @@ type SegmentRouterBuilderType = {|
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
   addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
 |};
 
 type RouterType = {|

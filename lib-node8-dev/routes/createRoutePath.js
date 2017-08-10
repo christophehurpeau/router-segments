@@ -21,7 +21,7 @@ const SegmentRoutePathType = _flowRuntime2.default.tdz(() => _types.SegmentRoute
 
 const RoutePathType = _flowRuntime2.default.tdz(() => _types.RoutePathType);
 
-const internalCreateRoutePath = (path, completePath, segment) => {
+const internalCreateRoutePath = _flowRuntime2.default.annotate(function internalCreateRoutePath(path, completePath, segment) {
   let _pathType = _flowRuntime2.default.string();
 
   let _completePathType = _flowRuntime2.default.string();
@@ -52,9 +52,9 @@ const internalCreateRoutePath = (path, completePath, segment) => {
     namedParams,
     toPath: _pathToRegexp2.default.compile(completePath)
   });
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.param('segment', _flowRuntime2.default.boolean()), _flowRuntime2.default.return(_flowRuntime2.default.union(_flowRuntime2.default.ref(SegmentRoutePathType), _flowRuntime2.default.ref(RoutePathType)))));
 
-const createRoutePathSegment = exports.createRoutePathSegment = (path, completePath) => {
+const createRoutePathSegment = exports.createRoutePathSegment = _flowRuntime2.default.annotate(function createRoutePathSegment(path, completePath) {
   let _pathType2 = _flowRuntime2.default.string();
 
   let _completePathType2 = _flowRuntime2.default.string();
@@ -66,9 +66,9 @@ const createRoutePathSegment = exports.createRoutePathSegment = (path, completeP
   _flowRuntime2.default.param('completePath', _completePathType2).assert(completePath);
 
   return _returnType2.assert(internalCreateRoutePath(path, completePath, true));
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.return(_flowRuntime2.default.ref(RoutePathType))));
 
-const createRoutePath = exports.createRoutePath = (path, completePath) => {
+const createRoutePath = exports.createRoutePath = _flowRuntime2.default.annotate(function createRoutePath(path, completePath) {
   let _pathType3 = _flowRuntime2.default.string();
 
   let _completePathType3 = _flowRuntime2.default.string();
@@ -80,5 +80,5 @@ const createRoutePath = exports.createRoutePath = (path, completePath) => {
   _flowRuntime2.default.param('completePath', _completePathType3).assert(completePath);
 
   return _returnType3.assert(internalCreateRoutePath(path, completePath, false));
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.return(_flowRuntime2.default.ref(RoutePathType))));
 //# sourceMappingURL=createRoutePath.js.map

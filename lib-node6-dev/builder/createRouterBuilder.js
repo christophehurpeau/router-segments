@@ -34,11 +34,11 @@ const RouteMapType = _flowRuntime2.default.tdz(() => _types.RouteMapType);
 
 const RouteType = _flowRuntime2.default.tdz(() => _types.RouteType);
 
-const SegmentCallbackType = _flowRuntime2.default.tdz(() => _types.SegmentCallbackType);
+const SegmentRouterBuilderType = _flowRuntime2.default.tdz(() => _types.SegmentRouterBuilderType);
 
 const RouteRefType = _flowRuntime2.default.tdz(() => _types.RouteRefType);
 
-exports.default = function createRouterBuilder(locales) {
+exports.default = _flowRuntime2.default.annotate(locales => {
   let _localesType = _flowRuntime2.default.nullable(_flowRuntime2.default.ref(LocalesType));
 
   const _returnType = _flowRuntime2.default.return(_flowRuntime2.default.ref(RouterBuilderType));
@@ -49,7 +49,7 @@ exports.default = function createRouterBuilder(locales) {
   const routes = _flowRuntime2.default.ref(RoutesType).assert([]);
   const routeMap = _flowRuntime2.default.ref(RouteMapType).assert(new Map());
 
-  const addToRouteMap = (key, route) => {
+  const addToRouteMap = _flowRuntime2.default.annotate(function addToRouteMap(key, route) {
     let _keyType = _flowRuntime2.default.string();
 
     let _routeType = _flowRuntime2.default.ref(RouteType);
@@ -60,12 +60,12 @@ exports.default = function createRouterBuilder(locales) {
 
     if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
     routeMap.set(key, route);
-  };
+  }, _flowRuntime2.default.function(_flowRuntime2.default.param('key', _flowRuntime2.default.string()), _flowRuntime2.default.param('route', _flowRuntime2.default.ref(RouteType))));
 
   const createSegmentRouterBuilder = (0, _createSegmentRouterBuilderCreator2.default)(defaultLocale, addToRouteMap);
 
   return _returnType.assert({
-    add: (path, ref, key) => {
+    add: _flowRuntime2.default.annotate((path, ref, key) => {
       let _pathType = _flowRuntime2.default.string();
 
       let _refType = _flowRuntime2.default.ref(RouteRefType);
@@ -84,10 +84,10 @@ exports.default = function createRouterBuilder(locales) {
       routes.push(route);
       if (!key) key = _keyType2.assert(path);
       addToRouteMap(key, route);
-    },
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string())), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-    addLocalized: (localizedPath, ref, key) => {
-      let _localizedPathType = _flowRuntime2.default.ref(PathDictionaryType);
+    addLocalized: _flowRuntime2.default.annotate((localizedPaths, ref, key) => {
+      let _localizedPathsType = _flowRuntime2.default.ref(PathDictionaryType);
 
       let _refType2 = _flowRuntime2.default.ref(RouteRefType);
 
@@ -95,7 +95,7 @@ exports.default = function createRouterBuilder(locales) {
 
       _flowRuntime2.default.return(_flowRuntime2.default.void());
 
-      _flowRuntime2.default.param('localizedPath', _localizedPathType).assert(localizedPath);
+      _flowRuntime2.default.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
 
       _flowRuntime2.default.param('ref', _refType2).assert(ref);
 
@@ -106,12 +106,12 @@ exports.default = function createRouterBuilder(locales) {
       routes.push(route);
       const finalKey = _flowRuntime2.default.string().assert(key || localizedPath[defaultLocale]);
       addToRouteMap(finalKey, route);
-    },
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.param('key', _flowRuntime2.default.nullable(_flowRuntime2.default.string())), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-    addSegment: (path, buildSegment) => {
+    addSegment: _flowRuntime2.default.annotate((path, buildSegment) => {
       let _pathType2 = _flowRuntime2.default.string();
 
-      let _buildSegmentType = _flowRuntime2.default.ref(SegmentCallbackType);
+      let _buildSegmentType = _flowRuntime2.default.ref(SegmentRouterBuilderType);
 
       _flowRuntime2.default.return(_flowRuntime2.default.void());
 
@@ -123,16 +123,16 @@ exports.default = function createRouterBuilder(locales) {
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
-    },
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentRouterBuilderType)), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
-    addLocalizedSegment: (localizedPaths, buildSegment) => {
-      let _localizedPathsType = _flowRuntime2.default.ref(PathDictionaryType);
+    addLocalizedSegment: _flowRuntime2.default.annotate((localizedPaths, buildSegment) => {
+      let _localizedPathsType2 = _flowRuntime2.default.ref(PathDictionaryType);
 
-      let _buildSegmentType2 = _flowRuntime2.default.ref(SegmentCallbackType);
+      let _buildSegmentType2 = _flowRuntime2.default.ref(SegmentRouterBuilderType);
 
       _flowRuntime2.default.return(_flowRuntime2.default.void());
 
-      _flowRuntime2.default.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
+      _flowRuntime2.default.param('localizedPaths', _localizedPathsType2).assert(localizedPaths);
 
       _flowRuntime2.default.param('buildSegment', _buildSegmentType2).assert(buildSegment);
 
@@ -141,10 +141,10 @@ exports.default = function createRouterBuilder(locales) {
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
-    },
+    }, _flowRuntime2.default.function(_flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('buildSegment', _flowRuntime2.default.ref(SegmentRouterBuilderType)), _flowRuntime2.default.return(_flowRuntime2.default.void()))),
 
     getRoutes: () => routes,
     createRouter: () => (0, _createRouter2.default)(routes, routeMap)
   });
-};
+}, _flowRuntime2.default.function(_flowRuntime2.default.param('locales', _flowRuntime2.default.nullable(_flowRuntime2.default.ref(LocalesType))), _flowRuntime2.default.return(_flowRuntime2.default.ref(RouterBuilderType))));
 //# sourceMappingURL=createRouterBuilder.js.map

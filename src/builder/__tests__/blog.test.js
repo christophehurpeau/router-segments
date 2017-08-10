@@ -104,7 +104,6 @@ describe('blog', () => {
     test('search', () => {
       const path = '/post/search';
       const match = router.find(path);
-      console.log(match);
       expect(match.path).toBe(path);
       expect(match.route.completePath).toBe(router.get('search').completePath);
       expect(match.ref).toBe('refsearch');

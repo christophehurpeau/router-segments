@@ -20,7 +20,6 @@ test:
   override:
     - yarn run preversion
     - yarn run test
-    - rm -Rf docs coverage
     - yarn run generate:docs
   post:
     - bash <(curl -s https://codecov.io/bash)

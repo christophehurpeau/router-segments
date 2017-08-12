@@ -7,7 +7,10 @@
       "envs": [
         "node6",
         "node8",
-        "module-node8"
+        "module-modern-browsers",
+        "module",
+        "module-node8",
+        "browsers"
       ],
       "documentation": {
         "doclets": false

@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EndRoute.html">EndRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndRoute.html#isSegment">isSegment</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalizedEndRoute.html">LocalizedEndRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedEndRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedEndRoute.html#isSegment">isSegment</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SegmentRoute.html">SegmentRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#isSegment">isSegment</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#isSegment">isSegment</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EndRoute.html">EndRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="EndRoute.html#isSegment">isSegment</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalizedEndRoute.html">LocalizedEndRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedEndRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedEndRoute.html#isSegment">isSegment</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalizedSegmentRoute.html">LocalizedSegmentRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedSegmentRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalizedSegmentRoute.html#isSegment">isSegment</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SegmentRoute.html">SegmentRoute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#getPath">getPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SegmentRoute.html#isSegment">isSegment</a></span></li>
 </nav>
 
 <div id="main">
@@ -93,16 +93,15 @@ builder.addLocalizedSegment(
   },
 );
 
-export default builder.createRouter();</code></pre><h2>API</h2><pre class="prettyprint source lang-js"><code>type SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;  
-type RouteMapType = Map&lt;string, RouteType>;
+export default builder.createRouter();</code></pre><h2>API</h2><pre class="prettyprint source lang-js"><code>type RouteMapType = Map&lt;string, RouteType>;
 type RoutesType = Array&lt;RouteType>;
 type RouteRefType = any;
 
 type RouterBuilderType = {|
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
   getRoutes: () => RoutesType,
   createRouter: () => RouterType,
 |};
@@ -111,8 +110,8 @@ type SegmentRouterBuilderType = {|
   defaultRoute: (ref: RouteRefType, key: ?string) => void,
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
 |};
 
 type RouterType = {|
@@ -141,7 +140,7 @@ type RouteMatchType = {|
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Thu Aug 10 2017 21:54:53 GMT+0000 (UTC) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Sat Aug 12 2017 09:57:53 GMT+0000 (UTC) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

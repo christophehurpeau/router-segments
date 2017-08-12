@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>SegmentRoute - Documentation</title>
+    <title>router/findMatch.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,385 +29,100 @@
 
 <div id="main">
     
-    <h1 class="page-title">SegmentRoute</h1>
+    <h1 class="page-title">router/findMatch.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
-    
-        <h2>
-        SegmentRoute
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="SegmentRoute"><span class="type-signature"></span>new SegmentRoute<span class="signature">(path)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_SegmentRoute.js.html">routes/SegmentRoute.js</a>, <a href="routes_SegmentRoute.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>RoutePathType</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="getPath"><span class="type-signature"></span>getPath<span class="signature">()</span><span class="type-signature"> &rarr; {RoutePathType}</span></h4>
-
-    
-
-
-
-
-
-
-
-<dl class="details">
-
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_SegmentRoute.js.html">routes/SegmentRoute.js</a>, <a href="routes_SegmentRoute.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>RoutePathType</code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
+exports.__esModule = true;
 
-</div>
-        
-            
-<div class="section-method">
+var _nightingaleLogger = require('nightingale-logger');
 
-    
-
-    <h4 class="name" id="isSegment"><span class="type-signature"></span>isSegment<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_SegmentRoute.js.html">routes/SegmentRoute.js</a>, <a href="routes_SegmentRoute.js.html#line29">line 29</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
+const logger = !false &amp;&amp; new _nightingaleLogger.default('router-segments:findMatch');
 
+const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
 
+const findMatch = (path, completePath, routes, locale, namedParams) => {
+  let result = null;
 
+  routes.some(route => {
+    const routePath = route.getPath(locale);
 
+    if (!false &amp;&amp; !routePath) {
+      throw new Error(`Unknown localized route for locale ${locale}`);
+    }
 
+    /* istanbul ignore next */
+    if (!false) logger.debug(`trying ${routePath.regExp}`);
 
+    const match = routePath.regExp.exec(path);
+    if (!match) return false;
 
+    match.shift(); // remove m[0], === path;
 
+    let groupCount = match.length;
+    let group = 0;
 
+    if (routePath.namedParams.length !== 0) {
+      // set params
+      if (!namedParams) namedParams = new Map();
 
+      routePath.namedParams.forEach(paramName => {
+        namedParams.set(paramName, match[group++]);
+      });
+    }
 
+    if (route.isSegment()) {
+      const restOfThePath = match[--groupCount];
 
+      if (restOfThePath) {
+        result = findMatch(`/${restOfThePath}`, completePath, route.nestedRoutes, locale, namedParams);
 
+        return result !== null;
+      }
 
+      if (!route.defaultRoute) {
+        return false;
+      }
 
+      route = route.defaultRoute;
+    }
 
+    const otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
 
+    result = Object.freeze({
+      ref: route.ref,
+      path: completePath,
+      route,
+      routePath,
+      namedParams,
+      otherParams
+    });
 
+    return true;
+  });
 
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>boolean</code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
+  return result;
+};
 
-</section>
+/**
+ * @param {string} path
+ * @param {RoutesType} routes
+ * @param {LocaleType} [locale=en]
+ * @returns {RouteMatchType}
+*/exports.default = function findMatch0(path, routes, locale = 'en') {
+  return findMatch(path, path, routes, locale);
+};
+//# sourceMappingURL=findMatch.js.map</code></pre>
+        </article>
+    </section>
 
 
 

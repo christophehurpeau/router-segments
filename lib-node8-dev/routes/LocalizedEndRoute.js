@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2;
+var _dec, _dec2, _desc, _value, _class, _descriptor, _descriptor2;
 
 var _types = require('../types');
 
@@ -64,7 +64,7 @@ const RoutePathType = _flowRuntime2.default.tdz(() => _types.RoutePathType);
 
 const RouteRefType = _flowRuntime2.default.tdz(() => _types.RouteRefType);
 
-let LocalizedEndRoute = (_dec = _flowRuntime2.default.annotate(_flowRuntime2.default.class('LocalizedEndRoute', _flowRuntime2.default.property('localizedPaths', _flowRuntime2.default.ref('Map', _flowRuntime2.default.ref(LocaleType), _flowRuntime2.default.ref(RoutePathType))), _flowRuntime2.default.property('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.method('constructor', _flowRuntime2.default.param('localizedPaths', _flowRuntime2.default.ref('Map', _flowRuntime2.default.ref(LocaleType), _flowRuntime2.default.ref(RoutePathType))), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType))), _flowRuntime2.default.method('getPath', _flowRuntime2.default.param('locale', _flowRuntime2.default.ref(LocaleType)), _flowRuntime2.default.return(_flowRuntime2.default.nullable(_flowRuntime2.default.ref(RoutePathType)))), _flowRuntime2.default.method('isSegment', _flowRuntime2.default.return(_flowRuntime2.default.boolean())), _flowRuntime2.default.method('toJSON'), _flowRuntime2.default.method('toString'))), _dec2 = _flowRuntime2.default.decorate(_flowRuntime2.default.ref('Map', _flowRuntime2.default.ref(LocaleType), _flowRuntime2.default.ref(RoutePathType))), _dec3 = _flowRuntime2.default.decorate(_flowRuntime2.default.ref(RouteRefType)), _dec(_class = (_class2 = class {
+let LocalizedEndRoute = (_dec = _flowRuntime2.default.decorate(_flowRuntime2.default.ref('Map', _flowRuntime2.default.ref(LocaleType), _flowRuntime2.default.ref(RoutePathType))), _dec2 = _flowRuntime2.default.decorate(_flowRuntime2.default.ref(RouteRefType)), (_class = class {
 
   constructor(localizedPaths, ref) {
     _initDefineProp(this, 'localizedPaths', _descriptor, this);
@@ -107,12 +107,12 @@ let LocalizedEndRoute = (_dec = _flowRuntime2.default.annotate(_flowRuntime2.def
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'localizedPaths', [_dec2], {
+}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'localizedPaths', [_dec], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'ref', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'ref', [_dec2], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class));
 exports.default = LocalizedEndRoute;
 //# sourceMappingURL=LocalizedEndRoute.js.map

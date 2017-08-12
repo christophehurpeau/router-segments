@@ -1,4 +1,4 @@
-import type { RouteType } from './routes';
+import type { RouteType, EndRouteType } from './routes';
 
 export type { RouteType };
 
@@ -12,11 +12,14 @@ export type SegmentRouterBuilderType = {|
   defaultRoute: (ref: RouteRefType, key: ?string) => void,
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (
+    localizedPaths: PathDictionaryType,
+    buildSegment: (builder: SegmentRouterBuilderType) => void,
+  ) => void,
 |};
 
-export type SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;
+// export type SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;
 
 export type SegmentRoutePathType = {|
   path: string,
@@ -46,8 +49,8 @@ export type RouteMatchType = {|
 |};
 
 export type RouterType = {|
-  get: (path: string) => ?RouteType,
-  find: (path: string) => ?RouteMatchType,
+  get: (key: string) => ?EndRouteType,
+  find: (path: string, locale: ?string) => ?RouteMatchType,
   toPath: (key: string, args: any) => string,
   toLocalizedPath: (locale: string, key: string, args: any) => string,
 |};
@@ -55,8 +58,11 @@ export type RouterType = {|
 export type RouterBuilderType = {|
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (
+    localizedPaths: PathDictionaryType,
+    buildSegment: (builder: SegmentRouterBuilderType) => void,
+  ) => void,
   getRoutes: () => RoutesType,
   createRouter: () => RouterType,
 |};

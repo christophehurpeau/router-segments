@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2;
+var _dec, _dec2, _desc, _value, _class, _descriptor, _descriptor2;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -49,7 +49,7 @@ import t from 'flow-runtime';
 const LocaleType = t.tdz(() => _LocaleType);
 const RoutePathType = t.tdz(() => _RoutePathType);
 const RouteRefType = t.tdz(() => _RouteRefType);
-let LocalizedEndRoute = (_dec = t.annotate(t.class('LocalizedEndRoute', t.property('localizedPaths', t.ref('Map', t.ref(LocaleType), t.ref(RoutePathType))), t.property('ref', t.ref(RouteRefType)), t.method('constructor', t.param('localizedPaths', t.ref('Map', t.ref(LocaleType), t.ref(RoutePathType))), t.param('ref', t.ref(RouteRefType))), t.method('getPath', t.param('locale', t.ref(LocaleType)), t.return(t.nullable(t.ref(RoutePathType)))), t.method('isSegment', t.return(t.boolean())), t.method('toJSON'), t.method('toString'))), _dec2 = t.decorate(t.ref('Map', t.ref(LocaleType), t.ref(RoutePathType))), _dec3 = t.decorate(t.ref(RouteRefType)), _dec(_class = (_class2 = class {
+let LocalizedEndRoute = (_dec = t.decorate(t.ref('Map', t.ref(LocaleType), t.ref(RoutePathType))), _dec2 = t.decorate(t.ref(RouteRefType)), (_class = class {
 
   constructor(localizedPaths, ref) {
     _initDefineProp(this, 'localizedPaths', _descriptor, this);
@@ -91,12 +91,12 @@ let LocalizedEndRoute = (_dec = t.annotate(t.class('LocalizedEndRoute', t.proper
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'localizedPaths', [_dec2], {
+}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'localizedPaths', [_dec], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'ref', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'ref', [_dec2], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class));
 export { LocalizedEndRoute as default };
 //# sourceMappingURL=LocalizedEndRoute.js.map

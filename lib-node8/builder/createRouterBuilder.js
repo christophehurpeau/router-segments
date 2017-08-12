@@ -38,9 +38,9 @@ exports.default = locales => {
 
     addLocalized: (localizedPaths, ref, key) => {
       if (!defaultLocale) throw new Error('Invalid locales');
-      const route = (0, _create.createLocalizedRoute)(localizedPath, localizedPath, ref);
+      const route = (0, _create.createLocalizedRoute)(localizedPaths, localizedPaths, ref);
       routes.push(route);
-      const finalKey = key || localizedPath[defaultLocale];
+      const finalKey = key || localizedPaths[defaultLocale];
       addToRouteMap(finalKey, route);
     },
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-let SegmentRoute = class {
+let LocalizedSegmentRoute = class {
 
   constructor(localizedPaths) {
     this.nestedRoutes = [];
@@ -32,5 +32,5 @@ let SegmentRoute = class {
     return JSON.stringify(this.toJSON());
   }
 };
-exports.default = SegmentRoute;
+exports.default = LocalizedSegmentRoute;
 //# sourceMappingURL=LocalizedSegmentRoute.js.map

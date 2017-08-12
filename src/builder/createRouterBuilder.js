@@ -42,13 +42,13 @@ export default (locales: ?LocalesType): RouterBuilderType => {
 
     addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string): void => {
       if (!defaultLocale) throw new Error('Invalid locales');
-      const route = createLocalizedRoute(localizedPath, localizedPath, ref);
+      const route = createLocalizedRoute(localizedPaths, localizedPaths, ref);
       routes.push(route);
-      const finalKey: string = key || localizedPath[defaultLocale];
+      const finalKey: string = key || localizedPaths[defaultLocale];
       addToRouteMap(finalKey, route);
     },
 
-    addSegment: (path: string, buildSegment: SegmentRouterBuilderType): void => {
+    addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void): void => {
       const route = createSegmentRoute(path, path);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
@@ -57,7 +57,7 @@ export default (locales: ?LocalesType): RouterBuilderType => {
 
     addLocalizedSegment: (
       localizedPaths: PathDictionaryType,
-      buildSegment: SegmentRouterBuilderType,
+      buildSegment: (builder: SegmentRouterBuilderType) => void,
     ): void => {
       if (!defaultLocale) throw new Error('Invalid locales');
       const route = createLocalizedSegmentRoute(localizedPaths, localizedPaths);

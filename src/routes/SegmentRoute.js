@@ -3,7 +3,8 @@ import type Route from './EndRoute';
 
 export default class SegmentRoute {
   path: RoutePathType;
-  nestedRoutes: Array<Route | SegmentRoute> = [];
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
+  nestedRoutes = [];
   defaultRoute: ?Route;
 
   constructor(path: RoutePathType) {

@@ -11,7 +11,7 @@ const PathDictionaryType = t.tdz(() => _PathDictionaryType);
 const RoutePathType = t.tdz(() => _RoutePathType);
 const SegmentRoutePathType = t.tdz(() => _SegmentRoutePathType);
 const RouteRefType = t.tdz(() => _RouteRefType);
-const createLocalizedPaths = t.annotate(function createLocalizedPaths(pathDictionary, completePathDictionary, segment) {
+const createLocalizedPaths = (pathDictionary, completePathDictionary, segment) => {
   let _pathDictionaryType = t.ref(PathDictionaryType);
 
   let _completePathDictionaryType = t.ref(PathDictionaryType);
@@ -23,7 +23,7 @@ const createLocalizedPaths = t.annotate(function createLocalizedPaths(pathDictio
   t.param('segment', _segmentType).assert(segment);
 
   const localizedPaths = new Map();
-  Object.keys(pathDictionary).forEach(t.annotate(locale => {
+  Object.keys(pathDictionary).forEach(locale => {
     let _localeType = t.ref(LocaleType);
 
     t.param('locale', _localeType).assert(locale);
@@ -36,19 +36,19 @@ const createLocalizedPaths = t.annotate(function createLocalizedPaths(pathDictio
       const routerPath = t.ref(RoutePathType).assert(createRoutePath(path, completePathDictionary[locale]));
       localizedPaths.set(locale, routerPath);
     }
-  }, t.function(t.param('locale', t.ref(LocaleType)))));
+  });
   return localizedPaths;
-}, t.function(t.param('pathDictionary', t.ref(PathDictionaryType)), t.param('completePathDictionary', t.ref(PathDictionaryType)), t.param('segment', t.boolean())));
+};
 
-const checkRef = t.annotate(function checkRef(ref) {
+const checkRef = ref => {
   let _refType = t.any();
 
   t.param('ref', _refType).assert(ref);
 
   if (!ref) throw new Error(`Invalid ref: "${ref}"`);
-}, t.function(t.param('ref', t.any())));
+};
 
-export const createRoute = t.annotate(function createRoute(path, completePath, ref) {
+export const createRoute = (path, completePath, ref) => {
   let _pathType = t.string();
 
   let _completePathType = t.string();
@@ -65,9 +65,9 @@ export const createRoute = t.annotate(function createRoute(path, completePath, r
   checkRef(ref);
   const routePath = t.ref(RoutePathType).assert(createRoutePath(path, completePath));
   return _returnType.assert(new Route(routePath, ref));
-}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.param('ref', t.ref(RouteRefType)), t.return(t.ref(Route))));
+};
 
-export const createLocalizedRoute = t.annotate(function createLocalizedRoute(pathDictionary, completePathDictionary, ref) {
+export const createLocalizedRoute = (pathDictionary, completePathDictionary, ref) => {
   let _pathDictionaryType2 = t.ref(PathDictionaryType);
 
   let _completePathDictionaryType2 = t.ref(PathDictionaryType);
@@ -84,9 +84,9 @@ export const createLocalizedRoute = t.annotate(function createLocalizedRoute(pat
   checkRef(ref);
   const localizedPaths = createLocalizedPaths(pathDictionary, completePathDictionary, false);
   return _returnType2.assert(new LocalizedRoute(localizedPaths, ref));
-}, t.function(t.param('pathDictionary', t.ref(PathDictionaryType)), t.param('completePathDictionary', t.ref(PathDictionaryType)), t.param('ref', t.ref(RouteRefType)), t.return(t.ref(LocalizedRoute))));
+};
 
-export const createSegmentRoute = t.annotate(function createSegmentRoute(path, completePath) {
+export const createSegmentRoute = (path, completePath) => {
   let _pathType2 = t.string();
 
   let _completePathType2 = t.string();
@@ -98,9 +98,9 @@ export const createSegmentRoute = t.annotate(function createSegmentRoute(path, c
 
   const routePath = createRoutePathSegment(path, completePath);
   return _returnType3.assert(new SegmentRoute(routePath));
-}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.return(t.ref(SegmentRoute))));
+};
 
-export const createLocalizedSegmentRoute = t.annotate(function createLocalizedSegmentRoute(pathDictionary, completePathDictionary) {
+export const createLocalizedSegmentRoute = (pathDictionary, completePathDictionary) => {
   let _pathDictionaryType3 = t.ref(PathDictionaryType);
 
   let _completePathDictionaryType3 = t.ref(PathDictionaryType);
@@ -112,5 +112,5 @@ export const createLocalizedSegmentRoute = t.annotate(function createLocalizedSe
 
   const localizedPaths = createLocalizedPaths(pathDictionary, completePathDictionary, true);
   return _returnType4.assert(new LocalizedSegmentRoute(localizedPaths));
-}, t.function(t.param('pathDictionary', t.ref(PathDictionaryType)), t.param('completePathDictionary', t.ref(PathDictionaryType)), t.return(t.ref(LocalizedSegmentRoute))));
+};
 //# sourceMappingURL=create.js.map

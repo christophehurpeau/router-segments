@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2;
+var _dec, _dec2, _desc, _value, _class, _descriptor, _descriptor2;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -48,7 +48,7 @@ import { RoutePathType as _RoutePathType, RouteRefType as _RouteRefType } from '
 import t from 'flow-runtime';
 const RoutePathType = t.tdz(() => _RoutePathType);
 const RouteRefType = t.tdz(() => _RouteRefType);
-let EndRoute = (_dec = t.annotate(t.class('EndRoute', t.property('path', t.ref(RoutePathType)), t.property('ref', t.ref(RouteRefType)), t.method('constructor', t.param('path', t.ref(RoutePathType)), t.param('ref', t.ref(RouteRefType))), t.method('getPath', t.return(t.ref(RoutePathType))), t.method('isSegment', t.return(t.boolean())), t.method('toJSON'), t.method('toString'))), _dec2 = t.decorate(t.ref(RoutePathType)), _dec3 = t.decorate(t.ref(RouteRefType)), _dec(_class = (_class2 = class {
+let EndRoute = (_dec = t.decorate(t.ref(RoutePathType)), _dec2 = t.decorate(t.ref(RouteRefType)), (_class = class {
 
   constructor(path, ref) {
     _initDefineProp(this, 'path', _descriptor, this);
@@ -86,12 +86,12 @@ let EndRoute = (_dec = t.annotate(t.class('EndRoute', t.property('path', t.ref(R
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'path', [_dec2], {
+}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'path', [_dec], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'ref', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'ref', [_dec2], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class));
 export { EndRoute as default };
 //# sourceMappingURL=EndRoute.js.map

@@ -1,5 +1,5 @@
 let SegmentRoute = class {
-
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
   constructor(path) {
     this.nestedRoutes = [];
 

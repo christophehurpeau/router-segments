@@ -1,5 +1,10 @@
 import type { SegmentRouteType } from '../routes/index';
-import type { RouteType, PathDictionaryType, SegmentCallbackType, RouteRefType } from '../types';
+import type {
+  RouteType,
+  PathDictionaryType,
+  RouteRefType,
+  SegmentRouterBuilderType,
+} from '../types';
 import {
   createRoute,
   createLocalizedRoute,
@@ -59,7 +64,7 @@ export default (defaultLocale: ?string, addToRouteMap: AddToRouteMapType) => {
 
     const _createLocalizedSegmentRoute = (
       localizedPaths: PathDictionaryType,
-      buildSegment: SegmentCallbackType,
+      buildSegment: (builder: SegmentRouterBuilderType) => void,
     ) => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
       const route = createLocalizedSegmentRoute(localizedPaths, completeLocalizedPaths);
@@ -68,7 +73,10 @@ export default (defaultLocale: ?string, addToRouteMap: AddToRouteMapType) => {
       return route;
     };
 
-    const _createSegmentRoute = (path: string, buildSegment: SegmentCallbackType) => {
+    const _createSegmentRoute = (
+      path: string,
+      buildSegment: (builder: SegmentRouterBuilderType) => void,
+    ) => {
       if (segmentRoute.localizedPaths) {
         return _createLocalizedSegmentRoute(createLocalizedPathFromSegment(path), buildSegment);
       }
@@ -94,13 +102,16 @@ export default (defaultLocale: ?string, addToRouteMap: AddToRouteMapType) => {
         segmentRoute.nestedRoutes.push(_createLocalizedEndRoute(localizedPaths, ref, key));
       },
 
-      addSegment: (path: string, buildSegment: SegmentCallbackType): void => {
+      addSegment: (
+        path: string,
+        buildSegment: (builder: SegmentRouterBuilderType) => void,
+      ): void => {
         segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
       },
 
       addLocalizedSegment: (
         localizedPaths: PathDictionaryType,
-        buildSegment: SegmentCallbackType,
+        buildSegment: (builder: SegmentRouterBuilderType) => void,
       ): void => {
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(_createLocalizedSegmentRoute(localizedPaths, buildSegment));

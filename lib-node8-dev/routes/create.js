@@ -41,7 +41,7 @@ const SegmentRoutePathType = _flowRuntime2.default.tdz(() => _types.SegmentRoute
 
 const RouteRefType = _flowRuntime2.default.tdz(() => _types.RouteRefType);
 
-const createLocalizedPaths = _flowRuntime2.default.annotate(function createLocalizedPaths(pathDictionary, completePathDictionary, segment) {
+const createLocalizedPaths = (pathDictionary, completePathDictionary, segment) => {
   let _pathDictionaryType = _flowRuntime2.default.ref(PathDictionaryType);
 
   let _completePathDictionaryType = _flowRuntime2.default.ref(PathDictionaryType);
@@ -55,7 +55,7 @@ const createLocalizedPaths = _flowRuntime2.default.annotate(function createLocal
   _flowRuntime2.default.param('segment', _segmentType).assert(segment);
 
   const localizedPaths = new Map();
-  Object.keys(pathDictionary).forEach(_flowRuntime2.default.annotate(locale => {
+  Object.keys(pathDictionary).forEach(locale => {
     let _localeType = _flowRuntime2.default.ref(LocaleType);
 
     _flowRuntime2.default.param('locale', _localeType).assert(locale);
@@ -68,19 +68,19 @@ const createLocalizedPaths = _flowRuntime2.default.annotate(function createLocal
       const routerPath = _flowRuntime2.default.ref(RoutePathType).assert((0, _createRoutePath.createRoutePath)(path, completePathDictionary[locale]));
       localizedPaths.set(locale, routerPath);
     }
-  }, _flowRuntime2.default.function(_flowRuntime2.default.param('locale', _flowRuntime2.default.ref(LocaleType)))));
+  });
   return localizedPaths;
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('pathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('completePathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('segment', _flowRuntime2.default.boolean())));
+};
 
-const checkRef = _flowRuntime2.default.annotate(function checkRef(ref) {
+const checkRef = ref => {
   let _refType = _flowRuntime2.default.any();
 
   _flowRuntime2.default.param('ref', _refType).assert(ref);
 
   if (!ref) throw new Error(`Invalid ref: "${ref}"`);
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('ref', _flowRuntime2.default.any())));
+};
 
-const createRoute = exports.createRoute = _flowRuntime2.default.annotate(function createRoute(path, completePath, ref) {
+const createRoute = exports.createRoute = (path, completePath, ref) => {
   let _pathType = _flowRuntime2.default.string();
 
   let _completePathType = _flowRuntime2.default.string();
@@ -99,9 +99,9 @@ const createRoute = exports.createRoute = _flowRuntime2.default.annotate(functio
   checkRef(ref);
   const routePath = _flowRuntime2.default.ref(RoutePathType).assert((0, _createRoutePath.createRoutePath)(path, completePath));
   return _returnType.assert(new _EndRoute2.default(routePath, ref));
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.return(_flowRuntime2.default.ref(_EndRoute2.default))));
+};
 
-const createLocalizedRoute = exports.createLocalizedRoute = _flowRuntime2.default.annotate(function createLocalizedRoute(pathDictionary, completePathDictionary, ref) {
+const createLocalizedRoute = exports.createLocalizedRoute = (pathDictionary, completePathDictionary, ref) => {
   let _pathDictionaryType2 = _flowRuntime2.default.ref(PathDictionaryType);
 
   let _completePathDictionaryType2 = _flowRuntime2.default.ref(PathDictionaryType);
@@ -120,9 +120,9 @@ const createLocalizedRoute = exports.createLocalizedRoute = _flowRuntime2.defaul
   checkRef(ref);
   const localizedPaths = createLocalizedPaths(pathDictionary, completePathDictionary, false);
   return _returnType2.assert(new _LocalizedEndRoute2.default(localizedPaths, ref));
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('pathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('completePathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('ref', _flowRuntime2.default.ref(RouteRefType)), _flowRuntime2.default.return(_flowRuntime2.default.ref(_LocalizedEndRoute2.default))));
+};
 
-const createSegmentRoute = exports.createSegmentRoute = _flowRuntime2.default.annotate(function createSegmentRoute(path, completePath) {
+const createSegmentRoute = exports.createSegmentRoute = (path, completePath) => {
   let _pathType2 = _flowRuntime2.default.string();
 
   let _completePathType2 = _flowRuntime2.default.string();
@@ -135,9 +135,9 @@ const createSegmentRoute = exports.createSegmentRoute = _flowRuntime2.default.an
 
   const routePath = (0, _createRoutePath.createRoutePathSegment)(path, completePath);
   return _returnType3.assert(new _SegmentRoute2.default(routePath));
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('path', _flowRuntime2.default.string()), _flowRuntime2.default.param('completePath', _flowRuntime2.default.string()), _flowRuntime2.default.return(_flowRuntime2.default.ref(_SegmentRoute2.default))));
+};
 
-const createLocalizedSegmentRoute = exports.createLocalizedSegmentRoute = _flowRuntime2.default.annotate(function createLocalizedSegmentRoute(pathDictionary, completePathDictionary) {
+const createLocalizedSegmentRoute = exports.createLocalizedSegmentRoute = (pathDictionary, completePathDictionary) => {
   let _pathDictionaryType3 = _flowRuntime2.default.ref(PathDictionaryType);
 
   let _completePathDictionaryType3 = _flowRuntime2.default.ref(PathDictionaryType);
@@ -150,5 +150,5 @@ const createLocalizedSegmentRoute = exports.createLocalizedSegmentRoute = _flowR
 
   const localizedPaths = createLocalizedPaths(pathDictionary, completePathDictionary, true);
   return _returnType4.assert(new _LocalizedSegmentRoute2.default(localizedPaths));
-}, _flowRuntime2.default.function(_flowRuntime2.default.param('pathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.param('completePathDictionary', _flowRuntime2.default.ref(PathDictionaryType)), _flowRuntime2.default.return(_flowRuntime2.default.ref(_LocalizedSegmentRoute2.default))));
+};
 //# sourceMappingURL=create.js.map

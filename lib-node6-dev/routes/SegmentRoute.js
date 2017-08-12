@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3;
+var _dec, _dec2, _desc, _value, _class, _descriptor, _descriptor2;
 
 var _types = require('../types');
 
@@ -66,18 +66,14 @@ const Route = _flowRuntime2.default.tdz(() => _EndRoute2.default);
 
 const RoutePathType = _flowRuntime2.default.tdz(() => _types.RoutePathType);
 
-let SegmentRoute = (_dec = _flowRuntime2.default.annotate(_flowRuntime2.default.class('SegmentRoute', SegmentRoute => {
-  return [_flowRuntime2.default.property('path', _flowRuntime2.default.ref(RoutePathType)), _flowRuntime2.default.property('nestedRoutes', _flowRuntime2.default.array(_flowRuntime2.default.union(_flowRuntime2.default.ref(Route), _flowRuntime2.default.ref(SegmentRoute)))), _flowRuntime2.default.property('defaultRoute', _flowRuntime2.default.nullable(_flowRuntime2.default.ref(Route))), _flowRuntime2.default.method('constructor', _flowRuntime2.default.param('path', _flowRuntime2.default.ref(RoutePathType))), _flowRuntime2.default.method('freeze'), _flowRuntime2.default.method('getPath', _flowRuntime2.default.return(_flowRuntime2.default.ref(RoutePathType))), _flowRuntime2.default.method('isSegment', _flowRuntime2.default.return(_flowRuntime2.default.boolean())), _flowRuntime2.default.method('toJSON'), _flowRuntime2.default.method('toString')];
-})), _dec2 = _flowRuntime2.default.decorate(_flowRuntime2.default.ref(RoutePathType)), _dec3 = _flowRuntime2.default.decorate(function () {
-  return _flowRuntime2.default.array(_flowRuntime2.default.union(_flowRuntime2.default.ref(Route), _flowRuntime2.default.ref(SegmentRoute)));
-}), _dec4 = _flowRuntime2.default.decorate(_flowRuntime2.default.nullable(_flowRuntime2.default.ref(Route))), _dec(_class = (_class2 = class {
-
+let SegmentRoute = (_dec = _flowRuntime2.default.decorate(_flowRuntime2.default.ref(RoutePathType)), _dec2 = _flowRuntime2.default.decorate(_flowRuntime2.default.nullable(_flowRuntime2.default.ref(Route))), (_class = class {
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
   constructor(path) {
     _initDefineProp(this, 'path', _descriptor, this);
 
-    _initDefineProp(this, 'nestedRoutes', _descriptor2, this);
+    this.nestedRoutes = [];
 
-    _initDefineProp(this, 'defaultRoute', _descriptor3, this);
+    _initDefineProp(this, 'defaultRoute', _descriptor2, this);
 
     let _pathType = _flowRuntime2.default.ref(RoutePathType);
 
@@ -110,17 +106,12 @@ let SegmentRoute = (_dec = _flowRuntime2.default.annotate(_flowRuntime2.default.
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'path', [_dec2], {
+}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'path', [_dec], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'nestedRoutes', [_dec3], {
-  enumerable: true,
-  initializer: function () {
-    return [];
-  }
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'defaultRoute', [_dec4], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'defaultRoute', [_dec2], {
   enumerable: true,
   initializer: null
-})), _class2)) || _class);
+})), _class));
 exports.default = SegmentRoute;
 //# sourceMappingURL=SegmentRoute.js.map

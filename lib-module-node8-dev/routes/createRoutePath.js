@@ -4,7 +4,7 @@ import { SegmentRoutePathType as _SegmentRoutePathType, RoutePathType as _RouteP
 import t from 'flow-runtime';
 const SegmentRoutePathType = t.tdz(() => _SegmentRoutePathType);
 const RoutePathType = t.tdz(() => _RoutePathType);
-const internalCreateRoutePath = t.annotate(function internalCreateRoutePath(path, completePath, segment) {
+const internalCreateRoutePath = (path, completePath, segment) => {
   let _pathType = t.string();
 
   let _completePathType = t.string();
@@ -33,9 +33,9 @@ const internalCreateRoutePath = t.annotate(function internalCreateRoutePath(path
     namedParams,
     toPath: pathToRegExp.compile(completePath)
   });
-}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.param('segment', t.boolean()), t.return(t.union(t.ref(SegmentRoutePathType), t.ref(RoutePathType)))));
+};
 
-export const createRoutePathSegment = t.annotate(function createRoutePathSegment(path, completePath) {
+export const createRoutePathSegment = (path, completePath) => {
   let _pathType2 = t.string();
 
   let _completePathType2 = t.string();
@@ -45,9 +45,9 @@ export const createRoutePathSegment = t.annotate(function createRoutePathSegment
   t.param('path', _pathType2).assert(path);
   t.param('completePath', _completePathType2).assert(completePath);
   return _returnType2.assert(internalCreateRoutePath(path, completePath, true));
-}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.return(t.ref(RoutePathType))));
+};
 
-export const createRoutePath = t.annotate(function createRoutePath(path, completePath) {
+export const createRoutePath = (path, completePath) => {
   let _pathType3 = t.string();
 
   let _completePathType3 = t.string();
@@ -57,5 +57,5 @@ export const createRoutePath = t.annotate(function createRoutePath(path, complet
   t.param('path', _pathType3).assert(path);
   t.param('completePath', _completePathType3).assert(completePath);
   return _returnType3.assert(internalCreateRoutePath(path, completePath, false));
-}, t.function(t.param('path', t.string()), t.param('completePath', t.string()), t.return(t.ref(RoutePathType))));
+};
 //# sourceMappingURL=createRoutePath.js.map

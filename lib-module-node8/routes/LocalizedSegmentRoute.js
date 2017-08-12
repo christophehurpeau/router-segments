@@ -1,4 +1,4 @@
-let SegmentRoute = class {
+let LocalizedSegmentRoute = class {
 
   constructor(localizedPaths) {
     this.nestedRoutes = [];
@@ -27,5 +27,5 @@ let SegmentRoute = class {
     return JSON.stringify(this.toJSON());
   }
 };
-export { SegmentRoute as default };
+export { LocalizedSegmentRoute as default };
 //# sourceMappingURL=LocalizedSegmentRoute.js.map

@@ -1,8 +1,7 @@
 import type { LocaleType, RoutePathType } from '../types';
 import type LocalizedRoute from './LocalizedEndRoute';
-import type LocalizedSegmentRoute from './LocalizedSegmentRoute';
 
-export default class SegmentRoute {
+export default class LocalizedSegmentRoute {
   localizedPaths: Map<LocaleType, RoutePathType>;
   nestedRoutes: Array<LocalizedRoute | LocalizedSegmentRoute> = [];
   defaultRoute: ?LocalizedRoute;

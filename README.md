@@ -76,7 +76,6 @@ export default builder.createRouter();
 ## API
 
 ```js
-type SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;  
 type RouteMapType = Map<string, RouteType>;
 type RoutesType = Array<RouteType>;
 type RouteRefType = any;
@@ -84,8 +83,8 @@ type RouteRefType = any;
 type RouterBuilderType = {|
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
   getRoutes: () => RoutesType,
   createRouter: () => RouterType,
 |};
@@ -94,8 +93,8 @@ type SegmentRouterBuilderType = {|
   defaultRoute: (ref: RouteRefType, key: ?string) => void,
   add: (path: string, ref: RouteRefType, key: ?string) => void,
   addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: SegmentRouterBuilderType) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: SegmentRouterBuilderType) => void,
+  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
+  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
 |};
 
 type RouterType = {|

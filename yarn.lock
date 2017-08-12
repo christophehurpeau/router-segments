@@ -653,9 +653,9 @@ babel-preset-jest@^20.0.3:
   dependencies:
     babel-plugin-jest-hoist "^20.0.3"
 
-babel-preset-jsdoc@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-jsdoc/-/babel-preset-jsdoc-0.4.0.tgz#28fcfa82f42f9b3d2f4e5591f08aa0aec3106fc3"
+babel-preset-jsdoc@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/babel-preset-jsdoc/-/babel-preset-jsdoc-0.4.1.tgz#adb7a297e58b7c5b53529d5a84f6781eaf7a3be1"
   dependencies:
     babel-plugin-transform-es2015-destructuring "^6.16.0"
     babel-plugin-transform-es2015-modules-commonjs "^6.16.0"
@@ -2447,7 +2447,7 @@ js-tokens@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.0, js-yaml@^3.9.1:
+js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
   dependencies:
@@ -3321,9 +3321,9 @@ pluralize@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
 
-pob-babel@^17.6.0:
-  version "17.6.0"
-  resolved "https://registry.yarnpkg.com/pob-babel/-/pob-babel-17.6.0.tgz#8b1a301f739080b89a24dab3c89a58c4b2444d5e"
+pob-babel@^17.6.1:
+  version "17.6.1"
+  resolved "https://registry.yarnpkg.com/pob-babel/-/pob-babel-17.6.1.tgz#88a0da145b86fa0626a40347c57e2e936f2e13cf"
   dependencies:
     babel-core "^6.25.0"
     babel-plugin-discard-module-references "^1.1.2"
@@ -3336,7 +3336,7 @@ pob-babel@^17.6.0:
     chokidar "^1.7.0"
     fs-readdir-recursive "^1.0.0"
     glob "^7.1.2"
-    js-yaml "^3.9.0"
+    js-yaml "^3.9.1"
     lock "^0.1.4"
     minimist-argv "^1.0.0"
     mkdirp "^0.5.1"
@@ -3634,8 +3634,8 @@ rx@^4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
 rxjs@^5.0.0-beta.11:
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.2.tgz#2a3236fcbf03df57bae06fd6972fd99e5c08fcf7"
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.3.tgz#0758cddee6033d68e0fd53676f0f3596ce3d483f"
   dependencies:
     symbol-observable "^1.0.1"
 

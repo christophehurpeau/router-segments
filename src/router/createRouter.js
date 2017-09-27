@@ -12,8 +12,13 @@ export default (routes: RoutesType, routeMap: RouteMapType): RouterType => {
   return {
     get: (key: string): ?EndRouteType => getRequiredRoute(key),
     find: (path: string, locale: ?string): ?RouteMatchType => findMatch(path, routes, locale),
-    toPath: (key: string, args: any): string => getRequiredRoute(key).getPath().toPath(args),
+    toPath: (key: string, args: any): string =>
+      getRequiredRoute(key)
+        .getPath()
+        .toPath(args),
     toLocalizedPath: (locale: string, key: string, args: any): string =>
-      getRequiredRoute(key).getPath(locale).toPath(args),
+      getRequiredRoute(key)
+        .getPath(locale)
+        .toPath(args),
   };
 };

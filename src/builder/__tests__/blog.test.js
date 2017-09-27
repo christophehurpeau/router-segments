@@ -35,13 +35,13 @@ describe('blog', () => {
       const routePath = postRouterRoute.path;
 
       test('path', () => {
-        expect(routePath.path).toBe('/post');
-        expect(routePath.completePath).toBe('/post');
+        expect(routePath).toHaveProperty('path', '/post');
+        expect(routePath).toHaveProperty('completePath', '/post');
         expect(routePath.regExp).toEqual(/^\/post(?:\/((?:.+)))?$/);
       });
 
       describe('nested routes', () => {
-        const nestedRoutes = postRouterRoute.nestedRoutes;
+        const { nestedRoutes } = postRouterRoute;
 
         test('/post should have 3 nested routes', () => {
           expect(nestedRoutes.length).toBe(3);
@@ -66,7 +66,7 @@ describe('blog', () => {
       });
 
       test('default route', () => {
-        const defaultRoute = postRouterRoute.defaultRoute;
+        const { defaultRoute } = postRouterRoute;
 
         expect(defaultRoute).toBeDefined();
         expect(defaultRoute).toEqual({});
@@ -86,8 +86,8 @@ describe('blog', () => {
     test('postList', () => {
       const path = '/post';
       const match = router.find(path);
-      expect(match.path).toBe(path);
-      expect(match.route).toBe(router.get('postList'));
+      expect(match).toHaveProperty('path', path);
+      expect(match).toHaveProperty('route', router.get('postList'));
       expect(match.namedParams).toBe(undefined);
       expect(match.otherParams).toBe(undefined);
     });
@@ -95,8 +95,7 @@ describe('blog', () => {
     test('postView', () => {
       const path = '/post/001-The-First-Post';
       const match = router.find(path);
-      expect(match.path).toBe(path);
-      expect(match.routePath.key, 'postView');
+      expect(match).toHaveProperty('path', path);
       expect(match.namedParams).toEqual(new Map([['id', '001'], ['slug', 'The-First-Post']]));
       expect(match.otherParams).toBe(undefined);
     });
@@ -104,7 +103,7 @@ describe('blog', () => {
     test('search', () => {
       const path = '/post/search';
       const match = router.find(path);
-      expect(match.path).toBe(path);
+      expect(match).toHaveProperty('path', path);
       expect(match.route.completePath).toBe(router.get('search').completePath);
       expect(match.ref).toBe('refsearch');
     });
@@ -112,8 +111,8 @@ describe('blog', () => {
     test('search', () => {
       const path = '/post/search/searchedterm';
       const match = router.find(path);
-      expect(match.path).toBe(path);
-      expect(match.route).toBe(router.get('search-results'));
+      expect(match).toHaveProperty('path', path);
+      expect(match).toHaveProperty('route', router.get('search-results'));
       expect(match.namedParams).toEqual(new Map([['term', 'searchedterm']]));
     });
   });

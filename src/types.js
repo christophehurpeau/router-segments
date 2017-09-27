@@ -9,9 +9,9 @@ export type PathDictionaryType = { [LocaleType]: string };
 export type RouteRefType = any;
 
 export type SegmentRouterBuilderType = {|
-  defaultRoute: (ref: RouteRefType, key: ?string) => void,
-  add: (path: string, ref: RouteRefType, key: ?string) => void,
-  addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  defaultRoute: (ref: RouteRefType, key?: ?string) => void,
+  add: (path: string, ref: RouteRefType, key?: ?string) => void,
+  addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key?: ?string) => void,
   addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
   addLocalizedSegment: (
     localizedPaths: PathDictionaryType,
@@ -50,14 +50,14 @@ export type RouteMatchType = {|
 
 export type RouterType = {|
   get: (key: string) => ?EndRouteType,
-  find: (path: string, locale: ?string) => ?RouteMatchType,
+  find: (path: string, locale?: ?string) => ?RouteMatchType,
   toPath: (key: string, args: any) => string,
   toLocalizedPath: (locale: string, key: string, args: any) => string,
 |};
 
 export type RouterBuilderType = {|
-  add: (path: string, ref: RouteRefType, key: ?string) => void,
-  addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
+  add: (path: string, ref: RouteRefType, key?: ?string) => void,
+  addLocalized: (localizedPaths: PathDictionaryType, ref: RouteRefType, key?: ?string) => void,
   addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
   addLocalizedSegment: (
     localizedPaths: PathDictionaryType,

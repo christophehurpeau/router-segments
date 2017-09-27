@@ -181,7 +181,9 @@ describe('localized blog', () => {
     const enPath = '/contact-us';
     test('en', () => {
       const match = router.find(enPath);
-      expect(match.routePath.key, '/contact-us');
+      expect(match.routePath).toHaveProperty('completePath', '/contact-us');
+      expect(match.routePath).toHaveProperty('path', '/contact-us');
+      expect(match.routePath).toHaveProperty('regExp', /^\/contact-us$/);
     });
 
     test('fr', () => {
@@ -189,8 +191,8 @@ describe('localized blog', () => {
 
       const frPath = '/contactez-nous';
       const match = router.find(frPath, 'fr');
-      expect(match.path).toBe(frPath);
-      expect(match.route).toBe(router.get('/contact-us'));
+      expect(match).toHaveProperty('path', frPath);
+      expect(match).toHaveProperty('route', router.get('/contact-us'));
     });
   });
 
@@ -198,7 +200,7 @@ describe('localized blog', () => {
     const enPath = '/post/search';
     test('en', () => {
       const match = router.find(enPath);
-      expect(match.route).toBe(router.get('search'));
+      expect(match).toHaveProperty('route', router.get('search'));
     });
 
     test('fr', () => {
@@ -206,8 +208,8 @@ describe('localized blog', () => {
 
       const frPath = '/article/rechercher';
       const match = router.find(frPath, 'fr');
-      expect(match.path).toBe(frPath);
-      expect(match.route).toBe(router.get('search'));
+      expect(match).toHaveProperty('path', frPath);
+      expect(match).toHaveProperty('route', router.get('search'));
     });
   });
 

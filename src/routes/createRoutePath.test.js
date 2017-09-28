@@ -11,10 +11,10 @@ describe('createRoutePath', () => {
   });
 
   test('/test/*', () => {
-    const routePath = createRoutePath('/test/*', '/test/*');
-    expect(routePath).toHaveProperty('path', '/test/*');
-    expect(routePath).toHaveProperty('completePath', '/test/*');
-    expect(routePath.regExp).toEqual(/^\/test\/((?:.*))$/);
+    const routePath = createRoutePath('/test/(.*)', '/test/(.*)');
+    expect(routePath).toHaveProperty('path', '/test/(.*)');
+    expect(routePath).toHaveProperty('completePath', '/test/(.*)');
+    expect(routePath.regExp).toEqual(/^\/test\/(.*)$/);
     expect(routePath.namedParams).toEqual([]);
     expect(routePath.toPath({ 0: '1/2/3' })).toEqual('/test/1/2/3');
   });

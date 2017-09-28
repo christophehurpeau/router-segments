@@ -7,7 +7,7 @@ const internalCreateRoutePath = (
   segment: boolean,
 ): SegmentRoutePathType | RoutePathType => {
   const keys = [];
-  const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  const regExp = pathToRegExp(segment ? `${path}/(.*)` : path, keys, {
     sensitive: true,
     strict: true,
   });

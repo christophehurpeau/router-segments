@@ -71,7 +71,7 @@
   "dependencies": {
     "flow-runtime": "^0.10.0",
     "nightingale-logger": "^3.4.0",
-    "path-to-regexp": "^1.7.0"
+    "path-to-regexp": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

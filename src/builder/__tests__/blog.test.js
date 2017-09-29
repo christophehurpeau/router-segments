@@ -55,13 +55,9 @@ describe('blog', () => {
         });
         test('second nested route', () => {
           expect(nestedRoutes[1].path.path).toBe('/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug');
-          expect(nestedRoutes[1].path.completePath).toBe(
-            '/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug',
-          );
-          expect(nestedRoutes[1].path.regExp).toEqual(
-            // eslint-disable-next-line no-useless-escape
-            /^(?:\/((?:[^\/]+?)))?\/((?:\d{4}\-\d{2}\-\d{2}))_((?:[^\/]+?))$/,
-          );
+          expect(nestedRoutes[1].path.completePath).toBe('/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug');
+          expect(nestedRoutes[1].path.regExp).toEqual(// eslint-disable-next-line no-useless-escape
+            /^(?:\/((?:[^\/]+?)))?\/((?:\d{4}\-\d{2}\-\d{2}))_((?:[^\/]+?))$/);
         });
       });
 
@@ -76,9 +72,10 @@ describe('blog', () => {
     test('postView', () => {
       const rrPostView = router.get('postView');
       expect(rrPostView.path.namedParams).toEqual(['id', 'slug']);
-      expect(rrPostView.path.toPath({ id: '001', slug: 'The-First-Post' })).toBe(
-        '/post/001-The-First-Post',
-      );
+      expect(rrPostView.path.toPath({
+          id: '001',
+          slug: 'The-First-Post',
+        })).toBe('/post/001-The-First-Post');
     });
   });
 

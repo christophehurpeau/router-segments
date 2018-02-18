@@ -4,8 +4,8 @@ Router with segments
 
 [![Build Status][circleci-status-image]][circleci-status-url]
 [![Travis Status][travisci-status-image]][travisci-status-url]
-[![Dependency ci Status][dependencyci-image]][dependencyci-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
+[![Dependency ci Status][dependencyci-image]][dependencyci-url]
 [![Coverage percentage][coverage-image]][coverage-url]
 
 ### Why another router ?

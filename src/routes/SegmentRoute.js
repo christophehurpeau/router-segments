@@ -1,13 +1,13 @@
-import type { RoutePathType } from '../types';
+import type { SegmentRoutePathType } from './types';
 import type Route from './EndRoute';
 
 export default class SegmentRoute {
-  path: RoutePathType;
+  path: SegmentRoutePathType;
   // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
   nestedRoutes = [];
   defaultRoute: ?Route;
 
-  constructor(path: RoutePathType) {
+  constructor(path: SegmentRoutePathType) {
     this.path = path;
   }
 
@@ -16,7 +16,7 @@ export default class SegmentRoute {
     Object.freeze(this.nestedRoutes);
   }
 
-  getPath(): RoutePathType {
+  getPath(): SegmentRoutePathType {
     return this.path;
   }
 

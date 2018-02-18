@@ -1,5 +1,11 @@
 import Logger from 'nightingale-logger';
-import type { RoutesType, LocaleType, RouteMatchType } from '../types';
+import type {
+  RoutesType,
+  LocaleType,
+  RouteMatchType,
+  SegmentRoutePathType,
+  RoutePathType,
+} from '../types';
 import type { RouteType } from '../routes/index';
 
 const logger = !PRODUCTION && new Logger('router-segments:findMatch');
@@ -16,7 +22,7 @@ const findMatch = (
   let result = null;
 
   routes.some((route: RouteType) => {
-    const routePath = route.getPath(locale);
+    const routePath: ?SegmentRoutePathType | RoutePathType = route.getPath(locale);
 
     if (!PRODUCTION && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);

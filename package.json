@@ -14,26 +14,26 @@
     "url": "https://github.com/christophehurpeau/router-segments/issues"
   },
   "engines": {
-    "node": ">=6.5.0"
+    "node": ">=4.0.0"
   },
   "main": "lib/index.js",
-  "module": "./lib-module/index.js",
-  "module-dev": "./lib-module-dev/index.js",
-  "browser": "./lib-browsers/index.js",
-  "browser-dev": "./lib-browsers-dev/index.js",
-  "module:node": "./lib-module-node8/index.js",
-  "module:node-dev": "./lib-module-node8-dev/index.js",
-  "module:browser": "./lib-module/index.js",
-  "module:browser-dev": "./lib-module-dev/index.js",
-  "module:modern-browsers": "./lib-module-modern-browsers/index.js",
-  "module:modern-browsers-dev": "./lib-module-modern-browsers-dev/index.js",
+  "module": "./dist/index-browser.es.js",
+  "module-dev": "./dist/index-browser-dev.es.js",
+  "browser": "./dist/index.cjs.js",
+  "browser-dev": "./dist/index-dev.cjs.js",
+  "module:node": "./dist/index-node8.es.js",
+  "module:node-dev": "./dist/index-node8-dev.es.js",
+  "module:browser": "./dist/index-browser.es.js",
+  "module:browser-dev": "./dist/index-browser-dev.es.js",
+  "module:modern-browsers": "./dist/index-browsermodern.es.js",
+  "module:modern-browsers-dev": "./dist/index-browsermodern-dev.es.js",
   "scripts": {
     "build": "pob-build",
-    "clean": "rm -Rf docs dist test/node6 coverage",
-    "generate:api": "rm -Rf docs/ ; mkdir docs/ ; pob-build doc ; jsdoc README.md lib-doc --recurse --destination docs/ --configure jsdoc.conf.json ; rm -Rf lib-doc",
+    "clean": "rm -Rf docs dist",
+    "generate:api": "pob-build-doc",
     "generate:docs": "yarn run generate:api && yarn run generate:test-coverage",
-    "generate:test-coverage": "NODE_ENV=production rm -Rf coverage/ ; jest --coverage --coverageReporters=lcov --coverageDirectory=coverage/",
-    "lint": "eslint --ext .js,.jsx src/",
+    "generate:test-coverage": "rm -Rf docs/coverage/ ; NODE_ENV=production BABEL_ENV=test jest --coverage --coverageReporters=lcov --coverageDirectory=docs/coverage/",
+    "lint": "eslint src/",
     "postcheckout": "./.git-hooks/post-checkout",
     "postmerge": "./.git-hooks/post-merge",
     "precommit": "./.git-hooks/pre-commit",
@@ -53,7 +53,7 @@
       "prettier --write",
       "git add"
     ],
-    "src/**/*.{js,jsx}": [
+    "src/**/*.js": [
       "eslint --fix --quiet",
       "git add"
     ]
@@ -62,44 +62,42 @@
     "cacheDirectory": "./node_modules/.cache/jest",
     "testMatch": [
       "**/src/**/?(*.)test.js",
-      "**/__tests__/**/*.test.js"
+      "**/src/__tests__/**/*.test.js"
     ],
     "collectCoverageFrom": [
       "src/**/*.js"
     ]
   },
   "dependencies": {
-    "flow-runtime": "^0.10.0",
+    "flow-runtime": "^0.17.0",
     "nightingale-logger": "^3.4.0",
     "path-to-regexp": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^21.0.2",
-    "babel-plugin-add-jsdoc-annotations": "^5.1.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-jsdoc": "^0.4.1",
-    "babel-preset-latest-node": "^0.4.0",
-    "babel-preset-modern-browsers": "^9.0.2",
-    "eslint": "^4.4.1",
-    "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-config-pob": "^16.0.4",
-    "eslint-config-prettier": "^2.5.0",
+    "babel-jest": "^22.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest-node": "^1.0.0",
+    "babel-preset-modern-browsers": "^10.0.1",
+    "eslint": "4.13.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-config-pob": "^17.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-babel": "^4.1.2",
-    "eslint-plugin-flowtype": "^2.35.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
-    "jest": "^21.1.0",
+    "jest": "^22.3.0",
     "jest-junit-reporter": "^1.1.0",
     "jsdoc": "^3.5.5",
     "komet": "^0.1.4",
     "komet-karma": "^0.2.5",
-    "lint-staged": "^4.2.1",
-    "minami": "^1.2.3",
-    "pob-babel": "^18.1.5",
+    "lint-staged": "^6.1.0",
+    "minami": "^1.1.1",
+    "pob-babel": "^19.0.1",
     "pob-release": "^3.1.0",
-    "prettier": "^1.7.0"
+    "prettier": "^1.8.2"
   }
 }

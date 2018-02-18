@@ -1,4 +1,4 @@
-import type { RoutePathType, RouteRefType } from '../types';
+import type { RoutePathType, RouteRefType } from './types';
 
 export default class EndRoute {
   path: RoutePathType;

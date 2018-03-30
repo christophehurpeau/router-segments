@@ -1,3 +1,12 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/christophehurpeau/router-segments/compare/v1.1.0...v1.2.0) (2018-03-30)
+
+
+### Bug Fixes
+
+* update dependencies and few fixes ([2c934de](https://github.com/christophehurpeau/router-segments/commit/2c934de))
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/christophehurpeau/router-segments/compare/v1.0.1...v1.1.0) (2017-08-12)
 

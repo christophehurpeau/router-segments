@@ -1,6 +1,6 @@
-import findMatch from './findMatch';
 import { LocalizedEndRoute } from '../routes';
 import { createSegmentRoute, createRoute } from '../routes/create';
+import findMatch from './findMatch';
 
 test('find without routes returns null', () => {
   const routes = [];
@@ -10,7 +10,12 @@ test('find without routes returns null', () => {
 test('unknown localized route', () => {
   const ref = Symbol('ref');
   const routes = [new LocalizedEndRoute(new Map(), ref)];
-  expect(() => findMatch('/', routes, 'it')).toThrow('Unknown localized route for locale it');
+  const findUnknownLocalizedMatch = () => findMatch('/', routes, 'it');
+  if (process.env.NODE_ENV === 'production') {
+    expect(findUnknownLocalizedMatch).toThrow();
+  } else {
+    expect(findUnknownLocalizedMatch).toThrow('Unknown localized route for locale it');
+  }
 });
 
 test('find match segment without default route', () => {

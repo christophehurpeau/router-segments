@@ -1,4 +1,4 @@
-import type { LocaleType, RoutePathType, RouteRefType } from '../types';
+import type { LocaleType, RoutePathType, RouteRefType } from './types';
 
 export default class LocalizedEndRoute {
   localizedPaths: Map<LocaleType, RoutePathType>;

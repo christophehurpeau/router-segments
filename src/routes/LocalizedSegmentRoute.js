@@ -1,12 +1,12 @@
-import type { LocaleType, RoutePathType } from '../types';
+import type { LocaleType, SegmentRoutePathType } from './types';
 import type LocalizedRoute from './LocalizedEndRoute';
 
 export default class LocalizedSegmentRoute {
-  localizedPaths: Map<LocaleType, RoutePathType>;
+  localizedPaths: Map<LocaleType, SegmentRoutePathType>;
   nestedRoutes: Array<LocalizedRoute | LocalizedSegmentRoute> = [];
   defaultRoute: ?LocalizedRoute;
 
-  constructor(localizedPaths: Map<LocaleType, RoutePathType>) {
+  constructor(localizedPaths: Map<LocaleType, SegmentRoutePathType>) {
     this.localizedPaths = localizedPaths;
   }
 
@@ -15,7 +15,7 @@ export default class LocalizedSegmentRoute {
     Object.freeze(this.nestedRoutes);
   }
 
-  getPath(locale: LocaleType): ?RoutePathType {
+  getPath(locale: LocaleType): ?SegmentRoutePathType {
     return this.localizedPaths.get(locale);
   }
 

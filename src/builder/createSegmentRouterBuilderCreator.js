@@ -32,9 +32,9 @@ export default (defaultLocale: ?string, addToRouteMap: AddToRouteMapType) => {
 
     const createLocalizedPathFromSegment = (path: string) => {
       const localizedPaths = {};
-      Array.from(segmentRoute.localizedPaths.keys()).forEach(
-        locale => (localizedPaths[locale] = path),
-      );
+      Array.from(segmentRoute.localizedPaths.keys()).forEach(locale => {
+        localizedPaths[locale] = path;
+      });
       return localizedPaths;
     };
 

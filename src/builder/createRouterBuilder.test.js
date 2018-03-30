@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-import createRouterBuilder from './createRouterBuilder';
 import type { SegmentRouterBuilderType } from '../types';
+import createRouterBuilder from './createRouterBuilder';
 
 test('home', () => {
   const builder = createRouterBuilder();
@@ -47,15 +47,17 @@ test('should throw when add localized is called but no locales were defined', ()
   ).toThrow('Invalid locales');
 });
 
-test('should throw when no ref is provided', () => {
-  const builder = createRouterBuilder(['en']);
+if (process.env.NODE_ENV !== 'production') {
+  test('should throw when no ref is provided', () => {
+    const builder = createRouterBuilder(['en']);
 
-  expect(() => builder.add('/', undefined)).toThrow('Invalid ref: "undefined"');
-  expect(() => builder.add('/', null)).toThrow('Invalid ref: "null"');
+    expect(() => builder.add('/', undefined)).toThrow('Invalid ref: "undefined"');
+    expect(() => builder.add('/', null)).toThrow('Invalid ref: "null"');
 
-  expect(() => builder.addLocalized({ en: '/' }, undefined)).toThrow('Invalid ref: "undefined"');
-  expect(() => builder.addLocalized({ en: '/' }, null)).toThrow('Invalid ref: "null"');
-});
+    expect(() => builder.addLocalized({ en: '/' }, undefined)).toThrow('Invalid ref: "undefined"');
+    expect(() => builder.addLocalized({ en: '/' }, null)).toThrow('Invalid ref: "null"');
+  });
+}
 
 describe('default key is path', () => {
   const ref = Symbol('ref');

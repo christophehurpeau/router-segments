@@ -1,5 +1,5 @@
 import type {
-  LocalesType,
+  LocaleType,
   RouterBuilderType,
   PathDictionaryType,
   RoutesType,
@@ -17,7 +17,7 @@ import {
 import createRouter from '../router/createRouter';
 import createSegmentRouterBuilderCreator from './createSegmentRouterBuilderCreator';
 
-export default (locales: ?LocalesType): RouterBuilderType => {
+export default (locales: ?Array<LocaleType>): RouterBuilderType => {
   const defaultLocale = locales && locales[0];
   const routes: RoutesType = [];
   const routeMap: RouteMapType = new Map();

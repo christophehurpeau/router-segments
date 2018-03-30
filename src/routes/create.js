@@ -1,4 +1,3 @@
-import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 import type {
   LocaleType,
   PathDictionaryType,
@@ -6,6 +5,7 @@ import type {
   SegmentRoutePathType,
   RouteRefType,
 } from '../types';
+import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 import Route from './EndRoute';
 import LocalizedRoute from './LocalizedEndRoute';
 import SegmentRoute from './SegmentRoute';

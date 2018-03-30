@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import createRouterBuilder from '../createRouterBuilder';
-import type { SegmentRouterBuilderType } from '../../types';
+import type { RouteMatchType, SegmentRouterBuilderType } from '../../types';
 
 describe('localized blog', () => {
   const ref = Symbol('ref');
@@ -180,7 +180,7 @@ describe('localized blog', () => {
   describe('find contact-us', () => {
     const enPath = '/contact-us';
     test('en', () => {
-      const match = router.find(enPath);
+      const match: RouteMatchType = router.find(enPath);
       expect(match.routePath).toHaveProperty('completePath', '/contact-us');
       expect(match.routePath).toHaveProperty('path', '/contact-us');
       expect(match.routePath).toHaveProperty('regExp', /^\/contact-us$/);

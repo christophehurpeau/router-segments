@@ -1,5 +1,5 @@
-import createRouter from './createRouter';
 import { createRoute, createLocalizedRoute } from '../routes/create';
+import createRouter from './createRouter';
 
 const ref = Symbol('ref');
 const route = createRoute('/', '/', ref);

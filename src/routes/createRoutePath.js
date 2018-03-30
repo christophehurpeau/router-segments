@@ -24,7 +24,7 @@ const internalCreateRoutePath = (
   };
 };
 
-export const createRoutePathSegment = (path: string, completePath: string): RoutePathType =>
+export const createRoutePathSegment = (path: string, completePath: string): SegmentRoutePathType =>
   internalCreateRoutePath(path, completePath, true);
 
 export const createRoutePath = (path: string, completePath: string): RoutePathType =>

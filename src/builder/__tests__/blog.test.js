@@ -69,7 +69,11 @@ describe('blog', () => {
         const { defaultRoute } = postRouterRoute;
 
         expect(defaultRoute).toBeDefined();
-        expect(defaultRoute).toEqual({});
+        expect(defaultRoute.path).toHaveProperty('completePath', '/post');
+        expect(defaultRoute.path).toHaveProperty('namedParams', []);
+        expect(defaultRoute.path).toHaveProperty('path', '');
+        expect(defaultRoute.path).toHaveProperty('regExp', /^$/);
+        expect(defaultRoute.path).toHaveProperty('toPath');
       });
     });
 

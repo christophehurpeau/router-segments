@@ -6,7 +6,7 @@ var pathToRegExp = _interopDefault(require('path-to-regexp'));
 
 var internalCreateRoutePath = function internalCreateRoutePath(path, completePath, segment) {
   var keys = [];
-  var regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  var regExp = pathToRegExp(segment ? `${path}(.*)?` : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -124,13 +124,14 @@ var LocalizedEndRoute = function () {
 }();
 
 var SegmentRoute = function () {
-  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
   function SegmentRoute(path) {
     classCallCheck(this, SegmentRoute);
     this.nestedRoutes = [];
 
     this.path = path;
   }
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
+
 
   createClass(SegmentRoute, [{
     key: 'freeze',

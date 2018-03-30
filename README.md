@@ -1,12 +1,18 @@
-# router-segments [![NPM version][npm-image]][npm-url]
+<h3 align="center">
+  router-segments
+</h3>
 
-Router with segments
+<p align="center">
+  Router with segments
+</p>
 
-[![Build Status][circleci-status-image]][circleci-status-url]
-[![Travis Status][travisci-status-image]][travisci-status-url]
-[![Dependency Status][daviddm-image]][daviddm-url]
-[![Dependency ci Status][dependencyci-image]][dependencyci-url]
-[![Coverage percentage][coverage-image]][coverage-url]
+<p align="center">
+  <a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/npm/v/router-segments.svg?style=flat-square"></a>
+  <a href="https://circleci.com/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/circleci/project/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
+  <a href="https://david-dm.org/christophehurpeau/router-segments"><img src="https://david-dm.org/christophehurpeau/router-segments.svg?style=flat-square"></a>
+  <a href="https://dependencyci.com/github/christophehurpeau/router-segments"><img src="https://dependencyci.com/github/christophehurpeau/router-segments/badge?style=flat-square"></a>
+  <a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
+</p>
 
 ### Why another router ?
 
@@ -114,17 +120,3 @@ type RouteMatchType = {|
 
 
 ```
-
-[npm-image]: https://img.shields.io/npm/v/router-segments.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/router-segments
-[daviddm-image]: https://david-dm.org/christophehurpeau/router-segments.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/christophehurpeau/router-segments
-[dependencyci-image]: https://dependencyci.com/github/christophehurpeau/router-segments/badge?style=flat-square
-[dependencyci-url]: https://dependencyci.com/github/christophehurpeau/router-segments
-[circleci-status-image]: https://img.shields.io/circleci/project/christophehurpeau/router-segments/master.svg?style=flat-square
-[circleci-status-url]: https://circleci.com/gh/christophehurpeau/router-segments
-[travisci-status-image]: https://img.shields.io/travis/christophehurpeau/router-segments/master.svg?style=flat-square
-[travisci-status-url]: https://travis-ci.org/christophehurpeau/router-segments
-[coverage-image]: https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square
-[coverage-url]: https://codecov.io/gh/christophehurpeau/router-segments
-[docs-coverage-url]: https://christophehurpeau.github.io/router-segments/coverage/lcov-report/

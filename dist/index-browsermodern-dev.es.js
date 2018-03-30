@@ -10,7 +10,144 @@ const SegmentRoutePathType = t.type("SegmentRoutePathType", t.exactObject(t.prop
 
 const LocaleType = t.type("LocaleType", t.string());
 
-var _dec, _dec2, _class, _descriptor, _descriptor2;
+const RoutePathType$1 = t.tdz(function () {
+  return RoutePathType;
+});
+const RouteRefType$1 = t.tdz(function () {
+  return RouteRefType;
+});
+let EndRoute = class {
+
+  constructor(path, ref) {
+    let _pathType = t.ref(RoutePathType$1);
+
+    let _refType = t.ref(RouteRefType$1);
+
+    t.param('path', _pathType).assert(path);
+    t.param('ref', _refType).assert(ref);
+
+    this.path = path;
+    this.ref = ref;
+    // Object.freeze(this);
+  }
+
+  getPath() {
+    const _returnType = t.return(t.ref(RoutePathType$1));
+
+    return _returnType.assert(this.path);
+  }
+
+  isSegment() {
+    const _returnType2 = t.return(t.boolean());
+
+    return _returnType2.assert(false);
+  }
+
+  toJSON() {
+    return this.path;
+  }
+
+  toString() {
+    return JSON.stringify(this.toJSON());
+  }
+};
+
+const LocaleType$1 = t.tdz(function () {
+  return LocaleType;
+});
+const RoutePathType$2 = t.tdz(function () {
+  return RoutePathType;
+});
+const RouteRefType$2 = t.tdz(function () {
+  return RouteRefType;
+});
+let LocalizedEndRoute = class {
+
+  constructor(localizedPaths, ref) {
+    let _localizedPathsType = t.ref('Map', t.ref(LocaleType$1), t.ref(RoutePathType$2));
+
+    let _refType = t.ref(RouteRefType$2);
+
+    t.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
+    t.param('ref', _refType).assert(ref);
+
+    this.localizedPaths = localizedPaths;
+    this.ref = ref;
+    Object.freeze(this);
+  }
+
+  getPath(locale) {
+    let _localeType = t.ref(LocaleType$1);
+
+    const _returnType = t.return(t.nullable(t.ref(RoutePathType$2)));
+
+    t.param('locale', _localeType).assert(locale);
+
+    return _returnType.assert(this.localizedPaths.get(locale));
+  }
+
+  isSegment() {
+    const _returnType2 = t.return(t.boolean());
+
+    return _returnType2.assert(false);
+  }
+
+  toJSON() {
+    return Array.from(this.localizedPaths.entries());
+  }
+
+  toString() {
+    return JSON.stringify(this.toJSON());
+  }
+};
+
+const Route = t.tdz(function () {
+  return EndRoute;
+});
+const SegmentRoutePathType$1 = t.tdz(function () {
+  return SegmentRoutePathType;
+});
+let SegmentRoute = class {
+
+  constructor(path) {
+    this.nestedRoutes = [];
+
+    let _pathType = t.ref(SegmentRoutePathType$1);
+
+    t.param('path', _pathType).assert(path);
+
+    this.path = path;
+  }
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
+
+
+  freeze() {
+    Object.freeze(this);
+    Object.freeze(this.nestedRoutes);
+  }
+
+  getPath() {
+    const _returnType = t.return(t.ref(SegmentRoutePathType$1));
+
+    return _returnType.assert(this.path);
+  }
+
+  isSegment() {
+    const _returnType2 = t.return(t.boolean());
+
+    return _returnType2.assert(true);
+  }
+
+  toJSON() {
+    return this.path;
+  }
+
+  toString() {
+    return JSON.stringify(this.toJSON());
+  }
+};
+
+var _dec, _class, _descriptor;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -50,291 +187,6 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
   return desc;
 }
-const RoutePathType$1 = t.tdz(function () {
-  return RoutePathType;
-});
-const RouteRefType$1 = t.tdz(function () {
-  return RouteRefType;
-});
-let EndRoute = (_dec = t.decorate(t.ref(RoutePathType$1)), _dec2 = t.decorate(t.ref(RouteRefType$1)), _class = class {
-
-  constructor(path, ref) {
-    _initDefineProp(this, 'path', _descriptor, this);
-
-    _initDefineProp(this, 'ref', _descriptor2, this);
-
-    let _pathType = t.ref(RoutePathType$1);
-
-    let _refType = t.ref(RouteRefType$1);
-
-    t.param('path', _pathType).assert(path);
-    t.param('ref', _refType).assert(ref);
-
-    this.path = path;
-    this.ref = ref;
-    // Object.freeze(this);
-  }
-
-  getPath() {
-    const _returnType = t.return(t.ref(RoutePathType$1));
-
-    return _returnType.assert(this.path);
-  }
-
-  isSegment() {
-    const _returnType2 = t.return(t.boolean());
-
-    return _returnType2.assert(false);
-  }
-
-  toJSON() {
-    return this.path;
-  }
-
-  toString() {
-    return JSON.stringify(this.toJSON());
-  }
-}, _descriptor = _applyDecoratedDescriptor(_class.prototype, 'path', [_dec], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'ref', [_dec2], {
-  enumerable: true,
-  initializer: null
-}), _class);
-
-var _dec$1, _dec2$1, _class$1, _descriptor$1, _descriptor2$1;
-
-function _initDefineProp$1(target, property, descriptor, context) {
-  if (!descriptor) return;
-  Object.defineProperty(target, property, {
-    enumerable: descriptor.enumerable,
-    configurable: descriptor.configurable,
-    writable: descriptor.writable,
-    value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-  });
-}
-
-function _applyDecoratedDescriptor$1(target, property, decorators, descriptor, context) {
-  var desc = {};
-  Object['keys'](descriptor).forEach(function (key) {
-    desc[key] = descriptor[key];
-  });
-  desc.enumerable = !!desc.enumerable;
-  desc.configurable = !!desc.configurable;
-
-  if ('value' in desc || desc.initializer) {
-    desc.writable = true;
-  }
-
-  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-    return decorator(target, property, desc) || desc;
-  }, desc);
-
-  if (context && desc.initializer !== void 0) {
-    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-    desc.initializer = undefined;
-  }
-
-  if (desc.initializer === void 0) {
-    Object['defineProperty'](target, property, desc);
-    desc = null;
-  }
-
-  return desc;
-}
-const LocaleType$1 = t.tdz(function () {
-  return LocaleType;
-});
-const RoutePathType$2 = t.tdz(function () {
-  return RoutePathType;
-});
-const RouteRefType$2 = t.tdz(function () {
-  return RouteRefType;
-});
-let LocalizedEndRoute = (_dec$1 = t.decorate(t.ref('Map', t.ref(LocaleType$1), t.ref(RoutePathType$2))), _dec2$1 = t.decorate(t.ref(RouteRefType$2)), _class$1 = class {
-
-  constructor(localizedPaths, ref) {
-    _initDefineProp$1(this, 'localizedPaths', _descriptor$1, this);
-
-    _initDefineProp$1(this, 'ref', _descriptor2$1, this);
-
-    let _localizedPathsType = t.ref('Map', t.ref(LocaleType$1), t.ref(RoutePathType$2));
-
-    let _refType = t.ref(RouteRefType$2);
-
-    t.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
-    t.param('ref', _refType).assert(ref);
-
-    this.localizedPaths = localizedPaths;
-    this.ref = ref;
-    Object.freeze(this);
-  }
-
-  getPath(locale) {
-    let _localeType = t.ref(LocaleType$1);
-
-    const _returnType = t.return(t.nullable(t.ref(RoutePathType$2)));
-
-    t.param('locale', _localeType).assert(locale);
-
-    return _returnType.assert(this.localizedPaths.get(locale));
-  }
-
-  isSegment() {
-    const _returnType2 = t.return(t.boolean());
-
-    return _returnType2.assert(false);
-  }
-
-  toJSON() {
-    return Array.from(this.localizedPaths.entries());
-  }
-
-  toString() {
-    return JSON.stringify(this.toJSON());
-  }
-}, _descriptor$1 = _applyDecoratedDescriptor$1(_class$1.prototype, 'localizedPaths', [_dec$1], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2$1 = _applyDecoratedDescriptor$1(_class$1.prototype, 'ref', [_dec2$1], {
-  enumerable: true,
-  initializer: null
-}), _class$1);
-
-var _dec$2, _dec2$2, _class$2, _descriptor$2, _descriptor2$2;
-
-function _initDefineProp$2(target, property, descriptor, context) {
-  if (!descriptor) return;
-  Object.defineProperty(target, property, {
-    enumerable: descriptor.enumerable,
-    configurable: descriptor.configurable,
-    writable: descriptor.writable,
-    value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-  });
-}
-
-function _applyDecoratedDescriptor$2(target, property, decorators, descriptor, context) {
-  var desc = {};
-  Object['keys'](descriptor).forEach(function (key) {
-    desc[key] = descriptor[key];
-  });
-  desc.enumerable = !!desc.enumerable;
-  desc.configurable = !!desc.configurable;
-
-  if ('value' in desc || desc.initializer) {
-    desc.writable = true;
-  }
-
-  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-    return decorator(target, property, desc) || desc;
-  }, desc);
-
-  if (context && desc.initializer !== void 0) {
-    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-    desc.initializer = undefined;
-  }
-
-  if (desc.initializer === void 0) {
-    Object['defineProperty'](target, property, desc);
-    desc = null;
-  }
-
-  return desc;
-}
-const Route = t.tdz(function () {
-  return EndRoute;
-});
-const SegmentRoutePathType$1 = t.tdz(function () {
-  return SegmentRoutePathType;
-});
-let SegmentRoute = (_dec$2 = t.decorate(t.ref(SegmentRoutePathType$1)), _dec2$2 = t.decorate(t.nullable(t.ref(Route))), _class$2 = class {
-  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
-  constructor(path) {
-    _initDefineProp$2(this, 'path', _descriptor$2, this);
-
-    this.nestedRoutes = [];
-
-    _initDefineProp$2(this, 'defaultRoute', _descriptor2$2, this);
-
-    let _pathType = t.ref(SegmentRoutePathType$1);
-
-    t.param('path', _pathType).assert(path);
-
-    this.path = path;
-  }
-
-  freeze() {
-    Object.freeze(this);
-    Object.freeze(this.nestedRoutes);
-  }
-
-  getPath() {
-    const _returnType = t.return(t.ref(SegmentRoutePathType$1));
-
-    return _returnType.assert(this.path);
-  }
-
-  isSegment() {
-    const _returnType2 = t.return(t.boolean());
-
-    return _returnType2.assert(true);
-  }
-
-  toJSON() {
-    return this.path;
-  }
-
-  toString() {
-    return JSON.stringify(this.toJSON());
-  }
-}, _descriptor$2 = _applyDecoratedDescriptor$2(_class$2.prototype, 'path', [_dec$2], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2$2 = _applyDecoratedDescriptor$2(_class$2.prototype, 'defaultRoute', [_dec2$2], {
-  enumerable: true,
-  initializer: null
-}), _class$2);
-
-var _dec$3, _dec2$3, _dec3, _class$3, _descriptor$3, _descriptor2$3, _descriptor3;
-
-function _initDefineProp$3(target, property, descriptor, context) {
-  if (!descriptor) return;
-  Object.defineProperty(target, property, {
-    enumerable: descriptor.enumerable,
-    configurable: descriptor.configurable,
-    writable: descriptor.writable,
-    value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-  });
-}
-
-function _applyDecoratedDescriptor$3(target, property, decorators, descriptor, context) {
-  var desc = {};
-  Object['keys'](descriptor).forEach(function (key) {
-    desc[key] = descriptor[key];
-  });
-  desc.enumerable = !!desc.enumerable;
-  desc.configurable = !!desc.configurable;
-
-  if ('value' in desc || desc.initializer) {
-    desc.writable = true;
-  }
-
-  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-    return decorator(target, property, desc) || desc;
-  }, desc);
-
-  if (context && desc.initializer !== void 0) {
-    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-    desc.initializer = undefined;
-  }
-
-  if (desc.initializer === void 0) {
-    Object['defineProperty'](target, property, desc);
-    desc = null;
-  }
-
-  return desc;
-}
 const LocalizedRoute = t.tdz(function () {
   return LocalizedEndRoute;
 });
@@ -344,16 +196,12 @@ const LocaleType$2 = t.tdz(function () {
 const SegmentRoutePathType$2 = t.tdz(function () {
   return SegmentRoutePathType;
 });
-let LocalizedSegmentRoute = (_dec$3 = t.decorate(t.ref('Map', t.ref(LocaleType$2), t.ref(SegmentRoutePathType$2))), _dec2$3 = t.decorate(function () {
+let LocalizedSegmentRoute = (_dec = t.decorate(function () {
   return t.array(t.union(t.ref(LocalizedRoute), t.ref(LocalizedSegmentRoute)));
-}), _dec3 = t.decorate(t.nullable(t.ref(LocalizedRoute))), _class$3 = class {
+}), _class = class {
 
   constructor(localizedPaths) {
-    _initDefineProp$3(this, 'localizedPaths', _descriptor$3, this);
-
-    _initDefineProp$3(this, 'nestedRoutes', _descriptor2$3, this);
-
-    _initDefineProp$3(this, 'defaultRoute', _descriptor3, this);
+    _initDefineProp(this, 'nestedRoutes', _descriptor, this);
 
     let _localizedPathsType = t.ref('Map', t.ref(LocaleType$2), t.ref(SegmentRoutePathType$2));
 
@@ -390,18 +238,12 @@ let LocalizedSegmentRoute = (_dec$3 = t.decorate(t.ref('Map', t.ref(LocaleType$2
   toString() {
     return JSON.stringify(this.toJSON());
   }
-}, _descriptor$3 = _applyDecoratedDescriptor$3(_class$3.prototype, 'localizedPaths', [_dec$3], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2$3 = _applyDecoratedDescriptor$3(_class$3.prototype, 'nestedRoutes', [_dec2$3], {
+}, _descriptor = _applyDecoratedDescriptor(_class.prototype, 'nestedRoutes', [_dec], {
   enumerable: true,
   initializer: function initializer() {
     return [];
   }
-}), _descriptor3 = _applyDecoratedDescriptor$3(_class$3.prototype, 'defaultRoute', [_dec3], {
-  enumerable: true,
-  initializer: null
-}), _class$3);
+}), _class);
 
 const RouteType = t.type('RouteType', t.union(t.ref(EndRoute), t.ref(LocalizedEndRoute), t.ref(SegmentRoute), t.ref(LocalizedSegmentRoute)));
 const SegmentRouteType = t.type('SegmentRouteType', t.union(t.ref(SegmentRoute), t.ref(LocalizedSegmentRoute)));
@@ -429,7 +271,7 @@ const EndRouteType$1 = t.tdz(function () {
 const PathDictionaryType = t.type('PathDictionaryType', t.object(t.indexer('key', t.ref(LocaleType$3), t.string())));
 
 const SegmentRouterBuilderType = t.type('SegmentRouterBuilderType', function (SegmentRouterBuilderType) {
-  return t.exactObject(t.property('defaultRoute', t.function(t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string())), t.return(t.void()))), t.property('add', t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string())), t.return(t.void()))), t.property('addLocalized', t.function(t.param('localizedPaths', PathDictionaryType), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string())), t.return(t.void()))), t.property('addSegment', t.function(t.param('path', t.string()), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('addLocalizedSegment', t.function(t.param('localizedPaths', PathDictionaryType), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))));
+  return t.exactObject(t.property('defaultRoute', t.function(t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string()), true), t.return(t.void()))), t.property('add', t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string()), true), t.return(t.void()))), t.property('addLocalized', t.function(t.param('localizedPaths', PathDictionaryType), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string()), true), t.return(t.void()))), t.property('addSegment', t.function(t.param('path', t.string()), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('addLocalizedSegment', t.function(t.param('localizedPaths', PathDictionaryType), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))));
 });
 
 // export type SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;
@@ -439,9 +281,9 @@ const RouteMapType = t.type('RouteMapType', t.ref('Map', t.string(), t.ref(Route
 
 const RouteMatchType = t.type('RouteMatchType', t.exactObject(t.property('ref', t.ref(RouteRefType$3)), t.property('path', t.string()), t.property('route', t.ref(RouteType$1)), t.property('routePath', t.union(t.ref(SegmentRoutePathType$3), t.ref(RoutePathType$3))), t.property('namedParams', t.nullable(t.ref('Map', t.string(), t.string()))), t.property('otherParams', t.nullable(t.array(t.string())))));
 
-const RouterType = t.type('RouterType', t.exactObject(t.property('get', t.function(t.param('key', t.string()), t.return(t.nullable(t.ref(EndRouteType$1))))), t.property('find', t.function(t.param('path', t.string()), t.param('locale', t.nullable(t.string())), t.return(t.nullable(RouteMatchType)))), t.property('toPath', t.function(t.param('key', t.string()), t.param('args', t.any()), t.return(t.string()))), t.property('toLocalizedPath', t.function(t.param('locale', t.string()), t.param('key', t.string()), t.param('args', t.any()), t.return(t.string())))));
+const RouterType = t.type('RouterType', t.exactObject(t.property('get', t.function(t.param('key', t.string()), t.return(t.nullable(t.ref(EndRouteType$1))))), t.property('find', t.function(t.param('path', t.string()), t.param('locale', t.nullable(t.string()), true), t.return(t.nullable(RouteMatchType)))), t.property('toPath', t.function(t.param('key', t.string()), t.param('args', t.any()), t.return(t.string()))), t.property('toLocalizedPath', t.function(t.param('locale', t.string()), t.param('key', t.string()), t.param('args', t.any()), t.return(t.string())))));
 
-const RouterBuilderType = t.type('RouterBuilderType', t.exactObject(t.property('add', t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string())), t.return(t.void()))), t.property('addLocalized', t.function(t.param('localizedPaths', PathDictionaryType), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string())), t.return(t.void()))), t.property('addSegment', t.function(t.param('path', t.string()), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('addLocalizedSegment', t.function(t.param('localizedPaths', PathDictionaryType), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('getRoutes', t.function(t.return(RoutesType))), t.property('createRouter', t.function(t.return(RouterType)))));
+const RouterBuilderType = t.type('RouterBuilderType', t.exactObject(t.property('add', t.function(t.param('path', t.string()), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string()), true), t.return(t.void()))), t.property('addLocalized', t.function(t.param('localizedPaths', PathDictionaryType), t.param('ref', t.ref(RouteRefType$3)), t.param('key', t.nullable(t.string()), true), t.return(t.void()))), t.property('addSegment', t.function(t.param('path', t.string()), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('addLocalizedSegment', t.function(t.param('localizedPaths', PathDictionaryType), t.param('buildSegment', t.function(t.param('builder', SegmentRouterBuilderType), t.return(t.void()))), t.return(t.void()))), t.property('getRoutes', t.function(t.return(RoutesType))), t.property('createRouter', t.function(t.return(RouterType)))));
 
 const SegmentRoutePathType$4 = t.tdz(function () {
   return SegmentRoutePathType$3;
@@ -463,7 +305,7 @@ const internalCreateRoutePath = function internalCreateRoutePath(path, completeP
   t.param('segment', _segmentType).assert(segment);
 
   const keys = [];
-  const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  const regExp = pathToRegExp(segment ? `${path}(.*)?` : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -740,6 +582,21 @@ const findMatch = function findMatch(path, completePath, routes, locale, namedPa
   return _returnType.assert(result);
 };
 
+var findMatch$1 = (function (path, routes, locale = 'en') {
+  let _pathType2 = t.string();
+
+  let _routesType2 = t.ref(RoutesType$1);
+
+  let _localeType2 = t.ref(LocaleType$5);
+
+  const _returnType2 = t.return(t.nullable(t.ref(RouteMatchType$1)));
+
+  t.param('path', _pathType2).assert(path);
+  t.param('routes', _routesType2).assert(routes);
+  t.param('locale', _localeType2).assert(locale);
+  return _returnType2.assert(findMatch(path, path, routes, locale));
+});
+
 const EndRouteType$2 = t.tdz(function () {
   return EndRouteType;
 });
@@ -754,6 +611,73 @@ const RouterType$1 = t.tdz(function () {
 });
 const RouteMatchType$2 = t.tdz(function () {
   return RouteMatchType;
+});
+var _createRouter = (function (routes, routeMap) {
+  let _routesType = t.ref(RoutesType$2);
+
+  let _routeMapType = t.ref(RouteMapType$1);
+
+  const _returnType = t.return(t.ref(RouterType$1));
+
+  t.param('routes', _routesType).assert(routes);
+  t.param('routeMap', _routeMapType).assert(routeMap);
+
+  const getRequiredRoute = function getRequiredRoute(routeKey) {
+    let _routeKeyType = t.string();
+
+    t.param('routeKey', _routeKeyType).assert(routeKey);
+
+    const route = routeMap.get(routeKey);
+    if (!route) throw new Error(`No route named "${routeKey}"`);
+    return route;
+  };
+
+  return _returnType.assert({
+    get: function get(key) {
+      let _keyType = t.string();
+
+      const _returnType2 = t.return(t.nullable(t.ref(EndRouteType$2)));
+
+      t.param('key', _keyType).assert(key);
+      return _returnType2.assert(getRequiredRoute(key));
+    },
+    find: function find(path, locale) {
+      let _pathType = t.string();
+
+      let _localeType = t.nullable(t.string());
+
+      const _returnType3 = t.return(t.nullable(t.ref(RouteMatchType$2)));
+
+      t.param('path', _pathType).assert(path);
+      t.param('locale', _localeType).assert(locale);
+      return _returnType3.assert(findMatch$1(path, routes, locale));
+    },
+    toPath: function toPath(key, args) {
+      let _keyType2 = t.string();
+
+      let _argsType = t.any();
+
+      const _returnType4 = t.return(t.string());
+
+      t.param('key', _keyType2).assert(key);
+      t.param('args', _argsType).assert(args);
+      return _returnType4.assert(getRequiredRoute(key).getPath().toPath(args));
+    },
+    toLocalizedPath: function toLocalizedPath(locale, key, args) {
+      let _localeType2 = t.string();
+
+      let _keyType3 = t.string();
+
+      let _argsType2 = t.any();
+
+      const _returnType5 = t.return(t.string());
+
+      t.param('locale', _localeType2).assert(locale);
+      t.param('key', _keyType3).assert(key);
+      t.param('args', _argsType2).assert(args);
+      return _returnType5.assert(getRequiredRoute(key).getPath(locale).toPath(args));
+    }
+  });
 });
 
 const RouteType$3 = t.tdz(function () {
@@ -772,6 +696,204 @@ const SegmentRouteType$1 = t.tdz(function () {
   return SegmentRouteType;
 });
 const AddToRouteMapType = t.type('AddToRouteMapType', t.function(t.param('key', t.string()), t.param('route', t.ref(RouteType$3)), t.return(t.void())));
+
+var createSegmentRouterBuilderCreator = (function (defaultLocale, addToRouteMap) {
+  let _defaultLocaleType = t.nullable(t.string());
+
+  t.param('defaultLocale', _defaultLocaleType).assert(defaultLocale);
+  t.param('addToRouteMap', AddToRouteMapType).assert(addToRouteMap);
+
+  const createSegmentRouterBuilder = function createSegmentRouterBuilder(segmentRoute) {
+    let _segmentRouteType = t.ref(SegmentRouteType$1);
+
+    t.param('segmentRoute', _segmentRouteType).assert(segmentRoute);
+
+    const getCompletePath = function getCompletePath(path) {
+      return segmentRoute.path.completePath + path;
+    };
+    const getCompleteLocalizedPaths = function getCompleteLocalizedPaths(localizedPaths) {
+      let _localizedPathsType = t.ref(PathDictionaryType$2);
+
+      const _returnType = t.return(t.ref(PathDictionaryType$2));
+
+      t.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
+
+      const completeLocalizedPaths = {};
+
+      const getCompletePathForLocale = !segmentRoute.localizedPaths ? function (path) {
+        return `${segmentRoute.path.completePath}${path}`;
+      } : function (path, locale) {
+        return `${segmentRoute.localizedPaths.get(locale).completePath}${path}`;
+      };
+
+      Object.keys(localizedPaths).forEach(function (locale) {
+        let _localeType = t.string();
+
+        t.param('locale', _localeType).assert(locale);
+
+        completeLocalizedPaths[locale] = getCompletePathForLocale(localizedPaths[locale], locale);
+      });
+
+      return _returnType.assert(completeLocalizedPaths);
+    };
+
+    const createLocalizedPathFromSegment = function createLocalizedPathFromSegment(path) {
+      let _pathType = t.string();
+
+      t.param('path', _pathType).assert(path);
+
+      const localizedPaths = {};
+      Array.from(segmentRoute.localizedPaths.keys()).forEach(function (locale) {
+        return localizedPaths[locale] = path;
+      });
+      return localizedPaths;
+    };
+
+    const _createLocalizedEndRoute = function _createLocalizedEndRoute(localizedPaths, ref, key) {
+      let _localizedPathsType2 = t.ref(PathDictionaryType$2);
+
+      let _refType = t.ref(RouteRefType$5);
+
+      let _keyType = t.nullable(t.string());
+
+      t.param('localizedPaths', _localizedPathsType2).assert(localizedPaths);
+      t.param('ref', _refType).assert(ref);
+      t.param('key', _keyType).assert(key);
+
+      const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
+      const finalKey = t.string().assert(key || completeLocalizedPaths[defaultLocale]);
+      const route = createLocalizedRoute(localizedPaths, completeLocalizedPaths, ref);
+      addToRouteMap(finalKey, route);
+      return route;
+    };
+
+    const _createEndRoute = function _createEndRoute(path, ref, key) {
+      let _pathType2 = t.string();
+
+      let _refType2 = t.ref(RouteRefType$5);
+
+      let _keyType2 = t.nullable(t.string());
+
+      t.param('path', _pathType2).assert(path);
+      t.param('ref', _refType2).assert(ref);
+      t.param('key', _keyType2).assert(key);
+
+      if (segmentRoute.localizedPaths) {
+        return _createLocalizedEndRoute(createLocalizedPathFromSegment(path), ref, key);
+      }
+
+      const completePath = getCompletePath(path);
+      const route = createRoute(path, completePath, ref);
+      const finalKey = t.string().assert(key || completePath);
+      addToRouteMap(finalKey, route);
+      return route;
+    };
+
+    const _createLocalizedSegmentRoute = function _createLocalizedSegmentRoute(localizedPaths, buildSegment) {
+      let _localizedPathsType3 = t.ref(PathDictionaryType$2);
+
+      let _buildSegmentType = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$1)), t.return(t.void()));
+
+      t.param('localizedPaths', _localizedPathsType3).assert(localizedPaths);
+      t.param('buildSegment', _buildSegmentType).assert(buildSegment);
+
+      const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
+      const route = createLocalizedSegmentRoute(localizedPaths, completeLocalizedPaths);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      return route;
+    };
+
+    const _createSegmentRoute = function _createSegmentRoute(path, buildSegment) {
+      let _pathType3 = t.string();
+
+      let _buildSegmentType2 = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$1)), t.return(t.void()));
+
+      t.param('path', _pathType3).assert(path);
+      t.param('buildSegment', _buildSegmentType2).assert(buildSegment);
+
+      if (segmentRoute.localizedPaths) {
+        return _createLocalizedSegmentRoute(createLocalizedPathFromSegment(path), buildSegment);
+      }
+
+      const completePath = getCompletePath(path);
+      const route = createSegmentRoute(path, completePath);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      return route;
+    };
+
+    return {
+      defaultRoute: function defaultRoute(ref, key) {
+        let _refType3 = t.ref(RouteRefType$5);
+
+        let _keyType3 = t.nullable(t.string());
+
+        t.param('ref', _refType3).assert(ref);
+        t.param('key', _keyType3).assert(key);
+
+        segmentRoute.defaultRoute = _createEndRoute('', ref, key);
+      },
+
+      add: function add(path, ref, key) {
+        let _pathType4 = t.string();
+
+        let _refType4 = t.ref(RouteRefType$5);
+
+        let _keyType4 = t.nullable(t.string());
+
+        t.return(t.void());
+        t.param('path', _pathType4).assert(path);
+        t.param('ref', _refType4).assert(ref);
+        t.param('key', _keyType4).assert(key);
+
+        segmentRoute.nestedRoutes.push(_createEndRoute(path, ref, key));
+      },
+
+      addLocalized: function addLocalized(localizedPaths, ref, key) {
+        let _localizedPathsType4 = t.ref(PathDictionaryType$2);
+
+        let _refType5 = t.ref(RouteRefType$5);
+
+        let _keyType5 = t.nullable(t.string());
+
+        t.return(t.void());
+        t.param('localizedPaths', _localizedPathsType4).assert(localizedPaths);
+        t.param('ref', _refType5).assert(ref);
+        t.param('key', _keyType5).assert(key);
+
+        if (!defaultLocale) throw new Error('Invalid locales');
+        segmentRoute.nestedRoutes.push(_createLocalizedEndRoute(localizedPaths, ref, key));
+      },
+
+      addSegment: function addSegment(path, buildSegment) {
+        let _pathType5 = t.string();
+
+        let _buildSegmentType3 = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$1)), t.return(t.void()));
+
+        t.return(t.void());
+        t.param('path', _pathType5).assert(path);
+        t.param('buildSegment', _buildSegmentType3).assert(buildSegment);
+
+        segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
+      },
+
+      addLocalizedSegment: function addLocalizedSegment(localizedPaths, buildSegment) {
+        let _localizedPathsType5 = t.ref(PathDictionaryType$2);
+
+        let _buildSegmentType4 = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$1)), t.return(t.void()));
+
+        t.return(t.void());
+        t.param('localizedPaths', _localizedPathsType5).assert(localizedPaths);
+        t.param('buildSegment', _buildSegmentType4).assert(buildSegment);
+
+        if (!defaultLocale) throw new Error('Invalid locales');
+        segmentRoute.nestedRoutes.push(_createLocalizedSegmentRoute(localizedPaths, buildSegment));
+      }
+    };
+  };
+  return createSegmentRouterBuilder;
+});
 
 const LocaleType$6 = t.tdz(function () {
   return LocaleType$3;
@@ -796,6 +918,108 @@ const SegmentRouterBuilderType$2 = t.tdz(function () {
 });
 const RouteRefType$6 = t.tdz(function () {
   return RouteRefType$3;
+});
+var createRouterBuilder = (function (locales) {
+  let _localesType = t.nullable(t.array(t.ref(LocaleType$6)));
+
+  const _returnType = t.return(t.ref(RouterBuilderType$1));
+
+  t.param('locales', _localesType).assert(locales);
+
+  const defaultLocale = locales && locales[0];
+  const routes = t.ref(RoutesType$3).assert([]);
+  const routeMap = t.ref(RouteMapType$2).assert(new Map());
+
+  const addToRouteMap = function addToRouteMap(key, route) {
+    let _keyType = t.string();
+
+    let _routeType = t.ref(RouteType$4);
+
+    t.param('key', _keyType).assert(key);
+    t.param('route', _routeType).assert(route);
+
+    if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
+    routeMap.set(key, route);
+  };
+
+  const createSegmentRouterBuilder = createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap);
+
+  return _returnType.assert({
+    add: function add(path, ref, key) {
+      let _pathType = t.string();
+
+      let _refType = t.ref(RouteRefType$6);
+
+      let _keyType2 = t.nullable(t.string());
+
+      t.return(t.void());
+      t.param('path', _pathType).assert(path);
+      t.param('ref', _refType).assert(ref);
+      t.param('key', _keyType2).assert(key);
+
+      const route = createRoute(path, path, ref);
+      routes.push(route);
+      if (!key) key = _keyType2.assert(path);
+      addToRouteMap(key, route);
+    },
+
+    addLocalized: function addLocalized(localizedPaths, ref, key) {
+      let _localizedPathsType = t.ref(PathDictionaryType$3);
+
+      let _refType2 = t.ref(RouteRefType$6);
+
+      let _keyType3 = t.nullable(t.string());
+
+      t.return(t.void());
+      t.param('localizedPaths', _localizedPathsType).assert(localizedPaths);
+      t.param('ref', _refType2).assert(ref);
+      t.param('key', _keyType3).assert(key);
+
+      if (!defaultLocale) throw new Error('Invalid locales');
+      const route = createLocalizedRoute(localizedPaths, localizedPaths, ref);
+      routes.push(route);
+      const finalKey = t.string().assert(key || localizedPaths[defaultLocale]);
+      addToRouteMap(finalKey, route);
+    },
+
+    addSegment: function addSegment(path, buildSegment) {
+      let _pathType2 = t.string();
+
+      let _buildSegmentType = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$2)), t.return(t.void()));
+
+      t.return(t.void());
+      t.param('path', _pathType2).assert(path);
+      t.param('buildSegment', _buildSegmentType).assert(buildSegment);
+
+      const route = createSegmentRoute(path, path);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      routes.push(route);
+    },
+
+    addLocalizedSegment: function addLocalizedSegment(localizedPaths, buildSegment) {
+      let _localizedPathsType2 = t.ref(PathDictionaryType$3);
+
+      let _buildSegmentType2 = t.function(t.param('builder', t.ref(SegmentRouterBuilderType$2)), t.return(t.void()));
+
+      t.return(t.void());
+      t.param('localizedPaths', _localizedPathsType2).assert(localizedPaths);
+      t.param('buildSegment', _buildSegmentType2).assert(buildSegment);
+
+      if (!defaultLocale) throw new Error('Invalid locales');
+      const route = createLocalizedSegmentRoute(localizedPaths, localizedPaths);
+      buildSegment(createSegmentRouterBuilder(route));
+      route.freeze();
+      routes.push(route);
+    },
+
+    getRoutes: function getRoutes() {
+      return routes;
+    },
+    createRouter: function createRouter() {
+      return _createRouter(routes, routeMap);
+    }
+  });
 });
 
 export default createRouterBuilder;

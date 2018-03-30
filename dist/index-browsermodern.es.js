@@ -2,7 +2,7 @@ import pathToRegExp from 'path-to-regexp';
 
 const internalCreateRoutePath = function internalCreateRoutePath(path, completePath, segment) {
   const keys = [];
-  const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  const regExp = pathToRegExp(segment ? `${path}(.*)?` : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -80,12 +80,14 @@ let LocalizedEndRoute = class {
 };
 
 let SegmentRoute = class {
-  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
+
   constructor(path) {
     this.nestedRoutes = [];
 
     this.path = path;
   }
+  // nestedRoutes: Array<Route | SegmentRoute> = []; // disable flow: can cause issues with Object.freeze
+
 
   freeze() {
     Object.freeze(this);

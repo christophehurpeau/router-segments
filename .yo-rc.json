@@ -47,7 +47,6 @@
       },
       "testing": {
         "circleci": true,
-        "travisci": true,
         "codecov": true
       }
     }

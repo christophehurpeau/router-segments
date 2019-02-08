@@ -27,13 +27,12 @@ and many other routers.
 
 ```js
 import createBuilder from 'router-segments';
-import type { SegmentRouterBuilderType } from 'router-segments/types'; // with flow-runtime
 
 
 const builder = createBuilder();
 
 builder.add('/', ref);
-builder.addSegment('/post', (segmentBuilder: SegmentRouterBuilderType) => {
+builder.addSegment('/post', (segmentBuilder) => {
   segmentBuilder.add('/:id(\\d+)-:slug([A-Za-z\\-]+)', ref, '/post/view');
   segmentBuilder.defaultRoute(ref, '/post');
 });
@@ -53,10 +52,8 @@ router.toPath('/post/view', { id: '001', slug: 'a-slug' });
 
 ## Localized routes
 
-     
 ```js
 import createBuilder from 'router-segments';
-import type { SegmentRouterBuilderType } from 'router-segments/types'; // with flow-runtime
 
 
 const builder = createBuilder(['en', 'fr']);
@@ -67,7 +64,7 @@ builder.addLocalizedSegment(
     en: '/my-blog',
     fr: '/mon-blog',
   },
-  (segmentBuilder: SegmentRouterBuilderType) => {
+  (segmentBuilder) => {
     segmentBuilder.addLocalized({
       en: '/post/:id(\\d+)',
       fr: '/billet/:id(\\d+)',
@@ -81,42 +78,4 @@ export default builder.createRouter();
 
 ## API
 
-```js
-type RouteMapType = Map<string, RouteType>;
-type RoutesType = Array<RouteType>;
-type RouteRefType = any;
-
-type RouterBuilderType = {|
-  add: (path: string, ref: RouteRefType, key: ?string) => void,
-  addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
-  getRoutes: () => RoutesType,
-  createRouter: () => RouterType,
-|};
-
-type SegmentRouterBuilderType = {|
-  defaultRoute: (ref: RouteRefType, key: ?string) => void,
-  add: (path: string, ref: RouteRefType, key: ?string) => void,
-  addLocalized: (localizedPath: PathDictionaryType, ref: RouteRefType, key: ?string) => void,
-  addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
-  addLocalizedSegment: (localizedPaths: PathDictionaryType, buildSegment: (builder: SegmentRouterBuilderType) => void) => void,
-|};
-
-type RouterType = {|
-  get: (path: string) => ?RouteType,
-  find: (path: string) => ?RouteMatchType,
-  toPath: (key: string, args: any) => string,
-  toLocalizedPath: (locale: string, key: string, args: any) => string,
-|};
-
-type RouteMatchType = {|
-  ref: RouteRefType,
-  path: string,
-  routePath: RoutePathType,
-  namedParams: ?Map<string, string>,
-  otherParams: ?Array<string>,
-|};
-
-
-```
+see [Definition file](https://github.com/christophehurpeau/router-segments/tree/master/dist/index.d.ts)

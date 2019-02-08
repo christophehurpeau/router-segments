@@ -1,3 +1,17 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/christophehurpeau/router-segments/compare/v1.2.0...v2.0.0) (2019-02-08)
+
+
+### Features
+
+* rewrite with typescript ([4bc2e64](https://github.com/christophehurpeau/router-segments/commit/4bc2e64))
+
+
+### BREAKING CHANGES
+
+* api changes and typescript use
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/christophehurpeau/router-segments/compare/v1.1.0...v1.2.0) (2018-03-30)
 

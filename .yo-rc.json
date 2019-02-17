@@ -35,7 +35,7 @@
           ]
         }
       ],
-      "documentation": false,
+      "documentation": true,
       "testing": {
         "circleci": true,
         "codecov": true

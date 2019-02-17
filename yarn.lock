@@ -5305,14 +5305,15 @@ pob-babel@23.6.2:
     rollup-plugin-babel "^4.3.2"
     rollup-plugin-node-resolve "^4.0.0"
 
-pob-release@4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-4.7.1.tgz#8d1693f95f0a937844b6473b19d0da887f3f9858"
-  integrity sha512-SiK3ESnKPsdyg+5sqySkZg+G5plsiXuKkS/k7M8FYZLYafeRWeK7SapwfjvRWL/nivT29VU85d+nH/rTMuIvsA==
+pob-release@4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-4.8.1.tgz#b46bde651136ebb2d808650a7041f13ac0ebff3d"
+  integrity sha512-5WpDSCml/AZQPeMATnxAMykFEdyXRmd7z9sBa2IAQu3/1Pe4eLfpoIETF+jTZwFPC6ZR9cM5fQHxcySabmv93g==
   dependencies:
     conventional-recommended-bump "^0.3.0"
     inquirer "^6.2.1"
     minimist-argv "^1.1.0"
+    repository-check-dirty "^1.0.1"
     semver "^5.6.0"
     standard-changelog "0.0.1"
 
@@ -5662,6 +5663,11 @@ repeating@^2.0.0:
   integrity sha1-UhTFOpJtNVJwdSf7q0FdvAjQbdo=
   dependencies:
     is-finite "^1.0.0"
+
+repository-check-dirty@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/repository-check-dirty/-/repository-check-dirty-1.0.1.tgz#12f4dd40000d9f1f8d075e8730669f4874260675"
+  integrity sha512-8PZz7FHumHOsQv4t4UNpvityXWca6oYnQ7rSlk8iUKT61mnqkGXTYoQWRxQt9vipOaklGQZLx/2DWt8PjBQuoQ==
 
 request-promise-core@1.1.1:
   version "1.1.1"

@@ -5412,15 +5412,15 @@ pob-lcov-reporter@1.0.0:
   dependencies:
     istanbul-reports "^2.1.1"
 
-pob-release@4.8.1:
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-4.8.1.tgz#b46bde651136ebb2d808650a7041f13ac0ebff3d"
-  integrity sha512-5WpDSCml/AZQPeMATnxAMykFEdyXRmd7z9sBa2IAQu3/1Pe4eLfpoIETF+jTZwFPC6ZR9cM5fQHxcySabmv93g==
+pob-release@4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-4.8.2.tgz#c235fb3918b04870069c1ad0ed14d54bb1188ba5"
+  integrity sha512-7T53yj0iYi5NeANHCLprS52JDxEyUeOJTNZGYq24CYCtFjHVTq1eWRauI/kYO3jdw0AmEizTBQ7KQ5kM/sobxw==
   dependencies:
     conventional-recommended-bump "^0.3.0"
     inquirer "^6.2.1"
     minimist-argv "^1.1.0"
-    repository-check-dirty "^1.0.1"
+    repository-check-dirty "^1.0.2"
     semver "^5.6.0"
     standard-changelog "0.0.1"
 
@@ -5778,10 +5778,15 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-repository-check-dirty@1.0.1, repository-check-dirty@^1.0.1:
+repository-check-dirty@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/repository-check-dirty/-/repository-check-dirty-1.0.1.tgz#12f4dd40000d9f1f8d075e8730669f4874260675"
   integrity sha512-8PZz7FHumHOsQv4t4UNpvityXWca6oYnQ7rSlk8iUKT61mnqkGXTYoQWRxQt9vipOaklGQZLx/2DWt8PjBQuoQ==
+
+repository-check-dirty@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/repository-check-dirty/-/repository-check-dirty-1.0.2.tgz#ab09cf637a273f834be64fee1a0f067dd0b6784d"
+  integrity sha512-7A/iyd1DkuG3Iz9fYjUMMVkH24OOD/UmJuPtwcWB2+oaINha4p8RAsX28rZ1Qtg54vuxoQqJJf/el7tNaUKoNQ==
 
 request-promise-core@1.1.1:
   version "1.1.1"

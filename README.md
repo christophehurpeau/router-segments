@@ -10,7 +10,6 @@
   <a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/npm/v/router-segments.svg?style=flat-square"></a>
   <a href="https://circleci.com/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/circleci/project/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
   <a href="https://david-dm.org/christophehurpeau/router-segments"><img src="https://david-dm.org/christophehurpeau/router-segments.svg?style=flat-square"></a>
-  <a href="https://dependencyci.com/github/christophehurpeau/router-segments"><img src="https://dependencyci.com/github/christophehurpeau/router-segments/badge?style=flat-square"></a>
   <a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
 </p>
 

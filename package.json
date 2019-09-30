@@ -107,7 +107,7 @@
     "lint-staged": "8.1.4",
     "pob-babel": "23.6.6",
     "pob-lcov-reporter": "1.0.0",
-    "pob-release": "4.8.2",
+    "pob-release": "4.15.2",
     "prettier": "1.16.4",
     "repository-check-dirty": "1.0.2",
     "typedoc": "0.14.2",

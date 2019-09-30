@@ -7022,10 +7022,10 @@ yarn-update-lock@0.3.1:
   dependencies:
     yarn-deduplicate "^1.1.1"
 
-yarnhook@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yarnhook/-/yarnhook-0.3.0.tgz#9a4bd1248b7a126ed78cb332b0800f2d76a38fa8"
-  integrity sha512-9eyVNDsA1nVl9pumtAxd/oc+H4k0PEZFazAcKSVmuT/MT40k3qUK31mnAoX5NV2wQxBEKvvwRRJqB9Z0BVuUvA==
+yarnhook@0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/yarnhook/-/yarnhook-0.4.3.tgz#d80443f86596f72cf58ddf16f69d9b8f9584f056"
+  integrity sha512-GIAWEJ/iBv5ywDGmEJp1qHPydof7pysgAyU8UYM5Z0Izm2mJAbJPbT4PIXFCh2e2ia1TYSUy+uwbD80mtBuK8w==
   dependencies:
     execa "^0.8.0"
     find-parent-dir "^0.3.0"

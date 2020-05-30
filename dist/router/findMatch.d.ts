@@ -1,4 +1,4 @@
-import { LocaleType, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
+import { Routes, LocaleType, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
 import { Route } from '../routes/interfaces';
 export interface RouteMatch<Locales extends LocaleType | never> {
     namedParams: undefined | Map<string, string>;
@@ -8,6 +8,5 @@ export interface RouteMatch<Locales extends LocaleType | never> {
     route: Route<any, Locales>;
     routePath: SegmentRoutePath | EndRoutePath;
 }
-declare const _default: <Locales extends string>(path: string, routes: Route<any, Locales>[], locale?: Locales | undefined) => RouteMatch<Locales> | null;
-export default _default;
+export default function findMatch<Locales extends LocaleType>(path: string, routes: Routes<Locales>, locale?: Locales): null | RouteMatch<Locales>;
 //# sourceMappingURL=findMatch.d.ts.map

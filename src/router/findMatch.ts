@@ -26,7 +26,7 @@ const logger = !PRODUCTION
 const parseOtherParams = (wildcard: string) =>
   wildcard ? wildcard.split('/') : [];
 
-const findMatch = <Locales extends LocaleType>(
+const internalFindMatch = <Locales extends LocaleType>(
   path: string,
   completePath: string,
   routes: Routes<Locales>,
@@ -35,7 +35,7 @@ const findMatch = <Locales extends LocaleType>(
 ): null | RouteMatch<Locales> => {
   let result = null;
 
-  routes.some((route) => {
+  routes.some((route): boolean => {
     const routePath: RoutePathInterface = route.getPath(locale);
 
     if (!PRODUCTION && !routePath) {
@@ -43,8 +43,7 @@ const findMatch = <Locales extends LocaleType>(
     }
 
     /* istanbul ignore next */
-    if (!PRODUCTION) {
-      // @ts-ignore
+    if (!PRODUCTION && logger) {
       logger.debug(`trying ${routePath.regExp}`);
     }
 
@@ -73,7 +72,7 @@ const findMatch = <Locales extends LocaleType>(
       const restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = findMatch(
+        result = internalFindMatch(
           `/${restOfThePath}`,
           completePath,
           segment.nestedRoutes,
@@ -111,8 +110,10 @@ const findMatch = <Locales extends LocaleType>(
   return result;
 };
 
-export default <Locales extends LocaleType>(
+export default function findMatch<Locales extends LocaleType>(
   path: string,
   routes: Routes<Locales>,
   locale?: Locales,
-): null | RouteMatch<Locales> => findMatch(path, path, routes, locale);
+): null | RouteMatch<Locales> {
+  return internalFindMatch(path, path, routes, locale);
+}

@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable max-lines, unicorn/better-regex, unicorn/no-unsafe-regex */
 import createRouterBuilder from '../createRouterBuilder';
 import { NotLocalizedEndRoute, NotLocalizedSegmentRoute } from '../../routes';
 import { RouteMatch } from '../../router/findMatch';
@@ -115,7 +115,10 @@ describe('blog', () => {
       const match = router.find(path) as RouteMatch<never>;
       expect(match).toHaveProperty('path', path);
       expect(match.namedParams).toEqual(
-        new Map([['id', '001'], ['slug', 'The-First-Post']]),
+        new Map([
+          ['id', '001'],
+          ['slug', 'The-First-Post'],
+        ]),
       );
       expect(match.otherParams).toBe(undefined);
     });

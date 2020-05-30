@@ -13,7 +13,10 @@ const localizedRoute = createLocalizedRoute(
 );
 const router = createRouter(
   [route, localizedRoute],
-  new Map<string, EndRoute>([['/', route], ['/blog', localizedRoute]]),
+  new Map<string, EndRoute>([
+    ['/', route],
+    ['/blog', localizedRoute],
+  ]),
 );
 
 test('get by key should return route', () => {

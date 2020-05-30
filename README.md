@@ -17,7 +17,6 @@
 
 This router take full advantages of segments, building a tree of regexp to avoid having 500 regexp calls for one route.
 
-
 ### How to use
 
 router-segments uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) for matching the route paths,
@@ -26,7 +25,6 @@ and many other routers.
 
 ```js
 import createBuilder from 'router-segments';
-
 
 const builder = createBuilder();
 
@@ -46,14 +44,12 @@ export default builder.createRouter();
 ```js
 router.toPath('/post/view', { id: '001', slug: 'a-slug' });
 // /post/001-a-slug
-
 ```
 
 ## Localized routes
 
 ```js
 import createBuilder from 'router-segments';
-
 
 const builder = createBuilder(['en', 'fr']);
 
@@ -64,12 +60,16 @@ builder.addLocalizedSegment(
     fr: '/mon-blog',
   },
   (segmentBuilder) => {
-    segmentBuilder.addLocalized({
-      en: '/post/:id(\\d+)',
-      fr: '/billet/:id(\\d+)',
-    }, ref, '/my-blog/post');
+    segmentBuilder.addLocalized(
+      {
+        en: '/post/:id(\\d+)',
+        fr: '/billet/:id(\\d+)',
+      },
+      ref,
+      '/my-blog/post'
+    );
     segmentBuilder.defaultRoute(ref, '/my-blog');
-  },
+  }
 );
 
 export default builder.createRouter();

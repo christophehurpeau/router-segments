@@ -1,5 +1,9 @@
 import pathToRegExp from 'path-to-regexp';
 
+var getKeys = function getKeys(o) {
+  return Object.keys(o);
+};
+
 function internalCreateRoutePath(path, completePath, segment) {
   var keys = [];
   var regExp = pathToRegExp(segment ? path + "/(.+)?" : path, keys, {
@@ -31,9 +35,7 @@ var createRoutePath = function createRoutePath(path, completePath) {
   return internalCreateRoutePath(path, completePath, false);
 };
 
-var NotLocalizedEndRoute =
-/*#__PURE__*/
-function () {
+var NotLocalizedEndRoute = /*#__PURE__*/function () {
   function NotLocalizedEndRoute(path, ref) {
     this.path = path;
     this.ref = ref; // Object.freeze(this);
@@ -64,9 +66,7 @@ function () {
   return NotLocalizedEndRoute;
 }();
 
-var LocalizedEndRoute =
-/*#__PURE__*/
-function () {
+var LocalizedEndRoute = /*#__PURE__*/function () {
   function LocalizedEndRoute(localizedPaths, ref) {
     this.localizedPaths = localizedPaths;
     this.ref = ref;
@@ -98,9 +98,7 @@ function () {
   return LocalizedEndRoute;
 }();
 
-var NotLocalizedSegmentRoute =
-/*#__PURE__*/
-function () {
+var NotLocalizedSegmentRoute = /*#__PURE__*/function () {
   function NotLocalizedSegmentRoute(path) {
     this.nestedRoutes = [];
     this.path = path;
@@ -136,9 +134,7 @@ function () {
   return NotLocalizedSegmentRoute;
 }();
 
-var LocalizedSegmentRoute =
-/*#__PURE__*/
-function () {
+var LocalizedSegmentRoute = /*#__PURE__*/function () {
   function LocalizedSegmentRoute(localizedPaths) {
     this.nestedRoutes = [];
     this.localizedPaths = localizedPaths;
@@ -175,9 +171,8 @@ function () {
 }();
 
 var createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, segment) {
-  var localizedPaths = new Map(); // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-  Object.keys(localizedPathsRecord).forEach(function (locale) {
+  var localizedPaths = new Map();
+  getKeys(localizedPathsRecord).forEach(function (locale) {
     var path = localizedPathsRecord[locale];
 
     if (segment) {
@@ -213,7 +208,7 @@ var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
 };
 
-var findMatch = function findMatch(path, completePath, routes, locale, namedParams) {
+var internalFindMatch = function internalFindMatch(path, completePath, routes, locale, namedParams) {
   if (locale === void 0) {
     locale = 'en';
   }
@@ -241,7 +236,7 @@ var findMatch = function findMatch(path, completePath, routes, locale, namedPara
       var restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = findMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
         return result !== null;
       }
 
@@ -267,11 +262,11 @@ var findMatch = function findMatch(path, completePath, routes, locale, namedPara
   return result;
 };
 
-var findMatch$1 = (function (path, routes, locale) {
-  return findMatch(path, path, routes, locale);
-});
+function findMatch(path, routes, locale) {
+  return internalFindMatch(path, path, routes, locale);
+}
 
-var _createRouter = (function (routes, routeMap) {
+function createRouter(routes, routeMap) {
   var getRequiredRoute = function getRequiredRoute(routeKey) {
     var route = routeMap.get(routeKey);
     if (!route) throw new Error("No route named \"" + routeKey + "\"");
@@ -281,7 +276,7 @@ var _createRouter = (function (routes, routeMap) {
   return {
     get: getRequiredRoute,
     find: function find(path, locale) {
-      return findMatch$1(path, routes, locale);
+      return findMatch(path, routes, locale);
     },
     toPath: function toPath(key, args) {
       return getRequiredRoute(key).getPath().toPath(args);
@@ -290,18 +285,17 @@ var _createRouter = (function (routes, routeMap) {
       return getRequiredRoute(key).getPath(locale).toPath(args);
     }
   };
-});
+}
 
-var createSegmentRouterBuilderCreator = (function (defaultLocale, addToRouteMap) {
+function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   var createSegmentRouterBuilder = function createSegmentRouterBuilder(segmentRoute) {
     var getCompletePath = function getCompletePath(path, locale) {
       return "" + segmentRoute.getPath(locale).completePath + path;
     };
 
     var getCompleteLocalizedPaths = function getCompleteLocalizedPaths(localizedPaths) {
-      var completeLocalizedPaths = {}; // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-      Object.keys(localizedPaths).forEach(function (locale) {
+      var completeLocalizedPaths = {};
+      getKeys(localizedPaths).forEach(function (locale) {
         completeLocalizedPaths[locale] = getCompletePath(localizedPaths[locale], locale);
       });
       return completeLocalizedPaths;
@@ -376,10 +370,10 @@ var createSegmentRouterBuilderCreator = (function (defaultLocale, addToRouteMap)
   };
 
   return createSegmentRouterBuilder;
-});
+}
 
-var createRouterBuilder = (function (locales) {
-  var defaultLocale = locales && locales[0];
+function createRouterBuilder(locales) {
+  var defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
   var routes = [];
   var routeMap = new Map();
 
@@ -419,11 +413,11 @@ var createRouterBuilder = (function (locales) {
     getRoutes: function getRoutes() {
       return routes;
     },
-    createRouter: function createRouter() {
-      return _createRouter(routes, routeMap);
+    createRouter: function createRouter$1() {
+      return createRouter(routes, routeMap);
     }
   };
-});
+}
 
 export default createRouterBuilder;
 //# sourceMappingURL=index-browser.es.js.map

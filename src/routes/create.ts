@@ -6,20 +6,23 @@ import {
   SegmentRoutePath,
   RouteRef,
 } from '../types';
+import { getKeys } from '../utils/getKeys';
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 import Route from './NotLocalizedEndRoute';
 import LocalizedEndRoute from './LocalizedEndRoute';
 import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
 import LocalizedSegmentRoute from './LocalizedSegmentRoute';
 
-const createLocalizedPaths = <Locales extends LocaleType>(
+const createLocalizedPaths = <
+  Locales extends LocaleType,
+  Path extends SegmentRoutePath | EndRoutePath
+>(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
   segment: boolean,
-) => {
+): Map<Locales, Path> => {
   const localizedPaths = new Map();
-  // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-  Object.keys(localizedPathsRecord).forEach((locale: Locales) => {
+  getKeys(localizedPathsRecord).forEach((locale: Locales) => {
     const path = localizedPathsRecord[locale];
     if (segment) {
       const routerPath: SegmentRoutePath = createRoutePathSegment(
@@ -38,7 +41,7 @@ const createLocalizedPaths = <Locales extends LocaleType>(
   return localizedPaths;
 };
 
-const checkRef = (ref: RouteRef) => {
+const checkRef = (ref: RouteRef): void => {
   if (!ref) throw new Error(`Invalid ref: "${ref}"`);
 };
 
@@ -60,7 +63,7 @@ export const createLocalizedRoute = <Locales extends LocaleType>(
 ): LocalizedEndRoute<Locales> => {
   /* istanbul ignore if */
   if (!PRODUCTION) checkRef(ref);
-  const localizedPaths = createLocalizedPaths(
+  const localizedPaths = createLocalizedPaths<Locales, EndRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,
     false,
@@ -80,7 +83,7 @@ export const createLocalizedSegmentRoute = <Locales extends LocaleType>(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
 ): LocalizedSegmentRoute<Locales> => {
-  const localizedPaths = createLocalizedPaths(
+  const localizedPaths = createLocalizedPaths<Locales, SegmentRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,
     true,

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/better-regex, unicorn/no-unsafe-regex, no-useless-escape */
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 
 describe('createRoutePath', () => {
@@ -35,7 +36,7 @@ describe('createRoutePath', () => {
     );
     expect(routePath).toHaveProperty('path', '/route/:namedParam');
     expect(routePath).toHaveProperty('completePath', '/route/:namedParam');
-    expect(routePath.regExp).toEqual(/^\/route\/((?:[^/]+?))$/);
+    expect(routePath.regExp).toEqual(/^\/route\/((?:[^\/]+?))$/);
     expect(routePath.namedParams).toEqual(['namedParam']);
     expect(routePath.toPath({ namedParam: 'test' })).toEqual('/route/test');
   });
@@ -74,10 +75,9 @@ describe('createRoutePathSegment', () => {
     expect(routePath).toHaveProperty('path', '/segment/:namedParam');
     expect(routePath).toHaveProperty('completePath', '/segment/:namedParam');
     expect(routePath.regExp).toEqual(
-      /^\/segment\/((?:[^/]+?))(?:\/((?:.+)))?$/,
+      /^\/segment\/((?:[^\/]+?))(?:\/((?:.+)))?$/,
     );
     expect(routePath.namedParams).toEqual(['namedParam']);
-    // @ts-ignore
-    expect(routePath.toPath).not.toBeDefined();
+    expect((routePath as any).toPath).not.toBeDefined();
   });
 });

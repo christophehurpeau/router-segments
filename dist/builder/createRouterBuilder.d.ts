@@ -9,6 +9,5 @@ export interface RouterBuilder<Locales extends LocaleType | never> {
     createRouter(): Router<Locales>;
     getRoutes(): Routes<Locales>;
 }
-declare const _default: <Locales extends string>(locales?: Locales[] | undefined) => RouterBuilder<Locales>;
-export default _default;
+export default function createRouterBuilder<Locales extends LocaleType>(locales?: Locales[]): RouterBuilder<Locales>;
 //# sourceMappingURL=createRouterBuilder.d.ts.map

@@ -1,24 +1,10 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": ["pob/babel", "pob/typescript"],
+  "root": true,
+  "extends": [
+    "@pob/eslint-config",
+    "@pob/eslint-config-node"
+  ],
   "rules": {
     "unicorn/no-unsafe-regex": "off"
-  },
-  "overrides": [
-    {
-      "files": ["src/**/*.test.ts", "src/__tests__/**/*.ts"],
-      "env": {
-        "jest": true
-      },
-      "rules": {
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "devDependencies": true
-          }
-        ]
-      }
-    }
-  ]
+  }
 }

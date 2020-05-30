@@ -1,6 +1,10 @@
 import pathToRegExp from 'path-to-regexp';
 import Logger from 'nightingale-logger';
 
+const getKeys = function getKeys(o) {
+  return Object.keys(o);
+};
+
 function internalCreateRoutePath(path, completePath, segment) {
   const keys = [];
   const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
@@ -156,9 +160,8 @@ class LocalizedSegmentRoute {
 }
 
 const createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, segment) {
-  const localizedPaths = new Map(); // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-  Object.keys(localizedPathsRecord).forEach(function (locale) {
+  const localizedPaths = new Map();
+  getKeys(localizedPathsRecord).forEach(function (locale) {
     const path = localizedPathsRecord[locale];
 
     if (segment) {
@@ -203,7 +206,7 @@ const parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
 };
 
-const findMatch = function findMatch(path, completePath, routes, locale = 'en', namedParams) {
+const internalFindMatch = function internalFindMatch(path, completePath, routes, locale = 'en', namedParams) {
   let result = null;
   routes.some(function (route) {
     const routePath = route.getPath(locale);
@@ -214,8 +217,10 @@ const findMatch = function findMatch(path, completePath, routes, locale = 'en', 
     /* istanbul ignore next */
 
 
-    // @ts-ignore
-    logger.debug(`trying ${routePath.regExp}`);
+    if (logger) {
+      logger.debug(`trying ${routePath.regExp}`);
+    }
+
     const match = routePath.regExp.exec(path);
     if (!match) return false;
     match.shift(); // remove m[0], === path;
@@ -236,7 +241,7 @@ const findMatch = function findMatch(path, completePath, routes, locale = 'en', 
       const restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = findMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
         return result !== null;
       }
 
@@ -262,11 +267,11 @@ const findMatch = function findMatch(path, completePath, routes, locale = 'en', 
   return result;
 };
 
-var findMatch$1 = (function (path, routes, locale) {
-  return findMatch(path, path, routes, locale);
-});
+function findMatch(path, routes, locale) {
+  return internalFindMatch(path, path, routes, locale);
+}
 
-var _createRouter = (function (routes, routeMap) {
+function createRouter(routes, routeMap) {
   const getRequiredRoute = function getRequiredRoute(routeKey) {
     const route = routeMap.get(routeKey);
     if (!route) throw new Error(`No route named "${routeKey}"`);
@@ -276,7 +281,7 @@ var _createRouter = (function (routes, routeMap) {
   return {
     get: getRequiredRoute,
     find: function find(path, locale) {
-      return findMatch$1(path, routes, locale);
+      return findMatch(path, routes, locale);
     },
     toPath: function toPath(key, args) {
       return getRequiredRoute(key).getPath().toPath(args);
@@ -285,18 +290,17 @@ var _createRouter = (function (routes, routeMap) {
       return getRequiredRoute(key).getPath(locale).toPath(args);
     }
   };
-});
+}
 
-var createSegmentRouterBuilderCreator = (function (defaultLocale, addToRouteMap) {
+function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   const createSegmentRouterBuilder = function createSegmentRouterBuilder(segmentRoute) {
     const getCompletePath = function getCompletePath(path, locale) {
       return `${segmentRoute.getPath(locale).completePath}${path}`;
     };
 
     const getCompleteLocalizedPaths = function getCompleteLocalizedPaths(localizedPaths) {
-      const completeLocalizedPaths = {}; // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-      Object.keys(localizedPaths).forEach(function (locale) {
+      const completeLocalizedPaths = {};
+      getKeys(localizedPaths).forEach(function (locale) {
         completeLocalizedPaths[locale] = getCompletePath(localizedPaths[locale], locale);
       });
       return completeLocalizedPaths;
@@ -371,10 +375,10 @@ var createSegmentRouterBuilderCreator = (function (defaultLocale, addToRouteMap)
   };
 
   return createSegmentRouterBuilder;
-});
+}
 
-var createRouterBuilder = (function (locales) {
-  const defaultLocale = locales && locales[0];
+function createRouterBuilder(locales) {
+  const defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
   const routes = [];
   const routeMap = new Map();
 
@@ -414,11 +418,11 @@ var createRouterBuilder = (function (locales) {
     getRoutes: function getRoutes() {
       return routes;
     },
-    createRouter: function createRouter() {
-      return _createRouter(routes, routeMap);
+    createRouter: function createRouter$1() {
+      return createRouter(routes, routeMap);
     }
   };
-});
+}
 
 export default createRouterBuilder;
 //# sourceMappingURL=index-browsermodern-dev.es.js.map

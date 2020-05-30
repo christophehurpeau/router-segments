@@ -36,10 +36,10 @@ export interface RouterBuilder<Locales extends LocaleType | never> {
   getRoutes(): Routes<Locales>;
 }
 
-export default <Locales extends LocaleType>(
+export default function createRouterBuilder<Locales extends LocaleType>(
   locales?: Locales[],
-): RouterBuilder<Locales> => {
-  const defaultLocale = locales && locales[0];
+): RouterBuilder<Locales> {
+  const defaultLocale = locales?.[0];
   const routes: Routes<Locales> = [];
   const routeMap: RouteMap<Locales> = new Map();
 
@@ -97,4 +97,4 @@ export default <Locales extends LocaleType>(
     getRoutes: () => routes,
     createRouter: () => createRouter(routes, routeMap),
   };
-};
+}

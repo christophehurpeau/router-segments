@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable max-lines, unicorn/better-regex, unicorn/no-unsafe-regex */
 import createRouterBuilder from '../createRouterBuilder';
 import { RouteMatch } from '../../router/findMatch';
 import { LocalizedEndRoute } from '../../routes';
@@ -118,7 +118,10 @@ describe('localized blog', () => {
         expect(match.path).toBe(enPath);
         expect(match.route).toBe(router.get('postView'));
         expect(match.namedParams).toEqual(
-          new Map([['id', '001'], ['slug', 'The-First-Post']]),
+          new Map([
+            ['id', '001'],
+            ['slug', 'The-First-Post'],
+          ]),
         );
         expect(match.otherParams).toBe(undefined);
       });
@@ -131,7 +134,10 @@ describe('localized blog', () => {
         expect(match.path).toBe(frPath);
         expect(match.route).toBe(router.get('postView'));
         expect(match.namedParams).toEqual(
-          new Map([['id', '001'], ['slug', 'Le-Premier-Article']]),
+          new Map([
+            ['id', '001'],
+            ['slug', 'Le-Premier-Article'],
+          ]),
         );
         expect(match.otherParams).toBe(undefined);
       });
@@ -287,7 +293,10 @@ describe('localized blog', () => {
       const match = router.find(enPath) as RouteMatch<Locales>;
       expect(match.route).toBe(router.get('search-results-tag'));
       expect(match.namedParams).toEqual(
-        new Map([['term', 'termsearched'], ['tag', 'tag1']]),
+        new Map([
+          ['term', 'termsearched'],
+          ['tag', 'tag1'],
+        ]),
       );
     });
 

@@ -2,7 +2,10 @@
   "name": "router-segments",
   "version": "2.0.0",
   "description": "Router with segments",
-  "keywords": ["router", "segments"],
+  "keywords": [
+    "router",
+    "segments"
+  ],
   "author": "Christophe Hurpeau <christophe@hurpeau.com> (http://christophe.hurpeau.com/)",
   "license": "MIT",
   "repository": "https://github.com:christophehurpeau/router-segments.git",
@@ -11,9 +14,14 @@
     "url": "https://github.com/christophehurpeau/router-segments/issues"
   },
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=10.13.0"
   },
-  "browserslist": ["> 0.1%", "Firefox ESR", "not ie < 9", "not dead"],
+  "browserslist": [
+    "> 0.1%",
+    "Firefox ESR",
+    "not ie < 9",
+    "not dead"
+  ],
   "main": "./index.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index-browser.es.js",
@@ -30,36 +38,17 @@
     "build": "pob-build",
     "build:definitions": "tsc -p tsconfig.build.json",
     "clean": "rm -Rf dist",
-    "generate:api": "typedoc --gitRevision master --out docs --tsconfig tsconfig.doc.json",
+    "generate:api": "typedoc --tsconfig tsconfig.doc.json",
     "generate:docs": "rm -Rf docs ; yarn run generate:api ; touch docs/.nojekyll && yarn run generate:test-coverage",
     "generate:test-coverage": "rm -Rf docs/coverage/ ; NODE_ENV=production BABEL_ENV=test jest --coverage --coverageReporters=pob-lcov-reporter --coverageDirectory=docs/coverage/",
-    "lint": "npm run typescript-check && eslint --ext .ts src/",
+    "lint": "tsc && eslint --ext .js,.ts --quiet *.js src",
     "postbuild": "tsc -p tsconfig.build.json",
     "preversion": "yarn run lint && yarn run build && yarn run generate:docs && repository-check-dirty",
     "release": "repository-check-dirty && pob-release",
     "test": "jest",
-    "typescript-check": "tsc --noEmit",
+    "test:watch": "jest",
     "version": "pob-version",
     "watch": "pob-watch"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $GIT_PARAMS",
-      "post-checkout": "yarnhook",
-      "post-merge": "yarnhook",
-      "post-rewrite": "yarnhook",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "package.json": ["yarn-update-lock", "git add yarn.lock"],
-    "yarn.lock": ["yarn-update-lock", "git add"],
-    "{package.json,.eslintrc.json}": [
-      "prettier --parser json --write",
-      "git add"
-    ],
-    "src/**/*.json": ["prettier --parser json --write", "git add"],
-    "src/**/*.js": ["eslint --fix --quiet", "git add"]
   },
   "prettier": {
     "trailingComma": "all",
@@ -67,7 +56,9 @@
     "arrowParens": "always"
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@pob/commitlint-config"
+    ]
   },
   "jest": {
     "cacheDirectory": "./node_modules/.cache/jest",
@@ -75,44 +66,78 @@
       "<rootDir>/src/**/__tests__/**/*.ts",
       "<rootDir>/src/**/*.test.ts"
     ],
-    "collectCoverageFrom": ["src/**/*.ts"],
-    "moduleFileExtensions": ["ts", "js"],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
     "transform": {
       "^.+\\.ts$": "babel-jest"
-    }
+    },
+    "testEnvironment": "node"
+  },
+  "pob": {
+    "babelEnvs": [
+      {
+        "target": "node",
+        "version": "10",
+        "formats": [
+          "cjs",
+          "es"
+        ]
+      },
+      {
+        "target": "browser",
+        "version": "modern",
+        "formats": [
+          "es"
+        ]
+      },
+      {
+        "target": "browser",
+        "formats": [
+          "cjs",
+          "es"
+        ]
+      }
+    ],
+    "entries": [
+      "index"
+    ]
   },
   "dependencies": {
     "nightingale-logger": "^6.0.0",
     "path-to-regexp": "^1.7.0"
   },
   "devDependencies": {
-    "@babel/core": "7.3.3",
-    "@babel/preset-env": "7.3.1",
-    "@commitlint/cli": "7.5.2",
-    "@commitlint/config-conventional": "7.5.0",
-    "@types/jest": "24.0.5",
-    "@typescript-eslint/eslint-plugin": "1.3.0",
-    "@typescript-eslint/parser": "1.3.0",
-    "babel-eslint": "10.0.1",
-    "babel-jest": "24.1.0",
-    "babel-preset-latest-node": "3.0.1",
-    "babel-preset-modern-browsers": "13.0.1",
-    "eslint": "5.14.0",
-    "eslint-config-pob": "28.0.0",
-    "eslint-plugin-babel": "5.3.0",
-    "eslint-plugin-import": "2.16.0",
-    "husky": "1.3.1",
-    "jest": "24.1.0",
+    "@babel/core": "7.10.1",
+    "@babel/preset-env": "7.10.1",
+    "@pob/commitlint-config": "1.1.2",
+    "@pob/eslint-config": "37.2.0",
+    "@pob/eslint-config-node": "37.2.0",
+    "@pob/eslint-config-typescript": "37.2.0",
+    "@pob/root": "2.2.0",
+    "@types/jest": "25.2.3",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "babel-jest": "26.0.1",
+    "babel-preset-latest-node": "4.1.0",
+    "babel-preset-modern-browsers": "14.2.1",
+    "eslint": "6.8.0",
+    "eslint-import-resolver-node": "0.3.3",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-unicorn": "18.0.1",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
     "jest-junit-reporter": "1.1.0",
-    "lint-staged": "8.1.4",
-    "pob-babel": "23.6.6",
-    "pob-lcov-reporter": "1.0.0",
-    "pob-release": "4.8.2",
-    "prettier": "1.16.4",
-    "repository-check-dirty": "1.0.2",
-    "typedoc": "0.14.2",
-    "typescript": "3.3.3",
-    "yarn-update-lock": "0.3.1",
-    "yarnhook": "0.3.0"
+    "pob-babel": "24.12.0",
+    "pob-lcov-reporter": "2.3.0",
+    "pob-release": "5.6.0",
+    "prettier": "2.0.5",
+    "typedoc": "0.17.7",
+    "typescript": "3.9.3"
   }
 }

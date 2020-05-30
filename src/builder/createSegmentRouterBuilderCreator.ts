@@ -5,8 +5,9 @@ import {
   createSegmentRoute,
   createLocalizedSegmentRoute,
 } from '../routes/create';
-import { LocalizedSegmentRoute } from '../routes';
+import { LocalizedSegmentRoute, LocalizedEndRoute } from '../routes';
 import { EndRoute, SegmentRoute } from '../routes/interfaces';
+import { getKeys } from '../utils/getKeys';
 
 export interface SegmentRouterBuilder<Locales extends LocaleType> {
   add(path: string, ref: RouteRef, key?: string): void;
@@ -26,23 +27,27 @@ export interface SegmentRouterBuilder<Locales extends LocaleType> {
   defaultRoute(ref: RouteRef, key?: string): void;
 }
 
-export default <Locales extends LocaleType>(
+export default function createSegmentRouterBuilderCreator<
+  Locales extends LocaleType
+>(
   defaultLocale: undefined | Locales,
   addToRouteMap: (key: string, route: EndRoute<Locales>) => void,
-) => {
+): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales> {
   const createSegmentRouterBuilder = (
     segmentRoute: SegmentRoute<Locales>,
   ): SegmentRouterBuilder<Locales> => {
-    const getCompletePath = (path: string, locale?: Locales) =>
+    const getCompletePath = (path: string, locale?: Locales): string =>
       `${segmentRoute.getPath(locale).completePath}${path}`;
 
     const getCompleteLocalizedPaths = (
       localizedPaths: LocalizedPathsRecord<Locales>,
     ): LocalizedPathsRecord<Locales> => {
-      const completeLocalizedPaths: { [locale: string]: string } = {};
+      const completeLocalizedPaths: Record<Locales, string> = {} as Record<
+        Locales,
+        string
+      >;
 
-      // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-      Object.keys(localizedPaths).forEach((locale: Locales) => {
+      getKeys(localizedPaths).forEach((locale: Locales) => {
         completeLocalizedPaths[locale] = getCompletePath(
           localizedPaths[locale],
           locale,
@@ -56,7 +61,10 @@ export default <Locales extends LocaleType>(
       segmentRoute: LocalizedSegmentRoute<Locales>,
       path: string,
     ): Record<Locales, string> => {
-      const localizedPaths: { [locale: string]: string } = {};
+      const localizedPaths: Record<Locales, string> = {} as Record<
+        Locales,
+        string
+      >;
       [...segmentRoute.localizedPaths.keys()].forEach((locale) => {
         localizedPaths[locale] = path;
       });
@@ -67,7 +75,7 @@ export default <Locales extends LocaleType>(
       localizedPaths: LocalizedPathsRecord<Locales>,
       ref: RouteRef,
       key?: string,
-    ) => {
+    ): LocalizedEndRoute<Locales> => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
       const finalKey: string =
         key || completeLocalizedPaths[defaultLocale as Locales];
@@ -80,7 +88,11 @@ export default <Locales extends LocaleType>(
       return route;
     };
 
-    const _createEndRoute = (path: string, ref: RouteRef, key?: string) => {
+    const _createEndRoute = (
+      path: string,
+      ref: RouteRef,
+      key?: string,
+    ): EndRoute<Locales> => {
       if (segmentRoute.isLocalized()) {
         return _createLocalizedEndRoute(
           createLocalizedPathFromSegment(
@@ -102,7 +114,7 @@ export default <Locales extends LocaleType>(
     const _createLocalizedSegmentRoute = (
       localizedPaths: LocalizedPathsRecord<Locales>,
       buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-    ) => {
+    ): LocalizedSegmentRoute<Locales> => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
       const route = createLocalizedSegmentRoute(
         localizedPaths,
@@ -116,7 +128,7 @@ export default <Locales extends LocaleType>(
     const _createSegmentRoute = (
       path: string,
       buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-    ) => {
+    ): SegmentRoute<Locales> => {
       if (segmentRoute.isLocalized()) {
         return _createLocalizedSegmentRoute(
           createLocalizedPathFromSegment(
@@ -135,7 +147,7 @@ export default <Locales extends LocaleType>(
     };
 
     return {
-      defaultRoute: (ref: RouteRef, key?: string) => {
+      defaultRoute: (ref: RouteRef, key?: string): void => {
         segmentRoute.defaultRoute = _createEndRoute('', ref, key);
       },
 
@@ -173,4 +185,4 @@ export default <Locales extends LocaleType>(
     };
   };
   return createSegmentRouterBuilder;
-};
+}

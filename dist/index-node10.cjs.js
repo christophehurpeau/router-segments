@@ -4,7 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var pathToRegExp = _interopDefault(require('path-to-regexp'));
+const pathToRegExp = _interopDefault(require('path-to-regexp'));
+
+const getKeys = o => Object.keys(o);
 
 function internalCreateRoutePath(path, completePath, segment) {
   const keys = [];
@@ -155,9 +157,8 @@ class LocalizedSegmentRoute {
 }
 
 const createLocalizedPaths = (localizedPathsRecord, completeLocalizedPathsRecord, segment) => {
-  const localizedPaths = new Map(); // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-  Object.keys(localizedPathsRecord).forEach(locale => {
+  const localizedPaths = new Map();
+  getKeys(localizedPathsRecord).forEach(locale => {
     const path = localizedPathsRecord[locale];
 
     if (segment) {
@@ -190,7 +191,7 @@ const createLocalizedSegmentRoute = (localizedPathsRecord, completeLocalizedPath
 
 const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
 
-const findMatch = (path, completePath, routes, locale = 'en', namedParams) => {
+const internalFindMatch = (path, completePath, routes, locale = 'en', namedParams) => {
   let result = null;
   routes.some(route => {
     const routePath = route.getPath(locale);
@@ -214,7 +215,7 @@ const findMatch = (path, completePath, routes, locale = 'en', namedParams) => {
       const restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = findMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
         return result !== null;
       }
 
@@ -240,9 +241,11 @@ const findMatch = (path, completePath, routes, locale = 'en', namedParams) => {
   return result;
 };
 
-var findMatch$1 = ((path, routes, locale) => findMatch(path, path, routes, locale));
+function findMatch(path, routes, locale) {
+  return internalFindMatch(path, path, routes, locale);
+}
 
-var createRouter = ((routes, routeMap) => {
+function createRouter(routes, routeMap) {
   const getRequiredRoute = routeKey => {
     const route = routeMap.get(routeKey);
     if (!route) throw new Error(`No route named "${routeKey}"`);
@@ -251,20 +254,19 @@ var createRouter = ((routes, routeMap) => {
 
   return {
     get: getRequiredRoute,
-    find: (path, locale) => findMatch$1(path, routes, locale),
+    find: (path, locale) => findMatch(path, routes, locale),
     toPath: (key, args) => getRequiredRoute(key).getPath().toPath(args),
     toLocalizedPath: (locale, key, args) => getRequiredRoute(key).getPath(locale).toPath(args)
   };
-});
+}
 
-var createSegmentRouterBuilderCreator = ((defaultLocale, addToRouteMap) => {
+function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   const createSegmentRouterBuilder = segmentRoute => {
     const getCompletePath = (path, locale) => `${segmentRoute.getPath(locale).completePath}${path}`;
 
     const getCompleteLocalizedPaths = localizedPaths => {
-      const completeLocalizedPaths = {}; // @ts-ignore https://github.com/Microsoft/TypeScript/pull/28899
-
-      Object.keys(localizedPaths).forEach(locale => {
+      const completeLocalizedPaths = {};
+      getKeys(localizedPaths).forEach(locale => {
         completeLocalizedPaths[locale] = getCompletePath(localizedPaths[locale], locale);
       });
       return completeLocalizedPaths;
@@ -339,10 +341,10 @@ var createSegmentRouterBuilderCreator = ((defaultLocale, addToRouteMap) => {
   };
 
   return createSegmentRouterBuilder;
-});
+}
 
-var createRouterBuilder = (locales => {
-  const defaultLocale = locales && locales[0];
+function createRouterBuilder(locales) {
+  const defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
   const routes = [];
   const routeMap = new Map();
 
@@ -382,7 +384,7 @@ var createRouterBuilder = (locales => {
     getRoutes: () => routes,
     createRouter: () => createRouter(routes, routeMap)
   };
-});
+}
 
 exports.default = createRouterBuilder;
 //# sourceMappingURL=index-node10.cjs.js.map

@@ -9,10 +9,10 @@ export interface Router<Locales extends LocaleType | never> {
   toPath(key: string, args?: any): string;
 }
 
-export default <Locales extends LocaleType | never>(
+export default function createRouter<Locales extends LocaleType | never>(
   routes: Routes<Locales>,
   routeMap: RouteMap<Locales>,
-): Router<Locales> => {
+): Router<Locales> {
   const getRequiredRoute = (routeKey: string): EndRoute => {
     const route = routeMap.get(routeKey);
     if (!route) throw new Error(`No route named "${routeKey}"`);
@@ -24,12 +24,8 @@ export default <Locales extends LocaleType | never>(
     find: (path: string, locale?: Locales): null | RouteMatch<Locales> =>
       findMatch(path, routes, locale),
     toPath: (key: string, args?: any): string =>
-      getRequiredRoute(key)
-        .getPath()
-        .toPath(args),
+      getRequiredRoute(key).getPath().toPath(args),
     toLocalizedPath: (locale: Locales, key: string, args?: any): string =>
-      getRequiredRoute(key)
-        .getPath(locale)
-        .toPath(args),
+      getRequiredRoute(key).getPath(locale).toPath(args),
   };
-};
+}

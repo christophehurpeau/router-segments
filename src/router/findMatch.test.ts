@@ -40,7 +40,10 @@ test('find segments with multiple named params', () => {
   expect(match).toBeDefined();
   expect(match.path).toBe('/1/2');
   expect(match.namedParams).toEqual(
-    new Map([['param1', '1'], ['param2', '2']]),
+    new Map([
+      ['param1', '1'],
+      ['param2', '2'],
+    ]),
   );
 });
 

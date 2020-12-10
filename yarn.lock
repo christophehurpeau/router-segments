@@ -5507,10 +5507,10 @@ pob-lcov-reporter@2.3.0:
   dependencies:
     istanbul-reports "^3.0.2"
 
-pob-release@5.6.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-5.6.0.tgz#ad3db89cdfe9f004bdd480780e0fad83b21b531e"
-  integrity sha512-/KtTYQ8gvMX8KSO6mpfTs9jH4URQY98/rnpuzzfKMicHirp3AzwjfkJOod8aaRDIfaVFvhtSI5L1qPSX+HQuFw==
+pob-release@5.6.3:
+  version "5.6.3"
+  resolved "https://registry.yarnpkg.com/pob-release/-/pob-release-5.6.3.tgz#e108d30687e6bf9c05938c6e7d17610dccc976a3"
+  integrity sha512-ipbSNWYlgBPpXTCeuIzWc/EAtkK2QzbqYggRbBdBSPsd4aoiluabQImW7GsZu+CYjT34LK4uY4ZpdxMB1fNB+Q==
   dependencies:
     conventional-changelog-angular "^5.0.10"
     conventional-recommended-bump "^6.0.9"

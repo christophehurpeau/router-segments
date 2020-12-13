@@ -1,3 +1,5 @@
 CHANGELOG.md
 /docs
+/.pnp.js
+/.yarn/**/*
 /dist

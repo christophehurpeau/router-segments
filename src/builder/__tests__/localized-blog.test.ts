@@ -1,8 +1,8 @@
-/* eslint-disable max-lines, unicorn/better-regex, unicorn/no-unsafe-regex */
+/* eslint-disable max-lines */
+import type { RouteMatch } from '../../router/findMatch';
+import type { LocalizedEndRoute } from '../../routes';
+import type { EndRoutePath } from '../../routes/types';
 import createRouterBuilder from '../createRouterBuilder';
-import { RouteMatch } from '../../router/findMatch';
-import { LocalizedEndRoute } from '../../routes';
-import { EndRoutePath } from '../../routes/types';
 
 describe('localized blog', () => {
   const ref = Symbol('ref');
@@ -146,9 +146,9 @@ describe('localized blog', () => {
 
   describe('postWithTag', () => {
     describe('route', () => {
-      const rrPostWithTag = router.get('postWithTag') as LocalizedEndRoute<
-        Locales
-      >;
+      const rrPostWithTag = router.get(
+        'postWithTag',
+      ) as LocalizedEndRoute<Locales>;
 
       test('en', () => {
         const routePath = rrPostWithTag.localizedPaths.get(

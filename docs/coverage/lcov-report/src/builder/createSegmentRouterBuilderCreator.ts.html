@@ -433,33 +433,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LocalizedPathsRecord, RouteRef, LocaleType } from '../types';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { LocalizedSegmentRoute, LocalizedEndRoute } from '../routes';
 import {
   createRoute,
   createLocalizedRoute,
   createSegmentRoute,
   createLocalizedSegmentRoute,
 } from '../routes/create';
-import { LocalizedSegmentRoute, LocalizedEndRoute } from '../routes';
-import { EndRoute, SegmentRoute } from '../routes/interfaces';
+import type { EndRoute, SegmentRoute } from '../routes/interfaces';
+import type { LocalizedPathsRecord, RouteRef, LocaleType } from '../types';
 import { getKeys } from '../utils/getKeys';
 &nbsp;
 export interface SegmentRouterBuilder&lt;Locales extends LocaleType&gt; {
-  add(path: string, ref: RouteRef, key?: string): void;
-  addLocalized(
+  add: (path: string, ref: RouteRef, key?: string) =&gt; void;
+  addLocalized: (
     localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
     ref: RouteRef,
     key?: string,
-  ): void;
-  addLocalizedSegment(
+  ) =&gt; void;
+  addLocalizedSegment: (
     localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
     buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-  ): void;
-  addSegment(
+  ) =&gt; void;
+  addSegment: (
     path: string,
     buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-  ): void;
-  defaultRoute(ref: RouteRef, key?: string): void;
+  ) =&gt; void;
+  defaultRoute: (ref: RouteRef, key?: string) =&gt; void;
 }
 &nbsp;
 export default function createSegmentRouterBuilderCreator&lt;

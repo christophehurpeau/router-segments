@@ -1,5 +1,5 @@
 import { PRODUCTION } from 'pob-babel';
-import {
+import type {
   LocaleType,
   LocalizedPathsRecord,
   EndRoutePath,
@@ -7,11 +7,11 @@ import {
   RouteRef,
 } from '../types';
 import { getKeys } from '../utils/getKeys';
-import { createRoutePath, createRoutePathSegment } from './createRoutePath';
-import Route from './NotLocalizedEndRoute';
 import LocalizedEndRoute from './LocalizedEndRoute';
-import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
 import LocalizedSegmentRoute from './LocalizedSegmentRoute';
+import Route from './NotLocalizedEndRoute';
+import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
+import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 
 const createLocalizedPaths = <
   Locales extends LocaleType,
@@ -21,7 +21,7 @@ const createLocalizedPaths = <
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
   segment: boolean,
 ): Map<Locales, Path> => {
-  const localizedPaths = new Map();
+  const localizedPaths = new Map<Locales, Path>();
   getKeys(localizedPathsRecord).forEach((locale: Locales) => {
     const path = localizedPathsRecord[locale];
     if (segment) {
@@ -29,20 +29,20 @@ const createLocalizedPaths = <
         path,
         completeLocalizedPathsRecord[locale],
       );
-      localizedPaths.set(locale, routerPath);
+      localizedPaths.set(locale, routerPath as Path);
     } else {
       const routerPath: EndRoutePath = createRoutePath(
         path,
         completeLocalizedPathsRecord[locale],
       );
-      localizedPaths.set(locale, routerPath);
+      localizedPaths.set(locale, routerPath as Path);
     }
   });
   return localizedPaths;
 };
 
 const checkRef = (ref: RouteRef): void => {
-  if (!ref) throw new Error(`Invalid ref: "${ref}"`);
+  if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
 };
 
 export const createRoute = (

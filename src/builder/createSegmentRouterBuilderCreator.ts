@@ -1,30 +1,30 @@
-import { LocalizedPathsRecord, RouteRef, LocaleType } from '../types';
+import type { LocalizedSegmentRoute, LocalizedEndRoute } from '../routes';
 import {
   createRoute,
   createLocalizedRoute,
   createSegmentRoute,
   createLocalizedSegmentRoute,
 } from '../routes/create';
-import { LocalizedSegmentRoute, LocalizedEndRoute } from '../routes';
-import { EndRoute, SegmentRoute } from '../routes/interfaces';
+import type { EndRoute, SegmentRoute } from '../routes/interfaces';
+import type { LocalizedPathsRecord, RouteRef, LocaleType } from '../types';
 import { getKeys } from '../utils/getKeys';
 
 export interface SegmentRouterBuilder<Locales extends LocaleType> {
-  add(path: string, ref: RouteRef, key?: string): void;
-  addLocalized(
+  add: (path: string, ref: RouteRef, key?: string) => void;
+  addLocalized: (
     localizedPaths: LocalizedPathsRecord<Locales>,
     ref: RouteRef,
     key?: string,
-  ): void;
-  addLocalizedSegment(
+  ) => void;
+  addLocalizedSegment: (
     localizedPaths: LocalizedPathsRecord<Locales>,
     buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-  ): void;
-  addSegment(
+  ) => void;
+  addSegment: (
     path: string,
     buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-  ): void;
-  defaultRoute(ref: RouteRef, key?: string): void;
+  ) => void;
+  defaultRoute: (ref: RouteRef, key?: string) => void;
 }
 
 export default function createSegmentRouterBuilderCreator<

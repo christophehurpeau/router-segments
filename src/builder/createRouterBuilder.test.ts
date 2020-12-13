@@ -1,5 +1,4 @@
-/* eslint-disable max-lines */
-import { NotLocalizedEndRoute } from '../routes';
+import type { NotLocalizedEndRoute } from '../routes';
 import createRouterBuilder from './createRouterBuilder';
 
 test('home', () => {

@@ -92,7 +92,8 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -103,6 +104,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,8 +129,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { EndRoutePath, RouteRef } from './types';
-import { EndRoute, NotLocalizedRoute } from './interfaces';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { EndRoute, NotLocalizedRoute } from './interfaces';
+import type { EndRoutePath, RouteRef } from './types';
 &nbsp;
 export default class NotLocalizedEndRoute
   implements EndRoute, NotLocalizedRoute&lt;EndRoutePath&gt; {
@@ -138,6 +140,7 @@ export default class NotLocalizedEndRoute
 &nbsp;
   constructor(path: EndRoutePath, ref: RouteRef) {
     this.path = path;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     // Object.freeze(this);
   }
@@ -154,11 +157,11 @@ export default class NotLocalizedEndRoute
 <span class="cstat-no" title="statement not covered" >    return false;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  to</span>JSON() {
+<span class="fstat-no" title="function not covered" >  to</span>JSON(): unknown {
 <span class="cstat-no" title="statement not covered" >    return this.path;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  to</span>String() {
+<span class="fstat-no" title="function not covered" >  to</span>String(): string {
 <span class="cstat-no" title="statement not covered" >    return JSON.stringify(this.toJSON());</span>
   }
 }

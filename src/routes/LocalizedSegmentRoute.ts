@@ -1,9 +1,9 @@
-import LocalizedEndRoute from './LocalizedEndRoute';
-import { LocaleType, SegmentRoutePath } from './types';
-import { SegmentRoute, LocalizedRoute } from './interfaces';
+import type LocalizedEndRoute from './LocalizedEndRoute';
+import type { SegmentRoute, LocalizedRoute } from './interfaces';
+import type { LocaleType, SegmentRoutePath } from './types';
 
 export default class LocalizedSegmentRoute<Locales extends LocaleType>
-  implements SegmentRoute, LocalizedRoute<SegmentRoutePath, Locales> {
+  implements SegmentRoute<Locales>, LocalizedRoute<SegmentRoutePath, Locales> {
   localizedPaths: Map<Locales, SegmentRoutePath>;
 
   nestedRoutes: LocalizedRoute<any, Locales>[] = [];
@@ -14,12 +14,13 @@ export default class LocalizedSegmentRoute<Locales extends LocaleType>
     this.localizedPaths = localizedPaths;
   }
 
-  freeze() {
+  freeze(): void {
     Object.freeze(this);
     Object.freeze(this.nestedRoutes);
   }
 
-  getPath(locale: Locales): SegmentRoutePath {
+  getPath(locale?: Locales): SegmentRoutePath {
+    if (!locale) throw new Error('Missing locale');
     return this.localizedPaths.get(locale) as SegmentRoutePath;
   }
 
@@ -31,11 +32,11 @@ export default class LocalizedSegmentRoute<Locales extends LocaleType>
     return true;
   }
 
-  toJSON() {
+  toJSON(): unknown[] {
     return [...this.localizedPaths.entries()];
   }
 
-  toString() {
+  toString(): string {
     return JSON.stringify(this.toJSON());
   }
 }

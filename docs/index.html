@@ -72,9 +72,6 @@
 				</p>
 				<p align="center">
 					<a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/npm/v/router-segments.svg?style=flat-square"></a>
-					<a href="https://circleci.com/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/circleci/project/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
-					<a href="https://david-dm.org/christophehurpeau/router-segments"><img src="https://david-dm.org/christophehurpeau/router-segments.svg?style=flat-square"></a>
-					<a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
 				</p>
 				<a href="#why-another-router-" id="why-another-router-" style="color: inherit; text-decoration: none;">
 					<h3>Why another router ?</h3>
@@ -86,14 +83,14 @@
 				<p>router-segments uses <a href="https://www.npmjs.com/package/path-to-regexp">path-to-regexp</a> for matching the route paths,
 					also used by <a href="https://expressjs.com/en/guide/routing.html">expressjs</a>, <a href="https://www.npmjs.com/package/koa-router">koa-router</a>
 				and many other routers.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> createBuilder <span class="hljs-keyword">from</span> <span class="hljs-string">'router-segments'</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> createBuilder <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;router-segments&#x27;</span>;
 
 <span class="hljs-keyword">const</span> builder = createBuilder();
 
-builder.add(<span class="hljs-string">'/'</span>, ref);
-builder.addSegment(<span class="hljs-string">'/post'</span>, (segmentBuilder) =&gt; {
-  segmentBuilder.add(<span class="hljs-string">'/:id(\\d+)-:slug([A-Za-z\\-]+)'</span>, ref, <span class="hljs-string">'/post/view'</span>);
-  segmentBuilder.defaultRoute(ref, <span class="hljs-string">'/post'</span>);
+builder.add(<span class="hljs-string">&#x27;/&#x27;</span>, ref);
+builder.addSegment(<span class="hljs-string">&#x27;/post&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">segmentBuilder</span>) =&gt;</span> {
+  segmentBuilder.add(<span class="hljs-string">&#x27;/:id(\\d+)-:slug([A-Za-z\\-]+)&#x27;</span>, ref, <span class="hljs-string">&#x27;/post/view&#x27;</span>);
+  segmentBuilder.defaultRoute(ref, <span class="hljs-string">&#x27;/post&#x27;</span>);
 });
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> builder.createRouter();</code></pre>
@@ -101,32 +98,32 @@ builder.addSegment(<span class="hljs-string">'/post'</span>, (segmentBuilder) =&
 					<h4>Url Generator</h4>
 				</a>
 				<p><a href="https://www.npmjs.com/package/path-to-regexp#compile-reverse-path-to-regexp">path-to-regexp documentation</a></p>
-				<pre><code class="language-js">router.toPath(<span class="hljs-string">'/post/view'</span>, { <span class="hljs-attr">id</span>: <span class="hljs-string">'001'</span>, <span class="hljs-attr">slug</span>: <span class="hljs-string">'a-slug'</span> });
+				<pre><code class="language-js">router.toPath(<span class="hljs-string">&#x27;/post/view&#x27;</span>, { <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;001&#x27;</span>, <span class="hljs-attr">slug</span>: <span class="hljs-string">&#x27;a-slug&#x27;</span> });
 <span class="hljs-comment">// /post/001-a-slug</span></code></pre>
 				<a href="#localized-routes" id="localized-routes" style="color: inherit; text-decoration: none;">
 					<h2>Localized routes</h2>
 				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> createBuilder <span class="hljs-keyword">from</span> <span class="hljs-string">'router-segments'</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> createBuilder <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;router-segments&#x27;</span>;
 
-<span class="hljs-keyword">const</span> builder = createBuilder([<span class="hljs-string">'en'</span>, <span class="hljs-string">'fr'</span>]);
+<span class="hljs-keyword">const</span> builder = createBuilder([<span class="hljs-string">&#x27;en&#x27;</span>, <span class="hljs-string">&#x27;fr&#x27;</span>]);
 
-builder.add(<span class="hljs-string">'/'</span>, ref);
+builder.add(<span class="hljs-string">&#x27;/&#x27;</span>, ref);
 builder.addLocalizedSegment(
   {
-    <span class="hljs-attr">en</span>: <span class="hljs-string">'/my-blog'</span>,
-    <span class="hljs-attr">fr</span>: <span class="hljs-string">'/mon-blog'</span>,
+    <span class="hljs-attr">en</span>: <span class="hljs-string">&#x27;/my-blog&#x27;</span>,
+    <span class="hljs-attr">fr</span>: <span class="hljs-string">&#x27;/mon-blog&#x27;</span>,
   },
-  (segmentBuilder) =&gt; {
+  <span class="hljs-function">(<span class="hljs-params">segmentBuilder</span>) =&gt;</span> {
     segmentBuilder.addLocalized(
       {
-        <span class="hljs-attr">en</span>: <span class="hljs-string">'/post/:id(\\d+)'</span>,
-        <span class="hljs-attr">fr</span>: <span class="hljs-string">'/billet/:id(\\d+)'</span>,
+        <span class="hljs-attr">en</span>: <span class="hljs-string">&#x27;/post/:id(\\d+)&#x27;</span>,
+        <span class="hljs-attr">fr</span>: <span class="hljs-string">&#x27;/billet/:id(\\d+)&#x27;</span>,
       },
       ref,
-      <span class="hljs-string">'/my-blog/post'</span>
+      <span class="hljs-string">&#x27;/my-blog/post&#x27;</span>,
     );
-    segmentBuilder.defaultRoute(ref, <span class="hljs-string">'/my-blog'</span>);
-  }
+    segmentBuilder.defaultRoute(ref, <span class="hljs-string">&#x27;/my-blog&#x27;</span>);
+  },
 );
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> builder.createRouter();</code></pre>
@@ -226,6 +223,5 @@ builder.addLocalizedSegment(
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

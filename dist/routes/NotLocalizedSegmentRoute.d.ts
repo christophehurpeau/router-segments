@@ -1,6 +1,6 @@
-import NotLocalizedEndRoute from './NotLocalizedEndRoute';
-import { SegmentRoute, NotLocalizedRoute } from './interfaces';
-import { SegmentRoutePath } from './types';
+import type NotLocalizedEndRoute from './NotLocalizedEndRoute';
+import type { SegmentRoute, NotLocalizedRoute } from './interfaces';
+import type { SegmentRoutePath } from './types';
 export default class NotLocalizedSegmentRoute implements SegmentRoute, NotLocalizedRoute<SegmentRoutePath> {
     path: SegmentRoutePath;
     nestedRoutes: NotLocalizedRoute<any>[];
@@ -10,7 +10,7 @@ export default class NotLocalizedSegmentRoute implements SegmentRoute, NotLocali
     getPath(): SegmentRoutePath;
     isSegment(): true;
     isLocalized(): false;
-    toJSON(): SegmentRoutePath;
+    toJSON(): unknown;
     toString(): string;
 }
 //# sourceMappingURL=NotLocalizedSegmentRoute.d.ts.map

@@ -88,7 +88,9 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -119,22 +121,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Routes, RouteMap, LocaleType } from '../types';
-import { EndRoute } from '../routes/interfaces';
-import findMatch, { RouteMatch } from './findMatch';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { EndRoute } from '../routes/interfaces';
+import type { Routes, RouteMap, LocaleType } from '../types';
+import type { RouteMatch } from './findMatch';
+import findMatch from './findMatch';
 &nbsp;
 export interface Router&lt;Locales extends LocaleType | never&gt; {
-  get(key: string): EndRoute;
-  find(path: string, locale?: Locales): null | RouteMatch&lt;Locales&gt;;
-  toLocalizedPath(locale: Locales, key: string, args?: any): string;
-  toPath(key: string, args?: any): string;
+  get: (key: string) =&gt; EndRoute&lt;Locales&gt;;
+  find: (path: string, locale?: Locales) =&gt; null | RouteMatch&lt;Locales&gt;;
+  toLocalizedPath: (locale: Locales, key: string, args?: any) =&gt; string;
+  toPath: (key: string, args?: any) =&gt; string;
 }
 &nbsp;
 export default function createRouter&lt;Locales extends LocaleType | never&gt;(
   routes: Routes&lt;Locales&gt;,
   routeMap: RouteMap&lt;Locales&gt;,
 ): Router&lt;Locales&gt; {
-  const getRequiredRoute = (routeKey: string): EndRoute =&gt; {
+  const getRequiredRoute = (routeKey: string): EndRoute&lt;Locales&gt; =&gt; {
     const route = routeMap.get(routeKey);
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!route) <span class="cstat-no" title="statement not covered" >throw new Error(`No route named "${routeKey}"`);</span>
     return route;

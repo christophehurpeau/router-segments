@@ -1,5 +1,5 @@
-import { EndRoutePath, RouteRef } from './types';
-import { EndRoute, NotLocalizedRoute } from './interfaces';
+import type { EndRoute, NotLocalizedRoute } from './interfaces';
+import type { EndRoutePath, RouteRef } from './types';
 export default class NotLocalizedEndRoute implements EndRoute, NotLocalizedRoute<EndRoutePath> {
     path: EndRoutePath;
     ref: RouteRef;
@@ -7,7 +7,7 @@ export default class NotLocalizedEndRoute implements EndRoute, NotLocalizedRoute
     getPath(): EndRoutePath;
     isSegment(): false;
     isLocalized(): false;
-    toJSON(): EndRoutePath;
+    toJSON(): unknown;
     toString(): string;
 }
 //# sourceMappingURL=NotLocalizedEndRoute.d.ts.map

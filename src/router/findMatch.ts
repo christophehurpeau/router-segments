@@ -1,6 +1,8 @@
+/* eslint-disable complexity */
 import { PRODUCTION } from 'pob-babel';
 import Logger from 'nightingale-logger';
-import {
+import type { EndRoute, Route, SegmentRoute } from '../routes/interfaces';
+import type {
   Routes,
   LocaleType,
   RoutePathInterface,
@@ -8,7 +10,6 @@ import {
   SegmentRoutePath,
   EndRoutePath,
 } from '../types';
-import { EndRoute, Route, SegmentRoute } from '../routes/interfaces';
 
 export interface RouteMatch<Locales extends LocaleType | never> {
   namedParams: undefined | Map<string, string>;
@@ -23,7 +24,7 @@ const logger = !PRODUCTION
   ? new Logger('router-segments:findMatch')
   : undefined;
 
-const parseOtherParams = (wildcard: string) =>
+const parseOtherParams = (wildcard: string): string[] =>
   wildcard ? wildcard.split('/') : [];
 
 const internalFindMatch = <Locales extends LocaleType>(
@@ -44,7 +45,7 @@ const internalFindMatch = <Locales extends LocaleType>(
 
     /* istanbul ignore next */
     if (!PRODUCTION && logger) {
-      logger.debug(`trying ${routePath.regExp}`);
+      logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 
     const match = routePath.regExp.exec(path);
@@ -55,7 +56,7 @@ const internalFindMatch = <Locales extends LocaleType>(
     let groupCount = match.length;
     let group = 0;
 
-    if (routePath.namedParams.length !== 0) {
+    if (routePath.namedParams.length > 0) {
       // set params
       if (!namedParams) namedParams = new Map();
 
@@ -96,6 +97,7 @@ const internalFindMatch = <Locales extends LocaleType>(
       group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
 
     result = Object.freeze({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,

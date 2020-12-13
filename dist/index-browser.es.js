@@ -1,43 +1,170 @@
 import pathToRegExp from 'path-to-regexp';
 
+/* eslint-disable complexity */
+
+var parseOtherParams = function parseOtherParams(wildcard) {
+  return wildcard ? wildcard.split('/') : [];
+};
+
+var internalFindMatch = function internalFindMatch(path, completePath, routes, locale, namedParams) {
+  if (locale === void 0) {
+    locale = 'en';
+  }
+
+  var result = null;
+  routes.some(function (route) {
+    var routePath = route.getPath(locale);
+    var match = routePath.regExp.exec(path);
+    if (!match) return false;
+    match.shift(); // remove m[0], === path;
+
+    var groupCount = match.length;
+    var group = 0;
+
+    if (routePath.namedParams.length > 0) {
+      // set params
+      if (!namedParams) namedParams = new Map();
+      routePath.namedParams.forEach(function (paramName) {
+        namedParams.set(paramName, match[group++]);
+      });
+    }
+
+    if (route.isSegment()) {
+      var segment = route;
+      var restOfThePath = match[--groupCount];
+
+      if (restOfThePath) {
+        result = internalFindMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
+        return result !== null;
+      }
+
+      if (!segment.defaultRoute) {
+        return false;
+      }
+
+      route = segment.defaultRoute;
+    }
+
+    var endRoute = route;
+    var otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
+    result = Object.freeze({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      ref: endRoute.ref,
+      path: completePath,
+      route: endRoute,
+      routePath,
+      namedParams,
+      otherParams
+    });
+    return true;
+  });
+  return result;
+};
+
+function findMatch(path, routes, locale) {
+  return internalFindMatch(path, path, routes, locale);
+}
+
+function createRouter(routes, routeMap) {
+  var getRequiredRoute = function getRequiredRoute(routeKey) {
+    var route = routeMap.get(routeKey);
+    if (!route) throw new Error(`No route named "${routeKey}"`);
+    return route;
+  };
+
+  return {
+    get: getRequiredRoute,
+    find: function find(path, locale) {
+      return findMatch(path, routes, locale);
+    },
+    toPath: function toPath(key, args) {
+      return getRequiredRoute(key).getPath().toPath(args);
+    },
+    toLocalizedPath: function toLocalizedPath(locale, key, args) {
+      return getRequiredRoute(key).getPath(locale).toPath(args);
+    }
+  };
+}
+
 var getKeys = function getKeys(o) {
   return Object.keys(o);
 };
 
-function internalCreateRoutePath(path, completePath, segment) {
-  var keys = [];
-  var regExp = pathToRegExp(segment ? path + "/(.+)?" : path, keys, {
-    sensitive: true,
-    strict: true
-  });
-  var namedParams = keys.map(function (key) {
-    return key.name;
-  }).filter(Boolean);
-  if (segment) return {
-    path: path,
-    completePath: completePath,
-    regExp: regExp,
-    namedParams: namedParams
-  };
-  return {
-    path: path,
-    completePath: completePath,
-    regExp: regExp,
-    namedParams: namedParams,
-    toPath: pathToRegExp.compile(completePath)
-  };
-}
+var LocalizedEndRoute = /*#__PURE__*/function () {
+  function LocalizedEndRoute(localizedPaths, ref) {
+    this.localizedPaths = localizedPaths; // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
-var createRoutePathSegment = function createRoutePathSegment(path, completePath) {
-  return internalCreateRoutePath(path, completePath, true);
-};
-var createRoutePath = function createRoutePath(path, completePath) {
-  return internalCreateRoutePath(path, completePath, false);
-};
+    this.ref = ref;
+    Object.freeze(this);
+  }
+
+  var _proto = LocalizedEndRoute.prototype;
+
+  _proto.getPath = function getPath(locale) {
+    if (!locale) throw new Error('Missing locale');
+    return this.localizedPaths.get(locale);
+  };
+
+  _proto.isSegment = function isSegment() {
+    return false;
+  };
+
+  _proto.isLocalized = function isLocalized() {
+    return true;
+  };
+
+  _proto.toJSON = function toJSON() {
+    return [].concat(this.localizedPaths.entries());
+  };
+
+  _proto.toString = function toString() {
+    return JSON.stringify(this.toJSON());
+  };
+
+  return LocalizedEndRoute;
+}();
+
+var LocalizedSegmentRoute = /*#__PURE__*/function () {
+  function LocalizedSegmentRoute(localizedPaths) {
+    this.nestedRoutes = [];
+    this.localizedPaths = localizedPaths;
+  }
+
+  var _proto = LocalizedSegmentRoute.prototype;
+
+  _proto.freeze = function freeze() {
+    Object.freeze(this);
+    Object.freeze(this.nestedRoutes);
+  };
+
+  _proto.getPath = function getPath(locale) {
+    if (!locale) throw new Error('Missing locale');
+    return this.localizedPaths.get(locale);
+  };
+
+  _proto.isSegment = function isSegment() {
+    return true;
+  };
+
+  _proto.isLocalized = function isLocalized() {
+    return true;
+  };
+
+  _proto.toJSON = function toJSON() {
+    return [].concat(this.localizedPaths.entries());
+  };
+
+  _proto.toString = function toString() {
+    return JSON.stringify(this.toJSON());
+  };
+
+  return LocalizedSegmentRoute;
+}();
 
 var NotLocalizedEndRoute = /*#__PURE__*/function () {
   function NotLocalizedEndRoute(path, ref) {
-    this.path = path;
+    this.path = path; // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     this.ref = ref; // Object.freeze(this);
   }
 
@@ -64,38 +191,6 @@ var NotLocalizedEndRoute = /*#__PURE__*/function () {
   };
 
   return NotLocalizedEndRoute;
-}();
-
-var LocalizedEndRoute = /*#__PURE__*/function () {
-  function LocalizedEndRoute(localizedPaths, ref) {
-    this.localizedPaths = localizedPaths;
-    this.ref = ref;
-    Object.freeze(this);
-  }
-
-  var _proto = LocalizedEndRoute.prototype;
-
-  _proto.getPath = function getPath(locale) {
-    return this.localizedPaths.get(locale);
-  };
-
-  _proto.isSegment = function isSegment() {
-    return false;
-  };
-
-  _proto.isLocalized = function isLocalized() {
-    return true;
-  };
-
-  _proto.toJSON = function toJSON() {
-    return [].concat(this.localizedPaths.entries());
-  };
-
-  _proto.toString = function toString() {
-    return JSON.stringify(this.toJSON());
-  };
-
-  return LocalizedEndRoute;
 }();
 
 var NotLocalizedSegmentRoute = /*#__PURE__*/function () {
@@ -134,41 +229,36 @@ var NotLocalizedSegmentRoute = /*#__PURE__*/function () {
   return NotLocalizedSegmentRoute;
 }();
 
-var LocalizedSegmentRoute = /*#__PURE__*/function () {
-  function LocalizedSegmentRoute(localizedPaths) {
-    this.nestedRoutes = [];
-    this.localizedPaths = localizedPaths;
-  }
-
-  var _proto = LocalizedSegmentRoute.prototype;
-
-  _proto.freeze = function freeze() {
-    Object.freeze(this);
-    Object.freeze(this.nestedRoutes);
+function internalCreateRoutePath(path, completePath, segment) {
+  var keys = [];
+  var regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+    sensitive: true,
+    strict: true
+  });
+  var namedParams = keys.map(function (key) {
+    return key.name;
+  }).filter(Boolean);
+  if (segment) return {
+    path,
+    completePath,
+    regExp,
+    namedParams
   };
-
-  _proto.getPath = function getPath(locale) {
-    return this.localizedPaths.get(locale);
+  return {
+    path,
+    completePath,
+    regExp,
+    namedParams,
+    toPath: pathToRegExp.compile(completePath)
   };
+}
 
-  _proto.isSegment = function isSegment() {
-    return true;
-  };
-
-  _proto.isLocalized = function isLocalized() {
-    return true;
-  };
-
-  _proto.toJSON = function toJSON() {
-    return [].concat(this.localizedPaths.entries());
-  };
-
-  _proto.toString = function toString() {
-    return JSON.stringify(this.toJSON());
-  };
-
-  return LocalizedSegmentRoute;
-}();
+var createRoutePathSegment = function createRoutePathSegment(path, completePath) {
+  return internalCreateRoutePath(path, completePath, true);
+};
+var createRoutePath = function createRoutePath(path, completePath) {
+  return internalCreateRoutePath(path, completePath, false);
+};
 
 var createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, segment) {
   var localizedPaths = new Map();
@@ -204,93 +294,10 @@ var createLocalizedSegmentRoute = function createLocalizedSegmentRoute(localized
   return new LocalizedSegmentRoute(localizedPaths);
 };
 
-var parseOtherParams = function parseOtherParams(wildcard) {
-  return wildcard ? wildcard.split('/') : [];
-};
-
-var internalFindMatch = function internalFindMatch(path, completePath, routes, locale, namedParams) {
-  if (locale === void 0) {
-    locale = 'en';
-  }
-
-  var result = null;
-  routes.some(function (route) {
-    var routePath = route.getPath(locale);
-    var match = routePath.regExp.exec(path);
-    if (!match) return false;
-    match.shift(); // remove m[0], === path;
-
-    var groupCount = match.length;
-    var group = 0;
-
-    if (routePath.namedParams.length !== 0) {
-      // set params
-      if (!namedParams) namedParams = new Map();
-      routePath.namedParams.forEach(function (paramName) {
-        namedParams.set(paramName, match[group++]);
-      });
-    }
-
-    if (route.isSegment()) {
-      var segment = route;
-      var restOfThePath = match[--groupCount];
-
-      if (restOfThePath) {
-        result = internalFindMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
-        return result !== null;
-      }
-
-      if (!segment.defaultRoute) {
-        return false;
-      }
-
-      route = segment.defaultRoute;
-    }
-
-    var endRoute = route;
-    var otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
-    result = Object.freeze({
-      ref: endRoute.ref,
-      path: completePath,
-      route: endRoute,
-      routePath: routePath,
-      namedParams: namedParams,
-      otherParams: otherParams
-    });
-    return true;
-  });
-  return result;
-};
-
-function findMatch(path, routes, locale) {
-  return internalFindMatch(path, path, routes, locale);
-}
-
-function createRouter(routes, routeMap) {
-  var getRequiredRoute = function getRequiredRoute(routeKey) {
-    var route = routeMap.get(routeKey);
-    if (!route) throw new Error("No route named \"" + routeKey + "\"");
-    return route;
-  };
-
-  return {
-    get: getRequiredRoute,
-    find: function find(path, locale) {
-      return findMatch(path, routes, locale);
-    },
-    toPath: function toPath(key, args) {
-      return getRequiredRoute(key).getPath().toPath(args);
-    },
-    toLocalizedPath: function toLocalizedPath(locale, key, args) {
-      return getRequiredRoute(key).getPath(locale).toPath(args);
-    }
-  };
-}
-
 function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   var createSegmentRouterBuilder = function createSegmentRouterBuilder(segmentRoute) {
     var getCompletePath = function getCompletePath(path, locale) {
-      return "" + segmentRoute.getPath(locale).completePath + path;
+      return `${segmentRoute.getPath(locale).completePath}${path}`;
     };
 
     var getCompleteLocalizedPaths = function getCompleteLocalizedPaths(localizedPaths) {
@@ -373,12 +380,12 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
 }
 
 function createRouterBuilder(locales) {
-  var defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
+  var defaultLocale = locales == null ? void 0 : locales[0];
   var routes = [];
   var routeMap = new Map();
 
   var addToRouteMap = function addToRouteMap(key, route) {
-    if (routeMap.has(key)) throw new Error("\"" + key + "\" is already used");
+    if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
     routeMap.set(key, route);
   };
 

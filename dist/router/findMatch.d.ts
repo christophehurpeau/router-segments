@@ -1,5 +1,5 @@
-import { Routes, LocaleType, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
-import { Route } from '../routes/interfaces';
+import type { Route } from '../routes/interfaces';
+import type { Routes, LocaleType, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
 export interface RouteMatch<Locales extends LocaleType | never> {
     namedParams: undefined | Map<string, string>;
     otherParams: undefined | string[];

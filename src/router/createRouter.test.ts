@@ -1,7 +1,7 @@
 import { createRoute, createLocalizedRoute } from '../routes/create';
-import { EndRoute } from '../routes/interfaces';
+import type { EndRoute } from '../routes/interfaces';
 import createRouter from './createRouter';
-import { RouteMatch } from './findMatch';
+import type { RouteMatch } from './findMatch';
 
 const ref = Symbol('ref');
 const route = createRoute('/', '/', ref);
@@ -13,7 +13,7 @@ const localizedRoute = createLocalizedRoute(
 );
 const router = createRouter(
   [route, localizedRoute],
-  new Map<string, EndRoute>([
+  new Map<string, EndRoute<keyof typeof localizedPathsRecord>>([
     ['/', route],
     ['/blog', localizedRoute],
   ]),

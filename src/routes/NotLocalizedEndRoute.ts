@@ -1,5 +1,5 @@
-import { EndRoutePath, RouteRef } from './types';
-import { EndRoute, NotLocalizedRoute } from './interfaces';
+import type { EndRoute, NotLocalizedRoute } from './interfaces';
+import type { EndRoutePath, RouteRef } from './types';
 
 export default class NotLocalizedEndRoute
   implements EndRoute, NotLocalizedRoute<EndRoutePath> {
@@ -9,6 +9,7 @@ export default class NotLocalizedEndRoute
 
   constructor(path: EndRoutePath, ref: RouteRef) {
     this.path = path;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     // Object.freeze(this);
   }
@@ -25,11 +26,11 @@ export default class NotLocalizedEndRoute
     return false;
   }
 
-  toJSON() {
+  toJSON(): unknown {
     return this.path;
   }
 
-  toString() {
+  toString(): string {
     return JSON.stringify(this.toJSON());
   }
 }

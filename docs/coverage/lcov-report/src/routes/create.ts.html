@@ -242,7 +242,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { PRODUCTION } from 'pob-babel';
-import {
+import type {
   LocaleType,
   LocalizedPathsRecord,
   EndRoutePath,
@@ -250,11 +250,11 @@ import {
   RouteRef,
 } from '../types';
 import { getKeys } from '../utils/getKeys';
-import { createRoutePath, createRoutePathSegment } from './createRoutePath';
-import Route from './NotLocalizedEndRoute';
 import LocalizedEndRoute from './LocalizedEndRoute';
-import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
 import LocalizedSegmentRoute from './LocalizedSegmentRoute';
+import Route from './NotLocalizedEndRoute';
+import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
+import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 &nbsp;
 const createLocalizedPaths = &lt;
   Locales extends LocaleType,
@@ -264,7 +264,7 @@ const createLocalizedPaths = &lt;
   completeLocalizedPathsRecord: LocalizedPathsRecord&lt;Locales&gt;,
   segment: boolean,
 ): Map&lt;Locales, Path&gt; =&gt; {
-  const localizedPaths = new Map();
+  const localizedPaths = new Map&lt;Locales, Path&gt;();
   getKeys(localizedPathsRecord).forEach((locale: Locales) =&gt; {
     const path = localizedPathsRecord[locale];
     if (segment) {
@@ -272,20 +272,20 @@ const createLocalizedPaths = &lt;
         path,
         completeLocalizedPathsRecord[locale],
       );
-      localizedPaths.set(locale, routerPath);
+      localizedPaths.set(locale, routerPath as Path);
     } else {
       const routerPath: EndRoutePath = createRoutePath(
         path,
         completeLocalizedPathsRecord[locale],
       );
-      localizedPaths.set(locale, routerPath);
+      localizedPaths.set(locale, routerPath as Path);
     }
   });
   return localizedPaths;
 };
 &nbsp;
 const checkRef = <span class="fstat-no" title="function not covered" >(r</span>ef: RouteRef): void =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (!ref) <span class="cstat-no" title="statement not covered" >throw new Error(`Invalid ref: "${ref}"`);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (!ref) <span class="cstat-no" title="statement not covered" >throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);</span></span>
 };
 &nbsp;
 export const createRoute = (

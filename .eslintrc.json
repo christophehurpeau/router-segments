@@ -1,9 +1,7 @@
 {
   "root": true,
-  "extends": [
-    "@pob/eslint-config",
-    "@pob/eslint-config-node"
-  ],
+  "extends": ["@pob/eslint-config", "@pob/eslint-config-node"],
+  "ignorePatterns": ["*.d.ts"],
   "rules": {
     "unicorn/no-unsafe-regex": "off"
   }

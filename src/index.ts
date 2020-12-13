@@ -1,4 +1,4 @@
-import { Router as RouterType } from './router/createRouter';
+import type { Router as RouterType } from './router/createRouter';
 
 export { default } from './builder/createRouterBuilder';
 

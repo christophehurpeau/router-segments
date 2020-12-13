@@ -1,39 +1,39 @@
-import {
-  LocaleType,
-  LocalizedPathsRecord,
-  Routes,
-  RouteMap,
-  RouteRef,
-} from '../types';
+import type { Router } from '../router/createRouter';
+import createRouter from '../router/createRouter';
 import {
   createRoute,
   createLocalizedRoute,
   createSegmentRoute,
   createLocalizedSegmentRoute,
 } from '../routes/create';
-import createRouter, { Router } from '../router/createRouter';
-import { EndRoute } from '../routes/interfaces';
-import createSegmentRouterBuilderCreator, {
-  SegmentRouterBuilder,
-} from './createSegmentRouterBuilderCreator';
+import type { EndRoute } from '../routes/interfaces';
+import type {
+  LocaleType,
+  LocalizedPathsRecord,
+  Routes,
+  RouteMap,
+  RouteRef,
+} from '../types';
+import type { SegmentRouterBuilder } from './createSegmentRouterBuilderCreator';
+import createSegmentRouterBuilderCreator from './createSegmentRouterBuilderCreator';
 
 export interface RouterBuilder<Locales extends LocaleType | never> {
-  add(path: string, ref: RouteRef, key?: string): void;
-  addLocalized(
+  add: (path: string, ref: RouteRef, key?: string) => void;
+  addLocalized: (
     localizedPaths: LocalizedPathsRecord<Locales>,
     ref: RouteRef,
     key?: string,
-  ): void;
-  addLocalizedSegment(
+  ) => void;
+  addLocalizedSegment: (
     localizedPaths: LocalizedPathsRecord<Locales>,
     buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-  ): void;
-  addSegment(
+  ) => void;
+  addSegment: (
     path: string,
     buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-  ): void;
-  createRouter(): Router<Locales>;
-  getRoutes(): Routes<Locales>;
+  ) => void;
+  createRouter: () => Router<Locales>;
+  getRoutes: () => Routes<Locales>;
 }
 
 export default function createRouterBuilder<Locales extends LocaleType>(
@@ -41,9 +41,9 @@ export default function createRouterBuilder<Locales extends LocaleType>(
 ): RouterBuilder<Locales> {
   const defaultLocale = locales?.[0];
   const routes: Routes<Locales> = [];
-  const routeMap: RouteMap<Locales> = new Map();
+  const routeMap: RouteMap<Locales> = new Map<string, EndRoute<Locales>>();
 
-  const addToRouteMap = (key: string, route: EndRoute<Locales>) => {
+  const addToRouteMap = (key: string, route: EndRoute<Locales>): void => {
     if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
     routeMap.set(key, route);
   };

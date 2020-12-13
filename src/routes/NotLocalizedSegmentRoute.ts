@@ -1,6 +1,6 @@
-import NotLocalizedEndRoute from './NotLocalizedEndRoute';
-import { SegmentRoute, NotLocalizedRoute } from './interfaces';
-import { SegmentRoutePath } from './types';
+import type NotLocalizedEndRoute from './NotLocalizedEndRoute';
+import type { SegmentRoute, NotLocalizedRoute } from './interfaces';
+import type { SegmentRoutePath } from './types';
 
 export default class NotLocalizedSegmentRoute
   implements SegmentRoute, NotLocalizedRoute<SegmentRoutePath> {
@@ -14,7 +14,7 @@ export default class NotLocalizedSegmentRoute
     this.path = path;
   }
 
-  freeze() {
+  freeze(): void {
     Object.freeze(this);
     Object.freeze(this.nestedRoutes);
   }
@@ -31,11 +31,11 @@ export default class NotLocalizedSegmentRoute
     return false;
   }
 
-  toJSON() {
+  toJSON(): unknown {
     return this.path;
   }
 
-  toString() {
+  toString(): string {
     return JSON.stringify(this.toJSON());
   }
 }

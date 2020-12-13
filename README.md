@@ -8,9 +8,6 @@
 
 <p align="center">
   <a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/npm/v/router-segments.svg?style=flat-square"></a>
-  <a href="https://circleci.com/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/circleci/project/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
-  <a href="https://david-dm.org/christophehurpeau/router-segments"><img src="https://david-dm.org/christophehurpeau/router-segments.svg?style=flat-square"></a>
-  <a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
 </p>
 
 ### Why another router ?
@@ -66,10 +63,10 @@ builder.addLocalizedSegment(
         fr: '/billet/:id(\\d+)',
       },
       ref,
-      '/my-blog/post'
+      '/my-blog/post',
     );
     segmentBuilder.defaultRoute(ref, '/my-blog');
-  }
+  },
 );
 
 export default builder.createRouter();

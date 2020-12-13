@@ -61,7 +61,7 @@
 <a name='L2'></a><a href='#L2'>2</a>
 <a name='L3'></a><a href='#L3'>3</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const getKeys = &lt;T extends {}&gt;(o: T): (keyof T)[] =&gt;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const getKeys = &lt;T extends Record&lt;string, unknown&gt;&gt;(o: T): (keyof T)[] =&gt;
   Object.keys(o) as (keyof T)[];
 &nbsp;</pre></td></tr></table></pre>
 

@@ -1,7 +1,10 @@
-/* eslint-disable max-lines, unicorn/better-regex, unicorn/no-unsafe-regex */
+/* eslint-disable unicorn/better-regex, unicorn/no-unsafe-regex */
+import type { RouteMatch } from '../../router/findMatch';
+import type {
+  NotLocalizedEndRoute,
+  NotLocalizedSegmentRoute,
+} from '../../routes';
 import createRouterBuilder from '../createRouterBuilder';
-import { NotLocalizedEndRoute, NotLocalizedSegmentRoute } from '../../routes';
-import { RouteMatch } from '../../router/findMatch';
 
 describe('blog', () => {
   const ref = Symbol('ref');

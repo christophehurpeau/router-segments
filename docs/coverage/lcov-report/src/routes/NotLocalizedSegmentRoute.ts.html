@@ -139,9 +139,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import NotLocalizedEndRoute from './NotLocalizedEndRoute';
-import { SegmentRoute, NotLocalizedRoute } from './interfaces';
-import { SegmentRoutePath } from './types';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type NotLocalizedEndRoute from './NotLocalizedEndRoute';
+import type { SegmentRoute, NotLocalizedRoute } from './interfaces';
+import type { SegmentRoutePath } from './types';
 &nbsp;
 export default class NotLocalizedSegmentRoute
   implements SegmentRoute, NotLocalizedRoute&lt;SegmentRoutePath&gt; {
@@ -155,7 +155,7 @@ export default class NotLocalizedSegmentRoute
     this.path = path;
   }
 &nbsp;
-  freeze() {
+  freeze(): void {
     Object.freeze(this);
     Object.freeze(this.nestedRoutes);
   }
@@ -172,11 +172,11 @@ export default class NotLocalizedSegmentRoute
     return false;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  to</span>JSON() {
+<span class="fstat-no" title="function not covered" >  to</span>JSON(): unknown {
 <span class="cstat-no" title="statement not covered" >    return this.path;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  to</span>String() {
+<span class="fstat-no" title="function not covered" >  to</span>String(): string {
 <span class="cstat-no" title="statement not covered" >    return JSON.stringify(this.toJSON());</span>
   }
 }

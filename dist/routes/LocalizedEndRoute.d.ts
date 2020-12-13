@@ -1,13 +1,13 @@
-import { LocaleType, EndRoutePath, RouteRef } from './types';
-import { EndRoute, LocalizedRoute } from './interfaces';
-export default class LocalizedEndRoute<Locales extends LocaleType> implements EndRoute, LocalizedRoute<EndRoutePath, Locales> {
+import type { EndRoute, LocalizedRoute } from './interfaces';
+import type { LocaleType, EndRoutePath, RouteRef } from './types';
+export default class LocalizedEndRoute<Locales extends LocaleType> implements EndRoute<Locales>, LocalizedRoute<EndRoutePath, Locales> {
     localizedPaths: Map<LocaleType, EndRoutePath>;
     ref: RouteRef;
     constructor(localizedPaths: Map<LocaleType, EndRoutePath>, ref: RouteRef);
-    getPath(locale: Locales): EndRoutePath;
+    getPath(locale?: Locales): EndRoutePath;
     isSegment(): false;
     isLocalized(): true;
-    toJSON(): [string, EndRoutePath][];
+    toJSON(): unknown[];
     toString(): string;
 }
 //# sourceMappingURL=LocalizedEndRoute.d.ts.map

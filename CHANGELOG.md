@@ -1,3 +1,23 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [4.0.0](https://github.com/christophehurpeau/router-segments/compare/v3.0.0...v4.0.0) (2020-12-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support node 10
+
+### Features
+
+* update dependencies, node 12 ([5cd13df](https://github.com/christophehurpeau/router-segments/commit/5cd13df27174f899ce8a656d07765b6d99f8e53f))
+
+
+### Bug Fixes
+
+* **deps:** update dependency nightingale-logger to v11 ([#63](https://github.com/christophehurpeau/router-segments/issues/63)) ([406ff54](https://github.com/christophehurpeau/router-segments/commit/406ff54d006ff4568c8dd4fc9e8cba7412ce811e))
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/christophehurpeau/router-segments/compare/v1.2.0...v2.0.0) (2019-02-08)
 

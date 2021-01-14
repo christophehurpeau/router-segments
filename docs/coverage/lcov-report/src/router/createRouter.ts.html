@@ -126,7 +126,7 @@ import type { Routes, RouteMap, LocaleType } from '../types';
 import type { RouteMatch } from './findMatch';
 import findMatch from './findMatch';
 &nbsp;
-export interface Router&lt;Locales extends LocaleType | never&gt; {
+export interface Router&lt;Locales extends LocaleType | never = any&gt; {
   get: (key: string) =&gt; EndRoute&lt;Locales&gt;;
   find: (path: string, locale?: Locales) =&gt; null | RouteMatch&lt;Locales&gt;;
   toLocalizedPath: (locale: Locales, key: string, args?: any) =&gt; string;

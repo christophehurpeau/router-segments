@@ -312,7 +312,7 @@ import type {
   EndRoutePath,
 } from '../types';
 &nbsp;
-export interface RouteMatch&lt;Locales extends LocaleType | never&gt; {
+export interface RouteMatch&lt;Locales extends LocaleType | never = any&gt; {
   namedParams: undefined | Map&lt;string, string&gt;;
   otherParams: undefined | string[];
   path: string;

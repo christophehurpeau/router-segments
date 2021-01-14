@@ -8,6 +8,8 @@
   },
 
   "typedocOptions": {
+    "entryPoints": ["src/"],
+    "exclude": ["src/**/*.test.ts", "src/**/__tests__/**"],
     "readme": "README.md",
     "out": "docs",
     "gitRevision": "master"

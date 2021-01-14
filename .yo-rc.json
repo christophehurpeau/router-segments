@@ -1,18 +1,18 @@
 {
   "pob": {
-    "pob-config": {
-      "documentation": true,
-      "testing": {
-        "codecov": true,
-        "ci": true
-      }
-    },
     "project": {
       "type": "lib",
       "yarn2": true
     },
     "renovate": {
       "enable": true
+    },
+    "lib": {
+      "documentation": true,
+      "testing": {
+        "codecov": true,
+        "ci": true
+      }
     }
   }
 }

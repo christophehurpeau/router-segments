@@ -112,7 +112,7 @@ const internalFindMatch = <Locales extends LocaleType>(
   return result;
 };
 
-export default function findMatch<Locales extends LocaleType>(
+export function findMatch<Locales extends LocaleType>(
   path: string,
   routes: Routes<Locales>,
   locale?: Locales,

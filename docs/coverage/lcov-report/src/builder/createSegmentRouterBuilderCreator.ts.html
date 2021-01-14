@@ -243,11 +243,7 @@
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -462,9 +458,7 @@ export interface SegmentRouterBuilder&lt;Locales extends LocaleType&gt; {
   defaultRoute: (ref: RouteRef, key?: string) =&gt; void;
 }
 &nbsp;
-export default function createSegmentRouterBuilderCreator&lt;
-  Locales extends LocaleType
-&gt;(
+export function createSegmentRouterBuilderCreator&lt;Locales extends LocaleType&gt;(
   defaultLocale: undefined | Locales,
   addToRouteMap: (key: string, route: EndRoute&lt;Locales&gt;) =&gt; void,
 ): (segmentRoute: SegmentRoute&lt;Locales&gt;) =&gt; SegmentRouterBuilder&lt;Locales&gt; {

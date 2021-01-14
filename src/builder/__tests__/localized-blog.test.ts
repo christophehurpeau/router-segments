@@ -2,7 +2,7 @@
 import type { RouteMatch } from '../../router/findMatch';
 import type { LocalizedEndRoute } from '../../routes';
 import type { EndRoutePath } from '../../routes/types';
-import createRouterBuilder from '../createRouterBuilder';
+import { createRouterBuilder } from '../createRouterBuilder';
 
 describe('localized blog', () => {
   const ref = Symbol('ref');

@@ -27,9 +27,7 @@ export interface SegmentRouterBuilder<Locales extends LocaleType> {
   defaultRoute: (ref: RouteRef, key?: string) => void;
 }
 
-export default function createSegmentRouterBuilderCreator<
-  Locales extends LocaleType
->(
+export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
   defaultLocale: undefined | Locales,
   addToRouteMap: (key: string, route: EndRoute<Locales>) => void,
 ): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales> {

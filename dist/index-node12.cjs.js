@@ -395,5 +395,6 @@ function createRouterBuilder(locales) {
   };
 }
 
+exports.createRouterBuilder = createRouterBuilder;
 exports.default = createRouterBuilder;
 //# sourceMappingURL=index-node12.cjs.js.map

@@ -258,7 +258,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Router } from '../router/createRouter';
-import createRouter from '../router/createRouter';
+import { createRouter } from '../router/createRouter';
 import {
   createRoute,
   createLocalizedRoute,
@@ -274,7 +274,7 @@ import type {
   RouteRef,
 } from '../types';
 import type { SegmentRouterBuilder } from './createSegmentRouterBuilderCreator';
-import createSegmentRouterBuilderCreator from './createSegmentRouterBuilderCreator';
+import { createSegmentRouterBuilderCreator } from './createSegmentRouterBuilderCreator';
 &nbsp;
 export interface RouterBuilder&lt;Locales extends LocaleType | never&gt; {
   add: (path: string, ref: RouteRef, key?: string) =&gt; void;
@@ -295,7 +295,7 @@ export interface RouterBuilder&lt;Locales extends LocaleType | never&gt; {
   getRoutes: () =&gt; Routes&lt;Locales&gt;;
 }
 &nbsp;
-export default function createRouterBuilder&lt;Locales extends LocaleType&gt;(
+export function createRouterBuilder&lt;Locales extends LocaleType&gt;(
   locales?: Locales[],
 ): RouterBuilder&lt;Locales&gt; {
   const defaultLocale = locales?.[0];

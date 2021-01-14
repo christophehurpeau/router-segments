@@ -4,7 +4,7 @@ import type {
   NotLocalizedEndRoute,
   NotLocalizedSegmentRoute,
 } from '../../routes';
-import createRouterBuilder from '../createRouterBuilder';
+import { createRouterBuilder } from '../createRouterBuilder';
 
 describe('blog', () => {
   const ref = Symbol('ref');

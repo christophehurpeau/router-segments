@@ -448,4 +448,5 @@ function createRouterBuilder(locales) {
 }
 
 export default createRouterBuilder;
+export { createRouterBuilder };
 //# sourceMappingURL=index-browser-dev.es.js.map

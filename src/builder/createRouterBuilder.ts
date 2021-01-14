@@ -1,5 +1,5 @@
 import type { Router } from '../router/createRouter';
-import createRouter from '../router/createRouter';
+import { createRouter } from '../router/createRouter';
 import {
   createRoute,
   createLocalizedRoute,
@@ -15,7 +15,7 @@ import type {
   RouteRef,
 } from '../types';
 import type { SegmentRouterBuilder } from './createSegmentRouterBuilderCreator';
-import createSegmentRouterBuilderCreator from './createSegmentRouterBuilderCreator';
+import { createSegmentRouterBuilderCreator } from './createSegmentRouterBuilderCreator';
 
 export interface RouterBuilder<Locales extends LocaleType | never> {
   add: (path: string, ref: RouteRef, key?: string) => void;
@@ -36,7 +36,7 @@ export interface RouterBuilder<Locales extends LocaleType | never> {
   getRoutes: () => Routes<Locales>;
 }
 
-export default function createRouterBuilder<Locales extends LocaleType>(
+export function createRouterBuilder<Locales extends LocaleType>(
   locales?: Locales[],
 ): RouterBuilder<Locales> {
   const defaultLocale = locales?.[0];

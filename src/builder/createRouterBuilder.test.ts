@@ -1,5 +1,5 @@
 import type { NotLocalizedEndRoute } from '../routes';
-import createRouterBuilder from './createRouterBuilder';
+import { createRouterBuilder } from './createRouterBuilder';
 
 test('home', () => {
   const builder = createRouterBuilder();

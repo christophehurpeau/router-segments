@@ -1,4 +1,4 @@
-import type { Router as RouterType } from './router/createRouter';
-export { default } from './builder/createRouterBuilder';
-export declare type Router = RouterType<any>;
+export type { Router } from './router/createRouter';
+export type { RouteMatch } from './router/findMatch';
+export { createRouterBuilder, createRouterBuilder as default, } from './builder/createRouterBuilder';
 //# sourceMappingURL=index.d.ts.map

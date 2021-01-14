@@ -1,7 +1,7 @@
 import type { EndRoute } from '../routes/interfaces';
 import type { Routes, RouteMap, LocaleType } from '../types';
 import type { RouteMatch } from './findMatch';
-import findMatch from './findMatch';
+import { findMatch } from './findMatch';
 
 export interface Router<Locales extends LocaleType | never = any> {
   get: (key: string) => EndRoute<Locales>;
@@ -10,7 +10,7 @@ export interface Router<Locales extends LocaleType | never = any> {
   toPath: (key: string, args?: any) => string;
 }
 
-export default function createRouter<Locales extends LocaleType | never>(
+export function createRouter<Locales extends LocaleType | never>(
   routes: Routes<Locales>,
   routeMap: RouteMap<Locales>,
 ): Router<Locales> {

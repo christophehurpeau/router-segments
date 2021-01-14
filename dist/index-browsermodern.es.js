@@ -388,4 +388,5 @@ function createRouterBuilder(locales) {
 }
 
 export default createRouterBuilder;
+export { createRouterBuilder };
 //# sourceMappingURL=index-browsermodern.es.js.map

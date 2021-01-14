@@ -2,7 +2,7 @@ import { LocalizedEndRoute } from '../routes';
 import { createSegmentRoute, createRoute } from '../routes/create';
 import type { Routes } from '../types';
 import type { RouteMatch } from './findMatch';
-import findMatch from './findMatch';
+import { findMatch } from './findMatch';
 
 test('find without routes returns null', () => {
   const routes: Routes<never> = [];

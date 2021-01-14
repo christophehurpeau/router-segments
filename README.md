@@ -21,9 +21,9 @@ also used by [expressjs](https://expressjs.com/en/guide/routing.html), [koa-rout
 and many other routers.
 
 ```js
-import createBuilder from 'router-segments';
+import { createRouterBuilder } from 'router-segments';
 
-const builder = createBuilder();
+const builder = createRouterBuilder();
 
 builder.add('/', ref);
 builder.addSegment('/post', (segmentBuilder) => {
@@ -46,9 +46,9 @@ router.toPath('/post/view', { id: '001', slug: 'a-slug' });
 ## Localized routes
 
 ```js
-import createBuilder from 'router-segments';
+import { createRouterBuilder } from 'router-segments';
 
-const builder = createBuilder(['en', 'fr']);
+const builder = createRouterBuilder(['en', 'fr']);
 
 builder.add('/', ref);
 builder.addLocalizedSegment(

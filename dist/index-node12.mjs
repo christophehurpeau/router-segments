@@ -388,4 +388,5 @@ function createRouterBuilder(locales) {
 }
 
 export default createRouterBuilder;
+export { createRouterBuilder };
 //# sourceMappingURL=index-node12.mjs.map

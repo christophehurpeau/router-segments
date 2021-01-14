@@ -417,5 +417,6 @@ function createRouterBuilder(locales) {
   };
 }
 
+exports.createRouterBuilder = createRouterBuilder;
 exports.default = createRouterBuilder;
 //# sourceMappingURL=index-node12-dev.cjs.js.map

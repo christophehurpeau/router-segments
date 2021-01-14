@@ -1,6 +1,6 @@
 import { createRoute, createLocalizedRoute } from '../routes/create';
 import type { EndRoute } from '../routes/interfaces';
-import createRouter from './createRouter';
+import { createRouter } from './createRouter';
 import type { RouteMatch } from './findMatch';
 
 const ref = Symbol('ref');

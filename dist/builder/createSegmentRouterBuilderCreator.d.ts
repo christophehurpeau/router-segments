@@ -7,5 +7,5 @@ export interface SegmentRouterBuilder<Locales extends LocaleType> {
     addSegment: (path: string, buildSegment: (builder: SegmentRouterBuilder<Locales>) => void) => void;
     defaultRoute: (ref: RouteRef, key?: string) => void;
 }
-export default function createSegmentRouterBuilderCreator<Locales extends LocaleType>(defaultLocale: undefined | Locales, addToRouteMap: (key: string, route: EndRoute<Locales>) => void): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales>;
+export declare function createSegmentRouterBuilderCreator<Locales extends LocaleType>(defaultLocale: undefined | Locales, addToRouteMap: (key: string, route: EndRoute<Locales>) => void): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales>;
 //# sourceMappingURL=createSegmentRouterBuilderCreator.d.ts.map

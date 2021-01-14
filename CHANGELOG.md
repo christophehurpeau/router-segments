@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/christophehurpeau/router-segments/compare/v4.0.0...v4.1.0) (2021-01-14)
+
+
+### Features
+
+* export RouteMatch ([301d55c](https://github.com/christophehurpeau/router-segments/commit/301d55c24cb6a714bd15161b080be2d0f6d15076))
+
 ## [4.0.0](https://github.com/christophehurpeau/router-segments/compare/v3.0.0...v4.0.0) (2020-12-13)
 
 

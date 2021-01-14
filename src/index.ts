@@ -1,5 +1,4 @@
-import type { Router as RouterType } from './router/createRouter';
+export type { Router } from './router/createRouter';
+export type { RouteMatch } from './router/findMatch';
 
 export { default } from './builder/createRouterBuilder';
-
-export type Router = RouterType<any>;

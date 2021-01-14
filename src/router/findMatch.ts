@@ -11,7 +11,7 @@ import type {
   EndRoutePath,
 } from '../types';
 
-export interface RouteMatch<Locales extends LocaleType | never> {
+export interface RouteMatch<Locales extends LocaleType | never = any> {
   namedParams: undefined | Map<string, string>;
   otherParams: undefined | string[];
   path: string;

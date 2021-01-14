@@ -3,7 +3,7 @@ import type { Routes, RouteMap, LocaleType } from '../types';
 import type { RouteMatch } from './findMatch';
 import findMatch from './findMatch';
 
-export interface Router<Locales extends LocaleType | never> {
+export interface Router<Locales extends LocaleType | never = any> {
   get: (key: string) => EndRoute<Locales>;
   find: (path: string, locale?: Locales) => null | RouteMatch<Locales>;
   toLocalizedPath: (locale: Locales, key: string, args?: any) => string;

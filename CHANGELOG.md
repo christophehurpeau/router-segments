@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.2](https://github.com/christophehurpeau/router-segments/compare/v4.1.1...v4.1.2) (2021-01-18)
+
+
+### Bug Fixes
+
+* import browser path ([7c9209f](https://github.com/christophehurpeau/router-segments/commit/7c9209f03f5d5375b6d1a505ec97ba24f5d0a00a))
+
 ### [4.1.1](https://github.com/christophehurpeau/router-segments/compare/v4.1.0...v4.1.1) (2021-01-18)
 
 

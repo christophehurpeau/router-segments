@@ -52,6 +52,12 @@
       }
     }
   },
+  "module:node": "./dist/index-node12.mjs",
+  "module:node-dev": "./dist/index-node12-dev.mjs",
+  "module:browser": "./dist/index-browser.es.js",
+  "module:browser-dev": "./dist/index-browser-dev.es.js",
+  "module:modern-browsers": "./dist/index-browsermodern.es.js",
+  "module:modern-browsers-dev": "./dist/index-browsermodern-dev.es.js",
   "sideEffects": false,
   "scripts": {
     "build": "pob-build && yarn run build:definitions",

@@ -401,7 +401,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
 }
 
 function createRouterBuilder(locales) {
-  var defaultLocale = locales == null ? void 0 : locales[0];
+  var defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
   var routes = [];
   var routeMap = new Map();
 

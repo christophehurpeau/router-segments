@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/christophehurpeau/router-segments/compare/v4.1.0...v4.1.1) (2021-01-18)
+
+
+### Bug Fixes
+
+* webpack 4 resolve support ([7052e66](https://github.com/christophehurpeau/router-segments/commit/7052e66954c326c73ca9c61110d2b0b72deb7f9e))
+
 ## [4.1.0](https://github.com/christophehurpeau/router-segments/compare/v4.0.0...v4.1.0) (2021-01-14)
 
 

@@ -8,7 +8,7 @@
   },
 
   "typedocOptions": {
-    "entryPoints": ["src/"],
+    "entryPoints": ["src/index.ts"],
     "exclude": ["src/**/*.test.ts", "src/**/__tests__/**"],
     "readme": "README.md",
     "out": "docs",

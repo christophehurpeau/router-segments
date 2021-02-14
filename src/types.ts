@@ -1,11 +1,13 @@
+import type { LocaleType, RoutePathInterface } from 'routes/types';
 import type { EndRoute, Route } from './routes/interfaces';
-import type * as routesTypes2 from './routes/types';
 
-export type LocaleType = routesTypes2.LocaleType;
-export type RouteRef = routesTypes2.RouteRef;
-export type RoutePathInterface = routesTypes2.RoutePathInterface;
-export type EndRoutePath = routesTypes2.EndRoutePath;
-export type SegmentRoutePath = routesTypes2.SegmentRoutePath;
+export type {
+  LocaleType,
+  RouteRef,
+  RoutePathInterface,
+  EndRoutePath,
+  SegmentRoutePath,
+} from './routes/types';
 
 export type LocalizedPathsRecord<Locales extends LocaleType> = Record<
   Locales,

@@ -3,7 +3,6 @@ import { PRODUCTION } from 'pob-babel';
 import Logger from 'nightingale-logger';
 import type { EndRoute, Route, SegmentRoute } from '../routes/interfaces';
 import type {
-  Routes,
   LocaleType,
   RoutePathInterface,
   RouteRef,
@@ -12,12 +11,12 @@ import type {
 } from '../types';
 
 export interface RouteMatch<Locales extends LocaleType | never = any> {
-  namedParams: undefined | Map<string, string>;
-  otherParams: undefined | string[];
+  namedParams: Map<string, string> | undefined;
+  otherParams: string[] | undefined;
   path: string;
   ref: RouteRef;
   route: Route<any, Locales>;
-  routePath: SegmentRoutePath | EndRoutePath;
+  routePath: EndRoutePath | SegmentRoutePath;
 }
 
 const logger = !PRODUCTION
@@ -30,10 +29,10 @@ const parseOtherParams = (wildcard: string): string[] =>
 const internalFindMatch = <Locales extends LocaleType>(
   path: string,
   completePath: string,
-  routes: Routes<Locales>,
+  routes: Route<RoutePathInterface, Locales>[],
   locale: Locales = 'en' as Locales,
-  namedParams?: Map<string | number, string>,
-): null | RouteMatch<Locales> => {
+  namedParams?: Map<number | string, string>,
+): RouteMatch<Locales> | null => {
   let result = null;
 
   routes.some((route): boolean => {
@@ -60,11 +59,8 @@ const internalFindMatch = <Locales extends LocaleType>(
       // set params
       if (!namedParams) namedParams = new Map();
 
-      routePath.namedParams.forEach((paramName: string | number) => {
-        (namedParams as Map<string | number, string>).set(
-          paramName,
-          match[group++],
-        );
+      routePath.namedParams.forEach((paramName: number | string) => {
+        namedParams!.set(paramName, match[group++]);
       });
     }
 
@@ -114,8 +110,8 @@ const internalFindMatch = <Locales extends LocaleType>(
 
 export function findMatch<Locales extends LocaleType>(
   path: string,
-  routes: Routes<Locales>,
+  routes: Route<RoutePathInterface, Locales>[],
   locale?: Locales,
-): null | RouteMatch<Locales> {
+): RouteMatch<Locales> | null {
   return internalFindMatch(path, path, routes, locale);
 }

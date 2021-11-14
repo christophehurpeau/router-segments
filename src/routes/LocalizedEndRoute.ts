@@ -2,7 +2,8 @@ import type { EndRoute, LocalizedRoute } from './interfaces';
 import type { LocaleType, EndRoutePath, RouteRef } from './types';
 
 export default class LocalizedEndRoute<Locales extends LocaleType>
-  implements EndRoute<Locales>, LocalizedRoute<EndRoutePath, Locales> {
+  implements EndRoute<Locales>, LocalizedRoute<EndRoutePath, Locales>
+{
   localizedPaths: Map<LocaleType, EndRoutePath>;
 
   ref: RouteRef;
@@ -16,7 +17,7 @@ export default class LocalizedEndRoute<Locales extends LocaleType>
 
   getPath(locale?: Locales): EndRoutePath {
     if (!locale) throw new Error('Missing locale');
-    return this.localizedPaths.get(locale) as EndRoutePath;
+    return this.localizedPaths.get(locale)!;
   }
 
   isSegment(): false {

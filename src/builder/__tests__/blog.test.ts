@@ -20,9 +20,9 @@ describe('blog', () => {
       ref,
       'postWithTag',
     );
-    segmentBuilder.addSegment('/search', (segmentBuilder) => {
-      segmentBuilder.defaultRoute('refsearch', 'search');
-      segmentBuilder.add('/:term', ref, 'search-results');
+    segmentBuilder.addSegment('/search', (subSegmentBuilder) => {
+      subSegmentBuilder.defaultRoute('refsearch', 'search');
+      subSegmentBuilder.add('/:term', ref, 'search-results');
     });
   });
 
@@ -40,7 +40,8 @@ describe('blog', () => {
     });
 
     describe('post', () => {
-      const postRouterRoute: NotLocalizedSegmentRoute = routes[1] as NotLocalizedSegmentRoute;
+      const postRouterRoute: NotLocalizedSegmentRoute =
+        routes[1] as NotLocalizedSegmentRoute;
       const routePath = postRouterRoute.path;
 
       test('path', () => {
@@ -57,7 +58,8 @@ describe('blog', () => {
         });
 
         test('first nested route', () => {
-          const nestedRoute: NotLocalizedEndRoute = nestedRoutes[0] as NotLocalizedEndRoute;
+          const nestedRoute: NotLocalizedEndRoute =
+            nestedRoutes[0] as NotLocalizedEndRoute;
           expect(nestedRoute.path.path).toBe('/:id(\\d+)-:slug([A-Za-z\\-]+)');
           expect(nestedRoute.path.completePath).toBe(
             '/post/:id(\\d+)-:slug([A-Za-z\\-]+)',
@@ -68,7 +70,8 @@ describe('blog', () => {
           );
         });
         test('second nested route', () => {
-          const nestedRoute: NotLocalizedEndRoute = nestedRoutes[1] as NotLocalizedEndRoute;
+          const nestedRoute: NotLocalizedEndRoute =
+            nestedRoutes[1] as NotLocalizedEndRoute;
           expect(nestedRoute.path.path).toBe(
             '/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug',
           );
@@ -83,7 +86,8 @@ describe('blog', () => {
       });
 
       test('default route', () => {
-        const defaultRoute: NotLocalizedEndRoute = postRouterRoute.defaultRoute as NotLocalizedEndRoute;
+        const defaultRoute: NotLocalizedEndRoute =
+          postRouterRoute.defaultRoute!;
 
         expect(defaultRoute).toBeDefined();
         expect(defaultRoute.path).toHaveProperty('completePath', '/post');

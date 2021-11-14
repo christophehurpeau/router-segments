@@ -1,14 +1,18 @@
 import type NotLocalizedEndRoute from './NotLocalizedEndRoute';
 import type { SegmentRoute, NotLocalizedRoute } from './interfaces';
-import type { SegmentRoutePath } from './types';
+import type { LocaleType, SegmentRoutePath } from './types';
 
-export default class NotLocalizedSegmentRoute
-  implements SegmentRoute, NotLocalizedRoute<SegmentRoutePath> {
+export default class NotLocalizedSegmentRoute<
+  Locales extends LocaleType = LocaleType,
+> implements
+    SegmentRoute<Locales>,
+    NotLocalizedRoute<SegmentRoutePath, Locales>
+{
   path: SegmentRoutePath;
 
-  nestedRoutes: NotLocalizedRoute<any>[] = [];
+  nestedRoutes: NotLocalizedRoute<any, Locales>[] = [];
 
-  defaultRoute: undefined | NotLocalizedEndRoute;
+  defaultRoute: NotLocalizedEndRoute | undefined;
 
   constructor(path: SegmentRoutePath) {
     this.path = path;

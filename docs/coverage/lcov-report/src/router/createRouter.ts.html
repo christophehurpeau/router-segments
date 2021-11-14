@@ -89,7 +89,10 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,6 +121,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,7 +134,7 @@ import { findMatch } from './findMatch';
 &nbsp;
 export interface Router&lt;Locales extends LocaleType | never = any&gt; {
   get: (key: string) =&gt; EndRoute&lt;Locales&gt;;
-  find: (path: string, locale?: Locales) =&gt; null | RouteMatch&lt;Locales&gt;;
+  find: (path: string, locale?: Locales) =&gt; RouteMatch&lt;Locales&gt; | null;
   toLocalizedPath: (locale: Locales, key: string, args?: any) =&gt; string;
   toPath: (key: string, args?: any) =&gt; string;
 }
@@ -145,12 +151,15 @@ export function createRouter&lt;Locales extends LocaleType | never&gt;(
 &nbsp;
   return {
     get: getRequiredRoute,
-    find: (path: string, locale?: Locales): null | RouteMatch&lt;Locales&gt; =&gt;
+    find: (path: string, locale?: Locales): RouteMatch&lt;Locales&gt; | null =&gt;
       findMatch(path, routes, locale),
-    toPath: (key: string, args?: any): string =&gt;
+    toPath: (key: string, args?: Record&lt;string, any&gt;): string =&gt;
       getRequiredRoute(key).getPath().toPath(args),
-    toLocalizedPath: (locale: Locales, key: string, args?: any): string =&gt;
-      getRequiredRoute(key).getPath(locale).toPath(args),
+    toLocalizedPath: (
+      locale: Locales,
+      key: string,
+      args?: Record&lt;string, any&gt;,
+    ): string =&gt; getRequiredRoute(key).getPath(locale).toPath(args),
   };
 }
 &nbsp;</pre></td></tr></table></pre>

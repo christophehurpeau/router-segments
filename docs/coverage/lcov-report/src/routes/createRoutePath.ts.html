@@ -170,7 +170,7 @@ function internalCreateRoutePath(
   path: string,
   completePath: string,
   segment: boolean,
-): SegmentRoutePath | EndRoutePath {
+): EndRoutePath | SegmentRoutePath {
   const keys: Key[] = [];
   const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
     sensitive: true,

@@ -5,7 +5,7 @@ import { findMatch } from './findMatch';
 
 export interface Router<Locales extends LocaleType | never = any> {
   get: (key: string) => EndRoute<Locales>;
-  find: (path: string, locale?: Locales) => null | RouteMatch<Locales>;
+  find: (path: string, locale?: Locales) => RouteMatch<Locales> | null;
   toLocalizedPath: (locale: Locales, key: string, args?: any) => string;
   toPath: (key: string, args?: any) => string;
 }
@@ -22,11 +22,14 @@ export function createRouter<Locales extends LocaleType | never>(
 
   return {
     get: getRequiredRoute,
-    find: (path: string, locale?: Locales): null | RouteMatch<Locales> =>
+    find: (path: string, locale?: Locales): RouteMatch<Locales> | null =>
       findMatch(path, routes, locale),
-    toPath: (key: string, args?: any): string =>
+    toPath: (key: string, args?: Record<string, any>): string =>
       getRequiredRoute(key).getPath().toPath(args),
-    toLocalizedPath: (locale: Locales, key: string, args?: any): string =>
-      getRequiredRoute(key).getPath(locale).toPath(args),
+    toLocalizedPath: (
+      locale: Locales,
+      key: string,
+      args?: Record<string, any>,
+    ): string => getRequiredRoute(key).getPath(locale).toPath(args),
   };
 }

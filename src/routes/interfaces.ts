@@ -25,21 +25,23 @@ export interface EndRoute<Locales = LocaleType>
 
 export interface SegmentRoute<Locales = LocaleType>
   extends Route<SegmentRoutePath, Locales> {
-  defaultRoute: undefined | EndRoute<Locales>;
-  nestedRoutes: Route<any, Locales>[];
+  defaultRoute: EndRoute<Locales> | undefined;
+  nestedRoutes: Route<RoutePathInterface, Locales>[];
 
   isSegment: () => true;
 }
 
-export interface NotLocalizedRoute<T extends RoutePathInterface>
-  extends Route<T> {
+export interface NotLocalizedRoute<
+  T extends RoutePathInterface,
+  Locales extends LocaleType,
+> extends Route<T, Locales> {
   isLocalized: () => false;
   getPath: () => T;
 }
 
 export interface LocalizedRoute<
   T extends RoutePathInterface,
-  Locales extends LocaleType
+  Locales extends LocaleType,
 > extends Route<T, Locales> {
   isLocalized: () => true;
   getPath: (locale?: Locales) => T;

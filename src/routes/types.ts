@@ -2,7 +2,7 @@ export type RouteRef = any;
 
 export type LocaleType = string;
 
-type RoutePathNamedParams = (string | number)[];
+type RoutePathNamedParams = (number | string)[];
 
 export interface RoutePathInterface {
   completePath: string;
@@ -15,4 +15,4 @@ export interface EndRoutePath extends RoutePathInterface {
   toPath: (args?: Record<string, any>) => string;
 }
 
-export interface SegmentRoutePath extends RoutePathInterface {}
+export type SegmentRoutePath = RoutePathInterface;

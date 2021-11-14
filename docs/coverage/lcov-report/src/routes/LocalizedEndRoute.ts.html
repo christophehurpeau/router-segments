@@ -94,7 +94,9 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,7 +137,8 @@
 import type { LocaleType, EndRoutePath, RouteRef } from './types';
 &nbsp;
 export default class LocalizedEndRoute&lt;Locales extends LocaleType&gt;
-  implements EndRoute&lt;Locales&gt;, LocalizedRoute&lt;EndRoutePath, Locales&gt; {
+  implements EndRoute&lt;Locales&gt;, LocalizedRoute&lt;EndRoutePath, Locales&gt;
+{
   localizedPaths: Map&lt;LocaleType, EndRoutePath&gt;;
 &nbsp;
   ref: RouteRef;
@@ -149,7 +152,7 @@ export default class LocalizedEndRoute&lt;Locales extends LocaleType&gt;
 &nbsp;
   getPath(locale?: Locales): EndRoutePath {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!locale) <span class="cstat-no" title="statement not covered" >throw new Error('Missing locale');</span>
-    return this.localizedPaths.get(locale) as EndRoutePath;
+    return this.localizedPaths.get(locale)!;
   }
 &nbsp;
   isSegment(): false {

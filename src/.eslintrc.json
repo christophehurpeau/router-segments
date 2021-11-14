@@ -11,11 +11,12 @@
   "overrides": [
     {
       "files": ["**/*.test.ts", "__tests__/**/*.ts"],
+      "extends": ["@pob/eslint-config-typescript/test"],
       "env": {
         "jest": true
       },
-      "extends": ["@pob/eslint-config-typescript/test"],
       "rules": {
+        "unicorn/no-array-method-this-argument": "off",
         "import/no-extraneous-dependencies": [
           "error",
           {

@@ -28,7 +28,7 @@ export interface SegmentRouterBuilder<Locales extends LocaleType> {
 }
 
 export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
-  defaultLocale: undefined | Locales,
+  defaultLocale: Locales | undefined,
   addToRouteMap: (key: string, route: EndRoute<Locales>) => void,
 ): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales> {
   const createSegmentRouterBuilder = (
@@ -56,6 +56,7 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
     };
 
     const createLocalizedPathFromSegment = (
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       segmentRoute: LocalizedSegmentRoute<Locales>,
       path: string,
     ): Record<Locales, string> => {
@@ -75,8 +76,7 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
       key?: string,
     ): LocalizedEndRoute<Locales> => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
-      const finalKey: string =
-        key || completeLocalizedPaths[defaultLocale as Locales];
+      const finalKey: string = key || completeLocalizedPaths[defaultLocale!];
       const route = createLocalizedRoute(
         localizedPaths,
         completeLocalizedPaths,

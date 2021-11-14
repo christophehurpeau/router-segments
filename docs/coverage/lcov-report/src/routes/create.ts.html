@@ -258,7 +258,7 @@ import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 &nbsp;
 const createLocalizedPaths = &lt;
   Locales extends LocaleType,
-  Path extends SegmentRoutePath | EndRoutePath
+  Path extends EndRoutePath | SegmentRoutePath
 &gt;(
   localizedPathsRecord: LocalizedPathsRecord&lt;Locales&gt;,
   completeLocalizedPathsRecord: LocalizedPathsRecord&lt;Locales&gt;,

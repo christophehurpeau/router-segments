@@ -22,9 +22,9 @@ test('should throw when key is used twice', () => {
   const builder = createRouterBuilder();
 
   builder.add('/path1', ref, 'samekey');
-  expect(() => builder.add('/path1', ref, 'samekey')).toThrow(
-    '"samekey" is already used',
-  );
+  expect(() => {
+    builder.add('/path1', ref, 'samekey');
+  }).toThrow('"samekey" is already used');
 });
 
 test('should throw when add localized is called but no locales were defined', () => {
@@ -32,41 +32,43 @@ test('should throw when add localized is called but no locales were defined', ()
 
   const builder = createRouterBuilder();
 
-  expect(() => builder.addLocalized({ en: '/path1' }, ref)).toThrow(
-    'Invalid locales',
-  );
-  expect(() => builder.addLocalizedSegment({ en: '/path1' }, () => {})).toThrow(
-    'Invalid locales',
-  );
+  expect(() => {
+    builder.addLocalized({ en: '/path1' }, ref);
+  }).toThrow('Invalid locales');
+  expect(() => {
+    builder.addLocalizedSegment({ en: '/path1' }, jest.fn());
+  }).toThrow('Invalid locales');
 
-  expect(() =>
+  expect(() => {
     builder.addSegment('/path1', (segmentBuilder) => {
       segmentBuilder.addLocalized({ en: '/path2' }, ref);
-    }),
-  ).toThrow('Invalid locales');
+    });
+  }).toThrow('Invalid locales');
 
-  expect(() =>
+  expect(() => {
     builder.addSegment('/path1', (segmentBuilder) => {
-      segmentBuilder.addLocalizedSegment({ en: '/path2' }, () => {});
-    }),
-  ).toThrow('Invalid locales');
+      segmentBuilder.addLocalizedSegment({ en: '/path2' }, jest.fn());
+    });
+  }).toThrow('Invalid locales');
 });
 
 if (process.env.NODE_ENV !== 'production') {
   test('should throw when no ref is provided', () => {
     const builder = createRouterBuilder(['en']);
 
-    expect(() => builder.add('/', undefined)).toThrow(
-      'Invalid ref: "undefined"',
-    );
-    expect(() => builder.add('/', null)).toThrow('Invalid ref: "null"');
+    expect(() => {
+      builder.add('/', undefined);
+    }).toThrow('Invalid ref: "undefined"');
+    expect(() => {
+      builder.add('/', null);
+    }).toThrow('Invalid ref: "null"');
 
-    expect(() => builder.addLocalized({ en: '/' }, undefined)).toThrow(
-      'Invalid ref: "undefined"',
-    );
-    expect(() => builder.addLocalized({ en: '/' }, null)).toThrow(
-      'Invalid ref: "null"',
-    );
+    expect(() => {
+      builder.addLocalized({ en: '/' }, undefined);
+    }).toThrow('Invalid ref: "undefined"');
+    expect(() => {
+      builder.addLocalized({ en: '/' }, null);
+    }).toThrow('Invalid ref: "null"');
   });
 }
 

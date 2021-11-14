@@ -1,7 +1,6 @@
 import { LocalizedEndRoute } from '../routes';
 import { createSegmentRoute, createRoute } from '../routes/create';
 import type { Routes } from '../types';
-import type { RouteMatch } from './findMatch';
 import { findMatch } from './findMatch';
 
 test('find without routes returns null', () => {
@@ -37,7 +36,7 @@ test('find segments with multiple named params', () => {
   const ref = Symbol('ref');
   nestedSegment.defaultRoute = createRoute('', '/:param1/:param2', ref);
 
-  const match = findMatch('/1/2', routes) as RouteMatch<never>;
+  const match = findMatch('/1/2', routes)!;
   expect(match).toBeDefined();
   expect(match.path).toBe('/1/2');
   expect(match.namedParams).toEqual(
@@ -53,14 +52,14 @@ describe('find with /*', () => {
   const routes = [createRoute('/test/*', '/test/*', ref)];
 
   test('/test/', () => {
-    const match = findMatch('/test/', routes) as RouteMatch<never>;
+    const match = findMatch('/test/', routes)!;
     expect(match).toBeDefined();
     expect(match.namedParams).toBe(undefined);
     expect(match.otherParams).toEqual([]);
   });
 
   test('/test/1', () => {
-    const match = findMatch('/test/1', routes) as RouteMatch<never>;
+    const match = findMatch('/test/1', routes)!;
     expect(match).toBeDefined();
     expect(match.path).toBe('/test/1');
     expect(match.namedParams).toBe(undefined);
@@ -68,7 +67,7 @@ describe('find with /*', () => {
   });
 
   test('/test/1/2', () => {
-    const match = findMatch('/test/1/2', routes) as RouteMatch<never>;
+    const match = findMatch('/test/1/2', routes)!;
     expect(match).toBeDefined();
     expect(match.path).toBe('/test/1/2');
     expect(match.namedParams).toBe(undefined);

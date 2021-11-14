@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import type { RouteMatch } from '../../router/findMatch';
 import type { LocalizedEndRoute } from '../../routes';
-import type { EndRoutePath } from '../../routes/types';
 import { createRouterBuilder } from '../createRouterBuilder';
 
 describe('localized blog', () => {
@@ -24,21 +23,24 @@ describe('localized blog', () => {
       );
       segmentBuilder.addLocalizedSegment(
         { en: '/search', fr: '/rechercher' },
-        (segmentBuilder) => {
-          segmentBuilder.defaultRoute(ref, 'search');
-          segmentBuilder.addLocalized(
+        (searchSegmentBuilder) => {
+          searchSegmentBuilder.defaultRoute(ref, 'search');
+          searchSegmentBuilder.addLocalized(
             { en: '/top-searched', fr: '/les-plus-recherches' },
             ref,
             'top-searched',
           );
-          segmentBuilder.addSegment('/:term', (segmentBuilder) => {
-            segmentBuilder.defaultRoute(ref, 'search-results');
-            segmentBuilder.addLocalized(
-              { en: '/tag-:tag', fr: '/etiquette-:tag' },
-              ref,
-              'search-results-tag',
-            );
-          });
+          searchSegmentBuilder.addSegment(
+            '/:term',
+            (searchTermSegmentBuilder) => {
+              searchTermSegmentBuilder.defaultRoute(ref, 'search-results');
+              searchTermSegmentBuilder.addLocalized(
+                { en: '/tag-:tag', fr: '/etiquette-:tag' },
+                ref,
+                'search-results-tag',
+              );
+            },
+          );
         },
       );
     },
@@ -51,14 +53,14 @@ describe('localized blog', () => {
       const rrPostList = router.get('postList') as LocalizedEndRoute<Locales>;
 
       test('en', () => {
-        const routePath = rrPostList.localizedPaths.get('en') as EndRoutePath;
+        const routePath = rrPostList.localizedPaths.get('en')!;
 
         expect(routePath.completePath).toEqual('/post');
         expect(routePath.toPath()).toBe('/post');
       });
 
       test('fr', () => {
-        const routePath = rrPostList.localizedPaths.get('fr') as EndRoutePath;
+        const routePath = rrPostList.localizedPaths.get('fr')!;
 
         expect(routePath.completePath).toEqual('/article');
         expect(routePath.toPath()).toBe('/article');
@@ -93,7 +95,7 @@ describe('localized blog', () => {
       const rrPostView = router.get('postView') as LocalizedEndRoute<Locales>;
 
       test('en', () => {
-        const routePath = rrPostView.localizedPaths.get('en') as EndRoutePath;
+        const routePath = rrPostView.localizedPaths.get('en')!;
 
         expect(routePath.namedParams).toEqual(['id', 'slug']);
         expect(routePath.toPath({ id: '001', slug: 'The-First-Post' })).toBe(
@@ -102,7 +104,7 @@ describe('localized blog', () => {
       });
 
       test('fr', () => {
-        const routePath = rrPostView.localizedPaths.get('fr') as EndRoutePath;
+        const routePath = rrPostView.localizedPaths.get('fr')!;
 
         expect(routePath.namedParams).toEqual(['id', 'slug']);
         expect(routePath.toPath({ id: '001', slug: 'The-First-Post' })).toBe(
@@ -151,9 +153,7 @@ describe('localized blog', () => {
       ) as LocalizedEndRoute<Locales>;
 
       test('en', () => {
-        const routePath = rrPostWithTag.localizedPaths.get(
-          'en',
-        ) as EndRoutePath;
+        const routePath = rrPostWithTag.localizedPaths.get('en')!;
         expect(routePath.namedParams).toEqual(['tag', 'date', 'slug']);
 
         expect(
@@ -166,9 +166,7 @@ describe('localized blog', () => {
       });
 
       test('fr', () => {
-        const routePath = rrPostWithTag.localizedPaths.get(
-          'fr',
-        ) as EndRoutePath;
+        const routePath = rrPostWithTag.localizedPaths.get('fr')!;
         expect(routePath.namedParams).toEqual(['tag', 'date', 'slug']);
 
         expect(

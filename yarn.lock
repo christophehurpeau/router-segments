@@ -2153,7 +2153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=14.0.0":
+"@types/node@npm:*, @types/node@npm:16.11.12, @types/node@npm:>=14.0.0":
   version: 16.11.12
   resolution: "@types/node@npm:16.11.12"
   checksum: a3feb346d61a56f5a137c29bb8c63cfa3cc02e184b9dffdc18ef1528dcce55596e570575215a2e39e6ce69343eeb2a5ba71c271938f1dc8db4cc393902855412
@@ -2164,13 +2164,6 @@ __metadata:
   version: 14.0.26
   resolution: "@types/node@npm:14.0.26"
   checksum: f23255d21725db1ec26ca3f992ce7fbf03cdb8556ea4dce3464ea94da868cf5e3404ff2242ded49c05474b80f57f58e11e934870e83dc8badf2b80c42936dd6b
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:14.18.0":
-  version: 14.18.0
-  resolution: "@types/node@npm:14.18.0"
-  checksum: b120c26fe5f30bc358e861db8d7e401e419d14bd9dd25c022f3c2ea8b0b429d4c9efd77ad5d6d2a8bde61702a6786fb74d409f1b2cbb61c79133e2a65aab4fb1
   languageName: node
   linkType: hard
 
@@ -7750,7 +7743,7 @@ __metadata:
     "@pob/eslint-config-typescript": 48.0.4
     "@pob/root": 6.0.0
     "@types/jest": 27.0.3
-    "@types/node": 14.18.0
+    "@types/node": 16.11.12
     babel-preset-modern-browsers: 15.0.2
     check-package-dependencies: 2.2.1
     eslint: 8.4.1

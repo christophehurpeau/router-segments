@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.59% </span>
+                <span class="strong">96.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/27</span>
+                <span class='fraction'>26/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.15% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
@@ -148,9 +148,7 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,7 +191,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
@@ -241,8 +239,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { PRODUCTION } from 'pob-babel';
-import type {
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type {
   LocaleType,
   LocalizedPathsRecord,
   EndRoutePath,
@@ -250,10 +247,10 @@ import type {
   RouteRef,
 } from '../types';
 import { getKeys } from '../utils/getKeys';
-import LocalizedEndRoute from './LocalizedEndRoute';
-import LocalizedSegmentRoute from './LocalizedSegmentRoute';
-import Route from './NotLocalizedEndRoute';
-import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
+import { LocalizedEndRoute } from './LocalizedEndRoute';
+import { LocalizedSegmentRoute } from './LocalizedSegmentRoute';
+import { NotLocalizedEndRoute as Route } from './NotLocalizedEndRoute';
+import { NotLocalizedSegmentRoute } from './NotLocalizedSegmentRoute';
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 &nbsp;
 const createLocalizedPaths = &lt;
@@ -284,8 +281,8 @@ const createLocalizedPaths = &lt;
   return localizedPaths;
 };
 &nbsp;
-const checkRef = <span class="fstat-no" title="function not covered" >(r</span>ef: RouteRef): void =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (!ref) <span class="cstat-no" title="statement not covered" >throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);</span></span>
+const checkRef = (ref: RouteRef): void =&gt; {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!ref) <span class="cstat-no" title="statement not covered" >throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);</span>
 };
 &nbsp;
 export const createRoute = (
@@ -294,7 +291,7 @@ export const createRoute = (
   ref: RouteRef,
 ): Route =&gt; {
   /* istanbul ignore if */
-  if (!PRODUCTION) checkRef(ref);
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (__DEV__) checkRef(ref);
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };
@@ -305,7 +302,7 @@ export const createLocalizedRoute = &lt;Locales extends LocaleType&gt;(
   ref: RouteRef,
 ): LocalizedEndRoute&lt;Locales&gt; =&gt; {
   /* istanbul ignore if */
-  if (!PRODUCTION) checkRef(ref);
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (__DEV__) checkRef(ref);
   const localizedPaths = createLocalizedPaths&lt;Locales, EndRoutePath&gt;(
     localizedPathsRecord,
     completeLocalizedPathsRecord,

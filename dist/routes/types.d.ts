@@ -1,6 +1,6 @@
 export declare type RouteRef = any;
 export declare type LocaleType = string;
-declare type RoutePathNamedParams = (string | number)[];
+declare type RoutePathNamedParams = (number | string)[];
 export interface RoutePathInterface {
     completePath: string;
     namedParams: RoutePathNamedParams;
@@ -10,7 +10,6 @@ export interface RoutePathInterface {
 export interface EndRoutePath extends RoutePathInterface {
     toPath: (args?: Record<string, any>) => string;
 }
-export interface SegmentRoutePath extends RoutePathInterface {
-}
+export declare type SegmentRoutePath = RoutePathInterface;
 export {};
 //# sourceMappingURL=types.d.ts.map

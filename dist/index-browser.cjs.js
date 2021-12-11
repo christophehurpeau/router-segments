@@ -2,13 +2,15 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var nightingaleLogger = require('nightingale-logger');
 var pathToRegExp = require('path-to-regexp');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e['default'] : e; }
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e["default"] : e; }
 
 var pathToRegExp__default = /*#__PURE__*/_interopDefaultLegacy(pathToRegExp);
 
 /* eslint-disable complexity */
+var logger = process.env.NODE_ENV !== "production" ? new nightingaleLogger.Logger('router-segments:findMatch') : undefined;
 
 var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
@@ -22,6 +24,17 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   var result = null;
   routes.some(function (route) {
     var routePath = route.getPath(locale);
+
+    if (process.env.NODE_ENV !== "production" && !routePath) {
+      throw new Error(`Unknown localized route for locale ${locale}`);
+    }
+    /* istanbul ignore next */
+
+
+    if (process.env.NODE_ENV !== "production" && logger) {
+      logger.debug(`trying ${routePath.regExp.toString()}`);
+    }
+
     var match = routePath.regExp.exec(path);
     if (!match) return false;
     match.shift(); // remove m[0], === path;
@@ -285,11 +298,19 @@ var createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, c
   return localizedPaths;
 };
 
+var checkRef = function checkRef(ref) {
+  if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
+};
+
 var createRoute = function createRoute(path, completePath, ref) {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   var routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 var createLocalizedRoute = function createLocalizedRoute(localizedPathsRecord, completeLocalizedPathsRecord, ref) {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   var localizedPaths = createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, false);
   return new LocalizedEndRoute(localizedPaths, ref);
 };
@@ -388,7 +409,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
 }
 
 function createRouterBuilder(locales) {
-  var defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
+  var defaultLocale = locales == null ? void 0 : locales[0];
   var routes = [];
   var routeMap = new Map();
 
@@ -435,5 +456,4 @@ function createRouterBuilder(locales) {
 }
 
 exports.createRouterBuilder = createRouterBuilder;
-exports.default = createRouterBuilder;
 //# sourceMappingURL=index-browser.cjs.js.map

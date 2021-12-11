@@ -1,12 +1,12 @@
 import type { Route } from '../routes/interfaces';
-import type { Routes, LocaleType, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
+import type { LocaleType, RoutePathInterface, RouteRef, SegmentRoutePath, EndRoutePath } from '../types';
 export interface RouteMatch<Locales extends LocaleType | never = any> {
-    namedParams: undefined | Map<string, string>;
-    otherParams: undefined | string[];
+    namedParams: Map<string, string> | undefined;
+    otherParams: string[] | undefined;
     path: string;
     ref: RouteRef;
     route: Route<any, Locales>;
-    routePath: SegmentRoutePath | EndRoutePath;
+    routePath: EndRoutePath | SegmentRoutePath;
 }
-export declare function findMatch<Locales extends LocaleType>(path: string, routes: Routes<Locales>, locale?: Locales): null | RouteMatch<Locales>;
+export declare function findMatch<Locales extends LocaleType>(path: string, routes: Route<RoutePathInterface, Locales>[], locale?: Locales): RouteMatch<Locales> | null;
 //# sourceMappingURL=findMatch.d.ts.map

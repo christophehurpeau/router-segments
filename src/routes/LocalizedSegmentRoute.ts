@@ -1,8 +1,8 @@
-import type LocalizedEndRoute from './LocalizedEndRoute';
+import type { LocalizedEndRoute } from './LocalizedEndRoute';
 import type { SegmentRoute, LocalizedRoute } from './interfaces';
 import type { LocaleType, SegmentRoutePath } from './types';
 
-export default class LocalizedSegmentRoute<Locales extends LocaleType>
+export class LocalizedSegmentRoute<Locales extends LocaleType>
   implements SegmentRoute<Locales>, LocalizedRoute<SegmentRoutePath, Locales>
 {
   localizedPaths: Map<Locales, SegmentRoutePath>;

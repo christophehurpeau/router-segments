@@ -1,4 +1,3 @@
-import { PRODUCTION } from 'pob-babel';
 import type {
   LocaleType,
   LocalizedPathsRecord,
@@ -7,10 +6,10 @@ import type {
   RouteRef,
 } from '../types';
 import { getKeys } from '../utils/getKeys';
-import LocalizedEndRoute from './LocalizedEndRoute';
-import LocalizedSegmentRoute from './LocalizedSegmentRoute';
-import Route from './NotLocalizedEndRoute';
-import NotLocalizedSegmentRoute from './NotLocalizedSegmentRoute';
+import { LocalizedEndRoute } from './LocalizedEndRoute';
+import { LocalizedSegmentRoute } from './LocalizedSegmentRoute';
+import { NotLocalizedEndRoute as Route } from './NotLocalizedEndRoute';
+import { NotLocalizedSegmentRoute } from './NotLocalizedSegmentRoute';
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 
 const createLocalizedPaths = <
@@ -51,7 +50,7 @@ export const createRoute = (
   ref: RouteRef,
 ): Route => {
   /* istanbul ignore if */
-  if (!PRODUCTION) checkRef(ref);
+  if (__DEV__) checkRef(ref);
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };
@@ -62,7 +61,7 @@ export const createLocalizedRoute = <Locales extends LocaleType>(
   ref: RouteRef,
 ): LocalizedEndRoute<Locales> => {
   /* istanbul ignore if */
-  if (!PRODUCTION) checkRef(ref);
+  if (__DEV__) checkRef(ref);
   const localizedPaths = createLocalizedPaths<Locales, EndRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,

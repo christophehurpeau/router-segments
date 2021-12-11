@@ -69,7 +69,7 @@ builder.addLocalizedSegment(
   },
 );
 
-export default builder.createRouter();
+export const router = builder.createRouter();
 ```
 
 ## API

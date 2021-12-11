@@ -36,7 +36,7 @@ test('should throw when add localized is called but no locales were defined', ()
     builder.addLocalized({ en: '/path1' }, ref);
   }).toThrow('Invalid locales');
   expect(() => {
-    builder.addLocalizedSegment({ en: '/path1' }, jest.fn());
+    builder.addLocalizedSegment({ en: '/path1' }, () => {});
   }).toThrow('Invalid locales');
 
   expect(() => {
@@ -47,7 +47,7 @@ test('should throw when add localized is called but no locales were defined', ()
 
   expect(() => {
     builder.addSegment('/path1', (segmentBuilder) => {
-      segmentBuilder.addLocalizedSegment({ en: '/path2' }, jest.fn());
+      segmentBuilder.addLocalizedSegment({ en: '/path2' }, () => {});
     });
   }).toThrow('Invalid locales');
 });

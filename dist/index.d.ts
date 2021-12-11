@@ -3,5 +3,5 @@ export type { EndRoute, LocalizedRoute, NotLocalizedRoute, Route, SegmentRoute, 
 export type { Router } from './router/createRouter';
 export type { RouteMatch } from './router/findMatch';
 export type { RouterBuilder } from './builder/createRouterBuilder';
-export { createRouterBuilder, createRouterBuilder as default, } from './builder/createRouterBuilder';
+export { createRouterBuilder } from './builder/createRouterBuilder';
 //# sourceMappingURL=index.d.ts.map

@@ -1,6 +1,8 @@
+import { Logger } from 'nightingale-logger';
 import pathToRegExp from 'path-to-regexp';
 
 /* eslint-disable complexity */
+const logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 
 const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
 
@@ -8,6 +10,17 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
   let result = null;
   routes.some(route => {
     const routePath = route.getPath(locale);
+
+    if (process.env.NODE_ENV !== "production" && !routePath) {
+      throw new Error(`Unknown localized route for locale ${locale}`);
+    }
+    /* istanbul ignore next */
+
+
+    if (process.env.NODE_ENV !== "production" && logger) {
+      logger.debug(`trying ${routePath.regExp.toString()}`);
+    }
+
     const match = routePath.regExp.exec(path);
     if (!match) return false;
     match.shift(); // remove m[0], === path;
@@ -108,8 +121,9 @@ class LocalizedEndRoute {
 }
 
 class LocalizedSegmentRoute {
+  nestedRoutes = [];
+
   constructor(localizedPaths) {
-    this.nestedRoutes = [];
     this.localizedPaths = localizedPaths;
   }
 
@@ -171,8 +185,9 @@ class NotLocalizedEndRoute {
 }
 
 class NotLocalizedSegmentRoute {
+  nestedRoutes = [];
+
   constructor(path) {
-    this.nestedRoutes = [];
     this.path = path;
   }
 
@@ -244,11 +259,19 @@ const createLocalizedPaths = (localizedPathsRecord, completeLocalizedPathsRecord
   return localizedPaths;
 };
 
+const checkRef = ref => {
+  if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
+};
+
 const createRoute = (path, completePath, ref) => {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 const createLocalizedRoute = (localizedPathsRecord, completeLocalizedPathsRecord, ref) => {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const localizedPaths = createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, false);
   return new LocalizedEndRoute(localizedPaths, ref);
 };
@@ -387,6 +410,5 @@ function createRouterBuilder(locales) {
   };
 }
 
-export default createRouterBuilder;
 export { createRouterBuilder };
 //# sourceMappingURL=index-browsermodern.es.js.map

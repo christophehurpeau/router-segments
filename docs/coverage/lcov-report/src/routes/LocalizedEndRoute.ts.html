@@ -136,7 +136,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { EndRoute, LocalizedRoute } from './interfaces';
 import type { LocaleType, EndRoutePath, RouteRef } from './types';
 &nbsp;
-export default class LocalizedEndRoute&lt;Locales extends LocaleType&gt;
+export class LocalizedEndRoute&lt;Locales extends LocaleType&gt;
   implements EndRoute&lt;Locales&gt;, LocalizedRoute&lt;EndRoutePath, Locales&gt;
 {
   localizedPaths: Map&lt;LocaleType, EndRoutePath&gt;;

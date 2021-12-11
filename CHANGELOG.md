@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/christophehurpeau/router-segments/compare/v4.1.3...v5.0.0) (2021-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop node 12
+* requires node with ESM support ^12.20.0 || ^14.13.1 || >=16.0.0
+
+### Features
+
+* update deps ([8673fff](https://github.com/christophehurpeau/router-segments/commit/8673fff01a94738b9633fef9d3905728b5e0f7a1))
+
+
+* update dev deps ([63ac05a](https://github.com/christophehurpeau/router-segments/commit/63ac05a3bc402fd2e962c1611d65d73783cf1e5e))
+
 ### [4.1.3](https://github.com/christophehurpeau/router-segments/compare/v4.1.2...v4.1.3) (2021-01-18)
 
 

@@ -142,7 +142,7 @@
     "babel-preset-modern-browsers": "15.0.2",
     "check-package-dependencies": "2.2.1",
     "eslint": "8.4.1",
-    "jest": "27.4.4",
+    "jest": "27.4.5",
     "pob-babel": "29.4.2",
     "pob-lcov-reporter": "6.0.0",
     "prettier": "2.5.1",

@@ -137,7 +137,7 @@
     "@types/jest": "27.4.0",
     "@types/node": "16.11.19",
     "babel-preset-modern-browsers": "15.0.2",
-    "check-package-dependencies": "2.2.1",
+    "check-package-dependencies": "3.0.0",
     "eslint": "8.6.0",
     "jest": "27.4.7",
     "pob-babel": "29.7.0",

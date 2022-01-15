@@ -18,14 +18,13 @@ jobs:
         with:
           path: |
             .yarn/unplugged
-            .yarn/build-state.yml
             .yarn/install-state.gz
           key: v2-dependencies--${{ matrix.node-version }}-${{ runner.OS }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             v2-dependencies--${{ matrix.node-version }}-${{ runner.OS }}-
             v2-dependencies--${{ matrix.node-version }}-
 
-      - name: Check Dependencies
+      - name: Install Dependencies
         # no immutable here
         run: yarn install
         env:
@@ -33,6 +32,11 @@ jobs:
 
       - name: Run pob-root-postinstall
         run: yarn run pob-root-postinstall
+
+      - name: Run pob update
+        run: npx pob update --force
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Check for added or modified files
         id: git-check-modified

@@ -16,7 +16,6 @@
         "jest": true
       },
       "rules": {
-        "unicorn/no-array-method-this-argument": "off",
         "import/no-extraneous-dependencies": [
           "error",
           {

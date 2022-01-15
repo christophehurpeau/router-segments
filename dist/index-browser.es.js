@@ -2,7 +2,7 @@ import { Logger } from 'nightingale-logger';
 import pathToRegExp from 'path-to-regexp';
 
 /* eslint-disable complexity */
-var logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
+var logger = (process.env.NODE_ENV !== "production") ? new Logger('router-segments:findMatch') : undefined;
 
 var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
@@ -17,14 +17,14 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   routes.some(function (route) {
     var routePath = route.getPath(locale);
 
-    if (process.env.NODE_ENV !== "production" && !routePath) {
-      throw new Error(`Unknown localized route for locale ${locale}`);
+    if ((process.env.NODE_ENV !== "production") && !routePath) {
+      throw new Error("Unknown localized route for locale " + locale);
     }
     /* istanbul ignore next */
 
 
-    if (process.env.NODE_ENV !== "production" && logger) {
-      logger.debug(`trying ${routePath.regExp.toString()}`);
+    if ((process.env.NODE_ENV !== "production") && logger) {
+      logger.debug("trying " + routePath.regExp.toString());
     }
 
     var match = routePath.regExp.exec(path);
@@ -47,7 +47,7 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
       var restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = internalFindMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
         return result !== null;
       }
 
@@ -65,9 +65,9 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,
-      routePath,
-      namedParams,
-      otherParams
+      routePath: routePath,
+      namedParams: namedParams,
+      otherParams: otherParams
     });
     return true;
   });
@@ -81,7 +81,7 @@ function findMatch(path, routes, locale) {
 function createRouter(routes, routeMap) {
   var getRequiredRoute = function getRequiredRoute(routeKey) {
     var route = routeMap.get(routeKey);
-    if (!route) throw new Error(`No route named "${routeKey}"`);
+    if (!route) throw new Error("No route named \"" + routeKey + "\"");
     return route;
   };
 
@@ -244,7 +244,7 @@ var NotLocalizedSegmentRoute = /*#__PURE__*/function () {
 
 function internalCreateRoutePath(path, completePath, segment) {
   var keys = [];
-  var regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  var regExp = pathToRegExp(segment ? path + "/(.+)?" : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -252,16 +252,16 @@ function internalCreateRoutePath(path, completePath, segment) {
     return key.name;
   }).filter(Boolean);
   if (segment) return {
-    path,
-    completePath,
-    regExp,
-    namedParams
+    path: path,
+    completePath: completePath,
+    regExp: regExp,
+    namedParams: namedParams
   };
   return {
-    path,
-    completePath,
-    regExp,
-    namedParams,
+    path: path,
+    completePath: completePath,
+    regExp: regExp,
+    namedParams: namedParams,
     toPath: pathToRegExp.compile(completePath)
   };
 }
@@ -291,18 +291,18 @@ var createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, c
 };
 
 var checkRef = function checkRef(ref) {
-  if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
+  if (!ref) throw new Error("Invalid ref: \"" + JSON.stringify(ref) + "\"");
 };
 
 var createRoute = function createRoute(path, completePath, ref) {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== "production") checkRef(ref);
+  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
   var routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 var createLocalizedRoute = function createLocalizedRoute(localizedPathsRecord, completeLocalizedPathsRecord, ref) {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== "production") checkRef(ref);
+  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
   var localizedPaths = createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, false);
   return new LocalizedEndRoute(localizedPaths, ref);
 };
@@ -318,7 +318,7 @@ var createLocalizedSegmentRoute = function createLocalizedSegmentRoute(localized
 function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   var createSegmentRouterBuilder = function createSegmentRouterBuilder(segmentRoute) {
     var getCompletePath = function getCompletePath(path, locale) {
-      return `${segmentRoute.getPath(locale).completePath}${path}`;
+      return "" + segmentRoute.getPath(locale).completePath + path;
     };
 
     var getCompleteLocalizedPaths = function getCompleteLocalizedPaths(localizedPaths) {
@@ -406,7 +406,7 @@ function createRouterBuilder(locales) {
   var routeMap = new Map();
 
   var addToRouteMap = function addToRouteMap(key, route) {
-    if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
+    if (routeMap.has(key)) throw new Error("\"" + key + "\" is already used");
     routeMap.set(key, route);
   };
 

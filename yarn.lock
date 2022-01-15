@@ -7251,14 +7251,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pob-lcov-reporter@npm:6.0.0":
-  version: 6.0.0
-  resolution: "pob-lcov-reporter@npm:6.0.0"
+"pob-lcov-reporter@npm:6.0.1":
+  version: 6.0.1
+  resolution: "pob-lcov-reporter@npm:6.0.1"
   dependencies:
     istanbul-reports: ^3.0.2
   peerDependencies:
     jest: ^26.0.1 || ^27.0.6
-  checksum: 2f0af2d92e412fb74f1317d1d1488d4248559ba414eab150f515e24740c5c4ee61294b899abbb3978a61b761d92be67310f744340b61cc6444fb57de04b77be0
+  checksum: 984706c7083ff4cfcbe3e3eabdc54129803e25d6035d0ab1ffa44c39e19b5b91b10f11f738e7a710c86fd100826b51dbcecc932e6b3d03147c5278163f0a0b6d
   languageName: node
   linkType: hard
 
@@ -7751,7 +7751,7 @@ __metadata:
     nightingale-logger: ^12.0.0
     path-to-regexp: ^1.7.0
     pob-babel: 29.4.2
-    pob-lcov-reporter: 6.0.0
+    pob-lcov-reporter: 6.0.1
     prettier: 2.5.1
     standard-version: 9.3.2
     typedoc: 0.22.10

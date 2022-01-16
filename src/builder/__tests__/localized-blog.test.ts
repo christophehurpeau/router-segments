@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-array-method-this-argument */
 /* eslint-disable max-lines */
 import type { RouteMatch } from '../../router/findMatch';
 import type { LocalizedEndRoute } from '../../routes';

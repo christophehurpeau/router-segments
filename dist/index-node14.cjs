@@ -419,4 +419,4 @@ function createRouterBuilder(locales) {
 }
 
 exports.createRouterBuilder = createRouterBuilder;
-//# sourceMappingURL=index-node14.cjs.js.map
+//# sourceMappingURL=index-node14.cjs.map

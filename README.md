@@ -12,7 +12,7 @@
   <a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/node/v/router-segments.svg?style=flat-square"></a>
   <a href="https://npmjs.org/package/router-segments"><img src="https://img.shields.io/npm/types/router-segments.svg?style=flat-square"></a>
   <a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/codecov/c/github/christophehurpeau/router-segments/master.svg?style=flat-square"></a>
-  <a href="https://codecov.io/gh/christophehurpeau/router-segments"><img src="https://img.shields.io/website.svg?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fchristophehurpeau.github.io%2Frouter-segments%2F?style=flat-square"></a>
+  <a href="https://christophehurpeau.github.io/router-segments/"><img src="https://img.shields.io/website.svg?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fchristophehurpeau.github.io%2Frouter-segments%2F?style=flat-square"></a>
 </p>
 
 ### Why another router ?

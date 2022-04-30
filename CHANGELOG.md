@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/christophehurpeau/router-segments/compare/v5.1.0...v5.1.1) (2022-04-30)
+
+
+### Bug Fixes
+
+* remove src/typings.d.ts ([4dd7d33](https://github.com/christophehurpeau/router-segments/commit/4dd7d33fc3edcdf246786612941afe1105d23dab))
+
 ## [5.1.0](https://github.com/christophehurpeau/router-segments/compare/v5.0.0...v5.1.0) (2022-04-30)
 
 

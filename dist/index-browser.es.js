@@ -16,14 +16,15 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   var result = null;
   routes.some(function (route) {
     var routePath = route.getPath(locale);
+    var isDev = process.env.NODE_ENV !== "production";
 
-    if (process.env.NODE_ENV !== "production" && !routePath) {
+    if (isDev && !routePath) {
       throw new Error("Unknown localized route for locale " + locale);
     }
     /* istanbul ignore next */
 
 
-    if (process.env.NODE_ENV !== "production" && logger) {
+    if (isDev && logger) {
       logger.debug("trying " + routePath.regExp.toString());
     }
 

@@ -10,14 +10,15 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
   let result = null;
   routes.some(route => {
     const routePath = route.getPath(locale);
+    const isDev = process.env.NODE_ENV !== "production";
 
-    if (process.env.NODE_ENV !== "production" && !routePath) {
+    if (isDev && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);
     }
     /* istanbul ignore next */
 
 
-    if (process.env.NODE_ENV !== "production" && logger) {
+    if (isDev && logger) {
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 

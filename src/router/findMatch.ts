@@ -35,13 +35,14 @@ const internalFindMatch = <Locales extends LocaleType>(
 
   routes.some((route): boolean => {
     const routePath: RoutePathInterface = route.getPath(locale);
+    const isDev = IS_DEV;
 
-    if (IS_DEV && !routePath) {
+    if (isDev && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);
     }
 
     /* istanbul ignore next */
-    if (IS_DEV && logger) {
+    if (isDev && logger) {
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 

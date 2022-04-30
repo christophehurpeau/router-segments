@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/christophehurpeau/router-segments/compare/v5.0.0...v5.1.0) (2022-04-30)
+
+
+### Features
+
+* update nightingale-logger ([dc4a9c3](https://github.com/christophehurpeau/router-segments/commit/dc4a9c3176fa17c54ee167252da8aa7e52b550a3))
+
 ## [5.0.0](https://github.com/christophehurpeau/router-segments/compare/v4.1.3...v5.0.0) (2021-12-11)
 
 

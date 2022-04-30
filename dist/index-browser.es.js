@@ -2,7 +2,7 @@ import { Logger } from 'nightingale-logger';
 import pathToRegExp from 'path-to-regexp';
 
 /* eslint-disable complexity */
-var logger = (process.env.NODE_ENV !== "production") ? new Logger('router-segments:findMatch') : undefined;
+var logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 
 var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
@@ -17,13 +17,13 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   routes.some(function (route) {
     var routePath = route.getPath(locale);
 
-    if ((process.env.NODE_ENV !== "production") && !routePath) {
+    if (process.env.NODE_ENV !== "production" && !routePath) {
       throw new Error("Unknown localized route for locale " + locale);
     }
     /* istanbul ignore next */
 
 
-    if ((process.env.NODE_ENV !== "production") && logger) {
+    if (process.env.NODE_ENV !== "production" && logger) {
       logger.debug("trying " + routePath.regExp.toString());
     }
 
@@ -296,13 +296,13 @@ var checkRef = function checkRef(ref) {
 
 var createRoute = function createRoute(path, completePath, ref) {
   /* istanbul ignore if */
-  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   var routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 var createLocalizedRoute = function createLocalizedRoute(localizedPathsRecord, completeLocalizedPathsRecord, ref) {
   /* istanbul ignore if */
-  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   var localizedPaths = createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, false);
   return new LocalizedEndRoute(localizedPaths, ref);
 };

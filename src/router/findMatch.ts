@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+import { IS_DEV } from 'pob-babel';
 import { Logger } from 'nightingale-logger';
 import type { EndRoute, Route, SegmentRoute } from '../routes/interfaces';
 import type {
@@ -18,7 +19,7 @@ export interface RouteMatch<Locales extends LocaleType | never = any> {
   routePath: EndRoutePath | SegmentRoutePath;
 }
 
-const logger = __DEV__ ? new Logger('router-segments:findMatch') : undefined;
+const logger = IS_DEV ? new Logger('router-segments:findMatch') : undefined;
 
 const parseOtherParams = (wildcard: string): string[] =>
   wildcard ? wildcard.split('/') : [];
@@ -35,12 +36,12 @@ const internalFindMatch = <Locales extends LocaleType>(
   routes.some((route): boolean => {
     const routePath: RoutePathInterface = route.getPath(locale);
 
-    if (__DEV__ && !routePath) {
+    if (IS_DEV && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);
     }
 
     /* istanbul ignore next */
-    if (__DEV__ && logger) {
+    if (IS_DEV && logger) {
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 

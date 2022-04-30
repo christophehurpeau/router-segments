@@ -2,7 +2,7 @@ import { Logger } from 'nightingale-logger';
 import pathToRegExp from 'path-to-regexp';
 
 /* eslint-disable complexity */
-const logger = (process.env.NODE_ENV !== "production") ? new Logger('router-segments:findMatch') : undefined;
+const logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 
 const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
 
@@ -11,13 +11,13 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
   routes.some(route => {
     const routePath = route.getPath(locale);
 
-    if ((process.env.NODE_ENV !== "production") && !routePath) {
+    if (process.env.NODE_ENV !== "production" && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);
     }
     /* istanbul ignore next */
 
 
-    if ((process.env.NODE_ENV !== "production") && logger) {
+    if (process.env.NODE_ENV !== "production" && logger) {
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 
@@ -265,13 +265,13 @@ const checkRef = ref => {
 
 const createRoute = (path, completePath, ref) => {
   /* istanbul ignore if */
-  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 const createLocalizedRoute = (localizedPathsRecord, completeLocalizedPathsRecord, ref) => {
   /* istanbul ignore if */
-  if ((process.env.NODE_ENV !== "production")) checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const localizedPaths = createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, false);
   return new LocalizedEndRoute(localizedPaths, ref);
 };

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.1](https://github.com/christophehurpeau/router-segments/compare/v5.0.0...v5.0.1) (2022-04-30)
+
+
+### Bug Fixes
+
+* weird error with coverage ([d913b53](https://github.com/christophehurpeau/router-segments/commit/d913b53985e449279ab40c7b67f697e737503a2f))
+
 ## [5.0.0](https://github.com/christophehurpeau/router-segments/compare/v4.1.3...v5.0.0) (2021-12-11)
 
 

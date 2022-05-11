@@ -135,7 +135,7 @@
     "@pob/eslint-config-typescript": "49.3.0",
     "@pob/root": "6.19.1",
     "@types/jest": "27.5.0",
-    "@types/node": "16.11.33",
+    "@types/node": "16.11.34",
     "babel-preset-modern-browsers": "15.0.2",
     "check-package-dependencies": "3.6.0",
     "eslint": "8.15.0",

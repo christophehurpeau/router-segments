@@ -2347,10 +2347,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.50":
-  version: 16.11.50
-  resolution: "@types/node@npm:16.11.50"
-  checksum: 8b64129ed651661602049e8e034f0cb77c09c87303dadfad1a2bdef658ece16b4be96a3142ef956a5e1a815336225c5beb0512c31a410e7d76075f18906df6da
+"@types/node@npm:16.11.51":
+  version: 16.11.51
+  resolution: "@types/node@npm:16.11.51"
+  checksum: b4193d3f9d4240d866db0ca50de4a8c3b68fd81754d0a572712b559497d0f34931e4246ce0b2692afc8f8def9fcc69fd176bd7176af896d07eefa6d78d886425
   languageName: node
   linkType: hard
 
@@ -6922,7 +6922,7 @@ __metadata:
     "@pob/eslint-config-typescript": 49.3.3
     "@pob/root": 6.21.1
     "@types/jest": 28.1.7
-    "@types/node": 16.11.50
+    "@types/node": 16.11.51
     babel-preset-modern-browsers: 15.0.2
     check-package-dependencies: 3.9.2
     eslint: 8.22.0

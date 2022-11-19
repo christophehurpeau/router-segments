@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/christophehurpeau/router-segments/compare/v5.1.1...v6.0.0) (2022-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop node 14 and cjs
+
+### Features
+
+* drop node 14 and cjs ([6099177](https://github.com/christophehurpeau/router-segments/commit/60991774cff07261201d6665cbf3b2e79a2ea958))
+
 ### [5.1.1](https://github.com/christophehurpeau/router-segments/compare/v5.1.0...v5.1.1) (2022-04-30)
 
 

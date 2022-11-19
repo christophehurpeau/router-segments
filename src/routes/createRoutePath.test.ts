@@ -11,11 +11,11 @@ describe('createRoutePath', () => {
     expect(routePath.toPath()).toEqual('/');
   });
 
-  test('/test/*', () => {
-    const routePath = createRoutePath('/test/*', '/test/*');
-    expect(routePath).toHaveProperty('path', '/test/*');
-    expect(routePath).toHaveProperty('completePath', '/test/*');
-    expect(routePath.regExp).toEqual(/^\/test\/((?:.*))$/);
+  test('/test/(.*)?', () => {
+    const routePath = createRoutePath('/test/(.*)?', '/test/(.*)?');
+    expect(routePath).toHaveProperty('path', '/test/(.*)?');
+    expect(routePath).toHaveProperty('completePath', '/test/(.*)?');
+    expect(routePath.regExp).toEqual(/^\/test(?:\/(.*))?$/);
     expect(routePath.namedParams).toEqual([]);
     expect(routePath.toPath({ 0: '1/2/3' })).toEqual('/test/1/2/3');
   });
@@ -36,7 +36,7 @@ describe('createRoutePath', () => {
     );
     expect(routePath).toHaveProperty('path', '/route/:namedParam');
     expect(routePath).toHaveProperty('completePath', '/route/:namedParam');
-    expect(routePath.regExp).toEqual(/^\/route\/((?:[^\/]+?))$/);
+    expect(routePath.regExp).toEqual(/^\/route(?:\/([^\/#\?]+?))$/);
     expect(routePath.namedParams).toEqual(['namedParam']);
     expect(routePath.toPath({ namedParam: 'test' })).toEqual('/route/test');
   });
@@ -47,7 +47,7 @@ describe('createRoutePathSegment', () => {
     const routePath = createRoutePathSegment('/', '/');
     expect(routePath).toHaveProperty('path', '/');
     expect(routePath).toHaveProperty('completePath', '/');
-    expect(routePath.regExp).toEqual(/^\/(?:\/((?:.+)))?$/);
+    expect(routePath.regExp).toEqual(/^\/(?:\/(.*))?$/);
     expect(routePath.namedParams).toEqual([]);
   });
 
@@ -55,7 +55,7 @@ describe('createRoutePathSegment', () => {
     const routePath = createRoutePathSegment('/segment', '/segment');
     expect(routePath).toHaveProperty('path', '/segment');
     expect(routePath).toHaveProperty('completePath', '/segment');
-    expect(routePath.regExp).toEqual(/^\/segment(?:\/((?:.+)))?$/);
+    expect(routePath.regExp).toEqual(/^\/segment(?:\/(.*))?$/);
     expect(routePath.namedParams).toEqual([]);
   });
 
@@ -63,7 +63,7 @@ describe('createRoutePathSegment', () => {
     const routePath = createRoutePathSegment('/segment2', '/segment/segment2');
     expect(routePath).toHaveProperty('path', '/segment2');
     expect(routePath).toHaveProperty('completePath', '/segment/segment2');
-    expect(routePath.regExp).toEqual(/^\/segment2(?:\/((?:.+)))?$/);
+    expect(routePath.regExp).toEqual(/^\/segment2(?:\/(.*))?$/);
     expect(routePath.namedParams).toEqual([]);
   });
 
@@ -75,7 +75,7 @@ describe('createRoutePathSegment', () => {
     expect(routePath).toHaveProperty('path', '/segment/:namedParam');
     expect(routePath).toHaveProperty('completePath', '/segment/:namedParam');
     expect(routePath.regExp).toEqual(
-      /^\/segment\/((?:[^\/]+?))(?:\/((?:.+)))?$/,
+      /^\/segment(?:\/([^\/#\?]+?))(?:\/(.*))?$/,
     );
     expect(routePath.namedParams).toEqual(['namedParam']);
     expect((routePath as any).toPath).not.toBeDefined();

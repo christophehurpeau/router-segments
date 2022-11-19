@@ -47,6 +47,7 @@ const internalFindMatch = <Locales extends LocaleType>(
     }
 
     const match = routePath.regExp.exec(path);
+    // logger.info('trytomatch', { path, regExp: routePath.regExp, match });
     if (!match) return false;
 
     match.shift(); // remove m[0], === path;

@@ -49,7 +49,7 @@ test('find segments with multiple named params', () => {
 
 describe('find with /*', () => {
   const ref = Symbol('ref');
-  const routes = [createRoute('/test/*', '/test/*', ref)];
+  const routes = [createRoute('/test/(.*)?', '/test/(.*)?', ref)];
 
   test('/test/', () => {
     const match = findMatch('/test/', routes)!;

@@ -47,7 +47,7 @@ describe('blog', () => {
       test('path', () => {
         expect(routePath).toHaveProperty('path', '/post');
         expect(routePath).toHaveProperty('completePath', '/post');
-        expect(routePath.regExp).toEqual(/^\/post(?:\/((?:.+)))?$/);
+        expect(routePath.regExp).toEqual(/^\/post(?:\/(.*))?$/);
       });
 
       describe('nested routes', () => {
@@ -66,7 +66,7 @@ describe('blog', () => {
           );
           expect(nestedRoute.path.regExp).toEqual(
             // eslint-disable-next-line no-useless-escape
-            /^\/((?:\d+))-((?:[A-Za-z\-]+))$/,
+            /^(?:\/(\d+))-([A-Za-z\-]+)$/,
           );
         });
         test('second nested route', () => {
@@ -80,7 +80,7 @@ describe('blog', () => {
           );
           expect(nestedRoute.path.regExp).toEqual(
             // eslint-disable-next-line no-useless-escape
-            /^(?:\/((?:[^\/]+?)))?\/((?:\d{4}\-\d{2}\-\d{2}))_((?:[^\/]+?))$/,
+            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_([^\/#\?]+?)$/,
           );
         });
       });

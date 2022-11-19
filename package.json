@@ -106,7 +106,7 @@
   },
   "dependencies": {
     "nightingale-logger": "^13.0.0",
-    "path-to-regexp": "^1.7.0"
+    "path-to-regexp": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.20.2",

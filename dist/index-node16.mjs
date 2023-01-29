@@ -1,5 +1,5 @@
 import { Logger } from 'nightingale-logger';
-import pathToRegExp from 'path-to-regexp';
+import { pathToRegexp, compile } from 'path-to-regexp';
 
 /* eslint-disable complexity */
 const logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
@@ -18,6 +18,7 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
     const match = routePath.regExp.exec(path);
+    // logger.info('trytomatch', { path, regExp: routePath.regExp, match });
     if (!match) return false;
     match.shift(); // remove m[0], === path;
 
@@ -182,7 +183,7 @@ class NotLocalizedSegmentRoute {
 
 function internalCreateRoutePath(path, completePath, segment) {
   const keys = [];
-  const regExp = pathToRegExp(segment ? `${path}/(.+)?` : path, keys, {
+  const regExp = pathToRegexp(segment ? `${path}/(.*)?` : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -198,7 +199,7 @@ function internalCreateRoutePath(path, completePath, segment) {
     completePath,
     regExp,
     namedParams,
-    toPath: pathToRegExp.compile(completePath)
+    toPath: compile(completePath)
   };
 }
 const createRoutePathSegment = (path, completePath) => internalCreateRoutePath(path, completePath, true);

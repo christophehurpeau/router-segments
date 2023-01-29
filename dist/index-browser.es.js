@@ -1,5 +1,5 @@
 import { Logger } from 'nightingale-logger';
-import pathToRegExp from 'path-to-regexp';
+import { pathToRegexp, compile } from 'path-to-regexp';
 
 /* eslint-disable complexity */
 var logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
@@ -23,6 +23,7 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
       logger.debug("trying " + routePath.regExp.toString());
     }
     var match = routePath.regExp.exec(path);
+    // logger.info('trytomatch', { path, regExp: routePath.regExp, match });
     if (!match) return false;
     match.shift(); // remove m[0], === path;
 
@@ -202,7 +203,7 @@ var NotLocalizedSegmentRoute = /*#__PURE__*/function () {
 
 function internalCreateRoutePath(path, completePath, segment) {
   var keys = [];
-  var regExp = pathToRegExp(segment ? path + "/(.+)?" : path, keys, {
+  var regExp = pathToRegexp(segment ? path + "/(.*)?" : path, keys, {
     sensitive: true,
     strict: true
   });
@@ -220,7 +221,7 @@ function internalCreateRoutePath(path, completePath, segment) {
     completePath: completePath,
     regExp: regExp,
     namedParams: namedParams,
-    toPath: pathToRegExp.compile(completePath)
+    toPath: compile(completePath)
   };
 }
 var createRoutePathSegment = function createRoutePathSegment(path, completePath) {

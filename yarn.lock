@@ -2892,10 +2892,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-fix-class-properties-uninitialized@npm:6.1.0":
-  version: 6.1.0
-  resolution: "babel-plugin-fix-class-properties-uninitialized@npm:6.1.0"
-  checksum: d72be33b2840830a300cb9b558b3bacb1b9d04b4e52f0b1b3fd5174998d5f22b92b8f6b10f7825cc3912e3019d699694903ef6f75f0e0d38fc1424abd77b5b19
+"babel-plugin-fix-class-properties-uninitialized@npm:6.1.1":
+  version: 6.1.1
+  resolution: "babel-plugin-fix-class-properties-uninitialized@npm:6.1.1"
+  checksum: c45c9182277744893bb89645b3367098c8746f063ad21ac7744a38c772ec5baaa0d8dfc89e1aa36405553d2338a775c182771e99ed4ace8c4b62b155fbf3a356
   languageName: node
   linkType: hard
 
@@ -3077,20 +3077,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-pob-env@npm:9.1.1":
-  version: 9.1.1
-  resolution: "babel-preset-pob-env@npm:9.1.1"
+"babel-preset-pob-env@npm:9.1.3":
+  version: 9.1.3
+  resolution: "babel-preset-pob-env@npm:9.1.3"
   dependencies:
     "@babel/plugin-proposal-nullish-coalescing-operator": ^7.16.7
     "@babel/plugin-proposal-optional-chaining": ^7.16.7
     "@babel/plugin-transform-modules-commonjs": ^7.17.9
     "@babel/preset-typescript": ^7.16.7
     babel-plugin-discard-module-references: ^1.1.2
-    babel-plugin-fix-class-properties-uninitialized: 6.1.0
+    babel-plugin-fix-class-properties-uninitialized: 6.1.1
     babel-preset-optimizations: ^2.0.0
   peerDependencies:
     "@babel/core": ^7.11.6
-  checksum: 0805a7f997ec1626b7da6adc8a2ede8653bf4396d342208f6daee968e7cbdeabaee3d02a3f95c221228ed08c1b097d05f137806ab017880342167bca8dc99027
+  checksum: 52a9f17d9bcdd492efe903130bb3998d229373b3c45afe152d721e0a60c9d22f528f1a56ca4c904a15fe2af3789f22166977ce5161c1b41d8ad3eaf6bd748d31
   languageName: node
   linkType: hard
 
@@ -6623,9 +6623,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pob-babel@npm:35.4.0":
-  version: 35.4.0
-  resolution: "pob-babel@npm:35.4.0"
+"pob-babel@npm:35.6.0":
+  version: 35.6.0
+  resolution: "pob-babel@npm:35.6.0"
   dependencies:
     "@babel/core": ^7.17.10
     "@babel/plugin-transform-runtime": 7.19.6
@@ -6634,13 +6634,13 @@ __metadata:
     "@rollup/plugin-node-resolve": 15.0.1
     "@rollup/plugin-run": 3.0.1
     babel-preset-modern-browsers: ^15.0.2
-    babel-preset-pob-env: 9.1.1
-    rollup: 3.9.0
+    babel-preset-pob-env: 9.1.3
+    rollup: 3.19.1
     rollup-config-external-dependencies: ^2.0.0
     semver: ^7.3.7
   peerDependencies:
     "@babel/core": ^7.16.5
-    rollup: 3.9.0
+    rollup: 3.19.1
     typescript: ^4.0.3
   peerDependenciesMeta:
     rollup:
@@ -6648,7 +6648,7 @@ __metadata:
   bin:
     pob-babel-clean-out: bin/pob-babel-clean-out.js
     rollup: bin/rollup.cjs
-  checksum: 02e26c90a4424c089e95bffb544235430d6535b4ca090714efcf76f03c3db38e2123f931bf103e719aad140b02aa61c20f16a0fd8ca5f4ee78a6e50af673d53c
+  checksum: 7167f74365632860eb16665567dd4e6a7d794339fb3ecba0a16800ff3f34412da22f4323132ed6262aedb814c459417b54edccd9af54d834325faa0c6e1cd48b
   languageName: node
   linkType: hard
 
@@ -7027,9 +7027,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:3.9.0":
-  version: 3.9.0
-  resolution: "rollup@npm:3.9.0"
+"rollup@npm:3.19.1":
+  version: 3.19.1
+  resolution: "rollup@npm:3.19.1"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -7037,7 +7037,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: b0ce4baa8db8ee77ab096a4e066b20fb0719efb9cbd84f230838517d35bf159311487112852cfa687126896b58084c8e6cb9ab222f7559c4b6138ca693d63439
+  checksum: f78198c6de224b26650c70b16db156762d1fcceeb375d34fb2c76fc5b23a78f712c3c881d3248e6f277a511589e20d50c247bcf5c7920f1ddc0a43cadf9f0140
   languageName: node
   linkType: hard
 
@@ -7059,7 +7059,7 @@ __metadata:
     jest: 29.5.0
     nightingale-logger: ^13.0.0
     path-to-regexp: ^6.2.1
-    pob-babel: 35.4.0
+    pob-babel: 35.6.0
     typedoc: 0.23.27
     typescript: 4.9.5
   languageName: unknown

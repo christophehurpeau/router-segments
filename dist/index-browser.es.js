@@ -2,6 +2,7 @@ import { Logger } from 'nightingale-logger';
 import { pathToRegexp, compile } from 'path-to-regexp';
 
 /* eslint-disable complexity */
+
 var logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
@@ -12,7 +13,9 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   }
   var result = null;
   routes.some(function (route) {
-    var routePath = route.getPath(locale);
+    var routePath = route.getPath(locale),
+      segment,
+      restOfThePath;
     var isDev = process.env.NODE_ENV !== "production";
     if (isDev && !routePath) {
       throw new Error("Unknown localized route for locale " + locale);
@@ -37,8 +40,8 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
       });
     }
     if (route.isSegment()) {
-      var segment = route;
-      var restOfThePath = match[--groupCount];
+      segment = route;
+      restOfThePath = match[--groupCount];
       if (restOfThePath) {
         result = internalFindMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
         return result !== null;
@@ -234,12 +237,14 @@ var createRoutePath = function createRoutePath(path, completePath) {
 var createLocalizedPaths = function createLocalizedPaths(localizedPathsRecord, completeLocalizedPathsRecord, segment) {
   var localizedPaths = new Map();
   getKeys(localizedPathsRecord).forEach(function (locale) {
-    var path = localizedPathsRecord[locale];
+    var path = localizedPathsRecord[locale],
+      routerPath,
+      _routerPath;
     if (segment) {
-      var routerPath = createRoutePathSegment(path, completeLocalizedPathsRecord[locale]);
+      routerPath = createRoutePathSegment(path, completeLocalizedPathsRecord[locale]);
       localizedPaths.set(locale, routerPath);
     } else {
-      var _routerPath = createRoutePath(path, completeLocalizedPathsRecord[locale]);
+      _routerPath = createRoutePath(path, completeLocalizedPathsRecord[locale]);
       localizedPaths.set(locale, _routerPath);
     }
   });

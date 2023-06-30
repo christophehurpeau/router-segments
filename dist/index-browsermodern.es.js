@@ -2,6 +2,7 @@ import { Logger } from 'nightingale-logger';
 import { pathToRegexp, compile } from 'path-to-regexp';
 
 /* eslint-disable complexity */
+
 const logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
 const internalFindMatch = (path, completePath, routes, locale = 'en', namedParams) => {
@@ -317,7 +318,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
 }
 
 function createRouterBuilder(locales) {
-  const defaultLocale = locales === null || locales === void 0 ? void 0 : locales[0];
+  const defaultLocale = locales?.[0];
   const routes = [];
   const routeMap = new Map();
   const addToRouteMap = (key, route) => {

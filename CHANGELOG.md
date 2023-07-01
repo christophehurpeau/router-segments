@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/christophehurpeau/router-segments/compare/v6.0.0...v7.0.0) (2023-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node 18
+
+### Miscellaneous Chores
+
+* drop node 16 ([14a67ed](https://github.com/christophehurpeau/router-segments/commit/14a67ed3b209b33e67028ef5dc12df28b2b1ebcc))
+
 ## [6.0.0](https://github.com/christophehurpeau/router-segments/compare/v5.1.1...v6.0.0) (2022-11-19)
 
 

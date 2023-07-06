@@ -113,7 +113,7 @@
     "path-to-regexp": "^6.2.1"
   },
   "devDependencies": {
-    "@babel/core": "7.22.7",
+    "@babel/core": "7.22.8",
     "@babel/preset-env": "7.22.7",
     "@pob/commitlint-config": "6.0.1",
     "@pob/eslint-config": "51.0.0",

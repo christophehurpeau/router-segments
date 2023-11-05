@@ -5,7 +5,13 @@ import { pathToRegexp, compile } from 'path-to-regexp';
 
 const logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments:findMatch') : undefined;
 const parseOtherParams = wildcard => wildcard ? wildcard.split('/') : [];
-const internalFindMatch = (path, completePath, routes, locale = 'en', namedParams) => {
+const internalFindMatch = ({
+  path,
+  completePath,
+  routes,
+  locale = 'en',
+  namedParams
+}) => {
   let result = null;
   routes.some(route => {
     const routePath = route.getPath(locale);
@@ -36,7 +42,13 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
       const segment = route;
       const restOfThePath = match[--groupCount];
       if (restOfThePath) {
-        result = internalFindMatch(`/${restOfThePath}`, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch({
+          path: `/${restOfThePath}`,
+          completePath,
+          routes: segment.nestedRoutes,
+          locale,
+          namedParams
+        });
         return result !== null;
       }
       if (!segment.defaultRoute) {
@@ -60,7 +72,12 @@ const internalFindMatch = (path, completePath, routes, locale = 'en', namedParam
   return result;
 };
 function findMatch(path, routes, locale) {
-  return internalFindMatch(path, path, routes, locale);
+  return internalFindMatch({
+    path,
+    completePath: path,
+    routes,
+    locale
+  });
 }
 
 function createRouter(routes, routeMap) {

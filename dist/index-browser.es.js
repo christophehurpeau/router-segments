@@ -7,10 +7,13 @@ var logger = process.env.NODE_ENV !== "production" ? new Logger('router-segments
 var parseOtherParams = function parseOtherParams(wildcard) {
   return wildcard ? wildcard.split('/') : [];
 };
-var internalFindMatch = function internalFindMatch(path, completePath, routes, locale, namedParams) {
-  if (locale === void 0) {
-    locale = 'en';
-  }
+var internalFindMatch = function internalFindMatch(_ref) {
+  var path = _ref.path,
+    completePath = _ref.completePath,
+    routes = _ref.routes,
+    _ref$locale = _ref.locale,
+    locale = _ref$locale === void 0 ? 'en' : _ref$locale,
+    namedParams = _ref.namedParams;
   var result = null;
   routes.some(function (route) {
     var routePath = route.getPath(locale),
@@ -43,7 +46,13 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
       segment = route;
       restOfThePath = match[--groupCount];
       if (restOfThePath) {
-        result = internalFindMatch("/" + restOfThePath, completePath, segment.nestedRoutes, locale, namedParams);
+        result = internalFindMatch({
+          path: "/" + restOfThePath,
+          completePath: completePath,
+          routes: segment.nestedRoutes,
+          locale: locale,
+          namedParams: namedParams
+        });
         return result !== null;
       }
       if (!segment.defaultRoute) {
@@ -67,7 +76,12 @@ var internalFindMatch = function internalFindMatch(path, completePath, routes, l
   return result;
 };
 function findMatch(path, routes, locale) {
-  return internalFindMatch(path, path, routes, locale);
+  return internalFindMatch({
+    path: path,
+    completePath: path,
+    routes: routes,
+    locale: locale
+  });
 }
 
 function createRouter(routes, routeMap) {

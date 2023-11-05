@@ -1,6 +1,12 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [7.0.1](https://github.com/christophehurpeau/router-segments/compare/v7.0.0...v7.0.1) (2023-11-05)
+
+Note: no notable changes
+
 
 ## [7.0.0](https://github.com/christophehurpeau/router-segments/compare/v6.0.0...v7.0.0) (2023-07-01)
 

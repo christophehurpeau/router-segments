@@ -8,6 +8,9 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["@pob/eslint-config-typescript"],
   "ignorePatterns": ["*.d.ts"],
+  "rules": {
+    "@typescript-eslint/class-methods-use-this": "off"
+  },
   "overrides": [
     {
       "files": ["**/*.test.ts", "__tests__/**/*.ts"],

@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, unicorn/no-unsafe-regex, no-useless-escape */
+/* eslint-disable unicorn/better-regex, no-useless-escape */
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 
 describe('createRoutePath', () => {

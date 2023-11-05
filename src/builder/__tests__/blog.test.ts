@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/better-regex, unicorn/no-unsafe-regex */
+/* eslint-disable unicorn/better-regex */
 import type { RouteMatch } from '../../router/findMatch';
 import type {
   NotLocalizedEndRoute,

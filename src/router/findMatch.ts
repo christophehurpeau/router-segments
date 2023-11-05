@@ -24,13 +24,21 @@ const logger = IS_DEV ? new Logger('router-segments:findMatch') : undefined;
 const parseOtherParams = (wildcard: string): string[] =>
   wildcard ? wildcard.split('/') : [];
 
-const internalFindMatch = <Locales extends LocaleType>(
-  path: string,
-  completePath: string,
-  routes: Route<RoutePathInterface, Locales>[],
-  locale: Locales = 'en' as Locales,
-  namedParams?: Map<number | string, string>,
-): RouteMatch<Locales> | null => {
+interface InternalFindMatchParams<Locales extends LocaleType> {
+  path: string;
+  completePath: string;
+  routes: Route<RoutePathInterface, Locales>[];
+  locale?: Locales;
+  namedParams?: Map<number | string, string>;
+}
+
+const internalFindMatch = <Locales extends LocaleType>({
+  path,
+  completePath,
+  routes,
+  locale = 'en' as Locales,
+  namedParams,
+}: InternalFindMatchParams<Locales>): RouteMatch<Locales> | null => {
   let result = null;
 
   routes.some((route): boolean => {
@@ -69,13 +77,13 @@ const internalFindMatch = <Locales extends LocaleType>(
       const restOfThePath = match[--groupCount];
 
       if (restOfThePath) {
-        result = internalFindMatch(
-          `/${restOfThePath}`,
+        result = internalFindMatch({
+          path: `/${restOfThePath}`,
           completePath,
-          segment.nestedRoutes,
+          routes: segment.nestedRoutes,
           locale,
           namedParams,
-        );
+        });
 
         return result !== null;
       }
@@ -113,5 +121,5 @@ export function findMatch<Locales extends LocaleType>(
   routes: Route<RoutePathInterface, Locales>[],
   locale?: Locales,
 ): RouteMatch<Locales> | null {
-  return internalFindMatch(path, path, routes, locale);
+  return internalFindMatch({ path, completePath: path, routes, locale });
 }

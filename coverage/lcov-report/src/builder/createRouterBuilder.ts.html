@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>32/32</span>
+                <span class='fraction'>37/37</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>28/28</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -163,8 +163,20 @@
 <a name='L98'></a><a href='#L98'>98</a>
 <a name='L99'></a><a href='#L99'>99</a>
 <a name='L100'></a><a href='#L100'>100</a>
-<a name='L101'></a><a href='#L101'>101</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -208,7 +220,13 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,6 +242,7 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,6 +255,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -244,6 +264,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,6 +275,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -262,6 +287,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Router } from '../router/createRouter';
 import { createRouter } from '../router/createRouter';
@@ -277,38 +303,43 @@ import type {
   LocalizedPathsRecord,
   Routes,
   RouteMap,
-  RouteRef,
 } from '../types';
 import type { SegmentRouterBuilder } from './createSegmentRouterBuilderCreator';
 import { createSegmentRouterBuilderCreator } from './createSegmentRouterBuilderCreator';
 &nbsp;
-export interface RouterBuilder&lt;Locales extends LocaleType | never&gt; {
-  add: (path: string, ref: RouteRef, key?: string) =&gt; void;
+export interface RouterBuilder&lt;Locales extends LocaleType | never, RouteRef&gt; {
+  add: (path: string, ref: RouteRef, key?: string) =&gt; this;
   addLocalized: (
     localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
     ref: RouteRef,
     key?: string,
-  ) =&gt; void;
+  ) =&gt; this;
   addLocalizedSegment: (
     localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
-    buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-  ) =&gt; void;
+    buildSegment: (builder: SegmentRouterBuilder&lt;Locales, RouteRef&gt;) =&gt; void,
+  ) =&gt; this;
   addSegment: (
     path: string,
-    buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-  ) =&gt; void;
-  createRouter: () =&gt; Router&lt;Locales&gt;;
-  getRoutes: () =&gt; Routes&lt;Locales&gt;;
+    buildSegment: (builder: SegmentRouterBuilder&lt;Locales, RouteRef&gt;) =&gt; void,
+  ) =&gt; this;
+  createRouter: () =&gt; Router&lt;Locales, RouteRef&gt;;
+  getRoutes: () =&gt; Routes&lt;Locales, RouteRef&gt;;
 }
 &nbsp;
-export function createRouterBuilder&lt;Locales extends LocaleType&gt;(
+export function createRouterBuilder&lt;Locales extends LocaleType, RouteRef&gt;(
   locales?: Locales[],
-): RouterBuilder&lt;Locales&gt; {
+): RouterBuilder&lt;Locales, RouteRef&gt; {
   const defaultLocale = locales?.[0];
-  const routes: Routes&lt;Locales&gt; = [];
-  const routeMap: RouteMap&lt;Locales&gt; = new Map&lt;string, EndRoute&lt;Locales&gt;&gt;();
+  const routes: Routes&lt;Locales, RouteRef&gt; = [];
+  const routeMap: RouteMap&lt;Locales, RouteRef&gt; = new Map&lt;
+    string,
+    EndRoute&lt;Locales, RouteRef&gt;
+  &gt;();
 &nbsp;
-  const addToRouteMap = (key: string, route: EndRoute&lt;Locales&gt;): void =&gt; {
+  const addToRouteMap = (
+    key: string,
+    route: EndRoute&lt;Locales, RouteRef&gt;,
+  ): void =&gt; {
     if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
     routeMap.set(key, route);
   };
@@ -318,50 +349,58 @@ export function createRouterBuilder&lt;Locales extends LocaleType&gt;(
     addToRouteMap,
   );
 &nbsp;
-  return {
-    add: (path: string, ref: RouteRef, key?: string): void =&gt; {
+  const builder: RouterBuilder&lt;Locales, RouteRef&gt; = {
+    add: (path: string, ref: RouteRef, key?: string) =&gt; {
       const route = createRoute(path, path, ref);
       routes.push(route);
       if (!key) key = path;
       addToRouteMap(key, route);
+      return builder;
     },
 &nbsp;
     addLocalized: (
       localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
       ref: RouteRef,
       key?: string,
-    ): void =&gt; {
+    ) =&gt; {
       if (!defaultLocale) throw new Error('Invalid locales');
       const route = createLocalizedRoute(localizedPaths, localizedPaths, ref);
       routes.push(route);
       const finalKey: string = key || localizedPaths[defaultLocale];
       addToRouteMap(finalKey, route);
+      return builder;
     },
 &nbsp;
     addSegment: (
       path: string,
-      buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-    ): void =&gt; {
-      const route = createSegmentRoute(path, path);
+      buildSegment: (builder: SegmentRouterBuilder&lt;Locales, RouteRef&gt;) =&gt; void,
+    ) =&gt; {
+      const route = createSegmentRoute&lt;Locales, RouteRef&gt;(path, path);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
 &nbsp;
     addLocalizedSegment: (
       localizedPaths: LocalizedPathsRecord&lt;Locales&gt;,
-      buildSegment: (builder: SegmentRouterBuilder&lt;Locales&gt;) =&gt; void,
-    ): void =&gt; {
+      buildSegment: (builder: SegmentRouterBuilder&lt;Locales, RouteRef&gt;) =&gt; void,
+    ) =&gt; {
       if (!defaultLocale) throw new Error('Invalid locales');
-      const route = createLocalizedSegmentRoute(localizedPaths, localizedPaths);
+      const route = createLocalizedSegmentRoute&lt;Locales, RouteRef&gt;(
+        localizedPaths,
+        localizedPaths,
+      );
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
 &nbsp;
     getRoutes: () =&gt; routes,
     createRouter: () =&gt; createRouter(routes, routeMap),
   };
+  return builder;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -370,7 +409,7 @@ export function createRouterBuilder&lt;Locales extends LocaleType&gt;(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-18T00:07:00.331Z
+                at 2023-11-18T16:10:33.997Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

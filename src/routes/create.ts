@@ -4,7 +4,6 @@ import type {
   LocalizedPathsRecord,
   EndRoutePath,
   SegmentRoutePath,
-  RouteRef,
 } from '../types';
 import { getKeys } from '../utils/getKeys';
 import { LocalizedEndRoute } from './LocalizedEndRoute';
@@ -41,26 +40,26 @@ const createLocalizedPaths = <
   return localizedPaths;
 };
 
-const checkRef = (ref: RouteRef): void => {
+const checkRef = <RouteRef>(ref: RouteRef): void => {
   if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
 };
 
-export const createRoute = (
+export const createRoute = <Locales extends LocaleType, RouteRef>(
   path: string,
   completePath: string,
   ref: RouteRef,
-): Route => {
+): Route<Locales, RouteRef> => {
   /* istanbul ignore if */
   if (IS_DEV) checkRef(ref);
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };
 
-export const createLocalizedRoute = <Locales extends LocaleType>(
+export const createLocalizedRoute = <Locales extends LocaleType, RouteRef>(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
   ref: RouteRef,
-): LocalizedEndRoute<Locales> => {
+): LocalizedEndRoute<Locales, RouteRef> => {
   /* istanbul ignore if */
   if (IS_DEV) checkRef(ref);
   const localizedPaths = createLocalizedPaths<Locales, EndRoutePath>(
@@ -71,18 +70,21 @@ export const createLocalizedRoute = <Locales extends LocaleType>(
   return new LocalizedEndRoute(localizedPaths, ref);
 };
 
-export const createSegmentRoute = (
+export const createSegmentRoute = <Locales extends LocaleType, RouteRef>(
   path: string,
   completePath: string,
-): NotLocalizedSegmentRoute => {
+): NotLocalizedSegmentRoute<Locales, RouteRef> => {
   const routePath = createRoutePathSegment(path, completePath);
   return new NotLocalizedSegmentRoute(routePath);
 };
 
-export const createLocalizedSegmentRoute = <Locales extends LocaleType>(
+export const createLocalizedSegmentRoute = <
+  Locales extends LocaleType,
+  RouteRef,
+>(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
-): LocalizedSegmentRoute<Locales> => {
+): LocalizedSegmentRoute<Locales, RouteRef> => {
   const localizedPaths = createLocalizedPaths<Locales, SegmentRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,

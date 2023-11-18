@@ -4,7 +4,7 @@ import type { Routes } from '../types';
 import { findMatch } from './findMatch';
 
 test('find without routes returns null', () => {
-  const routes: Routes<never> = [];
+  const routes: Routes<never, never> = [];
   expect(findMatch('/', routes)).toBe(null);
 });
 

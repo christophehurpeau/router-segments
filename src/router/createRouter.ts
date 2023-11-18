@@ -3,18 +3,21 @@ import type { Routes, RouteMap, LocaleType } from '../types';
 import type { RouteMatch } from './findMatch';
 import { findMatch } from './findMatch';
 
-export interface Router<Locales extends LocaleType | never = any> {
-  get: (key: string) => EndRoute<Locales>;
-  find: (path: string, locale?: Locales) => RouteMatch<Locales> | null;
+export interface Router<Locales extends LocaleType | never, RouteRef> {
+  get: (key: string) => EndRoute<Locales, RouteRef>;
+  find: (
+    path: string,
+    locale?: Locales,
+  ) => RouteMatch<Locales, RouteRef> | null;
   toLocalizedPath: (locale: Locales, key: string, args?: any) => string;
   toPath: (key: string, args?: any) => string;
 }
 
-export function createRouter<Locales extends LocaleType | never>(
-  routes: Routes<Locales>,
-  routeMap: RouteMap<Locales>,
-): Router<Locales> {
-  const getRequiredRoute = (routeKey: string): EndRoute<Locales> => {
+export function createRouter<Locales extends LocaleType | never, RouteRef>(
+  routes: Routes<Locales, RouteRef>,
+  routeMap: RouteMap<Locales, RouteRef>,
+): Router<Locales, RouteRef> {
+  const getRequiredRoute = (routeKey: string): EndRoute<Locales, RouteRef> => {
     const route = routeMap.get(routeKey);
     if (!route) throw new Error(`No route named "${routeKey}"`);
     return route;
@@ -22,8 +25,10 @@ export function createRouter<Locales extends LocaleType | never>(
 
   return {
     get: getRequiredRoute,
-    find: (path: string, locale?: Locales): RouteMatch<Locales> | null =>
-      findMatch(path, routes, locale),
+    find: (
+      path: string,
+      locale?: Locales,
+    ): RouteMatch<Locales, RouteRef> | null => findMatch(path, routes, locale),
     toPath: (key: string, args?: Record<string, any>): string =>
       getRequiredRoute(key).getPath().toPath(args),
     toLocalizedPath: (

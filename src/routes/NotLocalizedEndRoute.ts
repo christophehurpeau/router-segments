@@ -1,8 +1,10 @@
 import type { EndRoute, NotLocalizedRoute } from './interfaces';
-import type { EndRoutePath, LocaleType, RouteRef } from './types';
+import type { EndRoutePath, LocaleType } from './types';
 
-export class NotLocalizedEndRoute<Locales extends LocaleType = LocaleType>
-  implements EndRoute<Locales>, NotLocalizedRoute<EndRoutePath, Locales>
+export class NotLocalizedEndRoute<Locales extends LocaleType, RouteRef>
+  implements
+    EndRoute<Locales, RouteRef>,
+    NotLocalizedRoute<EndRoutePath, Locales, RouteRef>
 {
   path: EndRoutePath;
 
@@ -10,7 +12,7 @@ export class NotLocalizedEndRoute<Locales extends LocaleType = LocaleType>
 
   constructor(path: EndRoutePath, ref: RouteRef) {
     this.path = path;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     this.ref = ref;
     // Object.freeze(this);
   }

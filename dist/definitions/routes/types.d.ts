@@ -1,4 +1,3 @@
-export type RouteRef = any;
 export type LocaleType = string;
 type RoutePathNamedParams = (number | string)[];
 export interface RoutePathInterface {

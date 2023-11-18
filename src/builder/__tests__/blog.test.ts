@@ -9,22 +9,21 @@ import { createRouterBuilder } from '../createRouterBuilder';
 describe('blog', () => {
   const ref = Symbol('ref');
 
-  const builder = createRouterBuilder();
-
-  builder.add('/', ref);
-  builder.addSegment('/post', (segmentBuilder) => {
-    segmentBuilder.defaultRoute(ref, 'postList');
-    segmentBuilder.add('/:id(\\d+)-:slug([A-Za-z\\-]+)', ref, 'postView');
-    segmentBuilder.add(
-      '/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug',
-      ref,
-      'postWithTag',
-    );
-    segmentBuilder.addSegment('/search', (subSegmentBuilder) => {
-      subSegmentBuilder.defaultRoute('refsearch', 'search');
-      subSegmentBuilder.add('/:term', ref, 'search-results');
+  const builder = createRouterBuilder()
+    .add('/', ref)
+    .addSegment('/post', (segmentBuilder) => {
+      segmentBuilder.defaultRoute(ref, 'postList');
+      segmentBuilder.add('/:id(\\d+)-:slug([A-Za-z\\-]+)', ref, 'postView');
+      segmentBuilder.add(
+        '/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug',
+        ref,
+        'postWithTag',
+      );
+      segmentBuilder.addSegment('/search', (subSegmentBuilder) => {
+        subSegmentBuilder.defaultRoute('refsearch', 'search');
+        subSegmentBuilder.add('/:term', ref, 'search-results');
+      });
     });
-  });
 
   const router = builder.createRouter();
 
@@ -35,13 +34,12 @@ describe('blog', () => {
     });
 
     test('home', () => {
-      const homeRoute = routes[0] as NotLocalizedEndRoute;
-      expect(homeRoute.path.path).toBe('/');
+      const homeRoute = routes[0] as NotLocalizedEndRoute<any, any>;
+      expect(homeRoute?.path.path).toBe('/');
     });
 
     describe('post', () => {
-      const postRouterRoute: NotLocalizedSegmentRoute =
-        routes[1] as NotLocalizedSegmentRoute;
+      const postRouterRoute = routes[1] as NotLocalizedSegmentRoute<any, any>;
       const routePath = postRouterRoute.path;
 
       test('path', () => {
@@ -58,8 +56,10 @@ describe('blog', () => {
         });
 
         test('first nested route', () => {
-          const nestedRoute: NotLocalizedEndRoute =
-            nestedRoutes[0] as NotLocalizedEndRoute;
+          const nestedRoute = nestedRoutes[0] as NotLocalizedSegmentRoute<
+            any,
+            any
+          >;
           expect(nestedRoute.path.path).toBe('/:id(\\d+)-:slug([A-Za-z\\-]+)');
           expect(nestedRoute.path.completePath).toBe(
             '/post/:id(\\d+)-:slug([A-Za-z\\-]+)',
@@ -70,8 +70,10 @@ describe('blog', () => {
           );
         });
         test('second nested route', () => {
-          const nestedRoute: NotLocalizedEndRoute =
-            nestedRoutes[1] as NotLocalizedEndRoute;
+          const nestedRoute = nestedRoutes[1] as NotLocalizedSegmentRoute<
+            any,
+            any
+          >;
           expect(nestedRoute.path.path).toBe(
             '/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug',
           );
@@ -86,8 +88,7 @@ describe('blog', () => {
       });
 
       test('default route', () => {
-        const defaultRoute: NotLocalizedEndRoute =
-          postRouterRoute.defaultRoute!;
+        const defaultRoute = postRouterRoute.defaultRoute!;
 
         expect(defaultRoute).toBeDefined();
         expect(defaultRoute.path).toHaveProperty('completePath', '/post');
@@ -99,7 +100,10 @@ describe('blog', () => {
     });
 
     test('postView', () => {
-      const rrPostView = router.get('postView') as NotLocalizedEndRoute;
+      const rrPostView = router.get('postView') as NotLocalizedEndRoute<
+        any,
+        any
+      >;
       expect(rrPostView.path.namedParams).toEqual(['id', 'slug']);
       expect(
         rrPostView.path.toPath({ id: '001', slug: 'The-First-Post' }),
@@ -110,7 +114,7 @@ describe('blog', () => {
   describe('find', () => {
     test('postList', () => {
       const path = '/post';
-      const match = router.find(path) as RouteMatch<never>;
+      const match = router.find(path) as RouteMatch<never, unknown>;
       expect(match).toHaveProperty('path', path);
       expect(match).toHaveProperty('route', router.get('postList'));
       expect(match.namedParams).toBe(undefined);
@@ -119,7 +123,7 @@ describe('blog', () => {
 
     test('postView', () => {
       const path = '/post/001-The-First-Post';
-      const match = router.find(path) as RouteMatch<never>;
+      const match = router.find(path) as RouteMatch<never, unknown>;
       expect(match).toHaveProperty('path', path);
       expect(match.namedParams).toEqual(
         new Map([
@@ -132,18 +136,19 @@ describe('blog', () => {
 
     test('search', () => {
       const path = '/post/search';
-      const match = router.find(path) as RouteMatch<never>;
+      const match = router.find(path) as RouteMatch<never, unknown>;
       expect(match).toHaveProperty('path', path);
       const route: any = match.route;
       expect(route.path.completePath).toBe(
-        (router.get('search') as NotLocalizedEndRoute).path.completePath,
+        (router.get('search') as NotLocalizedEndRoute<any, unknown>).path
+          .completePath,
       );
       expect(match.ref).toBe('refsearch');
     });
 
     test('search', () => {
       const path = '/post/search/searchedterm';
-      const match = router.find(path) as RouteMatch<never>;
+      const match = router.find(path) as RouteMatch<never, unknown>;
       expect(match).toHaveProperty('path', path);
       expect(match).toHaveProperty('route', router.get('search-results'));
       expect(match.namedParams).toEqual(new Map([['term', 'searchedterm']]));

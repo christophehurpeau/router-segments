@@ -63,7 +63,6 @@ var internalFindMatch = function internalFindMatch(_ref) {
     var endRoute = route;
     var otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
     result = Object.freeze({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,
@@ -111,7 +110,6 @@ var getKeys = function getKeys(o) {
 var LocalizedEndRoute = /*#__PURE__*/function () {
   function LocalizedEndRoute(localizedPaths, ref) {
     this.localizedPaths = localizedPaths;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     Object.freeze(this);
   }
@@ -167,7 +165,6 @@ var LocalizedSegmentRoute = /*#__PURE__*/function () {
 var NotLocalizedEndRoute = /*#__PURE__*/function () {
   function NotLocalizedEndRoute(path, ref) {
     this.path = path;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     // Object.freeze(this);
   }
@@ -372,12 +369,13 @@ function createRouterBuilder(locales) {
     routeMap.set(key, route);
   };
   var createSegmentRouterBuilder = createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap);
-  return {
+  var builder = {
     add: function add(path, ref, key) {
       var route = createRoute(path, path, ref);
       routes.push(route);
       if (!key) key = path;
       addToRouteMap(key, route);
+      return builder;
     },
     addLocalized: function addLocalized(localizedPaths, ref, key) {
       if (!defaultLocale) throw new Error('Invalid locales');
@@ -385,12 +383,14 @@ function createRouterBuilder(locales) {
       routes.push(route);
       var finalKey = key || localizedPaths[defaultLocale];
       addToRouteMap(finalKey, route);
+      return builder;
     },
     addSegment: function addSegment(path, buildSegment) {
       var route = createSegmentRoute(path, path);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
     addLocalizedSegment: function addLocalizedSegment(localizedPaths, buildSegment) {
       if (!defaultLocale) throw new Error('Invalid locales');
@@ -398,6 +398,7 @@ function createRouterBuilder(locales) {
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
     getRoutes: function getRoutes() {
       return routes;
@@ -406,6 +407,7 @@ function createRouterBuilder(locales) {
       return createRouter(routes, routeMap);
     }
   };
+  return builder;
 }
 
 export { createRouterBuilder };

@@ -3,7 +3,6 @@ import type { LocaleType, RoutePathInterface } from './routes/types';
 
 export type {
   LocaleType,
-  RouteRef,
   RoutePathInterface,
   EndRoutePath,
   SegmentRoutePath,
@@ -16,8 +15,12 @@ export type LocalizedPathsRecord<Locales extends LocaleType> = Record<
 
 // export SegmentCallbackType = (builder: SegmentRouterBuilderType) => void;
 
-export type Routes<Locales> = Route<RoutePathInterface, Locales>[];
-export type RouteMap<Locales extends LocaleType> = Map<
+export type Routes<Locales extends LocaleType, RouteRef> = Route<
+  RoutePathInterface,
+  Locales,
+  RouteRef
+>[];
+export type RouteMap<Locales extends LocaleType, RouteRef> = Map<
   string,
-  EndRoute<Locales>
+  EndRoute<Locales, RouteRef>
 >;

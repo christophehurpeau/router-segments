@@ -1,6 +1,6 @@
 import type { EndRoute, NotLocalizedRoute } from './interfaces';
-import type { EndRoutePath, LocaleType, RouteRef } from './types';
-export declare class NotLocalizedEndRoute<Locales extends LocaleType = LocaleType> implements EndRoute<Locales>, NotLocalizedRoute<EndRoutePath, Locales> {
+import type { EndRoutePath, LocaleType } from './types';
+export declare class NotLocalizedEndRoute<Locales extends LocaleType, RouteRef> implements EndRoute<Locales, RouteRef>, NotLocalizedRoute<EndRoutePath, Locales, RouteRef> {
     path: EndRoutePath;
     ref: RouteRef;
     constructor(path: EndRoutePath, ref: RouteRef);

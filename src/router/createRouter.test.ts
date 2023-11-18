@@ -1,7 +1,6 @@
 import { createRoute, createLocalizedRoute } from '../routes/create';
 import type { EndRoute } from '../routes/interfaces';
 import { createRouter } from './createRouter';
-import type { RouteMatch } from './findMatch';
 
 const ref = Symbol('ref');
 const route = createRoute('/', '/', ref);
@@ -13,7 +12,7 @@ const localizedRoute = createLocalizedRoute(
 );
 const router = createRouter(
   [route, localizedRoute],
-  new Map<string, EndRoute<keyof typeof localizedPathsRecord>>([
+  new Map<string, EndRoute<keyof typeof localizedPathsRecord, symbol>>([
     ['/', route],
     ['/blog', localizedRoute],
   ]),
@@ -24,8 +23,8 @@ test('get by key should return route', () => {
 });
 
 test('find should return route match', () => {
-  const match = router.find('/') as RouteMatch<never>;
-  expect(match.routePath).toBe(route.path);
+  const match = router.find('/');
+  expect(match?.routePath).toBe(route.path);
 });
 
 test('toPath should return url', () => {

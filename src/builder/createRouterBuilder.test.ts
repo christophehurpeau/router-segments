@@ -8,7 +8,7 @@ test('home', () => {
   builder.add('/', ref);
 
   const router = builder.createRouter();
-  const rr = router.get('/') as NotLocalizedEndRoute;
+  const rr = router.get('/') as NotLocalizedEndRoute<never, symbol>;
   expect(rr).toBeDefined();
   expect(rr.ref).toBe(ref);
   expect(rr.path.namedParams.length).toBe(0);

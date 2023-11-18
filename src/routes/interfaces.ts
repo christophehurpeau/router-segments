@@ -1,12 +1,16 @@
 import type {
   LocaleType,
-  RouteRef,
   RoutePathInterface,
   EndRoutePath,
   SegmentRoutePath,
 } from './types';
 
-export interface Route<T extends RoutePathInterface, Locales = LocaleType> {
+export interface Route<
+  T extends RoutePathInterface,
+  Locales extends LocaleType,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- helps typescript to infer the type
+  RouteRef,
+> {
   isSegment: () => boolean;
   isLocalized: () => boolean;
   getPath: (locale?: Locales) => T;
@@ -16,17 +20,17 @@ export interface Route<T extends RoutePathInterface, Locales = LocaleType> {
   toString: () => string;
 }
 
-export interface EndRoute<Locales = LocaleType>
-  extends Route<EndRoutePath, Locales> {
+export interface EndRoute<Locales extends LocaleType, RouteRef>
+  extends Route<EndRoutePath, Locales, RouteRef> {
   ref: RouteRef;
 
   isSegment: () => false;
 }
 
-export interface SegmentRoute<Locales = LocaleType>
-  extends Route<SegmentRoutePath, Locales> {
-  defaultRoute: EndRoute<Locales> | undefined;
-  nestedRoutes: Route<RoutePathInterface, Locales>[];
+export interface SegmentRoute<Locales extends LocaleType, RouteRef>
+  extends Route<SegmentRoutePath, Locales, RouteRef> {
+  defaultRoute: EndRoute<Locales, RouteRef> | undefined;
+  nestedRoutes: Route<RoutePathInterface, Locales, RouteRef>[];
 
   isSegment: () => true;
 }
@@ -34,7 +38,8 @@ export interface SegmentRoute<Locales = LocaleType>
 export interface NotLocalizedRoute<
   T extends RoutePathInterface,
   Locales extends LocaleType,
-> extends Route<T, Locales> {
+  RouteRef,
+> extends Route<T, Locales, RouteRef> {
   isLocalized: () => false;
   getPath: () => T;
 }
@@ -42,7 +47,8 @@ export interface NotLocalizedRoute<
 export interface LocalizedRoute<
   T extends RoutePathInterface,
   Locales extends LocaleType,
-> extends Route<T, Locales> {
+  RouteRef,
+> extends Route<T, Locales, RouteRef> {
   isLocalized: () => true;
   getPath: (locale?: Locales) => T;
 }

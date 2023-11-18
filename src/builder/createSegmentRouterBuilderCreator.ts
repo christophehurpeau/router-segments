@@ -6,10 +6,10 @@ import {
   createLocalizedSegmentRoute,
 } from '../routes/create';
 import type { EndRoute, SegmentRoute } from '../routes/interfaces';
-import type { LocalizedPathsRecord, RouteRef, LocaleType } from '../types';
+import type { LocalizedPathsRecord, LocaleType } from '../types';
 import { getKeys } from '../utils/getKeys';
 
-export interface SegmentRouterBuilder<Locales extends LocaleType> {
+export interface SegmentRouterBuilder<Locales extends LocaleType, RouteRef> {
   add: (path: string, ref: RouteRef, key?: string) => void;
   addLocalized: (
     localizedPaths: LocalizedPathsRecord<Locales>,
@@ -18,22 +18,27 @@ export interface SegmentRouterBuilder<Locales extends LocaleType> {
   ) => void;
   addLocalizedSegment: (
     localizedPaths: LocalizedPathsRecord<Locales>,
-    buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
+    buildSegment: (builder: SegmentRouterBuilder<Locales, RouteRef>) => void,
   ) => void;
   addSegment: (
     path: string,
-    buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
+    buildSegment: (builder: SegmentRouterBuilder<Locales, RouteRef>) => void,
   ) => void;
   defaultRoute: (ref: RouteRef, key?: string) => void;
 }
 
-export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
+export function createSegmentRouterBuilderCreator<
+  Locales extends LocaleType,
+  RouteRef,
+>(
   defaultLocale: Locales | undefined,
-  addToRouteMap: (key: string, route: EndRoute<Locales>) => void,
-): (segmentRoute: SegmentRoute<Locales>) => SegmentRouterBuilder<Locales> {
+  addToRouteMap: (key: string, route: EndRoute<Locales, RouteRef>) => void,
+): (
+  segmentRoute: SegmentRoute<Locales, RouteRef>,
+) => SegmentRouterBuilder<Locales, RouteRef> {
   const createSegmentRouterBuilder = (
-    segmentRoute: SegmentRoute<Locales>,
-  ): SegmentRouterBuilder<Locales> => {
+    segmentRoute: SegmentRoute<Locales, RouteRef>,
+  ): SegmentRouterBuilder<Locales, RouteRef> => {
     const getCompletePath = (path: string, locale?: Locales): string =>
       `${segmentRoute.getPath(locale).completePath}${path}`;
 
@@ -57,7 +62,7 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
 
     const createLocalizedPathFromSegment = (
       // eslint-disable-next-line @typescript-eslint/no-shadow
-      segmentRoute: LocalizedSegmentRoute<Locales>,
+      segmentRoute: LocalizedSegmentRoute<Locales, RouteRef>,
       path: string,
     ): Record<Locales, string> => {
       const localizedPaths: Record<Locales, string> = {} as Record<
@@ -74,7 +79,7 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
       localizedPaths: LocalizedPathsRecord<Locales>,
       ref: RouteRef,
       key?: string,
-    ): LocalizedEndRoute<Locales> => {
+    ): LocalizedEndRoute<Locales, RouteRef> => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
       const finalKey: string = key || completeLocalizedPaths[defaultLocale!];
       const route = createLocalizedRoute(
@@ -90,11 +95,11 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
       path: string,
       ref: RouteRef,
       key?: string,
-    ): EndRoute<Locales> => {
+    ): EndRoute<Locales, RouteRef> => {
       if (segmentRoute.isLocalized()) {
         return _createLocalizedEndRoute(
           createLocalizedPathFromSegment(
-            segmentRoute as LocalizedSegmentRoute<Locales>,
+            segmentRoute as LocalizedSegmentRoute<Locales, RouteRef>,
             path,
           ),
           ref,
@@ -111,10 +116,10 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
 
     const _createLocalizedSegmentRoute = (
       localizedPaths: LocalizedPathsRecord<Locales>,
-      buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-    ): LocalizedSegmentRoute<Locales> => {
+      buildSegment: (builder: SegmentRouterBuilder<Locales, RouteRef>) => void,
+    ): LocalizedSegmentRoute<Locales, RouteRef> => {
       const completeLocalizedPaths = getCompleteLocalizedPaths(localizedPaths);
-      const route = createLocalizedSegmentRoute(
+      const route = createLocalizedSegmentRoute<Locales, RouteRef>(
         localizedPaths,
         completeLocalizedPaths,
       );
@@ -125,12 +130,12 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
 
     const _createSegmentRoute = (
       path: string,
-      buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
-    ): SegmentRoute<Locales> => {
+      buildSegment: (builder: SegmentRouterBuilder<Locales, RouteRef>) => void,
+    ): SegmentRoute<Locales, RouteRef> => {
       if (segmentRoute.isLocalized()) {
         return _createLocalizedSegmentRoute(
           createLocalizedPathFromSegment(
-            segmentRoute as LocalizedSegmentRoute<Locales>,
+            segmentRoute as LocalizedSegmentRoute<Locales, RouteRef>,
             path,
           ),
           buildSegment,
@@ -138,7 +143,7 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
       }
 
       const completePath = getCompletePath(path);
-      const route = createSegmentRoute(path, completePath);
+      const route = createSegmentRoute<Locales, RouteRef>(path, completePath);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       return route;
@@ -166,14 +171,18 @@ export function createSegmentRouterBuilderCreator<Locales extends LocaleType>(
 
       addSegment: (
         path: string,
-        buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
+        buildSegment: (
+          builder: SegmentRouterBuilder<Locales, RouteRef>,
+        ) => void,
       ): void => {
         segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
       },
 
       addLocalizedSegment: (
         localizedPaths: LocalizedPathsRecord<Locales>,
-        buildSegment: (builder: SegmentRouterBuilder<Locales>) => void,
+        buildSegment: (
+          builder: SegmentRouterBuilder<Locales, RouteRef>,
+        ) => void,
       ): void => {
         if (!defaultLocale) throw new Error('Invalid locales');
         segmentRoute.nestedRoutes.push(

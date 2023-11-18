@@ -1,6 +1,5 @@
 export type {
   LocaleType,
-  RouteRef,
   RoutePathInterface,
   EndRoutePath,
   SegmentRoutePath,

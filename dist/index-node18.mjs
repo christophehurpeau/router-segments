@@ -59,7 +59,6 @@ const internalFindMatch = ({
     const endRoute = route;
     const otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
     result = Object.freeze({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,
@@ -99,7 +98,6 @@ const getKeys = o => Object.keys(o);
 class LocalizedEndRoute {
   constructor(localizedPaths, ref) {
     this.localizedPaths = localizedPaths;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     Object.freeze(this);
   }
@@ -151,7 +149,6 @@ class LocalizedSegmentRoute {
 class NotLocalizedEndRoute {
   constructor(path, ref) {
     this.path = path;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this.ref = ref;
     // Object.freeze(this);
   }
@@ -343,12 +340,13 @@ function createRouterBuilder(locales) {
     routeMap.set(key, route);
   };
   const createSegmentRouterBuilder = createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap);
-  return {
+  const builder = {
     add: (path, ref, key) => {
       const route = createRoute(path, path, ref);
       routes.push(route);
       if (!key) key = path;
       addToRouteMap(key, route);
+      return builder;
     },
     addLocalized: (localizedPaths, ref, key) => {
       if (!defaultLocale) throw new Error('Invalid locales');
@@ -356,12 +354,14 @@ function createRouterBuilder(locales) {
       routes.push(route);
       const finalKey = key || localizedPaths[defaultLocale];
       addToRouteMap(finalKey, route);
+      return builder;
     },
     addSegment: (path, buildSegment) => {
       const route = createSegmentRoute(path, path);
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
     addLocalizedSegment: (localizedPaths, buildSegment) => {
       if (!defaultLocale) throw new Error('Invalid locales');
@@ -369,10 +369,12 @@ function createRouterBuilder(locales) {
       buildSegment(createSegmentRouterBuilder(route));
       route.freeze();
       routes.push(route);
+      return builder;
     },
     getRoutes: () => routes,
     createRouter: () => createRouter(routes, routeMap)
   };
+  return builder;
 }
 
 export { createRouterBuilder };

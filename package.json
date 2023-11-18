@@ -94,7 +94,7 @@
     ]
   },
   "dependencies": {
-    "nightingale-logger": "^14.0.2",
+    "nightingale-logger": "^14.2.1",
     "path-to-regexp": "^6.2.1"
   },
   "devDependencies": {

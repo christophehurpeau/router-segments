@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.0](https://github.com/christophehurpeau/router-segments/compare/v7.0.1...v8.0.0) (2023-11-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* pass RouteRef as a generic
+
+### Features
+
+* pass RouteRef as a generic ([99c0687](https://github.com/christophehurpeau/router-segments/commit/99c0687e2874e7f1d337e227e60048a5411e6346))
+* update nightingale ([492ac7c](https://github.com/christophehurpeau/router-segments/commit/492ac7cc1581d3a6593f63321ef1a8dfc402f9e0))
+
+
 ## [7.0.1](https://github.com/christophehurpeau/router-segments/compare/v7.0.0...v7.0.1) (2023-11-05)
 
 Note: no notable changes

@@ -152,7 +152,6 @@ class NotLocalizedEndRoute {
     this.ref = ref;
     // Object.freeze(this);
   }
-
   getPath() {
     return this.path;
   }

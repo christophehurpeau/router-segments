@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.0](https://github.com/christophehurpeau/router-segments/compare/v8.0.0...v9.0.0) (2023-12-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* update dev deps incuding babel which changes supported built files for browser
+
+### Miscellaneous Chores
+
+* update dev deps incuding babel which changes supported built files for browser ([425ed44](https://github.com/christophehurpeau/router-segments/commit/425ed444c683f8156e3d2bce2f9d6a49384158d7))
+
+
 ## [8.0.0](https://github.com/christophehurpeau/router-segments/compare/v7.0.1...v8.0.0) (2023-11-18)
 
 

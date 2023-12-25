@@ -39,9 +39,6 @@
         "import": "./dist/index-node18.mjs"
       },
       "browser": {
-        "browser:modern": {
-          "import": "./dist/index-browsermodern.es.js"
-        },
         "import": "./dist/index-browser.es.js"
       }
     }
@@ -82,10 +79,6 @@
         "version": "18"
       },
       {
-        "target": "browser",
-        "version": "modern"
-      },
-      {
         "target": "browser"
       }
     ],
@@ -94,7 +87,7 @@
     ]
   },
   "dependencies": {
-    "nightingale-logger": "^14.2.1",
+    "nightingale-logger": "^15.0.0",
     "path-to-regexp": "^6.2.1"
   },
   "devDependencies": {
@@ -109,7 +102,7 @@
     "check-package-dependencies": "7.0.0",
     "eslint": "8.56.0",
     "jest": "29.7.0",
-    "pob-babel": "37.0.0",
+    "pob-babel": "38.0.0",
     "typedoc": "0.25.4",
     "typescript": "5.3.3"
   }

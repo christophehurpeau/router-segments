@@ -6503,30 +6503,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nightingale-levels@npm:14.2.1":
-  version: 14.2.1
-  resolution: "nightingale-levels@npm:14.2.1"
-  checksum: 7b0ae8a2c504e75415d259b6a372534ee4a15d2b404c41f8ce67170fc488428025817598c5aaff098c335bd17dc6a9e2f9b5930c9d5962aeed795521ff67988c
+"nightingale-levels@npm:15.0.0":
+  version: 15.0.0
+  resolution: "nightingale-levels@npm:15.0.0"
+  checksum: cb1e770e43554bc7697a07dc02167f309ef9e298efe449929c1809ebc39bbdf42e663cae0e35133dbf1e72149a2c48bc85d0f311fa74481e18bd79ec3eca3695
   languageName: node
   linkType: hard
 
-"nightingale-logger@npm:^14.2.1":
-  version: 14.2.1
-  resolution: "nightingale-logger@npm:14.2.1"
+"nightingale-logger@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "nightingale-logger@npm:15.0.0"
   dependencies:
     "@types/node": "npm:>=18.0.0"
-    nightingale-levels: "npm:14.2.1"
-    nightingale-types: "npm:14.2.1"
-  checksum: c73cbef28257e5346f2fdcce02c35db8bd1f5462b7c502a02a3056f67956b62ebad85e239580716cc05b42d1d809479c31cbe44e7f24dd2159166b79db2b53bb
+    nightingale-levels: "npm:15.0.0"
+    nightingale-types: "npm:15.0.0"
+  checksum: 6e04928bf51c7aa1821af8b7c0ae1d9ae18b5ed33b6429b1d57bd1e434eba0ce1c004c0c985376f5fe4844e50248067f3167639073ebb5e94e2002f3d7d53c3c
   languageName: node
   linkType: hard
 
-"nightingale-types@npm:14.2.1":
-  version: 14.2.1
-  resolution: "nightingale-types@npm:14.2.1"
+"nightingale-types@npm:15.0.0":
+  version: 15.0.0
+  resolution: "nightingale-types@npm:15.0.0"
   dependencies:
-    nightingale-levels: "npm:14.2.1"
-  checksum: e8a8dacf8d07dba0959e738656169f7bb0a91a9a9d2388c99a4adb580a6e687832ab80ad7db37842aac10e062a85bb7afc81ddd6884a0dd045c8e2c585b3527d
+    nightingale-levels: "npm:15.0.0"
+  checksum: f3d7cc5b1e0f8a8d77f8fed50f25577dfa12c351363e8184e7d279936b27e729e0813cd4ffb683209175522b16bba178a55485c48a991370a48692f5d0f4f2a4
   languageName: node
   linkType: hard
 
@@ -6926,9 +6926,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pob-babel@npm:37.0.0":
-  version: 37.0.0
-  resolution: "pob-babel@npm:37.0.0"
+"pob-babel@npm:38.0.0":
+  version: 38.0.0
+  resolution: "pob-babel@npm:38.0.0"
   dependencies:
     "@babel/core": "npm:^7.23.2"
     "@babel/plugin-transform-runtime": "npm:7.23.6"
@@ -6939,7 +6939,7 @@ __metadata:
     "@rollup/plugin-run": "npm:3.0.2"
     babel-preset-pob-env: "npm:11.0.0"
     rollup: "npm:3.29.4"
-    rollup-config-external-dependencies: "npm:^2.0.0"
+    rollup-config-external-dependencies: "npm:^3.0.0"
     semver: "npm:^7.3.7"
   peerDependencies:
     "@babel/core": ^7.23.2
@@ -6951,7 +6951,7 @@ __metadata:
   bin:
     pob-babel-clean-out: ./bin/pob-babel-clean-out.js
     rollup: ./bin/rollup.cjs
-  checksum: 1cfe3e97ea482fecc644dbc257bc487eec6d648e3f6a700790a33ea30bbb48f5958af4f37dce25e8137bd8807fdc29879e7857a81df976d6731b73887314ae7a
+  checksum: 7221b014486691d00d633aa0c1dda75c9e852b8000910e957f80884c2fe2e4adc2466044d8b831bc727223975788a1b54403af9a32dbcfb978d3845b2437da83
   languageName: node
   linkType: hard
 
@@ -7320,10 +7320,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-config-external-dependencies@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "rollup-config-external-dependencies@npm:2.0.0"
-  checksum: b20aaa3a5bc8704e786a18ba4034c27c33140e10bcfb2e0bb8226c2e7219d0b66fb507123f3c37509871fd1c8f5fedc34c58fd14eab7c0977fd549f3bc941cfc
+"rollup-config-external-dependencies@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rollup-config-external-dependencies@npm:3.0.0"
+  checksum: 9f1ab3d4d27f2fe54dffab58fdaaf07defca613c5874534062f1b649e8d44f75339221412cdadd160934d847ab590bde5840887c950c8a87b2681eabbc9d591f
   languageName: node
   linkType: hard
 
@@ -7356,9 +7356,9 @@ __metadata:
     check-package-dependencies: "npm:7.0.0"
     eslint: "npm:8.56.0"
     jest: "npm:29.7.0"
-    nightingale-logger: "npm:^14.2.1"
+    nightingale-logger: "npm:^15.0.0"
     path-to-regexp: "npm:^6.2.1"
-    pob-babel: "npm:37.0.0"
+    pob-babel: "npm:38.0.0"
     typedoc: "npm:0.25.4"
     typescript: "npm:5.3.3"
   languageName: unknown

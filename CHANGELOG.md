@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.1.0](https://github.com/christophehurpeau/router-segments/compare/v9.0.0...v9.1.0) (2023-12-25)
+
+
+### Features
+
+* update nightingale and remove modern dist ([9452f6b](https://github.com/christophehurpeau/router-segments/commit/9452f6bb1f0fb031eff761ef4b4703876029a491))
+
+
 ## [9.0.0](https://github.com/christophehurpeau/router-segments/compare/v8.0.0...v9.0.0) (2023-12-14)
 
 

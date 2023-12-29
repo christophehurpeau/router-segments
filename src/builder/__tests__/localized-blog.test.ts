@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-array-method-this-argument */
-/* eslint-disable max-lines */
+
 import type { LocalizedEndRoute } from '../../routes';
 import { createRouterBuilder } from '../createRouterBuilder';
 

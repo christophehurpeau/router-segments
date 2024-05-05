@@ -45,6 +45,7 @@ export function createSegmentRouterBuilderCreator<
     const getCompleteLocalizedPaths = (
       localizedPaths: LocalizedPathsRecord<Locales>,
     ): LocalizedPathsRecord<Locales> => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       const completeLocalizedPaths: Record<Locales, string> = {} as Record<
         Locales,
         string
@@ -61,10 +62,10 @@ export function createSegmentRouterBuilderCreator<
     };
 
     const createLocalizedPathFromSegment = (
-      // eslint-disable-next-line @typescript-eslint/no-shadow
       segmentRoute: LocalizedSegmentRoute<Locales, RouteRef>,
       path: string,
     ): Record<Locales, string> => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       const localizedPaths: Record<Locales, string> = {} as Record<
         Locales,
         string

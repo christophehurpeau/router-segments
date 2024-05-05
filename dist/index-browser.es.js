@@ -261,6 +261,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
   const createSegmentRouterBuilder = segmentRoute => {
     const getCompletePath = (path, locale) => `${segmentRoute.getPath(locale).completePath}${path}`;
     const getCompleteLocalizedPaths = localizedPaths => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       const completeLocalizedPaths = {};
       getKeys(localizedPaths).forEach(locale => {
         completeLocalizedPaths[locale] = getCompletePath(localizedPaths[locale], locale);
@@ -268,6 +269,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
       return completeLocalizedPaths;
     };
     const createLocalizedPathFromSegment = (segmentRoute, path) => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       const localizedPaths = {};
       [...segmentRoute.localizedPaths.keys()].forEach(locale => {
         localizedPaths[locale] = path;

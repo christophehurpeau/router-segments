@@ -6,7 +6,10 @@
     "createDefaultProgram": true
   },
   "plugins": ["@typescript-eslint"],
-  "extends": ["@pob/eslint-config-typescript"],
+  "extends": [
+    "@pob/eslint-config-typescript",
+    "@pob/eslint-config-typescript/node"
+  ],
   "ignorePatterns": ["*.d.ts"],
   "rules": {
     "@typescript-eslint/class-methods-use-this": "off"

@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/no-array-method-this-argument */
 
+import { describe, expect, test } from 'vitest';
 import type { LocalizedEndRoute } from '../../routes';
 import { createRouterBuilder } from '../createRouterBuilder';
 

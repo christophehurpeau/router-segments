@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import type { NotLocalizedEndRoute } from '../routes';
 import { createRouterBuilder } from './createRouterBuilder';
 

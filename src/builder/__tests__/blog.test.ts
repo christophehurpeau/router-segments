@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/better-regex */
+import { describe, expect, test } from 'vitest';
 import type { RouteMatch } from '../../router/findMatch';
 import type {
   NotLocalizedEndRoute,
@@ -35,7 +36,7 @@ describe('blog', () => {
 
     test('home', () => {
       const homeRoute = routes[0] as NotLocalizedEndRoute<any, any>;
-      expect(homeRoute?.path.path).toBe('/');
+      expect(homeRoute.path.path).toBe('/');
     });
 
     describe('post', () => {

@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/better-regex, no-useless-escape */
+import { describe, expect, test } from 'vitest';
 import { createRoutePath, createRoutePathSegment } from './createRoutePath';
 
 describe('createRoutePath', () => {

@@ -8,7 +8,7 @@
       "testing": {
         "codecov": true,
         "ci": true,
-        "runner": "jest"
+        "runner": "vitest"
       }
     },
     "project": {

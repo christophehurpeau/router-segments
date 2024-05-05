@@ -1,4 +1,3 @@
-import { IS_DEV } from 'pob-babel';
 import type {
   LocaleType,
   LocalizedPathsRecord,
@@ -50,7 +49,7 @@ export const createRoute = <Locales extends LocaleType, RouteRef>(
   ref: RouteRef,
 ): Route<Locales, RouteRef> => {
   /* istanbul ignore if */
-  if (IS_DEV) checkRef(ref);
+  if (process.env.NODE_ENV !== 'production') checkRef(ref);
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };
@@ -61,7 +60,7 @@ export const createLocalizedRoute = <Locales extends LocaleType, RouteRef>(
   ref: RouteRef,
 ): LocalizedEndRoute<Locales, RouteRef> => {
   /* istanbul ignore if */
-  if (IS_DEV) checkRef(ref);
+  if (process.env.NODE_ENV !== 'production') checkRef(ref);
   const localizedPaths = createLocalizedPaths<Locales, EndRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.0](https://github.com/christophehurpeau/router-segments/compare/v9.1.0...v10.0.0) (2024-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop browser support and use esbuild instead of babel
+
+### Code Refactoring
+
+* drop browser support and use esbuild instead of babel ([be91bb5](https://github.com/christophehurpeau/router-segments/commit/be91bb5fc3d09ceaf2c09a1ae56c0dec32fe42f9))
+
+
 ## [9.1.0](https://github.com/christophehurpeau/router-segments/compare/v9.0.0...v9.1.0) (2023-12-25)
 
 

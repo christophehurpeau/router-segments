@@ -6,7 +6,7 @@ export type {
   LocalizedPathsRecord,
   Routes,
   RouteMap,
-} from './types';
+} from "./types";
 
 export type {
   EndRoute,
@@ -14,9 +14,9 @@ export type {
   NotLocalizedRoute,
   Route,
   SegmentRoute,
-} from './routes/interfaces';
-export type { Router } from './router/createRouter';
-export type { RouteMatch } from './router/findMatch';
-export type { RouterBuilder } from './builder/createRouterBuilder';
+} from "./routes/interfaces";
+export type { Router } from "./router/createRouter";
+export type { RouteMatch } from "./router/findMatch";
+export type { RouterBuilder } from "./builder/createRouterBuilder";
 
-export { createRouterBuilder } from './builder/createRouterBuilder';
+export { createRouterBuilder } from "./builder/createRouterBuilder";

@@ -3,21 +3,21 @@ import type {
   LocalizedPathsRecord,
   EndRoutePath,
   SegmentRoutePath,
-} from '../types';
-import { getKeys } from '../utils/getKeys';
-import { LocalizedEndRoute } from './LocalizedEndRoute';
-import { LocalizedSegmentRoute } from './LocalizedSegmentRoute';
-import { NotLocalizedEndRoute as Route } from './NotLocalizedEndRoute';
-import { NotLocalizedSegmentRoute } from './NotLocalizedSegmentRoute';
-import { createRoutePath, createRoutePathSegment } from './createRoutePath';
+} from "../types";
+import { getKeys } from "../utils/getKeys";
+import { LocalizedEndRoute } from "./LocalizedEndRoute";
+import { LocalizedSegmentRoute } from "./LocalizedSegmentRoute";
+import { NotLocalizedEndRoute as Route } from "./NotLocalizedEndRoute";
+import { NotLocalizedSegmentRoute } from "./NotLocalizedSegmentRoute";
+import { createRoutePath, createRoutePathSegment } from "./createRoutePath";
 
 const createLocalizedPaths = <
   Locales extends LocaleType,
-  Path extends EndRoutePath | SegmentRoutePath,
+  Path extends EndRoutePath | SegmentRoutePath
 >(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
-  segment: boolean,
+  segment: boolean
 ): Map<Locales, Path> => {
   const localizedPaths = new Map<Locales, Path>();
   getKeys(localizedPathsRecord).forEach((locale: Locales) => {
@@ -25,13 +25,13 @@ const createLocalizedPaths = <
     if (segment) {
       const routerPath: SegmentRoutePath = createRoutePathSegment(
         path,
-        completeLocalizedPathsRecord[locale],
+        completeLocalizedPathsRecord[locale]
       );
       localizedPaths.set(locale, routerPath as Path);
     } else {
       const routerPath: EndRoutePath = createRoutePath(
         path,
-        completeLocalizedPathsRecord[locale],
+        completeLocalizedPathsRecord[locale]
       );
       localizedPaths.set(locale, routerPath as Path);
     }
@@ -46,10 +46,10 @@ const checkRef = <RouteRef>(ref: RouteRef): void => {
 export const createRoute = <Locales extends LocaleType, RouteRef>(
   path: string,
   completePath: string,
-  ref: RouteRef,
+  ref: RouteRef
 ): Route<Locales, RouteRef> => {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== 'production') checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };
@@ -57,21 +57,21 @@ export const createRoute = <Locales extends LocaleType, RouteRef>(
 export const createLocalizedRoute = <Locales extends LocaleType, RouteRef>(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
   completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
-  ref: RouteRef,
+  ref: RouteRef
 ): LocalizedEndRoute<Locales, RouteRef> => {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== 'production') checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const localizedPaths = createLocalizedPaths<Locales, EndRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,
-    false,
+    false
   );
   return new LocalizedEndRoute(localizedPaths, ref);
 };
 
 export const createSegmentRoute = <Locales extends LocaleType, RouteRef>(
   path: string,
-  completePath: string,
+  completePath: string
 ): NotLocalizedSegmentRoute<Locales, RouteRef> => {
   const routePath = createRoutePathSegment(path, completePath);
   return new NotLocalizedSegmentRoute(routePath);
@@ -79,15 +79,15 @@ export const createSegmentRoute = <Locales extends LocaleType, RouteRef>(
 
 export const createLocalizedSegmentRoute = <
   Locales extends LocaleType,
-  RouteRef,
+  RouteRef
 >(
   localizedPathsRecord: LocalizedPathsRecord<Locales>,
-  completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>,
+  completeLocalizedPathsRecord: LocalizedPathsRecord<Locales>
 ): LocalizedSegmentRoute<Locales, RouteRef> => {
   const localizedPaths = createLocalizedPaths<Locales, SegmentRoutePath>(
     localizedPathsRecord,
     completeLocalizedPathsRecord,
-    true,
+    true
   );
   return new LocalizedSegmentRoute(localizedPaths);
 };

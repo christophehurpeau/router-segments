@@ -1,5 +1,5 @@
-import type { EndRoute, LocalizedRoute } from './interfaces';
-import type { LocaleType, EndRoutePath } from './types';
+import type { EndRoute, LocalizedRoute } from "./interfaces";
+import type { LocaleType, EndRoutePath } from "./types";
 
 export class LocalizedEndRoute<Locales extends LocaleType, RouteRef>
   implements
@@ -18,7 +18,7 @@ export class LocalizedEndRoute<Locales extends LocaleType, RouteRef>
   }
 
   getPath(locale?: Locales): EndRoutePath {
-    if (!locale) throw new Error('Missing locale');
+    if (!locale) throw new Error("Missing locale");
     return this.localizedPaths.get(locale)!;
   }
 

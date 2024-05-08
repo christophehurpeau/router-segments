@@ -26,14 +26,14 @@ also used by [expressjs](https://expressjs.com/en/guide/routing.html), [koa-rout
 and many other routers.
 
 ```js
-import { createRouterBuilder } from 'router-segments';
+import { createRouterBuilder } from "router-segments";
 
 const builder = createRouterBuilder();
 
-builder.add('/', ref);
-builder.addSegment('/post', (segmentBuilder) => {
-  segmentBuilder.add('/:id(\\d+)-:slug([A-Za-z\\-]+)', ref, '/post/view');
-  segmentBuilder.defaultRoute(ref, '/post');
+builder.add("/", ref);
+builder.addSegment("/post", (segmentBuilder) => {
+  segmentBuilder.add("/:id(\\d+)-:slug([A-Za-z\\-]+)", ref, "/post/view");
+  segmentBuilder.defaultRoute(ref, "/post");
 });
 
 export default builder.createRouter();
@@ -44,34 +44,34 @@ export default builder.createRouter();
 [path-to-regexp documentation](https://www.npmjs.com/package/path-to-regexp#compile-reverse-path-to-regexp)
 
 ```js
-router.toPath('/post/view', { id: '001', slug: 'a-slug' });
+router.toPath("/post/view", { id: "001", slug: "a-slug" });
 // /post/001-a-slug
 ```
 
 ## Localized routes
 
 ```js
-import { createRouterBuilder } from 'router-segments';
+import { createRouterBuilder } from "router-segments";
 
-const builder = createRouterBuilder(['en', 'fr']);
+const builder = createRouterBuilder(["en", "fr"]);
 
-builder.add('/', ref);
+builder.add("/", ref);
 builder.addLocalizedSegment(
   {
-    en: '/my-blog',
-    fr: '/mon-blog',
+    en: "/my-blog",
+    fr: "/mon-blog",
   },
   (segmentBuilder) => {
     segmentBuilder.addLocalized(
       {
-        en: '/post/:id(\\d+)',
-        fr: '/billet/:id(\\d+)',
+        en: "/post/:id(\\d+)",
+        fr: "/billet/:id(\\d+)",
       },
       ref,
-      '/my-blog/post',
+      "/my-blog/post"
     );
-    segmentBuilder.defaultRoute(ref, '/my-blog');
-  },
+    segmentBuilder.defaultRoute(ref, "/my-blog");
+  }
 );
 
 export const router = builder.createRouter();

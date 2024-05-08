@@ -1,6 +1,6 @@
-import type { LocalizedEndRoute } from './LocalizedEndRoute';
-import type { SegmentRoute, LocalizedRoute } from './interfaces';
-import type { LocaleType, SegmentRoutePath } from './types';
+import type { LocalizedEndRoute } from "./LocalizedEndRoute";
+import type { SegmentRoute, LocalizedRoute } from "./interfaces";
+import type { LocaleType, SegmentRoutePath } from "./types";
 
 export class LocalizedSegmentRoute<Locales extends LocaleType, RouteRef>
   implements
@@ -23,7 +23,7 @@ export class LocalizedSegmentRoute<Locales extends LocaleType, RouteRef>
   }
 
   getPath(locale?: Locales): SegmentRoutePath {
-    if (!locale) throw new Error('Missing locale');
+    if (!locale) throw new Error("Missing locale");
     return this.localizedPaths.get(locale)!;
   }
 

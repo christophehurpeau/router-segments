@@ -1,5 +1,5 @@
-import type { EndRoute, SegmentRoute } from '../routes/interfaces';
-import type { LocalizedPathsRecord, LocaleType } from '../types';
+import type { EndRoute, SegmentRoute } from "../routes/interfaces";
+import type { LocalizedPathsRecord, LocaleType } from "../types";
 export interface SegmentRouterBuilder<Locales extends LocaleType, RouteRef> {
     add: (path: string, ref: RouteRef, key?: string) => void;
     addLocalized: (localizedPaths: LocalizedPathsRecord<Locales>, ref: RouteRef, key?: string) => void;

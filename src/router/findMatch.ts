@@ -1,12 +1,12 @@
 /* eslint-disable complexity */
-import { Logger } from 'nightingale-logger';
-import type { EndRoute, Route, SegmentRoute } from '../routes/interfaces';
+import { Logger } from "nightingale-logger";
+import type { EndRoute, Route, SegmentRoute } from "../routes/interfaces";
 import type {
   LocaleType,
   RoutePathInterface,
   SegmentRoutePath,
   EndRoutePath,
-} from '../types';
+} from "../types";
 
 export interface RouteMatch<Locales extends LocaleType | never, RouteRef> {
   namedParams: Map<string, string> | undefined;
@@ -18,12 +18,12 @@ export interface RouteMatch<Locales extends LocaleType | never, RouteRef> {
 }
 
 const logger =
-  process.env.NODE_ENV !== 'production'
-    ? new Logger('router-segments:findMatch')
+  process.env.NODE_ENV !== "production"
+    ? new Logger("router-segments:findMatch")
     : undefined;
 
 const parseOtherParams = (wildcard: string): string[] =>
-  wildcard ? wildcard.split('/') : [];
+  wildcard ? wildcard.split("/") : [];
 
 interface InternalFindMatchParams<Locales extends LocaleType, RouteRef> {
   path: string;
@@ -37,7 +37,7 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
   path,
   completePath,
   routes,
-  locale = 'en' as Locales,
+  locale = "en" as Locales,
   namedParams,
 }: InternalFindMatchParams<Locales, RouteRef>): RouteMatch<
   Locales,
@@ -49,12 +49,12 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
     const routePath: RoutePathInterface = route.getPath(locale);
 
     /* istanbul ignore next */
-    if (process.env.NODE_ENV !== 'production' && !routePath) {
+    if (process.env.NODE_ENV !== "production" && !routePath) {
       throw new Error(`Unknown localized route for locale ${locale}`);
     }
 
     /* istanbul ignore next */
-    if (process.env.NODE_ENV !== 'production' && logger) {
+    if (process.env.NODE_ENV !== "production" && logger) {
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
 
@@ -122,7 +122,7 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
 export function findMatch<Locales extends LocaleType, RouteRef>(
   path: string,
   routes: Route<RoutePathInterface, Locales, RouteRef>[],
-  locale?: Locales,
+  locale?: Locales
 ): RouteMatch<Locales, RouteRef> | null {
   return internalFindMatch({ path, completePath: path, routes, locale });
 }

@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest';
-import { createRouterBuilder } from '.';
+import { expect, test } from "vitest";
+import { createRouterBuilder } from ".";
 
-test('export default', () => {
-  expect(typeof createRouterBuilder).toBe('function');
+test("export default", () => {
+  expect(typeof createRouterBuilder).toBe("function");
 });

@@ -5,18 +5,18 @@ import type { SegmentRoutePath, EndRoutePath } from "../types";
 function internalCreateRoutePath(
   path: string,
   completePath: string,
-  segment: true
+  segment: true,
 ): SegmentRoutePath;
 function internalCreateRoutePath(
   path: string,
   completePath: string,
-  segment: false
+  segment: false,
 ): EndRoutePath;
 
 function internalCreateRoutePath(
   path: string,
   completePath: string,
-  segment: boolean
+  segment: boolean,
 ): EndRoutePath | SegmentRoutePath {
   const keys: Key[] = [];
   const regExp = pathToRegexp(segment ? `${path}/(.*)?` : path, keys, {
@@ -38,10 +38,10 @@ function internalCreateRoutePath(
 
 export const createRoutePathSegment = (
   path: string,
-  completePath: string
+  completePath: string,
 ): SegmentRoutePath => internalCreateRoutePath(path, completePath, true);
 
 export const createRoutePath = (
   path: string,
-  completePath: string
+  completePath: string,
 ): EndRoutePath => internalCreateRoutePath(path, completePath, false);

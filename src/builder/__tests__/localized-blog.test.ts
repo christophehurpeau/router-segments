@@ -17,7 +17,7 @@ describe("localized blog", () => {
       segmentBuilder.add(
         "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
         ref,
-        "postWithTag"
+        "postWithTag",
       );
       segmentBuilder.addLocalizedSegment(
         { en: "/search", fr: "/rechercher" },
@@ -26,7 +26,7 @@ describe("localized blog", () => {
           searchSegmentBuilder.addLocalized(
             { en: "/top-searched", fr: "/les-plus-recherches" },
             ref,
-            "top-searched"
+            "top-searched",
           );
           searchSegmentBuilder.addSegment(
             "/:term",
@@ -35,11 +35,11 @@ describe("localized blog", () => {
               searchTermSegmentBuilder.addLocalized(
                 { en: "/tag-:tag", fr: "/etiquette-:tag" },
                 ref,
-                "search-results-tag"
+                "search-results-tag",
               );
-            }
+            },
           );
-        }
+        },
       );
     })
     .createRouter();
@@ -101,7 +101,7 @@ describe("localized blog", () => {
 
         expect(routePath.namedParams).toEqual(["id", "slug"]);
         expect(routePath.toPath({ id: "001", slug: "The-First-Post" })).toBe(
-          "/post/001-The-First-Post"
+          "/post/001-The-First-Post",
         );
       });
 
@@ -110,7 +110,7 @@ describe("localized blog", () => {
 
         expect(routePath.namedParams).toEqual(["id", "slug"]);
         expect(routePath.toPath({ id: "001", slug: "The-First-Post" })).toBe(
-          "/article/001-The-First-Post"
+          "/article/001-The-First-Post",
         );
       });
     });
@@ -125,7 +125,7 @@ describe("localized blog", () => {
           new Map([
             ["id", "001"],
             ["slug", "The-First-Post"],
-          ])
+          ]),
         );
         expect(match.otherParams).toBe(undefined);
       });
@@ -141,7 +141,7 @@ describe("localized blog", () => {
           new Map([
             ["id", "001"],
             ["slug", "Le-Premier-Article"],
-          ])
+          ]),
         );
         expect(match.otherParams).toBe(undefined);
       });
@@ -164,7 +164,7 @@ describe("localized blog", () => {
             tag: "test",
             date: "2017-01-01",
             slug: "The-First-Post",
-          })
+          }),
         ).toBe("/post/test/2017-01-01_The-First-Post");
       });
 
@@ -177,7 +177,7 @@ describe("localized blog", () => {
             tag: "test",
             date: "2017-01-01",
             slug: "Le-Premier-Article",
-          })
+          }),
         ).toBe("/article/test/2017-01-01_Le-Premier-Article");
       });
     });
@@ -193,7 +193,7 @@ describe("localized blog", () => {
             ["tag", "tag1"],
             ["date", "2015-01-01"],
             ["slug", "The-First-Post"],
-          ])
+          ]),
         );
         expect(match!.otherParams).toBe(undefined);
       });
@@ -210,7 +210,7 @@ describe("localized blog", () => {
             ["tag", "tag1"],
             ["date", "2015-01-01"],
             ["slug", "Le-Premier-Article"],
-          ])
+          ]),
         );
         expect(match!.otherParams).toBe(undefined);
       });
@@ -297,7 +297,7 @@ describe("localized blog", () => {
         new Map([
           ["term", "termsearched"],
           ["tag", "tag1"],
-        ])
+        ]),
       );
     });
 

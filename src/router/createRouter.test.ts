@@ -9,14 +9,14 @@ const localizedPathsRecord = { en: "/posts", fr: "/articles" };
 const localizedRoute = createLocalizedRoute(
   localizedPathsRecord,
   localizedPathsRecord,
-  ref
+  ref,
 );
 const router = createRouter(
   [route, localizedRoute],
   new Map<string, EndRoute<keyof typeof localizedPathsRecord, symbol>>([
     ["/", route],
     ["/blog", localizedRoute],
-  ])
+  ]),
 );
 
 test("get by key should return route", () => {

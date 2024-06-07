@@ -9,7 +9,7 @@ export interface Route<
   T extends RoutePathInterface,
   Locales extends LocaleType,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- helps typescript to infer the type
-  RouteRef
+  RouteRef,
 > {
   isSegment: () => boolean;
   isLocalized: () => boolean;
@@ -38,7 +38,7 @@ export interface SegmentRoute<Locales extends LocaleType, RouteRef>
 export interface NotLocalizedRoute<
   T extends RoutePathInterface,
   Locales extends LocaleType,
-  RouteRef
+  RouteRef,
 > extends Route<T, Locales, RouteRef> {
   isLocalized: () => false;
   getPath: () => T;
@@ -47,7 +47,7 @@ export interface NotLocalizedRoute<
 export interface LocalizedRoute<
   T extends RoutePathInterface,
   Locales extends LocaleType,
-  RouteRef
+  RouteRef,
 > extends Route<T, Locales, RouteRef> {
   isLocalized: () => true;
   getPath: (locale?: Locales) => T;

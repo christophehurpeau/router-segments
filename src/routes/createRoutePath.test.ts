@@ -33,7 +33,7 @@ describe("createRoutePath", () => {
   test("/route/:namedParam", () => {
     const routePath = createRoutePath(
       "/route/:namedParam",
-      "/route/:namedParam"
+      "/route/:namedParam",
     );
     expect(routePath).toHaveProperty("path", "/route/:namedParam");
     expect(routePath).toHaveProperty("completePath", "/route/:namedParam");
@@ -71,12 +71,12 @@ describe("createRoutePathSegment", () => {
   test("/segment/:namedParam", () => {
     const routePath = createRoutePathSegment(
       "/segment/:namedParam",
-      "/segment/:namedParam"
+      "/segment/:namedParam",
     );
     expect(routePath).toHaveProperty("path", "/segment/:namedParam");
     expect(routePath).toHaveProperty("completePath", "/segment/:namedParam");
     expect(routePath.regExp).toEqual(
-      /^\/segment(?:\/([^\/#\?]+?))(?:\/(.*))?$/
+      /^\/segment(?:\/([^\/#\?]+?))(?:\/(.*))?$/,
     );
     expect(routePath.namedParams).toEqual(["namedParam"]);
     expect((routePath as any).toPath).not.toBeDefined();

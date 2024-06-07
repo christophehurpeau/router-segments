@@ -18,7 +18,7 @@ describe("blog", () => {
       segmentBuilder.add(
         "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
         ref,
-        "postWithTag"
+        "postWithTag",
       );
       segmentBuilder.addSegment("/search", (subSegmentBuilder) => {
         subSegmentBuilder.defaultRoute("refsearch", "search");
@@ -63,11 +63,11 @@ describe("blog", () => {
           >;
           expect(nestedRoute.path.path).toBe("/:id(\\d+)-:slug([A-Za-z\\-]+)");
           expect(nestedRoute.path.completePath).toBe(
-            "/post/:id(\\d+)-:slug([A-Za-z\\-]+)"
+            "/post/:id(\\d+)-:slug([A-Za-z\\-]+)",
           );
           expect(nestedRoute.path.regExp).toEqual(
             // eslint-disable-next-line no-useless-escape
-            /^(?:\/(\d+))-([A-Za-z\-]+)$/
+            /^(?:\/(\d+))-([A-Za-z\-]+)$/,
           );
         });
         test("second nested route", () => {
@@ -76,14 +76,14 @@ describe("blog", () => {
             any
           >;
           expect(nestedRoute.path.path).toBe(
-            "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug"
+            "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
           );
           expect(nestedRoute.path.completePath).toBe(
-            "/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug"
+            "/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
           );
           expect(nestedRoute.path.regExp).toEqual(
             // eslint-disable-next-line no-useless-escape
-            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_([^\/#\?]+?)$/
+            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_([^\/#\?]+?)$/,
           );
         });
       });
@@ -107,7 +107,7 @@ describe("blog", () => {
       >;
       expect(rrPostView.path.namedParams).toEqual(["id", "slug"]);
       expect(
-        rrPostView.path.toPath({ id: "001", slug: "The-First-Post" })
+        rrPostView.path.toPath({ id: "001", slug: "The-First-Post" }),
       ).toBe("/post/001-The-First-Post");
     });
   });
@@ -130,7 +130,7 @@ describe("blog", () => {
         new Map([
           ["id", "001"],
           ["slug", "The-First-Post"],
-        ])
+        ]),
       );
       expect(match.otherParams).toBe(undefined);
     });
@@ -142,7 +142,7 @@ describe("blog", () => {
       const route: any = match.route;
       expect(route.path.completePath).toBe(
         (router.get("search") as NotLocalizedEndRoute<any, unknown>).path
-          .completePath
+          .completePath,
       );
       expect(match.ref).toBe("refsearch");
     });

@@ -122,7 +122,7 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
 export function findMatch<Locales extends LocaleType, RouteRef>(
   path: string,
   routes: Route<RoutePathInterface, Locales, RouteRef>[],
-  locale?: Locales
+  locale?: Locales,
 ): RouteMatch<Locales, RouteRef> | null {
   return internalFindMatch({ path, completePath: path, routes, locale });
 }

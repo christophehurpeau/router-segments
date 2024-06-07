@@ -17,7 +17,7 @@ test("unknown localized route", () => {
     expect(findUnknownLocalizedMatch).toThrow();
   } else {
     expect(findUnknownLocalizedMatch).toThrow(
-      "Unknown localized route for locale it"
+      "Unknown localized route for locale it",
     );
   }
 });
@@ -44,7 +44,7 @@ test("find segments with multiple named params", () => {
     new Map([
       ["param1", "1"],
       ["param2", "2"],
-    ])
+    ]),
   );
 });
 

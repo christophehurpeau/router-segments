@@ -68,10 +68,10 @@ builder.addLocalizedSegment(
         fr: "/billet/:id(\\d+)",
       },
       ref,
-      "/my-blog/post"
+      "/my-blog/post",
     );
     segmentBuilder.defaultRoute(ref, "/my-blog");
-  }
+  },
 );
 
 export const router = builder.createRouter();

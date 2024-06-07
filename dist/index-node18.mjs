@@ -20,14 +20,12 @@ const internalFindMatch = ({
       logger.debug(`trying ${routePath.regExp.toString()}`);
     }
     const match = routePath.regExp.exec(path);
-    if (!match)
-      return false;
+    if (!match) return false;
     match.shift();
     let groupCount = match.length;
     let group = 0;
     if (routePath.namedParams.length > 0) {
-      if (!namedParams)
-        namedParams = /* @__PURE__ */ new Map();
+      if (!namedParams) namedParams = /* @__PURE__ */ new Map();
       routePath.namedParams.forEach((paramName) => {
         namedParams.set(paramName, match[group++]);
       });
@@ -71,8 +69,7 @@ function findMatch(path, routes, locale) {
 function createRouter(routes, routeMap) {
   const getRequiredRoute = (routeKey) => {
     const route = routeMap.get(routeKey);
-    if (!route)
-      throw new Error(`No route named "${routeKey}"`);
+    if (!route) throw new Error(`No route named "${routeKey}"`);
     return route;
   };
   return {
@@ -94,8 +91,7 @@ class LocalizedEndRoute {
     Object.freeze(this);
   }
   getPath(locale) {
-    if (!locale)
-      throw new Error("Missing locale");
+    if (!locale) throw new Error("Missing locale");
     return this.localizedPaths.get(locale);
   }
   isSegment() {
@@ -124,8 +120,7 @@ class LocalizedSegmentRoute {
     Object.freeze(this.nestedRoutes);
   }
   getPath(locale) {
-    if (!locale)
-      throw new Error("Missing locale");
+    if (!locale) throw new Error("Missing locale");
     return this.localizedPaths.get(locale);
   }
   isSegment() {
@@ -201,8 +196,7 @@ function internalCreateRoutePath(path, completePath, segment) {
     strict: true
   });
   const namedParams = keys.map((key) => key.name).filter(Boolean);
-  if (segment)
-    return { path, completePath, regExp, namedParams };
+  if (segment) return { path, completePath, regExp, namedParams };
   return {
     path,
     completePath,
@@ -235,18 +229,15 @@ const createLocalizedPaths = (localizedPathsRecord, completeLocalizedPathsRecord
   return localizedPaths;
 };
 const checkRef = (ref) => {
-  if (!ref)
-    throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
+  if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
 };
 const createRoute = (path, completePath, ref) => {
-  if (process.env.NODE_ENV !== "production")
-    checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
 const createLocalizedRoute = (localizedPathsRecord, completeLocalizedPathsRecord, ref) => {
-  if (process.env.NODE_ENV !== "production")
-    checkRef(ref);
+  if (process.env.NODE_ENV !== "production") checkRef(ref);
   const localizedPaths = createLocalizedPaths(
     localizedPathsRecord,
     completeLocalizedPathsRecord,
@@ -349,8 +340,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
         segmentRoute.nestedRoutes.push(_createEndRoute(path, ref, key));
       },
       addLocalized: (localizedPaths, ref, key) => {
-        if (!defaultLocale)
-          throw new Error("Invalid locales");
+        if (!defaultLocale) throw new Error("Invalid locales");
         segmentRoute.nestedRoutes.push(
           _createLocalizedEndRoute(localizedPaths, ref, key)
         );
@@ -359,8 +349,7 @@ function createSegmentRouterBuilderCreator(defaultLocale, addToRouteMap) {
         segmentRoute.nestedRoutes.push(_createSegmentRoute(path, buildSegment));
       },
       addLocalizedSegment: (localizedPaths, buildSegment) => {
-        if (!defaultLocale)
-          throw new Error("Invalid locales");
+        if (!defaultLocale) throw new Error("Invalid locales");
         segmentRoute.nestedRoutes.push(
           _createLocalizedSegmentRoute(localizedPaths, buildSegment)
         );
@@ -375,8 +364,7 @@ function createRouterBuilder(locales) {
   const routes = [];
   const routeMap = /* @__PURE__ */ new Map();
   const addToRouteMap = (key, route) => {
-    if (routeMap.has(key))
-      throw new Error(`"${key}" is already used`);
+    if (routeMap.has(key)) throw new Error(`"${key}" is already used`);
     routeMap.set(key, route);
   };
   const createSegmentRouterBuilder = createSegmentRouterBuilderCreator(
@@ -387,14 +375,12 @@ function createRouterBuilder(locales) {
     add: (path, ref, key) => {
       const route = createRoute(path, path, ref);
       routes.push(route);
-      if (!key)
-        key = path;
+      if (!key) key = path;
       addToRouteMap(key, route);
       return builder;
     },
     addLocalized: (localizedPaths, ref, key) => {
-      if (!defaultLocale)
-        throw new Error("Invalid locales");
+      if (!defaultLocale) throw new Error("Invalid locales");
       const route = createLocalizedRoute(localizedPaths, localizedPaths, ref);
       routes.push(route);
       const finalKey = key || localizedPaths[defaultLocale];
@@ -409,8 +395,7 @@ function createRouterBuilder(locales) {
       return builder;
     },
     addLocalizedSegment: (localizedPaths, buildSegment) => {
-      if (!defaultLocale)
-        throw new Error("Invalid locales");
+      if (!defaultLocale) throw new Error("Invalid locales");
       const route = createLocalizedSegmentRoute(
         localizedPaths,
         localizedPaths

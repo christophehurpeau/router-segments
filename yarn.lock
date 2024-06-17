@@ -1329,12 +1329,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.14.2, @types/node@npm:>=18.0.0":
-  version: 20.14.2
-  resolution: "@types/node@npm:20.14.2"
+"@types/node@npm:*, @types/node@npm:20.14.3, @types/node@npm:>=18.0.0":
+  version: 20.14.3
+  resolution: "@types/node@npm:20.14.3"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/2d86e5f2227aaa42212e82ea0affe72799111b888ff900916376450b02b09b963ca888b20d9c332d8d2b833ed4781987867a38eaa2e4863fa8439071468b0a6f
+  checksum: 10c0/fbd15d63ac64b7d864e7a423c9af4fcc672cc78316c66b764effcf39736f3bac907df491dbd827329492252de08174d877b1855ec6e853e421eb0eeba31737e2
   languageName: node
   linkType: hard
 
@@ -5649,7 +5649,7 @@ __metadata:
     "@pob/eslint-config-typescript": "npm:56.0.0"
     "@pob/rollup-esbuild": "npm:3.0.0"
     "@pob/root": "npm:12.1.1"
-    "@types/node": "npm:20.14.2"
+    "@types/node": "npm:20.14.3"
     "@vitest/coverage-v8": "npm:1.6.0"
     check-package-dependencies: "npm:7.1.2"
     eslint: "npm:8.57.0"

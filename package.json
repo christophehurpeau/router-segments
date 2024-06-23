@@ -87,7 +87,7 @@
     "@vitest/coverage-v8": "1.6.0",
     "check-package-dependencies": "7.1.2",
     "eslint": "8.57.0",
-    "typedoc": "0.26.0",
+    "typedoc": "0.26.1",
     "typescript": "5.4.5",
     "vitest": "1.6.0"
   }

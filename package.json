@@ -84,11 +84,11 @@
     "@pob/rollup-esbuild": "3.1.0",
     "@pob/root": "12.1.1",
     "@types/node": "20.14.13",
-    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/coverage-v8": "2.0.4",
     "check-package-dependencies": "7.2.0",
     "eslint": "8.57.0",
     "typedoc": "0.26.5",
     "typescript": "5.4.5",
-    "vitest": "1.6.0"
+    "vitest": "2.0.4"
   }
 }

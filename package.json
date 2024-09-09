@@ -75,7 +75,7 @@
   "prettier": "@pob/root/prettier-config",
   "dependencies": {
     "nightingale-logger": "^15.0.0",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^8.0.0"
   },
   "devDependencies": {
     "@pob/commitlint-config": "7.0.0",

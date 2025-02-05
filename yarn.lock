@@ -1069,12 +1069,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pob/commitlint-config@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@pob/commitlint-config@npm:7.0.0"
+"@pob/commitlint-config@npm:9.0.0":
+  version: 9.0.0
+  resolution: "@pob/commitlint-config@npm:9.0.0"
   dependencies:
     "@commitlint/config-conventional": "npm:^19.2.2"
-  checksum: 10c0/874d57b176d69d300d72ab9b0a123a3c1a9e95cff209a701f57465a56df2642cc1daf1a1731a03c52a5b7c61a53fb86e70e016454e81a745b69cfa1bf38be4cc
+  checksum: 10c0/8741ba0c78b7872958fc21d00482620eb0b71805c09187540f33224089e2f92055577b433ac55983a401aba857f0bb06872ab09c1805d59747a58a81e4c52373
   languageName: node
   linkType: hard
 
@@ -6190,7 +6190,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "router-segments@workspace:."
   dependencies:
-    "@pob/commitlint-config": "npm:7.0.0"
+    "@pob/commitlint-config": "npm:9.0.0"
     "@pob/eslint-config": "npm:58.1.0"
     "@pob/eslint-config-typescript": "npm:58.1.0"
     "@pob/rollup-esbuild": "npm:4.1.0"

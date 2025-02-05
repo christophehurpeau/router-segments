@@ -78,7 +78,7 @@
     "path-to-regexp": "^6.2.1"
   },
   "devDependencies": {
-    "@pob/commitlint-config": "7.0.0",
+    "@pob/commitlint-config": "9.0.0",
     "@pob/eslint-config": "58.1.0",
     "@pob/eslint-config-typescript": "58.1.0",
     "@pob/rollup-esbuild": "4.1.0",

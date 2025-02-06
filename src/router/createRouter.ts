@@ -1,5 +1,5 @@
 import type { EndRoute } from "../routes/interfaces";
-import type { Routes, RouteMap, LocaleType } from "../types";
+import type { LocaleType, RouteMap, Routes } from "../types";
 import type { RouteMatch } from "./findMatch";
 import { findMatch } from "./findMatch";
 

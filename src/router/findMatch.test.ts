@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { LocalizedEndRoute } from "../routes";
-import { createSegmentRoute, createRoute } from "../routes/create";
+import { createRoute, createSegmentRoute } from "../routes/create";
 import type { Routes } from "../types";
 import { findMatch } from "./findMatch";
 

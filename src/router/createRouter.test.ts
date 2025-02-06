@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { createRoute, createLocalizedRoute } from "../routes/create";
+import { createLocalizedRoute, createRoute } from "../routes/create";
 import type { EndRoute } from "../routes/interfaces";
 import { createRouter } from "./createRouter";
 

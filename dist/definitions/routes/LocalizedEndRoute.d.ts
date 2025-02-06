@@ -1,5 +1,5 @@
 import type { EndRoute, LocalizedRoute } from "./interfaces";
-import type { LocaleType, EndRoutePath } from "./types";
+import type { EndRoutePath, LocaleType } from "./types";
 export declare class LocalizedEndRoute<Locales extends LocaleType, RouteRef> implements EndRoute<Locales, RouteRef>, LocalizedRoute<EndRoutePath, Locales, RouteRef> {
     localizedPaths: Map<LocaleType, EndRoutePath>;
     ref: RouteRef;

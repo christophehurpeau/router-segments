@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/better-regex */
 import { describe, expect, test } from "vitest";
 import type { RouteMatch } from "../../router/findMatch";
 import type {
@@ -66,7 +65,7 @@ describe("blog", () => {
             "/post/:id(\\d+)-:slug([A-Za-z\\-]+)",
           );
           expect(nestedRoute.path.regExp).toEqual(
-            // eslint-disable-next-line no-useless-escape
+            // eslint-disable-next-line no-useless-escape, regexp/no-useless-non-capturing-group, regexp/use-ignore-case
             /^(?:\/(\d+))-([A-Za-z\-]+)$/,
           );
         });
@@ -82,7 +81,7 @@ describe("blog", () => {
             "/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
           );
           expect(nestedRoute.path.regExp).toEqual(
-            // eslint-disable-next-line no-useless-escape
+            // eslint-disable-next-line no-useless-escape, regexp/no-useless-non-capturing-group, regexp/no-useless-escape, regexp/strict, regexp/no-useless-lazy
             /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_([^\/#\?]+?)$/,
           );
         });

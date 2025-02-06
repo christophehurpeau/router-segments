@@ -1,6 +1,6 @@
 import type { Key } from "path-to-regexp";
-import { pathToRegexp, compile } from "path-to-regexp";
-import type { SegmentRoutePath, EndRoutePath } from "../types";
+import { compile, pathToRegexp } from "path-to-regexp";
+import type { EndRoutePath, SegmentRoutePath } from "../types";
 
 function internalCreateRoutePath(
   path: string,

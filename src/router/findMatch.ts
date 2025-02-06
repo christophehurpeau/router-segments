@@ -2,10 +2,10 @@
 import { Logger } from "nightingale-logger";
 import type { EndRoute, Route, SegmentRoute } from "../routes/interfaces";
 import type {
+  EndRoutePath,
   LocaleType,
   RoutePathInterface,
   SegmentRoutePath,
-  EndRoutePath,
 } from "../types";
 
 export interface RouteMatch<Locales extends LocaleType | never, RouteRef> {

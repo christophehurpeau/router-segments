@@ -1,7 +1,7 @@
 import type {
+  EndRoutePath,
   LocaleType,
   RoutePathInterface,
-  EndRoutePath,
   SegmentRoutePath,
 } from "./types";
 

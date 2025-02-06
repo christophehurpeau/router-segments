@@ -1,7 +1,7 @@
 import type {
+  EndRoutePath,
   LocaleType,
   LocalizedPathsRecord,
-  EndRoutePath,
   SegmentRoutePath,
 } from "../types";
 import { getKeys } from "../utils/getKeys";

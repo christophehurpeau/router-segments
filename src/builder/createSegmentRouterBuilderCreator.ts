@@ -1,12 +1,12 @@
-import type { LocalizedSegmentRoute, LocalizedEndRoute } from "../routes";
+import type { LocalizedEndRoute, LocalizedSegmentRoute } from "../routes";
 import {
-  createRoute,
   createLocalizedRoute,
-  createSegmentRoute,
   createLocalizedSegmentRoute,
+  createRoute,
+  createSegmentRoute,
 } from "../routes/create";
 import type { EndRoute, SegmentRoute } from "../routes/interfaces";
-import type { LocalizedPathsRecord, LocaleType } from "../types";
+import type { LocaleType, LocalizedPathsRecord } from "../types";
 import { getKeys } from "../utils/getKeys";
 
 export interface SegmentRouterBuilder<Locales extends LocaleType, RouteRef> {

@@ -1,4 +1,4 @@
-import type { LocaleType, RoutePathInterface, EndRoutePath, SegmentRoutePath } from "./types";
+import type { EndRoutePath, LocaleType, RoutePathInterface, SegmentRoutePath } from "./types";
 export interface Route<T extends RoutePathInterface, Locales extends LocaleType, RouteRef> {
     isSegment: () => boolean;
     isLocalized: () => boolean;

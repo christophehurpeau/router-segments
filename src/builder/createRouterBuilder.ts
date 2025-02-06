@@ -1,17 +1,17 @@
 import type { Router } from "../router/createRouter";
 import { createRouter } from "../router/createRouter";
 import {
-  createRoute,
   createLocalizedRoute,
-  createSegmentRoute,
   createLocalizedSegmentRoute,
+  createRoute,
+  createSegmentRoute,
 } from "../routes/create";
 import type { EndRoute } from "../routes/interfaces";
 import type {
   LocaleType,
   LocalizedPathsRecord,
-  Routes,
   RouteMap,
+  Routes,
 } from "../types";
 import type { SegmentRouterBuilder } from "./createSegmentRouterBuilderCreator";
 import { createSegmentRouterBuilderCreator } from "./createSegmentRouterBuilderCreator";

@@ -22,7 +22,7 @@ const logger =
     ? new Logger("router-segments:findMatch")
     : undefined;
 
-const parseOtherParams = (wildcard: string): string[] =>
+const parseOtherParams = (wildcard?: string): string[] =>
   wildcard ? wildcard.split("/") : [];
 
 interface InternalFindMatchParams<Locales extends LocaleType, RouteRef> {
@@ -72,7 +72,8 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
       if (!namedParams) namedParams = new Map();
 
       routePath.namedParams.forEach((paramName: number | string) => {
-        namedParams!.set(paramName, match[group++]);
+        const paramValue = match[group++];
+        namedParams!.set(paramName, paramValue!);
       });
     }
 

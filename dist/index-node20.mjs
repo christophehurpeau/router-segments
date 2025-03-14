@@ -27,7 +27,8 @@ const internalFindMatch = ({
     if (routePath.namedParams.length > 0) {
       if (!namedParams) namedParams = /* @__PURE__ */ new Map();
       routePath.namedParams.forEach((paramName) => {
-        namedParams.set(paramName, match[group++]);
+        const paramValue = match[group++];
+        namedParams.set(paramName, paramValue);
       });
     }
     if (route.isSegment()) {

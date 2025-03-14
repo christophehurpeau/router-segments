@@ -82,7 +82,7 @@ describe("blog", () => {
           );
           expect(nestedRoute.path.regExp).toEqual(
             // eslint-disable-next-line no-useless-escape, regexp/no-useless-non-capturing-group, regexp/no-useless-escape, regexp/strict, regexp/no-useless-lazy
-            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_([^\/#\?]+?)$/,
+            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_((?:(?!_)[^\/#\?])+?)$/,
           );
         });
       });

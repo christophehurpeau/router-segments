@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.0](https://github.com/christophehurpeau/router-segments/compare/v10.0.0...v11.0.0) (2025-03-14)
+
+### ⚠ BREAKING CHANGES
+
+* drop node 18 support
+
+### Features
+
+* **deps:** update dependency path-to-regexp to v6.3.0 [security] ([#888](https://github.com/christophehurpeau/router-segments/issues/888)) ([67d95b7](https://github.com/christophehurpeau/router-segments/commit/67d95b718326bf7e0ec6a41a57e8842dc9009ffe))
+
+### Miscellaneous Chores
+
+* update dependencies ([c3e9fa0](https://github.com/christophehurpeau/router-segments/commit/c3e9fa0b854eb87c7f1685f20939678f6c7d6771))
+
 ## [10.0.0](https://github.com/christophehurpeau/router-segments/compare/v9.1.0...v10.0.0) (2024-05-08)
 
 

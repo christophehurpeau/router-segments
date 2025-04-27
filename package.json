@@ -85,7 +85,7 @@
     "@pob/root": "16.9.0",
     "@types/node": "22.15.2",
     "@vitest/coverage-v8": "3.0.8",
-    "check-package-dependencies": "10.1.0",
+    "check-package-dependencies": "10.2.0",
     "eslint": "9.25.1",
     "typedoc": "0.28.3",
     "typescript": "5.8.3",

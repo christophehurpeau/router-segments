@@ -1,7 +1,7 @@
 import { Logger } from 'nightingale-logger';
 import { pathToRegexp, compile } from 'path-to-regexp';
 
-const logger = process.env.NODE_ENV !== "production" ? new Logger("router-segments:findMatch") : undefined;
+const logger = process.env.NODE_ENV !== "production" ? new Logger("router-segments:findMatch") : void 0;
 const parseOtherParams = (wildcard) => wildcard ? wildcard.split("/") : [];
 const internalFindMatch = ({
   path,
@@ -50,7 +50,7 @@ const internalFindMatch = ({
       route = segment.defaultRoute;
     }
     const endRoute = route;
-    const otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
+    const otherParams = group + 1 !== groupCount ? void 0 : parseOtherParams(match[group]);
     result = Object.freeze({
       ref: endRoute.ref,
       path: completePath,

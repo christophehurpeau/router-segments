@@ -27,7 +27,7 @@ test("find match segment without default route", () => {
   expect(findMatch("/post", routes)).toBe(null);
 });
 
-test.only("find segments with multiple named params", () => {
+test("find segments with multiple named params", () => {
   const rootSegment = createSegmentRoute("/:param1", "/:param1");
   const routes = [rootSegment];
 

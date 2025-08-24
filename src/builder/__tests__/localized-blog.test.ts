@@ -1,3 +1,4 @@
+/* eslint-disable regexp/no-useless-non-capturing-group */
 /* eslint-disable unicorn/no-array-method-this-argument */
 
 import { describe, expect, test } from "vitest";
@@ -13,12 +14,7 @@ describe("localized blog", () => {
     .addLocalized({ en: "/contact-us", fr: "/contactez-nous" }, ref)
     .addLocalizedSegment({ en: "/post", fr: "/article" }, (segmentBuilder) => {
       segmentBuilder.defaultRoute(ref, "postList");
-      segmentBuilder.add("/:id(\\d+)-:slug([A-Za-z\\-]+)", ref, "postView");
-      segmentBuilder.add(
-        "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
-        ref,
-        "postWithTag",
-      );
+      segmentBuilder.add("/:id.:slug", ref, "postView");
       segmentBuilder.addLocalizedSegment(
         { en: "/search", fr: "/rechercher" },
         (searchSegmentBuilder) => {
@@ -41,6 +37,7 @@ describe("localized blog", () => {
           );
         },
       );
+      segmentBuilder.add("{/:tag}/:date{_:slug}", ref, "postWithTag");
     })
     .createRouter();
 
@@ -73,7 +70,6 @@ describe("localized blog", () => {
         expect(match.path).toBe(enPath);
         expect(match.route).toBe(router.get("postList"));
         expect(match.namedParams).toBe(undefined);
-        expect(match.otherParams).toBe(undefined);
       });
 
       test("fr", () => {
@@ -84,7 +80,6 @@ describe("localized blog", () => {
         expect(match.path).toBe(frPath);
         expect(match.route).toBe(router.get("postList"));
         expect(match.namedParams).toBe(undefined);
-        expect(match.otherParams).toBe(undefined);
       });
     });
   });
@@ -101,7 +96,7 @@ describe("localized blog", () => {
 
         expect(routePath.namedParams).toEqual(["id", "slug"]);
         expect(routePath.toPath({ id: "001", slug: "The-First-Post" })).toBe(
-          "/post/001-The-First-Post",
+          "/post/001.The-First-Post",
         );
       });
 
@@ -110,13 +105,13 @@ describe("localized blog", () => {
 
         expect(routePath.namedParams).toEqual(["id", "slug"]);
         expect(routePath.toPath({ id: "001", slug: "The-First-Post" })).toBe(
-          "/article/001-The-First-Post",
+          "/article/001.The-First-Post",
         );
       });
     });
 
     describe("find", () => {
-      const enPath = "/post/001-The-First-Post";
+      const enPath = "/post/001.The-First-Post";
       test("en", () => {
         const match = router.find(enPath)!;
         expect(match.path).toBe(enPath);
@@ -127,13 +122,12 @@ describe("localized blog", () => {
             ["slug", "The-First-Post"],
           ]),
         );
-        expect(match.otherParams).toBe(undefined);
       });
 
       test("fr", () => {
         expect(router.find(enPath, "fr")).toBe(null);
 
-        const frPath = "/article/001-Le-Premier-Article";
+        const frPath = "/article/001.Le-Premier-Article";
         const match = router.find(frPath, "fr")!;
         expect(match.path).toBe(frPath);
         expect(match.route).toBe(router.get("postView"));
@@ -143,7 +137,6 @@ describe("localized blog", () => {
             ["slug", "Le-Premier-Article"],
           ]),
         );
-        expect(match.otherParams).toBe(undefined);
       });
     });
   });
@@ -157,7 +150,21 @@ describe("localized blog", () => {
 
       test("en", () => {
         const routePath = rrPostWithTag.localizedPaths.get("en")!;
-        expect(routePath.namedParams).toEqual(["tag", "date", "slug"]);
+        expect(routePath.namedParams).toEqual([
+          "tag",
+          "date",
+          "slug",
+          "tag",
+          "date",
+          "date",
+          "slug",
+          "date",
+        ]);
+
+        expect(routePath.regExp).toEqual(
+          // eslint-disable-next-line no-useless-escape, regexp/no-useless-escape
+          /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+)|\/([^\/]+))$/,
+        );
 
         expect(
           routePath.toPath({
@@ -170,7 +177,16 @@ describe("localized blog", () => {
 
       test("fr", () => {
         const routePath = rrPostWithTag.localizedPaths.get("fr")!;
-        expect(routePath.namedParams).toEqual(["tag", "date", "slug"]);
+        expect(routePath.namedParams).toEqual([
+          "tag",
+          "date",
+          "slug",
+          "tag",
+          "date",
+          "date",
+          "slug",
+          "date",
+        ]);
 
         expect(
           routePath.toPath({
@@ -195,7 +211,6 @@ describe("localized blog", () => {
             ["slug", "The-First-Post"],
           ]),
         );
-        expect(match!.otherParams).toBe(undefined);
       });
 
       test("fr", () => {
@@ -212,7 +227,6 @@ describe("localized blog", () => {
             ["slug", "Le-Premier-Article"],
           ]),
         );
-        expect(match!.otherParams).toBe(undefined);
       });
     });
   });
@@ -223,7 +237,7 @@ describe("localized blog", () => {
       const match = router.find(enPath);
       expect(match!.routePath).toHaveProperty("completePath", "/contact-us");
       expect(match!.routePath).toHaveProperty("path", "/contact-us");
-      expect(match!.routePath).toHaveProperty("regExp", /^\/contact-us$/);
+      expect(match!.routePath).toHaveProperty("regExp", /^(?:\/contact-us)$/);
     });
 
     test("fr", () => {

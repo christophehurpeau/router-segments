@@ -49,7 +49,12 @@ export const createRoute = <Locales extends LocaleType, RouteRef>(
   ref: RouteRef,
 ): Route<Locales, RouteRef> => {
   /* istanbul ignore if */
-  if (process.env.NODE_ENV !== "production") checkRef(ref);
+  if (process.env.NODE_ENV !== "production") {
+    if (path.includes("(.*)")) {
+      throw new Error("Wildcard is not supported using regexp");
+    }
+    checkRef(ref);
+  }
   const routePath: EndRoutePath = createRoutePath(path, completePath);
   return new Route(routePath, ref);
 };

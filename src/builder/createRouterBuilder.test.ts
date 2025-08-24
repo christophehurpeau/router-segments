@@ -13,7 +13,7 @@ test("home", () => {
   expect(rr).toBeDefined();
   expect(rr.ref).toBe(ref);
   expect(rr.path.namedParams.length).toBe(0);
-  expect(rr.path.regExp.source).toBe("^\\/$");
+  expect(rr.path.regExp.source).toBe("^(?:\\/)$");
   expect(rr.path.toPath()).toBe("/");
 });
 

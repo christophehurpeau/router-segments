@@ -10,7 +10,6 @@ import type {
 
 export interface RouteMatch<Locales extends LocaleType | never, RouteRef> {
   namedParams: Map<string, string> | undefined;
-  otherParams: string[] | undefined;
   path: string;
   ref: RouteRef;
   route: Route<any, Locales, RouteRef>;
@@ -21,9 +20,6 @@ const logger =
   process.env.NODE_ENV !== "production"
     ? new Logger("router-segments:findMatch")
     : undefined;
-
-const parseOtherParams = (wildcard?: string): string[] =>
-  wildcard ? wildcard.split("/") : [];
 
 interface InternalFindMatchParams<Locales extends LocaleType, RouteRef> {
   path: string;
@@ -62,24 +58,24 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
     // logger.info('trytomatch', { path, regExp: routePath.regExp, match });
     if (!match) return false;
 
-    match.shift(); // remove m[0], === path;
-
-    let groupCount = match.length;
-    let group = 0;
+    const matchedValue = match[0]; // remove m[0], === path;
 
     if (routePath.namedParams.length > 0) {
+      let group = 1;
       // set params
       if (!namedParams) namedParams = new Map();
 
       routePath.namedParams.forEach((paramName: number | string) => {
         const paramValue = match[group++];
-        namedParams!.set(paramName, paramValue!);
+        if (paramValue !== undefined || !namedParams!.has(paramName)) {
+          namedParams!.set(paramName, paramValue!);
+        }
       });
     }
 
     if (route.isSegment()) {
       const segment = route as SegmentRoute<Locales, RouteRef>;
-      const restOfThePath = match[--groupCount];
+      const restOfThePath = path.slice(matchedValue.length + 1);
 
       if (restOfThePath) {
         result = internalFindMatch({
@@ -102,16 +98,12 @@ const internalFindMatch = <Locales extends LocaleType, RouteRef>({
 
     const endRoute = route as EndRoute<Locales, RouteRef>;
 
-    const otherParams =
-      group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
-
     result = Object.freeze({
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,
       routePath,
       namedParams,
-      otherParams,
     });
 
     return true;

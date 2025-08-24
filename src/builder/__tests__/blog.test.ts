@@ -1,3 +1,7 @@
+/* eslint-disable regexp/no-useless-non-capturing-group */
+/* eslint-disable regexp/no-useless-escape */
+/* eslint-disable no-useless-escape */
+/* eslint-disable regexp/no-empty-group */
 import { describe, expect, test } from "vitest";
 import type { RouteMatch } from "../../router/findMatch";
 import type {
@@ -13,16 +17,12 @@ describe("blog", () => {
     .add("/", ref)
     .addSegment("/post", (segmentBuilder) => {
       segmentBuilder.defaultRoute(ref, "postList");
-      segmentBuilder.add("/:id(\\d+)-:slug([A-Za-z\\-]+)", ref, "postView");
-      segmentBuilder.add(
-        "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
-        ref,
-        "postWithTag",
-      );
+      segmentBuilder.add("/:id.:slug", ref, "postView");
       segmentBuilder.addSegment("/search", (subSegmentBuilder) => {
         subSegmentBuilder.defaultRoute("refsearch", "search");
         subSegmentBuilder.add("/:term", ref, "search-results");
       });
+      segmentBuilder.add("{/:tag}/:date{_:slug}", ref, "postWithTag");
     });
 
   const router = builder.createRouter();
@@ -45,7 +45,7 @@ describe("blog", () => {
       test("path", () => {
         expect(routePath).toHaveProperty("path", "/post");
         expect(routePath).toHaveProperty("completePath", "/post");
-        expect(routePath.regExp).toEqual(/^\/post(?:\/(.*))?$/);
+        expect(routePath.regExp).toEqual(/^(?:\/post)(?=\/|$)/);
       });
 
       describe("nested routes", () => {
@@ -60,29 +60,23 @@ describe("blog", () => {
             any,
             any
           >;
-          expect(nestedRoute.path.path).toBe("/:id(\\d+)-:slug([A-Za-z\\-]+)");
-          expect(nestedRoute.path.completePath).toBe(
-            "/post/:id(\\d+)-:slug([A-Za-z\\-]+)",
-          );
+          expect(nestedRoute.path.path).toBe("/:id.:slug");
+          expect(nestedRoute.path.completePath).toBe("/post/:id.:slug");
           expect(nestedRoute.path.regExp).toEqual(
-            // eslint-disable-next-line no-useless-escape, regexp/no-useless-non-capturing-group, regexp/use-ignore-case
-            /^(?:\/(\d+))-([A-Za-z\-]+)$/,
+            /^(?:\/([^\/]+)\.([^\/\.]+))$/,
           );
         });
-        test("second nested route", () => {
-          const nestedRoute = nestedRoutes[1] as NotLocalizedSegmentRoute<
+        test("third nested route", () => {
+          const nestedRoute = nestedRoutes[2] as NotLocalizedSegmentRoute<
             any,
             any
           >;
-          expect(nestedRoute.path.path).toBe(
-            "/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
-          );
+          expect(nestedRoute.path.path).toBe("{/:tag}/:date{_:slug}");
           expect(nestedRoute.path.completePath).toBe(
-            "/post/:tag?/:date(\\d{4}\\-\\d{2}\\-\\d{2})_:slug",
+            "/post{/:tag}/:date{_:slug}",
           );
           expect(nestedRoute.path.regExp).toEqual(
-            // eslint-disable-next-line no-useless-escape, regexp/no-useless-non-capturing-group, regexp/no-useless-escape, regexp/strict, regexp/no-useless-lazy
-            /^(?:\/([^\/#\?]+?))?(?:\/(\d{4}\-\d{2}\-\d{2}))_((?:(?!_)[^\/#\?])+?)$/,
+            /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+)|\/([^\/]+))$/,
           );
         });
       });
@@ -94,7 +88,7 @@ describe("blog", () => {
         expect(defaultRoute.path).toHaveProperty("completePath", "/post");
         expect(defaultRoute.path).toHaveProperty("namedParams", []);
         expect(defaultRoute.path).toHaveProperty("path", "");
-        expect(defaultRoute.path).toHaveProperty("regExp", /^$/);
+        expect(defaultRoute.path).toHaveProperty("regExp", /^(?:)$/);
         expect(defaultRoute.path).toHaveProperty("toPath");
       });
     });
@@ -107,7 +101,7 @@ describe("blog", () => {
       expect(rrPostView.path.namedParams).toEqual(["id", "slug"]);
       expect(
         rrPostView.path.toPath({ id: "001", slug: "The-First-Post" }),
-      ).toBe("/post/001-The-First-Post");
+      ).toBe("/post/001.The-First-Post");
     });
   });
 
@@ -118,11 +112,10 @@ describe("blog", () => {
       expect(match).toHaveProperty("path", path);
       expect(match).toHaveProperty("route", router.get("postList"));
       expect(match.namedParams).toBe(undefined);
-      expect(match.otherParams).toBe(undefined);
     });
 
     test("postView", () => {
-      const path = "/post/001-The-First-Post";
+      const path = "/post/001.The-First-Post";
       const match = router.find(path) as RouteMatch<never, unknown>;
       expect(match).toHaveProperty("path", path);
       expect(match.namedParams).toEqual(
@@ -131,7 +124,6 @@ describe("blog", () => {
           ["slug", "The-First-Post"],
         ]),
       );
-      expect(match.otherParams).toBe(undefined);
     });
 
     test("search", () => {

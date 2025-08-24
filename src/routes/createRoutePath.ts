@@ -1,4 +1,3 @@
-import type { Key } from "path-to-regexp";
 import { compile, pathToRegexp } from "path-to-regexp";
 import type { EndRoutePath, SegmentRoutePath } from "../types";
 
@@ -18,11 +17,12 @@ function internalCreateRoutePath(
   completePath: string,
   segment: boolean,
 ): EndRoutePath | SegmentRoutePath {
-  const keys: Key[] = [];
-  const regExp = pathToRegexp(segment ? `${path}/(.*)?` : path, keys, {
+  const { keys, regexp: regExp } = pathToRegexp(path, {
     sensitive: true,
-    strict: true,
+    trailing: false,
+    end: !segment,
   });
+
   const namedParams = keys.map((key) => key.name).filter(Boolean);
 
   if (segment) return { path, completePath, regExp, namedParams };

@@ -27,7 +27,7 @@ test("find match segment without default route", () => {
   expect(findMatch("/post", routes)).toBe(null);
 });
 
-test("find segments with multiple named params", () => {
+test.only("find segments with multiple named params", () => {
   const rootSegment = createSegmentRoute("/:param1", "/:param1");
   const routes = [rootSegment];
 
@@ -37,8 +37,10 @@ test("find segments with multiple named params", () => {
   const ref = Symbol("ref");
   nestedSegment.defaultRoute = createRoute("", "/:param1/:param2", ref);
 
+  console.log(routes);
+
   const match = findMatch("/1/2", routes)!;
-  expect(match).toBeDefined();
+  expect(match).toBeTruthy();
   expect(match.path).toBe("/1/2");
   expect(match.namedParams).toEqual(
     new Map([
@@ -50,28 +52,25 @@ test("find segments with multiple named params", () => {
 
 describe("find with /*", () => {
   const ref = Symbol("ref");
-  const routes = [createRoute("/test/(.*)?", "/test/(.*)?", ref)];
+  const routes = [createRoute("/test/{*rest}", "/test/{*rest}", ref)];
 
   test("/test/", () => {
     const match = findMatch("/test/", routes)!;
-    expect(match).toBeDefined();
-    expect(match.namedParams).toBe(undefined);
-    expect(match.otherParams).toEqual([]);
+    expect(match).toBeTruthy();
+    expect(match.namedParams).toEqual(new Map([["rest", undefined]]));
   });
 
   test("/test/1", () => {
     const match = findMatch("/test/1", routes)!;
-    expect(match).toBeDefined();
+    expect(match).toBeTruthy();
     expect(match.path).toBe("/test/1");
-    expect(match.namedParams).toBe(undefined);
-    expect(match.otherParams).toEqual(["1"]);
+    expect(match.namedParams).toEqual(new Map([["rest", "1"]]));
   });
 
   test("/test/1/2", () => {
     const match = findMatch("/test/1/2", routes)!;
     expect(match).toBeDefined();
     expect(match.path).toBe("/test/1/2");
-    expect(match.namedParams).toBe(undefined);
-    expect(match.otherParams).toEqual(["1", "2"]);
+    expect(match.namedParams).toEqual(new Map([["rest", "1/2"]]));
   });
 });

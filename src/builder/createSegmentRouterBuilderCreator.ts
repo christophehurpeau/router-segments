@@ -1,13 +1,16 @@
-import type { LocalizedEndRoute, LocalizedSegmentRoute } from "../routes";
 import {
   createLocalizedRoute,
   createLocalizedSegmentRoute,
   createRoute,
   createSegmentRoute,
-} from "../routes/create";
-import type { EndRoute, SegmentRoute } from "../routes/interfaces";
-import type { LocaleType, LocalizedPathsRecord } from "../types";
-import { getKeys } from "../utils/getKeys";
+} from "../routes/create.ts";
+import type {
+  LocalizedEndRoute,
+  LocalizedSegmentRoute,
+} from "../routes/index.ts";
+import type { EndRoute, SegmentRoute } from "../routes/interfaces.ts";
+import type { LocaleType, LocalizedPathsRecord } from "../types.ts";
+import { getKeys } from "../utils/getKeys.ts";
 
 export interface SegmentRouterBuilder<Locales extends LocaleType, RouteRef> {
   add: (path: string, ref: RouteRef, key?: string) => void;

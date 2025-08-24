@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
-import { createLocalizedRoute, createRoute } from "../routes/create";
-import type { EndRoute } from "../routes/interfaces";
-import { createRouter } from "./createRouter";
+import { createLocalizedRoute, createRoute } from "../routes/create.ts";
+import type { EndRoute } from "../routes/interfaces.ts";
+import { createRouter } from "./createRouter.ts";
 
 const ref = Symbol("ref");
 const route = createRoute("/", "/", ref);

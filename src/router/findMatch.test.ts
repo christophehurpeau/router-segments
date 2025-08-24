@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { LocalizedEndRoute } from "../routes";
-import { createRoute, createSegmentRoute } from "../routes/create";
-import type { Routes } from "../types";
-import { findMatch } from "./findMatch";
+import { createRoute, createSegmentRoute } from "../routes/create.ts";
+import { LocalizedEndRoute } from "../routes/index.ts";
+import type { Routes } from "../types.ts";
+import { findMatch } from "./findMatch.ts";
 
 test("find without routes returns null", () => {
   const routes: Routes<never, never> = [];
@@ -36,8 +36,6 @@ test.only("find segments with multiple named params", () => {
 
   const ref = Symbol("ref");
   nestedSegment.defaultRoute = createRoute("", "/:param1/:param2", ref);
-
-  console.log(routes);
 
   const match = findMatch("/1/2", routes)!;
   expect(match).toBeTruthy();

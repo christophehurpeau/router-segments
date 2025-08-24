@@ -1,6 +1,6 @@
-import type { EndRoute } from "../routes/interfaces";
-import type { LocaleType, RouteMap, Routes } from "../types";
-import type { RouteMatch } from "./findMatch";
+import type { EndRoute } from "../routes/interfaces.ts";
+import type { LocaleType, RouteMap, Routes } from "../types.ts";
+import type { RouteMatch } from "./findMatch.ts";
 export interface Router<Locales extends LocaleType | never, RouteRef> {
     get: (key: string) => EndRoute<Locales, RouteRef>;
     find: (path: string, locale?: Locales) => RouteMatch<Locales, RouteRef> | null;

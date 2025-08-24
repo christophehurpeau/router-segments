@@ -1,8 +1,7 @@
 import { Logger } from 'nightingale-logger';
 import { pathToRegexp, compile } from 'path-to-regexp';
 
-const logger = process.env.NODE_ENV !== "production" ? new Logger("router-segments:findMatch") : undefined;
-const parseOtherParams = (wildcard) => wildcard ? wildcard.split("/") : [];
+const logger = process.env.NODE_ENV !== "production" ? new Logger("router-segments:findMatch") : void 0;
 const internalFindMatch = ({
   path,
   completePath,
@@ -21,19 +20,20 @@ const internalFindMatch = ({
     }
     const match = routePath.regExp.exec(path);
     if (!match) return false;
-    match.shift();
-    let groupCount = match.length;
-    let group = 0;
+    const matchedValue = match[0];
     if (routePath.namedParams.length > 0) {
+      let group = 1;
       if (!namedParams) namedParams = /* @__PURE__ */ new Map();
       routePath.namedParams.forEach((paramName) => {
         const paramValue = match[group++];
-        namedParams.set(paramName, paramValue);
+        if (paramValue !== void 0 || !namedParams.has(paramName)) {
+          namedParams.set(paramName, paramValue);
+        }
       });
     }
     if (route.isSegment()) {
       const segment = route;
-      const restOfThePath = match[--groupCount];
+      const restOfThePath = path.slice(matchedValue.length + 1);
       if (restOfThePath) {
         result = internalFindMatch({
           path: `/${restOfThePath}`,
@@ -50,14 +50,12 @@ const internalFindMatch = ({
       route = segment.defaultRoute;
     }
     const endRoute = route;
-    const otherParams = group + 1 !== groupCount ? undefined : parseOtherParams(match[group]);
     result = Object.freeze({
       ref: endRoute.ref,
       path: completePath,
       route: endRoute,
       routePath,
-      namedParams,
-      otherParams
+      namedParams
     });
     return true;
   });
@@ -191,10 +189,10 @@ class NotLocalizedSegmentRoute {
 }
 
 function internalCreateRoutePath(path, completePath, segment) {
-  const keys = [];
-  const regExp = pathToRegexp(segment ? `${path}/(.*)?` : path, keys, {
+  const { keys, regexp: regExp } = pathToRegexp(path, {
     sensitive: true,
-    strict: true
+    trailing: false,
+    end: !segment
   });
   const namedParams = keys.map((key) => key.name).filter(Boolean);
   if (segment) return { path, completePath, regExp, namedParams };
@@ -233,7 +231,12 @@ const checkRef = (ref) => {
   if (!ref) throw new Error(`Invalid ref: "${JSON.stringify(ref)}"`);
 };
 const createRoute = (path, completePath, ref) => {
-  if (process.env.NODE_ENV !== "production") checkRef(ref);
+  if (process.env.NODE_ENV !== "production") {
+    if (path.includes("(.*)")) {
+      throw new Error("Wildcard is not supported using regexp");
+    }
+    checkRef(ref);
+  }
   const routePath = createRoutePath(path, completePath);
   return new NotLocalizedEndRoute(routePath, ref);
 };
@@ -413,4 +416,4 @@ function createRouterBuilder(locales) {
 }
 
 export { createRouterBuilder };
-//# sourceMappingURL=index-node20.mjs.map
+//# sourceMappingURL=index-node.mjs.map

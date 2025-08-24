@@ -3,13 +3,13 @@ import type {
   LocaleType,
   LocalizedPathsRecord,
   SegmentRoutePath,
-} from "../types";
-import { getKeys } from "../utils/getKeys";
-import { LocalizedEndRoute } from "./LocalizedEndRoute";
-import { LocalizedSegmentRoute } from "./LocalizedSegmentRoute";
-import { NotLocalizedEndRoute as Route } from "./NotLocalizedEndRoute";
-import { NotLocalizedSegmentRoute } from "./NotLocalizedSegmentRoute";
-import { createRoutePath, createRoutePathSegment } from "./createRoutePath";
+} from "../types.ts";
+import { getKeys } from "../utils/getKeys.ts";
+import { LocalizedEndRoute } from "./LocalizedEndRoute.ts";
+import { LocalizedSegmentRoute } from "./LocalizedSegmentRoute.ts";
+import { NotLocalizedEndRoute as Route } from "./NotLocalizedEndRoute.ts";
+import { NotLocalizedSegmentRoute } from "./NotLocalizedSegmentRoute.ts";
+import { createRoutePath, createRoutePathSegment } from "./createRoutePath.ts";
 
 const createLocalizedPaths = <
   Locales extends LocaleType,

@@ -1,4 +1,4 @@
-export { NotLocalizedEndRoute } from "./NotLocalizedEndRoute";
-export { LocalizedEndRoute } from "./LocalizedEndRoute";
-export { NotLocalizedSegmentRoute } from "./NotLocalizedSegmentRoute";
-export { LocalizedSegmentRoute } from "./LocalizedSegmentRoute";
+export { NotLocalizedEndRoute } from "./NotLocalizedEndRoute.ts";
+export { LocalizedEndRoute } from "./LocalizedEndRoute.ts";
+export { NotLocalizedSegmentRoute } from "./NotLocalizedSegmentRoute.ts";
+export { LocalizedSegmentRoute } from "./LocalizedSegmentRoute.ts";

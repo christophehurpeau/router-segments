@@ -3,12 +3,12 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable regexp/no-empty-group */
 import { describe, expect, test } from "vitest";
-import type { RouteMatch } from "../../router/findMatch";
+import type { RouteMatch } from "../../router/findMatch.ts";
 import type {
   NotLocalizedEndRoute,
   NotLocalizedSegmentRoute,
-} from "../../routes";
-import { createRouterBuilder } from "../createRouterBuilder";
+} from "../../routes/index.ts";
+import { createRouterBuilder } from "../createRouterBuilder.ts";
 
 describe("blog", () => {
   const ref = Symbol("ref");

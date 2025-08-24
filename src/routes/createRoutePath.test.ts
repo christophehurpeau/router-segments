@@ -1,7 +1,7 @@
 /* eslint-disable regexp/no-useless-non-capturing-group */
 /* eslint-disable regexp/no-useless-escape */
 import { describe, expect, test } from "vitest";
-import { createRoutePath, createRoutePathSegment } from "./createRoutePath";
+import { createRoutePath, createRoutePathSegment } from "./createRoutePath.ts";
 
 describe("createRoutePath", () => {
   test("/", () => {

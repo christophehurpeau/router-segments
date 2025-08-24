@@ -1,6 +1,6 @@
-import type { Router } from "../router/createRouter";
-import type { LocaleType, LocalizedPathsRecord, Routes } from "../types";
-import type { SegmentRouterBuilder } from "./createSegmentRouterBuilderCreator";
+import type { Router } from "../router/createRouter.ts";
+import type { LocaleType, LocalizedPathsRecord, Routes } from "../types.ts";
+import type { SegmentRouterBuilder } from "./createSegmentRouterBuilderCreator.ts";
 export interface RouterBuilder<Locales extends LocaleType | never, RouteRef> {
     add: (path: string, ref: RouteRef, key?: string) => this;
     addLocalized: (localizedPaths: LocalizedPathsRecord<Locales>, ref: RouteRef, key?: string) => this;

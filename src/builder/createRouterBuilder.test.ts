@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import type { NotLocalizedEndRoute } from "../routes";
-import { createRouterBuilder } from "./createRouterBuilder";
+import type { NotLocalizedEndRoute } from "../routes/index.ts";
+import { createRouterBuilder } from "./createRouterBuilder.ts";
 
 test("home", () => {
   const builder = createRouterBuilder();

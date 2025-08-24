@@ -49,7 +49,6 @@
     "postinstall": "pob-root-postinstall",
     "postpack": "pinst --enable",
     "prepack": "pinst --disable",
-    "preversion": "yarn run lint && yarn run build && repository-check-dirty",
     "test": "TZ=UTC vitest",
     "test:coverage": "TZ=UTC POB_VITEST_COVERAGE=json,text vitest run --coverage",
     "test:coverage:json": "TZ=UTC POB_VITEST_COVERAGE=json vitest run --coverage",

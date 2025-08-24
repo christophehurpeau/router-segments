@@ -32,7 +32,7 @@ const builder = createRouterBuilder();
 
 builder.add("/", ref);
 builder.addSegment("/post", (segmentBuilder) => {
-  segmentBuilder.add("/:id(\\d+)-:slug([A-Za-z\\-]+)", ref, "/post/view");
+  segmentBuilder.add("/:id/:slug", ref, "/post/view");
   segmentBuilder.defaultRoute(ref, "/post");
 });
 
@@ -45,7 +45,7 @@ export default builder.createRouter();
 
 ```js
 router.toPath("/post/view", { id: "001", slug: "a-slug" });
-// /post/001-a-slug
+// /post/001/a-slug
 ```
 
 ## Localized routes
@@ -64,8 +64,8 @@ builder.addLocalizedSegment(
   (segmentBuilder) => {
     segmentBuilder.addLocalized(
       {
-        en: "/post/:id(\\d+)",
-        fr: "/billet/:id(\\d+)",
+        en: "/post/:id",
+        fr: "/billet/:id",
       },
       ref,
       "/my-blog/post",
@@ -79,4 +79,4 @@ export const router = builder.createRouter();
 
 ## API
 
-see [Definition file](https://github.com/christophehurpeau/router-segments/tree/master/dist/index.d.ts)
+https://christophehurpeau.github.io/router-segments/

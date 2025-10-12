@@ -52,13 +52,12 @@
     "test": "TZ=UTC vitest",
     "test:coverage": "TZ=UTC POB_VITEST_COVERAGE=json,text vitest run --coverage",
     "test:coverage:json": "TZ=UTC POB_VITEST_COVERAGE=json vitest run --coverage",
-    "test:coverage:lcov": "POB_VITEST_COVERAGE=lcovvitest run --coverage",
     "test:watch": "TZ=UTC vitest --watch",
     "watch": "yarn clean:build && rollup --config rollup.config.mjs --watch"
   },
   "commitlint": {
     "extends": [
-      "@pob/commitlint-config"
+      "@pob/root/commitlint-config"
     ]
   },
   "pob": {
@@ -81,11 +80,10 @@
     "path-to-regexp": "^8.2.0"
   },
   "devDependencies": {
-    "@pob/commitlint-config": "10.0.0",
-    "@pob/eslint-config": "61.1.0",
-    "@pob/eslint-config-typescript": "61.1.0",
-    "@pob/rollup-esbuild": "7.0.0",
-    "@pob/root": "19.1.0",
+    "@pob/eslint-config": "62.0.0",
+    "@pob/eslint-config-typescript": "62.0.0",
+    "@pob/rollup-esbuild": "7.1.0",
+    "@pob/root": "19.2.0",
     "@types/node": "22.18.10",
     "@vitest/coverage-v8": "3.2.4",
     "check-package-dependencies": "10.4.1",

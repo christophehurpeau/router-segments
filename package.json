@@ -16,7 +16,7 @@
   "type": "module",
   "packageManager": "yarn@4.10.3",
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=24.11.0"
   },
   "sideEffects": false,
   "main": "./dist/index-node.mjs",
@@ -84,7 +84,7 @@
     "@pob/eslint-config-typescript": "62.0.0",
     "@pob/rollup-esbuild": "7.3.0",
     "@pob/root": "19.5.0",
-    "@types/node": "22.18.13",
+    "@types/node": "24.9.2",
     "@vitest/coverage-v8": "4.0.4",
     "check-package-dependencies": "10.5.0",
     "eslint": "9.38.0",

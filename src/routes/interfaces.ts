@@ -20,15 +20,20 @@ export interface Route<
   toString: () => string;
 }
 
-export interface EndRoute<Locales extends LocaleType, RouteRef>
-  extends Route<EndRoutePath, Locales, RouteRef> {
+export interface EndRoute<Locales extends LocaleType, RouteRef> extends Route<
+  EndRoutePath,
+  Locales,
+  RouteRef
+> {
   ref: RouteRef;
 
   isSegment: () => false;
 }
 
-export interface SegmentRoute<Locales extends LocaleType, RouteRef>
-  extends Route<SegmentRoutePath, Locales, RouteRef> {
+export interface SegmentRoute<
+  Locales extends LocaleType,
+  RouteRef,
+> extends Route<SegmentRoutePath, Locales, RouteRef> {
   defaultRoute: EndRoute<Locales, RouteRef> | undefined;
   nestedRoutes: Route<RoutePathInterface, Locales, RouteRef>[];
 

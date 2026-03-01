@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.0](https://github.com/christophehurpeau/router-segments/compare/v12.0.0...v12.1.0) (2026-03-01)
+
+### Features
+
+* **deps:** update dependency nightingale-logger to v17 ([#1090](https://github.com/christophehurpeau/router-segments/issues/1090))
+* **deps:** update dependency path-to-regexp to ^8.3.0 ([#1100](https://github.com/christophehurpeau/router-segments/issues/1100))
+* update nightingale-logger
+
 ## [12.0.0](https://github.com/christophehurpeau/router-segments/compare/v11.0.0...v12.0.0) (2025-08-24)
 
 ### ⚠ BREAKING CHANGES

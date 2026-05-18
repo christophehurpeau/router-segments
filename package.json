@@ -80,7 +80,7 @@
     "path-to-regexp": "^8.3.0"
   },
   "devDependencies": {
-    "@pob/eslint-config": "65.3.0",
+    "@pob/eslint-config": "65.4.3",
     "@pob/rollup-esbuild": "8.3.0",
     "@pob/root": "22.1.0",
     "@types/node": "22.19.3",

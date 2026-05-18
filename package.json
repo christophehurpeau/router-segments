@@ -89,7 +89,7 @@
     "eslint": "10.3.0",
     "pinst": "3.0.0",
     "typedoc": "0.28.19",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "vitest": "4.0.18"
   }
 }

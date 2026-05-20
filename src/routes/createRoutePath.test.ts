@@ -17,7 +17,8 @@ describe("createRoutePath", () => {
     const routePath = createRoutePath("/test/{*rest}", "/test/{*rest}");
     expect(routePath).toHaveProperty("path", "/test/{*rest}");
     expect(routePath).toHaveProperty("completePath", "/test/{*rest}");
-    expect(routePath.regExp).toEqual(/^(?:\/test\/([\s\S]+)|\/test\/)$/);
+    // eslint-disable-next-line regexp/match-any
+    expect(routePath.regExp).toEqual(/^(?:\/test\/([^]+)|\/test\/)$/);
     expect(routePath.namedParams).toEqual(["rest"]);
     expect(routePath.toPath({ rest: ["1", "2", "3"] })).toEqual("/test/1/2/3");
   });

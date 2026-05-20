@@ -63,7 +63,7 @@ describe("blog", () => {
           expect(nestedRoute.path.path).toBe("/:id.:slug");
           expect(nestedRoute.path.completePath).toBe("/post/:id.:slug");
           expect(nestedRoute.path.regExp).toEqual(
-            /^(?:\/([^\/]+)\.([^\/\.]+))$/,
+            /^(?:\/([^\/]+)\.([^\/\.]+|\.))$/,
           );
         });
         test("third nested route", () => {
@@ -76,7 +76,7 @@ describe("blog", () => {
             "/post{/:tag}/:date{_:slug}",
           );
           expect(nestedRoute.path.regExp).toEqual(
-            /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+)|\/([^\/]+))$/,
+            /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+|_)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+|_)|\/([^\/]+))$/,
           );
         });
       });

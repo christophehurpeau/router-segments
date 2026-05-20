@@ -77,7 +77,7 @@
   "prettier": "@pob/root/prettier-config",
   "dependencies": {
     "nightingale-logger": "^18.1.0",
-    "path-to-regexp": "^8.3.0"
+    "path-to-regexp": "^8.4.2"
   },
   "devDependencies": {
     "@pob/eslint-config": "65.3.0",

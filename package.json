@@ -6,18 +6,18 @@
     "router",
     "segments"
   ],
-  "author": "Christophe Hurpeau <christophe@hurpeau.com> (http://christophe.hurpeau.com/)",
-  "license": "MIT",
-  "repository": "https://github.com/christophehurpeau/router-segments.git",
   "homepage": "https://christophehurpeau.github.io/router-segments/",
   "bugs": {
     "url": "https://github.com/christophehurpeau/router-segments/issues"
   },
+  "license": "MIT",
+  "author": "Christophe Hurpeau <christophe@hurpeau.com> (http://christophe.hurpeau.com/)",
+  "repository": "https://github.com/christophehurpeau/router-segments.git",
+  "files": [
+    "src",
+    "dist"
+  ],
   "type": "module",
-  "packageManager": "yarn@4.12.0",
-  "engines": {
-    "node": ">=22.18.0"
-  },
   "sideEffects": false,
   "main": "./dist/index-node.mjs",
   "types": "./dist/definitions/index.d.ts",
@@ -30,22 +30,18 @@
       }
     }
   },
-  "files": [
-    "src",
-    "dist"
-  ],
   "scripts": {
     "build": "yarn clean:build && rollup --config rollup.config.mjs && yarn run build:definitions",
     "build:definitions": "tsc -p tsconfig.json",
     "checks": "node scripts/check-package.js",
     "clean": "yarn clean:build",
     "clean:build": "pob-esbuild-clean-out dist",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check .",
     "generate:api": "typedoc --tsconfig tsconfig.doc.json",
     "generate:test-coverage": "rm -Rf docs/coverage/ ; NODE_ENV=production BABEL_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --coverage --coverageReporters=pob-lcov-reporter --coverageDirectory=docs/coverage/",
-    "lint": "yarn run lint:prettier && tsc && yarn run lint:eslint",
+    "lint": "yarn run format && tsc && yarn run lint:eslint",
     "lint:eslint": "eslint --quiet .",
-    "lint:prettier": "pob-root-prettier --check .",
-    "lint:prettier:fix": "pob-root-prettier --write .",
     "postinstall": "pob-root-postinstall",
     "postpack": "pinst --enable",
     "prepack": "pinst --disable",
@@ -55,11 +51,33 @@
     "test:watch": "TZ=UTC vitest --watch",
     "watch": "yarn clean:build && rollup --config rollup.config.mjs --watch"
   },
+  "dependencies": {
+    "nightingale-logger": "^18.1.0",
+    "path-to-regexp": "^8.4.2"
+  },
+  "devDependencies": {
+    "@pob/eslint-config": "65.4.3",
+    "@pob/rollup-esbuild": "9.0.0",
+    "@pob/root": "24.0.0",
+    "@types/node": "22.19.3",
+    "@vitest/coverage-v8": "4.1.6",
+    "check-package-dependencies": "11.1.1",
+    "eslint": "10.4.0",
+    "pinst": "3.0.0",
+    "typedoc": "0.28.19",
+    "typescript": "6.0.3",
+    "vite": "8.0.13",
+    "vitest": "4.1.6"
+  },
   "commitlint": {
     "extends": [
       "@pob/root/commitlint-config"
     ]
   },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "yarn@4.14.1",
   "pob": {
     "bundler": "rollup-esbuild",
     "entries": [
@@ -73,23 +91,5 @@
       }
     ],
     "typescript": true
-  },
-  "prettier": "@pob/root/prettier-config",
-  "dependencies": {
-    "nightingale-logger": "^18.1.0",
-    "path-to-regexp": "^8.4.2"
-  },
-  "devDependencies": {
-    "@pob/eslint-config": "65.3.0",
-    "@pob/rollup-esbuild": "8.3.0",
-    "@pob/root": "22.1.0",
-    "@types/node": "22.19.3",
-    "@vitest/coverage-v8": "4.0.18",
-    "check-package-dependencies": "10.5.0",
-    "eslint": "10.3.0",
-    "pinst": "3.0.0",
-    "typedoc": "0.28.19",
-    "typescript": "5.9.3",
-    "vitest": "4.0.18"
   }
 }

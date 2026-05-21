@@ -68,4 +68,5 @@ jobs:
 
       - name: Publish to npm
         if: github.ref == 'refs/heads/main' && !inputs.dry-run
-        run: yarn npm publish
+        run: |
+          yarn npm publish

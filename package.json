@@ -60,14 +60,14 @@
     "@pob/rollup-esbuild": "9.1.0",
     "@pob/root": "24.0.0",
     "@types/node": "22.19.3",
-    "@vitest/coverage-v8": "4.1.6",
+    "@vitest/coverage-v8": "4.1.7",
     "check-package-dependencies": "11.1.1",
     "eslint": "10.4.0",
     "pinst": "3.0.0",
     "typedoc": "0.28.19",
     "typescript": "6.0.3",
     "vite": "8.0.14",
-    "vitest": "4.1.6"
+    "vitest": "4.1.7"
   },
   "commitlint": {
     "extends": [

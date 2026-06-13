@@ -51,7 +51,7 @@
     "watch": "yarn clean:build && rollup --config rollup.config.mjs --watch"
   },
   "dependencies": {
-    "nightingale-logger": "^18.1.0",
+    "nightingale-logger": "^18.2.0",
     "path-to-regexp": "^8.4.2"
   },
   "devDependencies": {

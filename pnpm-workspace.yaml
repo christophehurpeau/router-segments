@@ -10,6 +10,4 @@ minimumReleaseAgeExclude:
   - alouette-icons
   - nightingale
   - nightingale-logger
-  - nightingale-levels@18.2.0
-  - nightingale-types@18.2.0
 savePrefix: ^

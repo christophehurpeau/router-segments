@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       nightingale-logger:
-        specifier: ^18.1.0
+        specifier: ^18.2.0
         version: 18.2.0
       path-to-regexp:
         specifier: ^8.4.2

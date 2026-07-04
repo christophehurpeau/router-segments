@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.2.1](https://github.com/christophehurpeau/router-segments/compare/v12.2.0...v12.2.1) (2026-07-04)
+
+Note: no notable changes
+
+
 ## [12.2.0](https://github.com/christophehurpeau/router-segments/compare/v12.1.2...v12.2.0) (2026-07-04)
 
 ### Features

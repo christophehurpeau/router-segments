@@ -31,8 +31,8 @@ importers:
         specifier: 4.1.9
         version: 4.1.9(vitest@4.1.9)
       check-package-dependencies:
-        specifier: 11.2.0
-        version: 11.2.0(eslint@10.6.0(supports-color@7.2.0))
+        specifier: 11.7.0
+        version: 11.7.0(eslint@10.6.0(supports-color@7.2.0))
       eslint:
         specifier: 10.6.0
         version: 10.6.0(supports-color@7.2.0)
@@ -1276,12 +1276,12 @@ packages:
   change-case@5.4.4:
     resolution: {integrity: sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w==}
 
-  check-package-dependencies@11.2.0:
-    resolution: {integrity: sha512-ohxs7NXgWcpGlFJCv66rNR7yDS5x+DvwLt5WO9C6yW+LUqt8pyxcmP8TlC01hLjsxu2pzD2d8lAGnCyzGo0eBg==}
+  check-package-dependencies@11.7.0:
+    resolution: {integrity: sha512-+bOgnnBLg9RzLjRF2eOD/S0h4sG5wuunWON9T+wrBYNuQqvRK7N2cnx06maH9MdhojReLHm6HW6jZUr/YliDNQ==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
-      eslint: ^10.0.3
+      eslint: ^10.6.0
     peerDependenciesMeta:
       eslint:
         optional: true
@@ -3784,7 +3784,7 @@ snapshots:
 
   change-case@5.4.4: {}
 
-  check-package-dependencies@11.2.0(eslint@10.6.0(supports-color@7.2.0)):
+  check-package-dependencies@11.7.0(eslint@10.6.0(supports-color@7.2.0)):
     dependencies:
       '@eslint/plugin-kit': 0.7.2
       jsonc-parser: 3.3.1

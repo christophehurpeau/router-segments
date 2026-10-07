@@ -38,8 +38,9 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check .",
     "generate:api": "typedoc --tsconfig tsconfig.doc.json",
-    "lint": "pnpm run format && tsc && pnpm run lint:eslint",
+    "lint": "pnpm run format && pnpm run lint:oxlint && tsc && pnpm run lint:eslint",
     "lint:eslint": "eslint --quiet .",
+    "lint:oxlint": "oxlint --quiet",
     "prepare": "pob-root-postinstall",
     "test": "TZ=UTC vitest",
     "test:coverage": "TZ=UTC POB_VITEST_COVERAGE=json,text vitest run --coverage",
@@ -53,17 +54,17 @@
     "path-to-regexp": "^8.4.2"
   },
   "devDependencies": {
-    "@pob/eslint-config": "67.4.0",
-    "@pob/rollup-esbuild": "10.0.0",
-    "@pob/root": "27.5.0",
+    "@pob/eslint-config": "67.11.0",
+    "@pob/rollup-esbuild": "10.2.0",
+    "@pob/root": "27.12.0",
     "@types/node": "22.19.3",
     "@typescript/native": "npm:typescript@7.0.2",
-    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/coverage-v8": "4.1.11",
     "eslint": "10.8.1",
     "typedoc": "0.28.20",
     "typescript": "npm:@typescript/typescript6@6.0.2",
-    "vite": "8.1.5",
-    "vitest": "4.1.10"
+    "vite": "8.2.1",
+    "vitest": "4.1.11"
   },
   "commitlint": {
     "extends": [

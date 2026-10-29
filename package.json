@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "nightingale-logger": "^18.2.0",
-    "path-to-regexp": "^8.4.2"
+    "path-to-regexp": "^9.0.0"
   },
   "devDependencies": {
     "@pob/eslint-config": "67.4.0",

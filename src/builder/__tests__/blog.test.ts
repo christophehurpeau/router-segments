@@ -1,7 +1,7 @@
-/* eslint-disable regexp/no-useless-non-capturing-group */
-/* eslint-disable regexp/no-useless-escape */
-/* eslint-disable no-useless-escape */
-/* eslint-disable regexp/no-empty-group */
+/* oxlint-disable regexp/no-useless-non-capturing-group */
+/* oxlint-disable regexp/no-useless-escape */
+/* oxlint-disable no-useless-escape */
+/* oxlint-disable regexp/no-empty-group */
 import { describe, expect, test } from "vitest";
 import type { RouteMatch } from "../../router/findMatch.ts";
 import type {

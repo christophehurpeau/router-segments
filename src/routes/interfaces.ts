@@ -8,7 +8,7 @@ import type {
 export interface Route<
   T extends RoutePathInterface,
   Locales extends LocaleType,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- helps typescript to infer the type
+  // oxlint-disable-next-line no-unused-vars -- helps typescript to infer the type
   RouteRef,
 > {
   isSegment: () => boolean;

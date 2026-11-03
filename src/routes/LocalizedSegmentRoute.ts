@@ -1,6 +1,6 @@
-import type { LocalizedEndRoute } from "./LocalizedEndRoute";
-import type { LocalizedRoute, SegmentRoute } from "./interfaces";
-import type { LocaleType, SegmentRoutePath } from "./types";
+import type { LocalizedEndRoute } from "./LocalizedEndRoute.ts";
+import type { LocalizedRoute, SegmentRoute } from "./interfaces.ts";
+import type { LocaleType, SegmentRoutePath } from "./types.ts";
 
 export class LocalizedSegmentRoute<Locales extends LocaleType, RouteRef>
   implements

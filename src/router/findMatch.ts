@@ -1,11 +1,11 @@
 import { Logger } from "nightingale-logger";
-import type { EndRoute, Route, SegmentRoute } from "../routes/interfaces";
+import type { EndRoute, Route, SegmentRoute } from "../routes/interfaces.ts";
 import type {
   EndRoutePath,
   LocaleType,
   RoutePathInterface,
   SegmentRoutePath,
-} from "../types";
+} from "../types.ts";
 
 export interface RouteMatch<Locales extends LocaleType | never, RouteRef> {
   namedParams: Map<string, string> | undefined;

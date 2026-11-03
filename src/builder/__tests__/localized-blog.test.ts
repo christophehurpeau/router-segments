@@ -1,5 +1,5 @@
-/* eslint-disable regexp/no-useless-non-capturing-group */
-/* eslint-disable unicorn/no-array-method-this-argument */
+/* oxlint-disable regexp/no-useless-non-capturing-group */
+/* oxlint-disable unicorn/no-array-method-this-argument */
 
 import { describe, expect, test } from "vitest";
 import type { LocalizedEndRoute } from "../../routes/index.ts";
@@ -162,7 +162,7 @@ describe("localized blog", () => {
         ]);
 
         expect(routePath.regExp).toEqual(
-          // eslint-disable-next-line no-useless-escape, regexp/no-useless-escape
+          // oxlint-disable-next-line no-useless-escape, regexp/no-useless-escape
           /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+|_)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+|_)|\/([^\/]+))$/,
         );
 

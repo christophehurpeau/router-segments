@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { Logger } from "nightingale-logger";
 import type { EndRoute, Route, SegmentRoute } from "../routes/interfaces";
 import type {

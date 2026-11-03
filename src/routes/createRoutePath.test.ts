@@ -1,5 +1,5 @@
-/* eslint-disable regexp/no-useless-non-capturing-group */
-/* eslint-disable regexp/no-useless-escape */
+/* oxlint-disable regexp/no-useless-non-capturing-group */
+/* oxlint-disable regexp/no-useless-escape */
 import { describe, expect, test } from "vitest";
 import { createRoutePath, createRoutePathSegment } from "./createRoutePath.ts";
 
@@ -17,7 +17,7 @@ describe("createRoutePath", () => {
     const routePath = createRoutePath("/test/{*rest}", "/test/{*rest}");
     expect(routePath).toHaveProperty("path", "/test/{*rest}");
     expect(routePath).toHaveProperty("completePath", "/test/{*rest}");
-    // eslint-disable-next-line regexp/match-any
+    // oxlint-disable-next-line regexp/match-any
     expect(routePath.regExp).toEqual(/^(?:\/test\/([^]+)|\/test\/)$/);
     expect(routePath.namedParams).toEqual(["rest"]);
     expect(routePath.toPath({ rest: ["1", "2", "3"] })).toEqual("/test/1/2/3");
@@ -39,7 +39,7 @@ describe("createRoutePath", () => {
     );
     expect(routePath).toHaveProperty("path", "/route/:namedParam");
     expect(routePath).toHaveProperty("completePath", "/route/:namedParam");
-    // eslint-disable-next-line no-useless-escape
+    // oxlint-disable-next-line no-useless-escape
     expect(routePath.regExp).toEqual(/^(?:\/route\/([^\/]+))$/);
     expect(routePath.namedParams).toEqual(["namedParam"]);
     expect(routePath.toPath({ namedParam: "test" })).toEqual("/route/test");
@@ -79,7 +79,7 @@ describe("createRoutePathSegment", () => {
     expect(routePath).toHaveProperty("path", "/segment/:namedParam");
     expect(routePath).toHaveProperty("completePath", "/segment/:namedParam");
     expect(routePath.regExp).toEqual(
-      // eslint-disable-next-line no-useless-escape
+      // oxlint-disable-next-line no-useless-escape
       /^(?:\/segment\/([^\/]+))(?=\/|$)/,
     );
     expect(routePath.namedParams).toEqual(["namedParam"]);

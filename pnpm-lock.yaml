@@ -20,7 +20,7 @@ importers:
         version: 68.0.0(@typescript-eslint/utils@8.67.0(@typescript/typescript6@6.0.2)(eslint@10.12.0(supports-color@7.2.0))(supports-color@7.2.0))(@typescript/typescript6@6.0.2)(eslint@10.12.0(supports-color@7.2.0))(supports-color@7.2.0)
       '@pob/rollup-esbuild':
         specifier: 11.1.0
-        version: 11.1.0(@typescript/typescript6@6.0.2)(supports-color@7.2.0)
+        version: 11.1.0(@typescript/typescript6@6.0.2)(rollup@4.60.4)(supports-color@7.2.0)
       '@pob/root':
         specifier: 28.2.2
         version: 28.2.2
@@ -1443,9 +1443,9 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  brace-expansion@5.0.6:
-    resolution: {integrity: sha512-kLpxurY4Z4r9sgMsyG0Z9uzsBlgiU/EFKhj/h91/8yHu0edo7XuixOIH3VcJ8kkxs6/jPzoI6U9Vj3WqbMQ94g==}
-    engines: {node: 18 || 20 || >=22}
+  brace-expansion@5.0.12:
+    resolution: {integrity: sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==}
+    engines: {node: 20 || >=22}
 
   browserslist@4.29.3:
     resolution: {integrity: sha512-1R4kiYKXGViqEN0CnoDrXc1StD9niAwu+j2dukWzrD4bJgsD4lDmEp0CRbc6E/vYJIfTHwPmwyaKtVSudICdPA==}
@@ -2796,17 +2796,18 @@ snapshots:
     optionalDependencies:
       typescript: '@typescript/typescript6@6.0.2'
 
-  '@pob/rollup-esbuild@11.1.0(@typescript/typescript6@6.0.2)(supports-color@7.2.0)':
+  '@pob/rollup-esbuild@11.1.0(@typescript/typescript6@6.0.2)(rollup@4.60.4)(supports-color@7.2.0)':
     dependencies:
       '@pob/rollup': 8.4.0
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.4)
       '@rollup/plugin-replace': 6.0.3(rollup@4.60.4)
       '@rollup/plugin-run': 3.1.0(rollup@4.60.4)
       esbuild: 0.28.2
-      rollup: 4.60.4
       rollup-config-external-dependencies: 3.0.1
       rollup-plugin-esbuild: 6.2.1(esbuild@0.28.2)(rollup@4.60.4)(supports-color@7.2.0)
       typescript: '@typescript/typescript6@6.0.2'
+    optionalDependencies:
+      rollup: 4.60.4
     transitivePeerDependencies:
       - supports-color
 
@@ -3370,7 +3371,7 @@ snapshots:
 
   baseline-browser-mapping@2.11.27: {}
 
-  brace-expansion@5.0.6:
+  brace-expansion@5.0.12:
     dependencies:
       balanced-match: 4.0.4
 
@@ -3877,7 +3878,7 @@ snapshots:
 
   minimatch@10.2.5:
     dependencies:
-      brace-expansion: 5.0.6
+      brace-expansion: 5.0.12
 
   ms@2.1.3: {}
 

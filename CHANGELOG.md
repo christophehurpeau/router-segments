@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.2.2](https://github.com/christophehurpeau/router-segments/compare/v12.2.1...v12.2.2) (2026-11-03)
+
+### Bug Fixes
+
+* add explicit .ts extension to type-only relative imports ([#1202](https://github.com/christophehurpeau/router-segments/issues/1202))
+
 ## [12.2.1](https://github.com/christophehurpeau/router-segments/compare/v12.2.0...v12.2.1) (2026-07-04)
 
 Note: no notable changes

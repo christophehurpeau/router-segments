@@ -1,5 +1,5 @@
 import { compile, pathToRegexp } from "path-to-regexp";
-import type { EndRoutePath, SegmentRoutePath } from "../types";
+import type { EndRoutePath, SegmentRoutePath } from "../types.ts";
 
 function internalCreateRoutePath(
   path: string,

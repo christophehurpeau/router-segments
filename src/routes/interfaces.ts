@@ -3,7 +3,7 @@ import type {
   LocaleType,
   RoutePathInterface,
   SegmentRoutePath,
-} from "./types";
+} from "./types.ts";
 
 export interface Route<
   T extends RoutePathInterface,

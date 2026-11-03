@@ -1,6 +1,6 @@
-import type { NotLocalizedEndRoute } from "./NotLocalizedEndRoute";
-import type { NotLocalizedRoute, SegmentRoute } from "./interfaces";
-import type { LocaleType, SegmentRoutePath } from "./types";
+import type { NotLocalizedEndRoute } from "./NotLocalizedEndRoute.ts";
+import type { NotLocalizedRoute, SegmentRoute } from "./interfaces.ts";
+import type { LocaleType, SegmentRoutePath } from "./types.ts";
 
 export class NotLocalizedSegmentRoute<Locales extends LocaleType, RouteRef>
   implements

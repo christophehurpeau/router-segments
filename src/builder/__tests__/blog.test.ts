@@ -63,7 +63,7 @@ describe("blog", () => {
           expect(nestedRoute.path.path).toBe("/:id.:slug");
           expect(nestedRoute.path.completePath).toBe("/post/:id.:slug");
           expect(nestedRoute.path.regExp).toEqual(
-            /^(?:\/([^\/]+)\.([^\/\.]+|\.))$/,
+            /^(?:\/(?=([^\/]+?)\.)(?:\1)\.([^\/]+))$/,
           );
         });
         test("third nested route", () => {
@@ -76,7 +76,7 @@ describe("blog", () => {
             "/post{/:tag}/:date{_:slug}",
           );
           expect(nestedRoute.path.regExp).toEqual(
-            /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+|_)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+|_)|\/([^\/]+))$/,
+            /^(?:\/([^\/]+)\/(?=([^\/]+?)_)(?:\2)_([^\/]+)|\/([^\/]+)\/([^\/]+)|\/(?=([^\/]+?)_)(?:\6)_([^\/]+)|\/([^\/]+))$/,
           );
         });
       });
@@ -144,6 +144,68 @@ describe("blog", () => {
       expect(match).toHaveProperty("path", path);
       expect(match).toHaveProperty("route", router.get("search-results"));
       expect(match.namedParams).toEqual(new Map([["term", "searchedterm"]]));
+    });
+
+    describe("ambiguous segments: first parameter stops at the first delimiter", () => {
+      test.each([
+        ["/post/42.my-slug", "postView", { id: "42", slug: "my-slug" }],
+        ["/post/42.my.slug", "postView", { id: "42", slug: "my.slug" }],
+        ["/post/4.2.slug", "postView", { id: "4", slug: "2.slug" }],
+        ["/post/42..slug", "postView", { id: "42", slug: ".slug" }],
+        ["/post/42.", "postWithTag", { date: "42." }],
+        [
+          "/post/2017-01-01_my_slug",
+          "postWithTag",
+          { date: "2017-01-01", slug: "my_slug" },
+        ],
+        [
+          "/post/test/2017-01-01_my_slug",
+          "postWithTag",
+          { tag: "test", date: "2017-01-01", slug: "my_slug" },
+        ],
+        [
+          "/post/test/2017_01_01",
+          "postWithTag",
+          { tag: "test", date: "2017", slug: "01_01" },
+        ],
+        [
+          "/post/test/2017-01-01_",
+          "postWithTag",
+          { tag: "test", date: "2017-01-01_" },
+        ],
+      ])("%s", (path, routeKey, expectedParams) => {
+        const match = router.find(path) as RouteMatch<never, unknown>;
+        expect(match).toHaveProperty("route", router.get(routeKey));
+        expect(Object.fromEntries(match.namedParams!)).toEqual(expectedParams);
+      });
+    });
+  });
+
+  describe("toPath", () => {
+    test("first parameter containing the delimiter does not round-trip", () => {
+      const path = router.toPath("postView", { id: "4.2", slug: "slug" });
+      expect(path).toBe("/post/4.2.slug");
+      expect(
+        Object.fromEntries(
+          (router.find(path) as RouteMatch<never, unknown>).namedParams!,
+        ),
+      ).toEqual({ id: "4", slug: "2.slug" });
+    });
+
+    test("last parameter containing the delimiter round-trips", () => {
+      const path = router.toPath("postView", { id: "42", slug: "my.slug" });
+      expect(path).toBe("/post/42.my.slug");
+      expect(
+        Object.fromEntries(
+          (router.find(path) as RouteMatch<never, unknown>).namedParams!,
+        ),
+      ).toEqual({ id: "42", slug: "my.slug" });
+    });
+
+    test("empty string parameter throws", () => {
+      expect(() => router.toPath("postView", { id: "", slug: "x" })).toThrow(
+        new TypeError('Expected "id" to be a non-empty string'),
+      );
     });
   });
 });

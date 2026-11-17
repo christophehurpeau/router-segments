@@ -163,7 +163,7 @@ describe("localized blog", () => {
 
         expect(routePath.regExp).toEqual(
           // oxlint-disable-next-line no-useless-escape, regexp/no-useless-escape
-          /^(?:\/([^\/]+)\/([^\/]+)_([^\/_]+|_)|\/([^\/]+)\/([^\/]+)|\/([^\/]+)_([^\/_]+|_)|\/([^\/]+))$/,
+          /^(?:\/([^\/]+)\/(?=([^\/]+?)_)(?:\2)_([^\/]+)|\/([^\/]+)\/([^\/]+)|\/(?=([^\/]+?)_)(?:\6)_([^\/]+)|\/([^\/]+))$/,
         );
 
         expect(
